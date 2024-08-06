@@ -95,9 +95,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = 'bitrix-crm-card/static/'
+STATIC_URL = 'bitrix-serial-products/static/'
 if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'bitrix-crm-card/static')]
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'bitrix-serial-products/static')]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
