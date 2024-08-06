@@ -1,5 +1,4 @@
 
-
 export default class ApiClient {
     constructor() {
         this.baseUrl = null;
