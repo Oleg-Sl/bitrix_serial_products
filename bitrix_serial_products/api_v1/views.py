@@ -28,6 +28,15 @@ PRODUCT_TEMPLATES = {
     186: "products/table.html"
 }
 
+
+class InstallApiView(views.APIView):
+    @xframe_options_exempt
+    def post(self, request):
+        template = 'install.html'
+
+        return render(request, template)
+
+
 class IndexApiView(views.APIView):
     @xframe_options_exempt
     def post(self, request):

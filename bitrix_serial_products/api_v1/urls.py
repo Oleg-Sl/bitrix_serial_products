@@ -4,6 +4,7 @@ from rest_framework import routers
 
 from .views import (
     IndexApiView,
+    InstallApiView,
     SmartApiView
 )
 
@@ -15,6 +16,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('', include(router.urls)),
     path('index/', IndexApiView.as_view()),
+    path('index/', InstallApiView.as_view()),
     path('smart/<int:smart_type_id>/<int:smart_id>/', SmartApiView.as_view()),
 ]
 
