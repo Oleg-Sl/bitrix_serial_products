@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{% static 'scripts/libs/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'scripts/libs/bootstrap/font/bootstrap-icons.min.css' %}">
+    
+    <link href="{% static 'scripts/libs/chosen_v1.8.7/chosen.min.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/index.css' %}" rel="stylesheet">
+
+    <script>
+        let portalUrl = "{{ portal_url }}";
+    </script>
+
+    <title>Поточные изделия</title>
+</head>
+<body id="containerApp">
+    <div id="elemWaitingLoader" class="mt-5 d-flex justify-content-center">
+        <p class="fs-2">Загрузка приложения ...</p>
+        <div class="ms-3 spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Загрузка приложения...</span>
+        </div>
+    </div>
+    <div id="elemAppData" class="app-container text-center h-100 d-none">
+        <div class="col permission" id="editPermission">
+            <div class="d-flex flex-column mb-3">
+                <label for="" class="form-label text-start w-100 fw-bolder">&nbsp;</label>
+                <div class="btn-group btn-group-sm">
+                    <button type="button" id="btnEditPermission" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#permissionModal">Права доступа</button>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3 product-buttons">
+            <div class="col">
+                <button type="button" id="filterArmchair" data-type="armchair" class="btn btn-secondary w-75 filter-armchair">Кресло</button>
+            </div>
+            <div class="col">
+                <button type="button" id="filterBed" data-type="bed" class="btn btn-secondary w-75 filter-bed">Кровать</button>
+            </div>
+            <div class="col">
+                <button type="button" id="filterChair" data-type="chair" class="btn btn-secondary w-75 filter-chair">Стул</button>
+            </div>
+
+            <div class="col">
+                <button type="button" id="filterMelochevka" data-type="melochevka" class="btn btn-secondary w-75 filter-melochevka">Другое</button>
+            </div>
+            <div class="col">
+                <button type="button" id="filterMsp" data-type="msp" class="btn btn-secondary w-75 filter-msp">МСП</button>
+            </div>
+            <div class="col">
+                <button type="button" id="filterNightstand" data-type="nightstand" class="btn btn-secondary w-75 filter-nightstand">Тумбочка</button>
+            </div>
+
+            <div class="col">
+                <button type="button" id="filterPouf" data-type="pouf" class="btn btn-secondary w-75 filter-pouf">Пуф</button>
+            </div>
+            <div class="col">
+                <button type="button" id="filterSofa" data-type="sofa" class="btn btn-secondary w-75 filter-sofa">Диван</button>
+            </div>
+            <div class="col">
+                <button type="button" id="filterTable" data-type="table" class="btn btn-secondary w-75 filter-table">Стол</button>
+            </div>
+        </div>
+        <div class="row app-products">
+            <div>
+                <div class="app-products-container">
+                    <div class="app-product-buttons">
+                        <div class="mb-2">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item dropdown app-button-add-product  dropend">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                        Д<br>О<br>Б<br>А<br>В<br>И<br>Т<br>Ь
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" id="openSofaWindow" data-smart-type-id="158" data-product-type="sofa">Диван</a></li>
+                                        <li><a class="dropdown-item" id="openBedWindow" data-smart-type-id="189" data-product-type="bed">Кровать</a></li>
+                                        <li><a class="dropdown-item" id="openArmchairWindow" data-smart-type-id="165" data-product-type="armchair">Кресло</a></li>
+                                        <li><a class="dropdown-item" id="openPoufWindow" data-smart-type-id="167" data-product-type="pouf">Пуф - банкетка</a></li>
+                                        <li><a class="dropdown-item" id="openMspWindow" data-smart-type-id="172" data-product-type="msp">МСП</a></li>
+                                        <li><a class="dropdown-item" id="openMelochevkaWindow" data-smart-type-id="162" data-product-type="melochevka">Мелочевка</a></li>
+                                        <li><a class="dropdown-item" id="openNightstandWindow" data-smart-type-id="188" data-product-type="nightstands">Тумбочка</a></li>
+                                        <li><a class="dropdown-item" id="openTableWindow" data-smart-type-id="186" data-product-type="table">Стол</a></li>
+                                        <li><a class="dropdown-item" id="openChairWindow" data-smart-type-id="150" data-product-type="chair">Стул</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-5 g-4 app-products-cards"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Модальное окно с правами доступа -->
+    <div class="modal" id="permissionModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Управление правами доступа</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="permission-container">
+                    <div class="container">
+                        <div class="deal-buttons-control">
+                            <h3>Список пользователей имеющих доступ к приложению</h3>
+                            <table class="table table-bordered" id="tableUserAccessForAppUpload">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Список пользователей</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <button id="saveChangeUsersAccessForAppUpload" type="button" class="btn btn-success mb-3">Сохранить изменения</button>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
+    <!-- <script type="module" src="../scripts/libs/chosen_v1.8.7/docsupport/jquery-3.2.1.min.js"></script> -->
+    <!-- <script type="module" src="../scripts/libs/chosen_v1.8.7/chosen.jquery.min.js"></script> -->
+
+    <!-- <script type="module" src="./index.js"></script> -->
+
+
+    <script src="{% static 'scripts/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'scripts/libs/jquery/jquery-3.6.0.min.js' %}"></script>
+
+    <script type="module" src="{% static 'scripts/libs/chosen_v1.8.7/docsupport/jquery-3.2.1.min.js' %}"></script>
+    <script type="module" src="{% static 'scripts/libs/chosen_v1.8.7/chosen.jquery.min.js' %}"></script>
+    
+    <script type="module" src="{% static 'scripts/index/index.js' %}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+staticfiles/
+.env
+.env/
+/.env
+.venv
+.idea
+*.sqlite3
+__pycache__/
+
+html_offline
+
+fake_api.js
+fake_api_client.js
+*/fake_api_client.js
+fake*
+qr_code.py
+test/
