@@ -2,6 +2,7 @@ staticfiles/
 .env
 .env/
 /.env
+env
 .venv
 .idea
 *.sqlite3
