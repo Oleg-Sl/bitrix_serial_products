@@ -17,6 +17,7 @@
 // // import { DeliveryCalculation } from '../../common/delivery_calculation/delivery_calculation.js';
 // import { DimensionsManager } from '../../common/delivery_calculation/dimensions_manager/manager.js';
 // import { DocsPrinterManager } from '../../common/permission/docs/docsprinter_manager.js';
+import { getProductConfig } from '../../configs/utils.js';
 
 
 export default class ProductAction {
@@ -33,7 +34,9 @@ export default class ProductAction {
             if (event.target.tagName === 'A') {
                 const productType = event.target.getAttribute('data-type');
                 console.log('productType = ', productType);
-                await this.bx24.openProductCard(smartTypeId, productId, smartTypeId);
+                const { title, smartTypeId, field } = getProductConfig(productType);
+
+                await this.bx24.openProductCard(smartTypeId, productId, title);
             }
         });
 
