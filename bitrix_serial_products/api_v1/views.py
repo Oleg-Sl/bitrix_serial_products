@@ -41,26 +41,19 @@ class InstallApiView(views.APIView):
         return render(request, template)
 
 
-# 2024-08-08 18:54:54,860 - root - INFO - Placement: DEFAULT
-# 2024-08-08 18:54:54,861 - root - INFO - Placement Options: {"opened":"true","parameters":{"productTypeId":"165","productId":"25"}}
-
 class IndexApiView(views.APIView):
     @xframe_options_exempt
     def post(self, request):
-        logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        placement = request.data.get("PLACEMENT")
+        # logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         placement_option = request.data.get("PLACEMENT_OPTIONS", "")
-
-        logging.info(f"Placement: {placement}")
-        logging.info(f"Placement Options: {placement_option}")
-        logging.info(type(placement_option))
-        logging.info(f"Received post request with data: {request.data}")
         data = json.loads(placement_option)
         productTypeId = data.get("parameters", {}).get("productTypeId")
         productId = data.get("parameters", {}).get("productId")
-        logging.info(f'productTypeId: {productTypeId}, productId: {productId}')
 
         template = 'index.html'
+
+        if productId and productTypeId:
+            template = PRODUCT_TEMPLATES.get(int(productTypeId))
 
         data = {
             "portal_url": "https://database.tamamm.ru/bitrix-serial-products"
