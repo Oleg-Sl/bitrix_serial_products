@@ -56,7 +56,9 @@ class IndexApiView(views.APIView):
         logging.info(type(placement_option))
         logging.info(f"Received post request with data: {request.data}")
         data = json.loads(placement_option)
-        logging.info(data)
+        productTypeId = data.get("parameters", {}).get("productTypeId")
+        productId = data.get("parameters", {}).get("productId")
+        logging.info(f'productTypeId: {productTypeId}, productId: {productId}')
 
         template = 'index.html'
 
