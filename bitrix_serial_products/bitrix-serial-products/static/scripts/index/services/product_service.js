@@ -122,6 +122,7 @@ export default class ProductService {
     }
 
     async openProductCard(productTypeId, productId, title) {
+        console.log('openProductCard', productTypeId, productId, title);
         await new Promise((resolve, reject) => {
             BX24.openApplication(
                 {
