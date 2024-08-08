@@ -35,7 +35,7 @@ export default class ProductAction {
                 const productType = event.target.getAttribute('data-type');
                 console.log('productType = ', productType);
                 const { title, smartTypeId, field } = getProductConfig(productType);
-
+                const productId = 1;
                 await this.bx24.openProductCard(smartTypeId, productId, title);
             }
         });
