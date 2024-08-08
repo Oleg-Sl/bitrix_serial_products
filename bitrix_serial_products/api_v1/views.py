@@ -42,7 +42,6 @@ class InstallApiView(views.APIView):
 
 # 2024-08-08 18:54:54,860 - root - INFO - Placement: DEFAULT
 # 2024-08-08 18:54:54,861 - root - INFO - Placement Options: {"opened":"true","parameters":{"productTypeId":"165","productId":"25"}}
-# 2024-08-08 18:54:54,861 - root - INFO - Received post request with data: <QueryDict: {'AUTH_ID': ['5ef8b46600702fbe001252ad00002e0d4038074219e8e0103a3ea93e14376093288ef0'], 'AUTH_EXPIRES': ['3600'], 'REFRESH_ID': ['4e77dc6600702fbe001252ad00002e0d40380715a70dbc6ee0c79ef8b097e55526f727'], 'member_id': ['46daf0002614a639c844739d27cf70c1'], 'status': ['L'], 'PLACEMENT': ['DEFAULT'], 'PLACEMENT_OPTIONS': ['{"opened":"true","parameters":{"productTypeId":"165","productId":"25"}}']}>
 
 class IndexApiView(views.APIView):
     @xframe_options_exempt
@@ -50,8 +49,10 @@ class IndexApiView(views.APIView):
         logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         placement = request.data.get("PLACEMENT")
         placement_option = request.data.get("PLACEMENT_OPTIONS", "")
+
         logging.info(f"Placement: {placement}")
         logging.info(f"Placement Options: {placement_option}")
+        logging.info(type(placement_option))
         logging.info(f"Received post request with data: {request.data}")
 
         template = 'index.html'
