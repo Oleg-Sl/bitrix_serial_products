@@ -3,6 +3,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.shortcuts import render
 from django.http import HttpResponse
 import logging
+import json
 
 
 # PRODUCT_TEMPLATES = {
@@ -54,6 +55,8 @@ class IndexApiView(views.APIView):
         logging.info(f"Placement Options: {placement_option}")
         logging.info(type(placement_option))
         logging.info(f"Received post request with data: {request.data}")
+        data = json.loads(placement_option)
+        logging.info(data)
 
         template = 'index.html'
 
