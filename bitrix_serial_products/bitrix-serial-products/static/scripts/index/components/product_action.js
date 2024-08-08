@@ -21,6 +21,8 @@
 
 export default class ProductAction {
     constructor(bx24) {
+        this.bx24 = bx24;
+
         this.addProductButtonsContainer = document.getElementById('addProductContainer');
         this.productCardsContainer = document.getElementById('productCardsContainer');
     }
