@@ -79,22 +79,22 @@
                                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
                                         Д<br>О<br>Б<br>А<br>В<br>И<br>Т<br>Ь
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" id="openSofaWindow" data-smart-type-id="158" data-product-type="sofa">Диван</a></li>
-                                        <li><a class="dropdown-item" id="openBedWindow" data-smart-type-id="189" data-product-type="bed">Кровать</a></li>
-                                        <li><a class="dropdown-item" id="openArmchairWindow" data-smart-type-id="165" data-product-type="armchair">Кресло</a></li>
-                                        <li><a class="dropdown-item" id="openPoufWindow" data-smart-type-id="167" data-product-type="pouf">Пуф - банкетка</a></li>
-                                        <li><a class="dropdown-item" id="openMspWindow" data-smart-type-id="172" data-product-type="msp">МСП</a></li>
-                                        <li><a class="dropdown-item" id="openMelochevkaWindow" data-smart-type-id="162" data-product-type="melochevka">Мелочевка</a></li>
-                                        <li><a class="dropdown-item" id="openNightstandWindow" data-smart-type-id="188" data-product-type="nightstands">Тумбочка</a></li>
-                                        <li><a class="dropdown-item" id="openTableWindow" data-smart-type-id="186" data-product-type="table">Стол</a></li>
-                                        <li><a class="dropdown-item" id="openChairWindow" data-smart-type-id="150" data-product-type="chair">Стул</a></li>
+                                    <ul class="dropdown-menu" id="addProductContainer">
+                                        <li><a class="dropdown-item" style="cursor: pointer;" id="openSofaWindow" data-type="sofa" data-smart-type-id="158" data-product-type="sofa">Диван</a></li>
+                                        <li><a class="dropdown-item" style="cursor: pointer;" id="openBedWindow" data-type="bed" data-smart-type-id="189" data-product-type="bed">Кровать</a></li>
+                                        <li><a class="dropdown-item" style="cursor: pointer;" id="openArmchairWindow" data-type="armchair" data-smart-type-id="165" data-product-type="armchair">Кресло</a></li>
+                                        <li><a class="dropdown-item" style="cursor: pointer;" id="openPoufWindow" data-type="pouf" data-smart-type-id="167" data-product-type="pouf">Пуф - банкетка</a></li>
+                                        <li><a class="dropdown-item" style="cursor: pointer;" id="openMspWindow" data-type="msp" data-smart-type-id="172" data-product-type="msp">МСП</a></li>
+                                        <li><a class="dropdown-item" style="cursor: pointer;" id="openMelochevkaWindow" data-type="melochevka" data-smart-type-id="162" data-product-type="melochevka">Мелочевка</a></li>
+                                        <li><a class="dropdown-item" style="cursor: pointer;" id="openNightstandWindow" data-type="nightstand" data-smart-type-id="188" data-product-type="nightstands">Тумбочка</a></li>
+                                        <li><a class="dropdown-item" style="cursor: pointer;" id="openTableWindow" data-type="table" data-smart-type-id="186" data-product-type="table">Стол</a></li>
+                                        <li><a class="dropdown-item" style="cursor: pointer;" id="openChairWindow" data-type="chair" data-smart-type-id="150" data-product-type="chair">Стул</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="row row-cols-1 row-cols-md-5 g-4 app-products-cards"></div>
+                    <div class="row row-cols-1 row-cols-md-5 g-4 app-products-cards" id="productCardsContainer"></div>
                 </div>
             </div>
         </div>
