@@ -1,8 +1,7 @@
 import Filter from './filter.js';
 import ProductsList from './products.js';
 import PackedParameters from '../services/packed.js';
-// import AppUploadAccessManager from './permissions/app_upload_access_manager.js';
-import PermissionManager from './permissions/permission_manager.js';
+import ProductAction from './product_action.js';
 
 
 export default class App {
@@ -18,17 +17,15 @@ export default class App {
         this.productsFields = await this.productsService.getProductsFields();
         this.specificWeights = await this.productsService.getSpecificWeights();
 
-        console.log('Current User:', this.currentUser);
-        console.log('Products Fields:', this.productsFields);
-        console.log('Specific Weights:', this.specificWeights);
-
         const filterButtonsContainer = document.querySelector(".product-buttons");
         const productsContainer = document.querySelector(".app-products-cards");
         
         const packed = new PackedParameters(this.specificWeights);
         const productsList = new ProductsList(productsContainer, this.productsFields, this.currentUser, packed);
         const filter = new Filter(filterButtonsContainer, this.productsService, productsList);
+        const productAction = new ProductAction(this.productsService);
 
         filter.initialize();
+        productAction.initialize();
     }
 }

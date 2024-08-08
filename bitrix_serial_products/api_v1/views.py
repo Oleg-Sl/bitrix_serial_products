@@ -2,6 +2,7 @@ from rest_framework import views
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.shortcuts import render
 from django.http import HttpResponse
+import logging
 
 
 # PRODUCT_TEMPLATES = {
@@ -15,6 +16,8 @@ from django.http import HttpResponse
 #     "sofa": "products/sofa.html",               # 158
 #     "table": "products/table.html"              # 186
 # }
+
+
 
 PRODUCT_TEMPLATES = {
     165: "products/armchair.html",
@@ -40,6 +43,13 @@ class InstallApiView(views.APIView):
 class IndexApiView(views.APIView):
     @xframe_options_exempt
     def post(self, request):
+        logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        placement = request.data.get("PLACEMENT")
+        placement_option = request.data.get("PLACEMENT_OPTIONS", "")
+        logging.info(f"Placement: {placement}")
+        logging.info(f"Placement Options: {placement_option}")
+        logging.info(f"Received post request with data: {request.data}")
+
         template = 'index.html'
 
         data = {

@@ -19,6 +19,19 @@ export default class ProductService {
         this.specificWeights = null;
     }
 
+    createProduct(productType) {
+        const { title, smartTypeId, field } = getProductConfig(productType);
+
+        const cmd = {
+            products: `crm.item.add?entityTypeId=${smartTypeId}&fields=${JSON.stringify(productFields)}`,
+        };
+
+        return this.apiClient.callMethod('batch', {
+            halt: 0,
+            cmd: cmd
+        });
+    }
+
     async getProducts(productType) {
         const { title, smartId, field } = getProductConfig(productType);
         try {
@@ -106,5 +119,33 @@ export default class ProductService {
         }
 
         return this.specificWeights;
+    }
+
+    async openProductCard(productTypeId, productId, title) {
+        await new Promise((resolve, reject) => {
+            BX24.openApplication(
+                {
+                    'opened': true,
+                    'bx24_leftBoundary': 100,
+                    'bx24_label': {
+                        'bgColor':'pink',
+                        'text': 'my task',
+                        'color': '#07ff0e',
+                    },
+                    'bx24_title': title,
+                    'parameters': {
+                        'productTypeId': productTypeId,
+                        'productId': productId,
+                    }
+                },
+                function(response) {
+                    if (response && response.error) {
+                        reject(response.error);
+                    } else {
+                        resolve(response);
+                    }
+                }
+            );
+        });
     }
 }
