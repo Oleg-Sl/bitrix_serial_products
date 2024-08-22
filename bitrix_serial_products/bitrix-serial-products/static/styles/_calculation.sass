@@ -1,0 +1,104 @@
+.draggable-window
+    // position: absolute
+    position: fixed
+    background-color: #ffffff
+    border: 1px solid #cccccc
+    top: 250px
+    left: 100px
+    z-index: 1001
+    // width: 300px
+    // height: 700px
+    // overflow-y: auto
+    .fixed-rows-top
+        background-color: #ffffff
+        position: sticky
+        top: 0px       
+    // .fixed-rows-bottom
+    //     position: sticky
+    //     bottom: 31px
+    .window-content
+        // max-height: 500px
+        height: 600px
+        overflow-y: auto
+    .fixed-tfooter
+        background-color: #ffffff
+        z-index: 101
+        border-top: 2px solid #cccccc
+        position: sticky
+        bottom: 0
+    .window-header
+        cursor: move
+        padding: 3px
+        background-color: #f0f0f0
+        border-bottom: 1px solid #cccccc
+        text-align: center
+        // position: sticky
+        // top: 0
+    .window-grip-left
+        // text-align: middle
+        width: 25px
+        background-color: #f0f0f0
+    .window-droptable
+        background-color: #f0f0f0
+        cursor: move
+        text-align: center
+    th:first-child, td:first-child
+        border-left: 1px solid #cccccc
+    tr:first-child
+        border-top: 1px solid #cccccc
+    // .edge
+    //     background-color: #000
+    //     opacity: 0.5
+    // .corner
+    //     background-color: #000
+    //     opacity: 0.5
+
+    // .fixed-rows-tfoot, .fixed-rows-bottom
+    //     position: sticky
+    //     bottom: 0
+    //     // background-color: #fff
+    //     // z-index: 1
+
+    table
+        display: grid
+        // grid-template-columns: 200px 90px 90px 90px 150px
+        grid-template-columns: 200px 90px 90px 90px auto
+        input
+            width: 100%
+            text-align: right
+            border: none
+            padding: 0
+        textarea
+            width: 100%
+            border: none
+            padding: 2px
+            resize: vertical
+
+        .comment
+            grid-column: 2 / span 4
+
+        // table, 
+        thead, tbody, tfoot, tr
+            display: contents
+
+        th, td
+            border-right: 1px solid #cccccc
+            border-bottom: 1px solid #cccccc
+            overflow: hidden
+            white-space: nowrap
+            text-overflow: ellipsis
+            div
+                display: flex
+                // align-content: center
+                // justify-content: center
+                align-items: center
+                height: 100%
+                overflow: hidden
+                white-space: nowrap
+                text-overflow: ellipsis
+
+    .window-footer
+        display: grid
+        grid-template-columns: 1fr 1fr
+        // position: sticky
+        // bottom: 0

@@ -1,0 +1,89 @@
+.draggable-window
+    position: fixed
+    background-color: #ffffff
+    border: 1px solid #cccccc
+    top: 20px
+    left: 20px
+    z-index: 1001
+    .fixed-rows-top
+        background-color: #ffffff
+        position: sticky
+        top: 0px       
+    .window-content
+        height: 600px
+        // overflow-y: auto
+        overflow-y: scroll
+    .fixed-tfooter
+        background-color: #ffffff
+        z-index: 101
+        border-top: 2px solid #cccccc
+        position: sticky
+        bottom: 0
+    .window-header
+        cursor: move
+        padding: 3px
+        background-color: #f0f0f0
+        border-bottom: 1px solid #cccccc
+        text-align: center
+    .window-grip-left
+        width: 25px
+        background-color: #f0f0f0
+    .window-droptable
+        background-color: #f0f0f0
+        cursor: move
+        text-align: center
+    th:first-child, td:first-child
+        border-left: 1px solid #cccccc
+    tr:first-child
+        border-top: 1px solid #cccccc
+
+
+    table
+        display: grid
+        grid-template-columns: 200px 90px 90px 90px 100px 100px 100px
+        transition: max-height 0.5s ease-out
+        max-height: 700px
+        // height: auto
+        // , opacity 1.5s ease-out
+        input
+            width: 100%
+            text-align: right
+            // border: none
+            padding: 0
+        textarea
+            width: 100%
+            border: none
+            padding: 2px
+            resize: vertical
+        .btn-chek-list
+            width: 100%
+            height: 100%
+        thead, tbody, tfoot, tr
+            display: contents
+        th, td
+            border-right: 1px solid #cccccc
+            border-bottom: 1px solid #cccccc
+            overflow: hidden
+            white-space: nowrap
+            text-overflow: ellipsis
+            background-color: #ffffff
+            div
+                display: flex
+                align-items: center
+                height: 100%
+                overflow: hidden
+                white-space: nowrap
+                text-overflow: ellipsis
+        &.materials-list
+            .column-5-7
+                grid-column: 5 / span 7
+            // .comment
+            //     grid-column: 2 / span 4
+        &.collapsed
+            max-height: 0
+            // opacity: 0
+
+
+    .window-footer
+        display: grid
+        grid-template-columns: 1fr 1fr

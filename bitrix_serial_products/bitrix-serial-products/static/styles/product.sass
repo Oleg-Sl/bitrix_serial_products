@@ -1,0 +1,126 @@
+@import photo
+@import calculation
+@import fabric_info
+
+body
+    height: 105%
+
+.product-buttons
+    position: sticky
+    top: 0px
+    z-index: 100
+    padding: 10px 0
+    background-color: #fff
+
+.label-show-history
+    background-color: #49ff00
+    width: 10px
+    height: 10px
+    border-radius: 50%
+    position: absolute
+    right: 2px
+    top: 2px
+    cursor: pointer
+
+.alert-production-canvas
+    margin-top: 15px
+    font-size: 35px
+    font-weight: bold
+
+.chosen-container
+    width: 100% !important
+
+.file-upload-label
+    height: 500px
+    .upload-icon
+        margin-top: 175px
+
+.table-cell-header, .table-header-size
+    font-weight: bold !important
+    text-align: left !important
+    vertical-align: middle !important
+
+.table-cell-value, .table-body-size
+    text-align: center !important
+    vertical-align: middle !important
+    textarea, input, select
+        text-align: center !important
+        vertical-align: middle !important
+
+.control-panel-1-btn
+    width: 36px
+    height: 36px
+    padding: 0
+    border-radius: 4px
+    display: grid
+    cursor: pointer
+
+
+.btn-add-image
+    height: 32px
+    // margin: 0 2px
+    border: none
+    padding: 0
+    margin: 0 2px
+    img
+        border: 2px solid #b9b9b9
+        height: 100%
+
+.btn-add-image
+    width: 45px
+    height: 32px
+    background: none
+    border: 3px solid #d2d2d2
+    position: relative
+    div
+        position: absolute
+        height: 12px
+        width: 18px
+        background-color: #759dc7
+.btn-add-image-small
+    div
+        height: 6px
+        width: 9px
+.image-uploaded
+    background-color: #d6d6d6
+.btn-add-image-1 div
+    left: 1px
+    top: 1px
+.btn-add-image-2 div
+    left: 12px
+    top: 1px
+.btn-add-image-3 div
+    left: 1px
+    top: 8px
+.btn-add-image-4 div
+    right: 1px
+    top: 1px
+.btn-add-image-5 div
+    left: 1px
+    bottom: 1px        
+.btn-add-image-6 div
+    right: 1px
+    bottom: 1px
+
+.btn-set-default-values
+    // color: #7194ff
+    color: #6c757d
+    font-size: 20px
+    cursor: pointer
+    font-weight: bold
+.btn-set-default-values:hover
+    color: #2d2d2d
+
+
+.table-history-data
+    display: grid
+    grid-template-columns: auto 1fr
+    thead, tbody, tfoot, tr
+        display: contents
+    th, td
+        max-width: 500px
+        border-right: 1px solid #cccccc
+        border-bottom: 1px solid #cccccc
+        white-space: nowrap
+        // overflow: hidden
+        // text-overflow: ellipsis

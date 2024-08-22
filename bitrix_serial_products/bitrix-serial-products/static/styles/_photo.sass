@@ -1,0 +1,64 @@
+$padding: 5px
+
+.photos-parent
+    position: relative
+    width: 100%
+    border: 2px solid #000
+
+    .child
+        box-sizing: border-box
+        border: 1px solid #c7c7c7
+        overflow: hidden
+        input
+            position: absolute
+            left: 0
+            z-index: 1000
+        .child-container
+            // position: relative
+            width: 100%
+            height: 100%
+
+            img
+                // position: fixed
+                width: 100%
+                height: 100%
+
+    .child1
+        position: absolute
+        top: $padding
+        left: $padding
+        width: 15%
+        height: 15%
+        // background-color: red
+    
+    .child2
+        position: absolute
+        top: $padding
+        left: calc(15% + #{$padding * 3})
+        width: 15%
+        height: 15%
+        // background-color: blue
+
+    .child3
+        position: absolute
+        top: $padding
+        right: $padding
+        width: calc(70% - #{$padding * 6})
+        height: calc(50% - #{$padding * 2})
+        // background-color: green
+
+    .child4
+        position: absolute
+        bottom: $padding
+        left: $padding
+        width: calc(50% - #{$padding * 2})
+        height: calc(50% - #{$padding * 2})
+        // background-color: rgb(223, 187, 42)
+
+    .child5
+        position: absolute
+        bottom: $padding
+        right: $padding
+        width: calc(50% - #{$padding * 2})
+        height: calc(50% - #{$padding * 2})
+        // background-color: rgb(198, 43, 225)

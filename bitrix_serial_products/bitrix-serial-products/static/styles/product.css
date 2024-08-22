@@ -1,0 +1,316 @@
+.photos-parent {
+  position: relative;
+  width: 100%;
+  border: 2px solid #000;
+}
+.photos-parent .child {
+  box-sizing: border-box;
+  border: 1px solid #c7c7c7;
+  overflow: hidden;
+}
+.photos-parent .child input {
+  position: absolute;
+  left: 0;
+  z-index: 1000;
+}
+.photos-parent .child .child-container {
+  width: 100%;
+  height: 100%;
+}
+.photos-parent .child .child-container img {
+  width: 100%;
+  height: 100%;
+}
+.photos-parent .child1 {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 15%;
+  height: 15%;
+}
+.photos-parent .child2 {
+  position: absolute;
+  top: 5px;
+  left: calc(15% + 15px);
+  width: 15%;
+  height: 15%;
+}
+.photos-parent .child3 {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: calc(70% - 30px);
+  height: calc(50% - 10px);
+}
+.photos-parent .child4 {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: calc(50% - 10px);
+  height: calc(50% - 10px);
+}
+.photos-parent .child5 {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: calc(50% - 10px);
+  height: calc(50% - 10px);
+}
+
+.draggable-window {
+  position: fixed;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  top: 250px;
+  left: 100px;
+  z-index: 1001;
+}
+.draggable-window .fixed-rows-top {
+  background-color: #ffffff;
+  position: sticky;
+  top: 0px;
+}
+.draggable-window .window-content {
+  height: 600px;
+  overflow-y: auto;
+}
+.draggable-window .fixed-tfooter {
+  background-color: #ffffff;
+  z-index: 101;
+  border-top: 2px solid #cccccc;
+  position: sticky;
+  bottom: 0;
+}
+.draggable-window .window-header {
+  cursor: move;
+  padding: 3px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #cccccc;
+  text-align: center;
+}
+.draggable-window .window-grip-left {
+  width: 25px;
+  background-color: #f0f0f0;
+}
+.draggable-window .window-droptable {
+  background-color: #f0f0f0;
+  cursor: move;
+  text-align: center;
+}
+.draggable-window th:first-child, .draggable-window td:first-child {
+  border-left: 1px solid #cccccc;
+}
+.draggable-window tr:first-child {
+  border-top: 1px solid #cccccc;
+}
+.draggable-window table {
+  display: grid;
+  grid-template-columns: 200px 90px 90px 90px auto;
+}
+.draggable-window table input {
+  width: 100%;
+  text-align: right;
+  border: none;
+  padding: 0;
+}
+.draggable-window table textarea {
+  width: 100%;
+  border: none;
+  padding: 2px;
+  resize: vertical;
+}
+.draggable-window table .comment {
+  grid-column: 2/span 4;
+}
+.draggable-window table thead, .draggable-window table tbody, .draggable-window table tfoot, .draggable-window table tr {
+  display: contents;
+}
+.draggable-window table th, .draggable-window table td {
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.draggable-window table th div, .draggable-window table td div {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.draggable-window .window-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.dropdown-fabric-menu {
+  width: 450px;
+}
+.dropdown-fabric-menu .dropdown-fabric-menu-content table {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.dropdown-fabric-menu .dropdown-fabric-menu-content tbody, .dropdown-fabric-menu .dropdown-fabric-menu-content tr {
+  display: contents;
+}
+.dropdown-fabric-menu .dropdown-fabric-menu-content td {
+  border: 1px solid #e3e3e3;
+  padding-left: 4px;
+  padding-right: 4px;
+  font-size: 14px;
+}
+
+body {
+  height: 105%;
+}
+
+.product-buttons {
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  padding: 10px 0;
+  background-color: #fff;
+}
+
+.label-show-history {
+  background-color: #49ff00;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  cursor: pointer;
+}
+
+.alert-production-canvas {
+  margin-top: 15px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.chosen-container {
+  width: 100% !important;
+}
+
+.file-upload-label {
+  height: 500px;
+}
+.file-upload-label .upload-icon {
+  margin-top: 175px;
+}
+
+.table-cell-header, .table-header-size {
+  font-weight: bold !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+}
+
+.table-cell-value, .table-body-size {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+.table-cell-value textarea, .table-cell-value input, .table-cell-value select, .table-body-size textarea, .table-body-size input, .table-body-size select {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.control-panel-1-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 4px;
+  display: grid;
+  cursor: pointer;
+}
+
+.btn-add-image {
+  height: 32px;
+  border: none;
+  padding: 0;
+  margin: 0 2px;
+}
+.btn-add-image img {
+  border: 2px solid #b9b9b9;
+  height: 100%;
+}
+
+.btn-add-image {
+  width: 45px;
+  height: 32px;
+  background: none;
+  border: 3px solid #d2d2d2;
+  position: relative;
+}
+.btn-add-image div {
+  position: absolute;
+  height: 12px;
+  width: 18px;
+  background-color: #759dc7;
+}
+
+.btn-add-image-small div {
+  height: 6px;
+  width: 9px;
+}
+
+.image-uploaded {
+  background-color: #d6d6d6;
+}
+
+.btn-add-image-1 div {
+  left: 1px;
+  top: 1px;
+}
+
+.btn-add-image-2 div {
+  left: 12px;
+  top: 1px;
+}
+
+.btn-add-image-3 div {
+  left: 1px;
+  top: 8px;
+}
+
+.btn-add-image-4 div {
+  right: 1px;
+  top: 1px;
+}
+
+.btn-add-image-5 div {
+  left: 1px;
+  bottom: 1px;
+}
+
+.btn-add-image-6 div {
+  right: 1px;
+  bottom: 1px;
+}
+
+.btn-set-default-values {
+  color: #6c757d;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-set-default-values:hover {
+  color: #2d2d2d;
+}
+
+.table-history-data {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.table-history-data thead, .table-history-data tbody, .table-history-data tfoot, .table-history-data tr {
+  display: contents;
+}
+.table-history-data th, .table-history-data td {
+  max-width: 500px;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  white-space: nowrap;
+}/*# sourceMappingURL=product.css.map */

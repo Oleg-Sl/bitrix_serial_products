@@ -1,0 +1,96 @@
+.draggable-window {
+  position: fixed;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+}
+.draggable-window .fixed-rows-top {
+  background-color: #ffffff;
+  position: sticky;
+  top: 0px;
+}
+.draggable-window .window-content {
+  height: 600px;
+  overflow-y: scroll;
+}
+.draggable-window .fixed-tfooter {
+  background-color: #ffffff;
+  z-index: 101;
+  border-top: 2px solid #cccccc;
+  position: sticky;
+  bottom: 0;
+}
+.draggable-window .window-header {
+  cursor: move;
+  padding: 3px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #cccccc;
+  text-align: center;
+}
+.draggable-window .window-grip-left {
+  width: 25px;
+  background-color: #f0f0f0;
+}
+.draggable-window .window-droptable {
+  background-color: #f0f0f0;
+  cursor: move;
+  text-align: center;
+}
+.draggable-window th:first-child, .draggable-window td:first-child {
+  border-left: 1px solid #cccccc;
+}
+.draggable-window tr:first-child {
+  border-top: 1px solid #cccccc;
+}
+.draggable-window table {
+  display: grid;
+  grid-template-columns: 200px 90px 90px 90px 100px 100px 100px;
+  transition: max-height 0.5s ease-out;
+  max-height: 700px;
+}
+.draggable-window table input {
+  width: 100%;
+  text-align: right;
+  padding: 0;
+}
+.draggable-window table textarea {
+  width: 100%;
+  border: none;
+  padding: 2px;
+  resize: vertical;
+}
+.draggable-window table .btn-chek-list {
+  width: 100%;
+  height: 100%;
+}
+.draggable-window table thead, .draggable-window table tbody, .draggable-window table tfoot, .draggable-window table tr {
+  display: contents;
+}
+.draggable-window table th, .draggable-window table td {
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background-color: #ffffff;
+}
+.draggable-window table th div, .draggable-window table td div {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.draggable-window table.materials-list .column-5-7 {
+  grid-column: 5/span 7;
+}
+.draggable-window table.collapsed {
+  max-height: 0;
+}
+.draggable-window .window-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}/*# sourceMappingURL=calc.css.map */

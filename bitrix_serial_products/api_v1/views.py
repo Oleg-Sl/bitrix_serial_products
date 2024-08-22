@@ -19,7 +19,6 @@ import json
 # }
 
 
-
 PRODUCT_TEMPLATES = {
     165: "products/armchair.html",
     189: "products/bed.html",
@@ -44,22 +43,23 @@ class InstallApiView(views.APIView):
 class IndexApiView(views.APIView):
     @xframe_options_exempt
     def post(self, request):
+        template = 'index.html'
+        context = {
+            "portal_url": "https://database.tamamm.ru/bitrix-serial-products"
+        }
+
         # logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         placement_option = request.data.get("PLACEMENT_OPTIONS", "")
         data = json.loads(placement_option)
         productTypeId = data.get("parameters", {}).get("productTypeId")
         productId = data.get("parameters", {}).get("productId")
 
-        template = 'index.html'
-
         if productId and productTypeId:
             template = PRODUCT_TEMPLATES.get(int(productTypeId))
+            context["smartProcessId"] = productId
+            context["smartProcessTypeId"] = productTypeId
 
-        data = {
-            "portal_url": "https://database.tamamm.ru/bitrix-serial-products"
-        }
-
-        return render(request, template, context=data)
+        return render(request, template, context=context)
 
 
 class SmartApiView(views.APIView):

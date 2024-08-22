@@ -1,5 +1,5 @@
 import ApiClient from './utils/api_client.js';
-import { main } from './index/index.js';
+import { main } from './main/index.js';
 
 
 document.addEventListener("DOMContentLoaded", async function() {

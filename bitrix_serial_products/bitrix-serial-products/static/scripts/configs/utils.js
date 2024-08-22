@@ -7,34 +7,76 @@ import { ID_NIGHTSTAND, FIELD_NIGHTSTAND, SCETCH_ITEMS as SCETCH_ITEMS_NIGHTSTAN
 import { ID_POUF, FIELD_POUF, SCETCH_ITEMS as SCETCH_ITEMS_POUF } from './products/pouf.js';
 import { ID_SOFA, FIELD_SOFA, SCETCH_ITEMS as SCETCH_ITEMS_SOFA } from './products/sofa.js';
 import { ID_TABLE, FIELD_TABLE, SCETCH_ITEMS as SCETCH_ITEMS_TABLE } from './products/table.js';
-
+import { CALC_ID_ARMCHAIR, CALC_FIELD_ARMCHAIR } from './calc/sp_armchair.js';
+import { CALC_ID_BED, CALC_FIELD_BED } from './calc/sp_bed.js';
+import { CALC_ID_CHAIR, CALC_FIELD_CHAIR } from './calc/sp_chair.js';
+import { CALC_ID_MELOCHEVKA, CALC_FIELD_MELOCHEVKA } from './calc/sp_melochevka.js';
+import { CALC_ID_MSP, CALC_FIELD_MSP } from './calc/sp_msp.js';
+import { CALC_ID_NIGHTSTAND, CALC_FIELD_NIGHTSTAND } from './calc/sp_nightstand.js';
+import { CALC_ID_POUF, CALC_FIELD_POUF } from './calc/sp_pouf.js';
+import { CALC_ID_SOFA, CALC_FIELD_SOFA } from './calc/sp_sofa.js';
+import { CALC_ID_TABLE, CALC_FIELD_TABLE } from './calc/sp_table.js';
 
 
 export function getProductConfig(productType) {
     switch (productType) {
         case 'armchair':
-            return { title: 'Кресло', smartId: ID_ARMCHAIR, field: FIELD_ARMCHAIR };
+            return getProductConfigById(ID_ARMCHAIR);
+            // return { title: 'Кресло', smartId: ID_ARMCHAIR, field: FIELD_ARMCHAIR, calcTypeId: CALC_ID_ARMCHAIR, calcFieldAlias: CALC_FIELD_ARMCHAIR };
         case 'bed':
-            return { title: 'Кровать', smartId: ID_BED, field: FIELD_BED };
+            return getProductConfigById(ID_BED);
+            // return { title: 'Кровать', smartId: ID_BED, field: FIELD_BED, calcTypeId: CALC_ID_BED, calcFieldAlias: CALC_FIELD_BED };
         case 'chair':
-            return { title: 'Стул', smartId: ID_CHAIR, field: FIELD_CHAIR };
+            return getProductConfigById(ID_CHAIR);
+            // return { title: 'Стул', smartId: ID_CHAIR, field: FIELD_CHAIR, calcTypeId: CALC_ID_CHAIR, calcFieldAlias: CALC_FIELD_CHAIR };
         case 'melochevka':
-            return { title: 'Мелочевка', smartId: ID_MELOCHEVKA, field: FIELD_MELOCHEVKA };
+            return getProductConfigById(ID_MELOCHEVKA);
+            // return { title: 'Мелочевка', smartId: ID_MELOCHEVKA, field: FIELD_MELOCHEVKA, calcTypeId: CALC_ID_MELOCHEVKA, calcFieldAlias: CALC_FIELD_MELOCHEVKA };
         case 'msp':
-            return { title: 'МСП', smartId: ID_MSP, field: FIELD_MSP };
+            return getProductConfigById(ID_MSP);
+            // return { title: 'МСП', smartId: ID_MSP, field: FIELD_MSP, calcTypeId: CALC_ID_MSP, calcFieldAlias: CALC_FIELD_MSP };
         case 'nightstand':
-            return { title: 'Тумбочка', smartId: ID_NIGHTSTAND, field: FIELD_NIGHTSTAND };
+            return getProductConfigById(ID_NIGHTSTAND);
+            // return { title: 'Тумбочка', smartId: ID_NIGHTSTAND, field: FIELD_NIGHTSTAND, calcTypeId: CALC_ID_NIGHTSTAND, calcFieldAlias: CALC_FIELD_NIGHTSTAND };
         case 'pouf':
-            return { title: 'Пуф-банкетка', smartId: ID_POUF, field: FIELD_POUF };
+            return getProductConfigById(ID_POUF);
+            // return { title: 'Пуф-банкетка', smartId: ID_POUF, field: FIELD_POUF, calcTypeId: CALC_ID_POUF, calcFieldAlias: CALC_FIELD_POUF };
         case 'sofa':
-            return { title: 'Диван', smartId: ID_SOFA, field: FIELD_SOFA };
+            return getProductConfigById(ID_SOFA);
+            // return { title: 'Диван', smartId: ID_SOFA, field: FIELD_SOFA, calcTypeId: CALC_ID_SOFA, calcFieldAlias: CALC_FIELD_SOFA };
         case 'table':
-            return { title: 'Стол', smartId: ID_TABLE, field: FIELD_TABLE };
+            return getProductConfigById(ID_TABLE);
+            // return { title: 'Стол', smartId: ID_TABLE, field: FIELD_TABLE, calcTypeId: CALC_ID_TABLE, calcFieldAlias: CALC_FIELD_TABLE };
         default:
-            return null;
+            return {};
     }
 }
 
+
+export function getProductConfigById(productTypeId) {
+    switch (parseInt(productTypeId)) {
+        case ID_ARMCHAIR:
+            return { title: 'Кресло', smartId: ID_ARMCHAIR, field: FIELD_ARMCHAIR, calcTypeId: CALC_ID_ARMCHAIR, calcFieldAlias: CALC_FIELD_ARMCHAIR };
+        case ID_BED:
+            return { title: 'Кровать', smartId: ID_BED, field: FIELD_BED, calcTypeId: CALC_ID_BED, calcFieldAlias: CALC_FIELD_BED };
+        case ID_CHAIR:
+            return { title: 'Стул', smartId: ID_CHAIR, field: FIELD_CHAIR, calcTypeId: CALC_ID_CHAIR, calcFieldAlias: CALC_FIELD_CHAIR };
+        case ID_MELOCHEVKA:
+            return { title: 'Мелочевка', smartId: ID_MELOCHEVKA, field: FIELD_MELOCHEVKA, calcTypeId: CALC_ID_MELOCHEVKA, calcFieldAlias: CALC_FIELD_MELOCHEVKA };
+        case ID_MSP:
+            return { title: 'МСП', smartId: ID_MSP, field: FIELD_MSP, calcTypeId: CALC_ID_MSP, calcFieldAlias: CALC_FIELD_MSP };
+        case ID_NIGHTSTAND:
+            return { title: 'Тумбочка', smartId: ID_NIGHTSTAND, field: FIELD_NIGHTSTAND, calcTypeId: CALC_ID_NIGHTSTAND, calcFieldAlias: CALC_FIELD_NIGHTSTAND };
+        case ID_POUF:
+            return { title: 'Пуф-банкетка', smartId: ID_POUF, field: FIELD_POUF, calcTypeId: CALC_ID_POUF, calcFieldAlias: CALC_FIELD_POUF };
+        case ID_SOFA:
+            return { title: 'Диван', smartId: ID_SOFA, field: FIELD_SOFA, calcTypeId: CALC_ID_SOFA, calcFieldAlias: CALC_FIELD_SOFA };
+        case ID_TABLE:
+            return { title: 'Стол', smartId: ID_TABLE, field: FIELD_TABLE, calcTypeId: CALC_ID_TABLE, calcFieldAlias: CALC_FIELD_TABLE };
+        default:
+            return {};
+    }
+}
 
 // function getProductDescription(productType) {
 //     if (productType == ID_MSP) {
