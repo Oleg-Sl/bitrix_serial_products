@@ -19,7 +19,7 @@ export default class MaterialsService {
         const closestMaterial = this.getMaterialPricesClosestDateLessOrEqual(targetDate);
         if (!closestMaterial) return 0;
         const field = FIELD_MATERIALS[key];
-        return closestMaterial[field];
+        return +closestMaterial[field];
     }
 
     getMaterialPricesClosestDateLessOrEqual(targetDate) {

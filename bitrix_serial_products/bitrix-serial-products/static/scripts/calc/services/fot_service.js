@@ -3,7 +3,20 @@ import { ID_FOT, FIELD_FOT } from '../../configs/calc/fot.js';
 
 export default class FotService {
     constructor(fotList) {
-        this.fotList = fotList;
+        this.fot = fotList[0];
+        
+    }
+
+    getFieldsFot() {
+        let arr = [];
+        for (const [ fotName, fotData] of Object.entries(FIELD_FOT)) {
+            
+            arr.push({
+
+            });
+        }
+        console.log(arr);
+        return FIELD_FOT;
     }
 
     // getCoefficientById(id) {

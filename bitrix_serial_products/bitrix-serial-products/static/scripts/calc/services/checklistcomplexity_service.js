@@ -7,8 +7,7 @@ export default class ChecklistComplexityService {
         console.log("checklist = ", this.checklist);
     }
 
-    getCheckList() {
-        // console.log(this.checklist);
+    getQuestions() {
         return this.checklist.map(item => this.mapCheckListItem(item))
     }
 
@@ -34,17 +33,4 @@ export default class ChecklistComplexityService {
             }
         };
     }
-
-    // getCoefficientById(id) {
-    //     return this.coefficients.find(coefficient => coefficient.id === id);
-    // }
-
-    // getCoefficientByKey(key) {
-    //     const fieldInBx24 = FIELD_COEFFICIENTS?.[key]?.fieldId;
-    //     if (!fieldInBx24) {
-    //         return 1;
-    //     }
-    //     const coefficient = this.coefficients?.[fieldInBx24] || 1;
-    //     return +coefficient;
-    // }
 }

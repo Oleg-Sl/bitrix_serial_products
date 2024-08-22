@@ -1,11 +1,34 @@
 
 export default class CalculationsListView {
-    constructor() {
+    constructor(cbCreateCalculation, cbOpenCalculation) {
+        this.cbCreateCalculation = cbCreateCalculation;
+        this.cbOpenCalculation = cbOpenCalculation;
+
         this.container = document.querySelector('#productCalculations');
         this.containerList = this.container.querySelector('tbody');
         this.productOtherCalculationsList = document.querySelector('#productOtherCalculationsList');
         this.btnNewProductCalculation = document.querySelector('#newProductCalculation');
         this.btnAddProductCalculation = document.querySelector('#addProductCalculation');
+    }
+
+    init(calculationsData) {
+        this.render(calculationsData);
+        this.initHandlers();
+    }
+
+    initHandlers() {
+        // открыть расчет для редактирования
+        this.containerList.addEventListener('click', (event) => {
+            const target = event.target;
+            if (target.classList.contains('show-calculation-window')) {
+                const calculationId = target.closest('tr').dataset.id;
+                this.cbOpenCalculation(calculationId);
+            }
+        });
+        // открыть окно сощдания нового расчета
+        this.btnNewProductCalculation.addEventListener('click', (event) => {
+            this.cbCreateCalculation();
+        });
     }
 
     render(calculations, currentCalculationId, calculationValidityDate) {
