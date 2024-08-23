@@ -2,9 +2,38 @@ import { ID_FOT, FIELD_FOT } from '../../configs/calc/fot.js';
 
 
 export default class FotService {
-    constructor(fotList) {
-        this.fot = fotList[0];
+    constructor(fot, fieldParentId) {
+        this.fot = fot;
+        this.fieldParentId = fieldParentId;
         
+    }
+
+    getFotByParentId(parentId) {
+        return this.fot.find(item => item[this.fieldParentId] === parentId);
+    }
+
+    getFotCodeList() {
+        return Object.keys(FIELD_FOT);
+    }
+
+    getFotTitle(key) {
+        return FIELD_FOT[key]?.title;
+    }
+
+    getEstimateField(key) {
+        return FIELD_FOT[key]?.estimatedAmount;
+    }
+
+    getGrowthField(key) {
+        return FIELD_FOT[key]?.growthCoefficient;
+    }
+
+    getFinalAmountField(key) {
+        return FIELD_FOT[key]?.finalAmount;
+    }
+
+    getCommentField(key) {
+        return FIELD_FOT[key]?.comment;
     }
 
     getFieldsFot() {

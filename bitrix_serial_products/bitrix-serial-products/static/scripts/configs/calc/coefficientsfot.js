@@ -12,6 +12,7 @@ import { ID_MELOCHEVKA } from '../products/melochevka.js';
 
 export const ID_COEFFICIENTS_FOT = 1044;
 
+// export const 
 
 export const PRODUCT_TYPES_COEFFICIENTS_FOT = {
     [ID_SOFA]: 4741,

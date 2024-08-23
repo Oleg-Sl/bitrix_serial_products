@@ -2,18 +2,44 @@ import {ID_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT, FIELD_COEFFICIENTS_
 
 
 export default class CoefficientsFotService {
-    constructor(coefficientsList) {
+    constructor(coefficientsList, productTypeId) {
         this.coefficients = coefficientsList[0];
-        console.log("this.coefficients = ", this.coefficients);
+        // console.log("this.coefficients = ", this.coefficients);
     }
 
     getBaseRatePerUnit(key) {
-        return this.coefficients[key]?.baseRatePerUnit || 0;
+        const field = FIELD_COEFFICIENTS_FOT[key]?.baseRatePerUnit;
+        // console.log("field = ", field);
+        return this.coefficients[field] || 0;
     }
 
     getCostPerHour(key) {
-        return this.coefficients[key]?.costPerHour || 0;
+        const field = FIELD_COEFFICIENTS_FOT[key]?.costPerHour;
+        // console.log("field = ", field);
+        return this.coefficients[field] || 0;
     }
+
+    getUpholsteryStaffCount() {
+        const field = FIELD_COEFFICIENTS_FOT.upholstery?.staffCount;
+        return this.coefficients[field] || 0;
+    }
+
+    getManagementField(key) {
+        const field = FIELD_COEFFICIENTS_FOT.management?.[key];
+        // console.log("field = ", field);
+        return this.coefficients[field] || 0;
+    }
+
+    getRentField(key) {
+        const field = FIELD_COEFFICIENTS_FOT.rent?.[key];
+        return this.coefficients[field] || 0;
+    }
+    // Диван, Кресло, Кровать, Пуф, МСП и ИНОЕ- 
+    // Сумма за работу обтясчика / upholstery.costPerHour / upholstery.staffCount * management.baseSalaryRate
+
+    // Дли типов изделия 
+    // Сумма за работупокраски / painting.costPerHour * management.baseSalaryRate    
+
 
     // getCoefficientById(id) {
     //     return this.coefficients.find(coefficient => coefficient.id === id);

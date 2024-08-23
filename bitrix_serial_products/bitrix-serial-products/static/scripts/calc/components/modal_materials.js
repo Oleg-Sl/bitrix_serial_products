@@ -8,8 +8,8 @@ export default class ModalMaterialsView {
         this.summaryMaterialsCell = this.table.querySelector('.material-summary-cost');
     }
 
-
-    render(materials) {
+    render(materials, summaryMaterials) {
+        this.setSummaryCost(summaryMaterials);
         this.containerMaterialsRows.innerHTML = this.getMaterialsHTML(materials)
     }
 
@@ -40,5 +40,9 @@ export default class ModalMaterialsView {
         }
 
         return contentHTML;
+    }
+
+    setSummaryCost(summaryMaterials) {
+        this.summaryMaterialsCell.value = summaryMaterials;
     }
 }

@@ -45,7 +45,7 @@ export default class DataService {
             users
         } = await this.fetchData();
 
-        this.services.fot = new FotService(fot);
+        this.services.fot = new FotService(fot, `parentId${this.calcTypeId}`);
         this.services.user = new UserService(users, currentUser);
         this.services.materials = new MaterialsService(materials);
         this.services.coefficients = new CoefficientsService(coefficients);
@@ -54,7 +54,7 @@ export default class DataService {
         this.services.calculationFields = new CalculationFieldsService(calculationFields, this.calcFieldsAliases);
         
         for (const calculation of calculations) {
-            const calc = new Calculation(this.services, calculation);
+            const calc = new Calculation(this.services, calculation, this.productTypeId);
             this.calculations.push(calc);
         }
     }
@@ -62,6 +62,98 @@ export default class DataService {
     getCalculations() {
         return this.calculations;
     }
+
+
+    async fetchData() {
+        const checklistcomplexityProductType = PRODUCT_TYPES_CHECKLIST_COMPLEXITY[this.productTypeId];
+        const coefficientFotProductType = PRODUCT_TYPES_COEFFICIENTS_FOT[this.productTypeId];
+        const cmd = {
+            materials: `crm.item.list?entityTypeId=${ID_MATERIALS}`,
+            coefficients: `crm.item.list?entityTypeId=${ID_COEFFICIENTS}`,
+            checklistcomplexity: `crm.item.list?entityTypeId=${ID_CHECKLIST_COMPLEXITY}&filter[${FIELD_CHECKLIST_COMPLEXITY.typeProduct}]=${checklistcomplexityProductType}`,
+            coefficientsfot: `crm.item.list?entityTypeId=${ID_COEFFICIENTS_FOT}&filter[${FIELD_COEFFICIENTS_FOT.typeProduct}]=${coefficientFotProductType}`,
+            calculationFields: `crm.item.fields?entityTypeId=${this.calcTypeId}`,
+            calculations: `crm.item.list?entityTypeId=${this.calcTypeId}&filter[parentId${this.productTypeId}]=${this.productId}`,
+            fot: `crm.item.list?entityTypeId=${ID_FOT}&filter[parentId${this.productTypeId}]=${this.productId}`,
+            fotFields: `crm.item.fields?entityTypeId=${ID_FOT}`,
+
+            // other_calculations: `crm.item.list?entityTypeId=${this.calcTypeId}&filter[${fieldParent}]=${this.crmId}`,
+        };
+
+        const response = await this.apiClient.callMethod('batch', {
+            halt: 0,
+            cmd: cmd
+        });
+        console.log('response = ', response);
+
+        const materials = response?.result?.materials?.items || [];
+        const coefficients = response?.result?.coefficients?.items?.[0] || {};
+        const checklistcomplexity = response?.result?.checklistcomplexity?.items || [];
+        const fot = response?.result?.fot?.items || [];
+        const coefficientsfot = response?.result?.coefficientsfot?.items || [];
+        const calculationFields = response?.result?.calculationFields?.fields || [];
+        const calculations = response?.result?.calculations?.items || [];
+        // this.otherCalculations = response?.result?.other_calculations?.items || [];
+
+        const currentUser = await this.getCurrentUserFromBx24();
+        const usersIds = calculations.map(calculation => calculation.createdBy);
+        const users = await this.getUsersFromBx24(usersIds);
+        users[currentUser.ID] = currentUser;
+
+        return {
+            materials: materials,
+            coefficients: coefficients,
+            checklistcomplexity: checklistcomplexity,
+            fot: fot,
+            coefficientsfot: coefficientsfot,
+            calculationFields: calculationFields,
+            calculations: calculations,
+            currentUser: currentUser,
+            users: users,
+        }
+    }
+
+    async getCurrentUserFromBx24() {
+        const response = await this.apiClient.callMethodJS('user.current', {});
+        return response;
+    }
+
+    async getUsersFromBx24(userIds) {
+        let users = {};
+        let cmd = { current : `user.current` };
+        userIds.forEach(userId => {
+            cmd[userId] = `user.get?id=${userId}`;
+        })
+        
+        const result = await this.apiClient.callMethod('batch', {
+            halt: 0,
+            cmd: cmd
+        });
+        
+        for (const userId in result?.result) {
+            const user = Array.isArray(result?.result[userId]) ? result?.result[userId]?.[0] : result?.result[userId];
+            users[user.ID] = user;
+        }
+        return users;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // getCalculationsFullInfo() {
     //     const calculations = this.calculationsService.getCalculations();
@@ -170,82 +262,6 @@ export default class DataService {
     //     const material = this.materialsService.getClosestMaterialPrice(fieldAlias, dateTarget);
     //     return { value: +material, isFixed: true };
     // }
-
-    async fetchData() {
-        const checklistcomplexityProductType = PRODUCT_TYPES_CHECKLIST_COMPLEXITY[this.productTypeId];
-        const coefficientFotProductType = PRODUCT_TYPES_COEFFICIENTS_FOT[this.productTypeId];
-        const cmd = {
-            materials: `crm.item.list?entityTypeId=${ID_MATERIALS}`,
-            coefficients: `crm.item.list?entityTypeId=${ID_COEFFICIENTS}`,
-            checklistcomplexity: `crm.item.list?entityTypeId=${ID_CHECKLIST_COMPLEXITY}&filter[${FIELD_CHECKLIST_COMPLEXITY.typeProduct}]=${checklistcomplexityProductType}`,
-            coefficientsfot: `crm.item.list?entityTypeId=${ID_COEFFICIENTS_FOT}&filter[${FIELD_COEFFICIENTS_FOT.typeProduct}]=${coefficientFotProductType}`,
-            calculationFields: `crm.item.fields?entityTypeId=${this.calcTypeId}`,
-            calculations: `crm.item.list?entityTypeId=${this.calcTypeId}&filter[parentId${this.productTypeId}]=${this.productId}`,
-            fot: `crm.item.list?entityTypeId=${ID_FOT}&filter[parentId${this.productTypeId}]=${this.productId}`,
-            fotFields: `crm.item.fields?entityTypeId=${ID_FOT}`,
-
-            // other_calculations: `crm.item.list?entityTypeId=${this.calcTypeId}&filter[${fieldParent}]=${this.crmId}`,
-        };
-
-        const response = await this.apiClient.callMethod('batch', {
-            halt: 0,
-            cmd: cmd
-        });
-        console.log('response = ', response);
-
-        const materials = response?.result?.materials?.items || [];
-        const coefficients = response?.result?.coefficients?.items?.[0] || {};
-        const checklistcomplexity = response?.result?.checklistcomplexity?.items || [];
-        const fot = response?.result?.fot?.items?.[0] || {};
-        const coefficientsfot = response?.result?.coefficientsfot?.items || [];
-        const calculationFields = response?.result?.calculationFields?.fields || [];
-        const calculations = response?.result?.calculations?.items || [];
-        // this.otherCalculations = response?.result?.other_calculations?.items || [];
-
-        const currentUser = await this.getCurrentUserFromBx24();
-        const usersIds = calculations.map(calculation => calculation.createdBy);
-        const users = await this.getUsersFromBx24(usersIds);
-        users[currentUser.ID] = currentUser;
-
-        return {
-            materials: materials,
-            coefficients: coefficients,
-            checklistcomplexity: checklistcomplexity,
-            fot: fot,
-            coefficientsfot: coefficientsfot,
-            calculationFields: calculationFields,
-            calculations: calculations,
-            currentUser: currentUser,
-            users: users,
-        }
-    }
-
-    async getCurrentUserFromBx24() {
-        const response = await this.apiClient.callMethodJS('user.current', {});
-        return response;
-    }
-
-    async getUsersFromBx24(userIds) {
-        let users = {};
-        let cmd = { current : `user.current` };
-        userIds.forEach(userId => {
-            cmd[userId] = `user.get?id=${userId}`;
-        })
-        
-        const result = await this.apiClient.callMethod('batch', {
-            halt: 0,
-            cmd: cmd
-        });
-        
-        for (const userId in result?.result) {
-            const user = Array.isArray(result?.result[userId]) ? result?.result[userId]?.[0] : result?.result[userId];
-            users[user.ID] = user;
-        }
-        return users;
-    }
-}
-
-
 
 
 // getCalculationData(calculation) {

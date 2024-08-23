@@ -15,8 +15,8 @@ export default class ChecklistComplexityService {
         return {
             title: item?.[FIELD_CHECKLIST_COMPLEXITY.title],
             showInQuestions: item?.[FIELD_CHECKLIST_COMPLEXITY.showInQuestions] === 'Y',
-            showInApp: item?.[FIELD_CHECKLIST_COMPLEXITY.showInApp] === 'Y',
-            description: item?.[FIELD_CHECKLIST_COMPLEXITY.description] === 'Y',
+            question: item?.[FIELD_CHECKLIST_COMPLEXITY.showInApp],
+            description: item?.[FIELD_CHECKLIST_COMPLEXITY.description],
             showInCalc: item?.[FIELD_CHECKLIST_COMPLEXITY.showInCalc] === 'Y',
             coefficients: {
                 development: item?.[FIELD_CHECKLIST_COMPLEXITY.coefficietnts.development],

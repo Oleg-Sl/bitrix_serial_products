@@ -89,6 +89,7 @@
 }
 .draggable-window table.collapsed {
   max-height: 0;
+  height: 0;
 }
 .draggable-window .window-footer {
   display: grid;

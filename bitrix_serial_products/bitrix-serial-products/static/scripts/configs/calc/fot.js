@@ -46,6 +46,15 @@ export const FIELD_FOT = {
       growthCoefficient: "ufCrm93_1723537554",  // Обтяжка - коэффициент роста
       finalAmount: "ufCrm93_1723537654",        // Обтяжка - итоговая сумма
       comment: "ufCrm93_1723537861"             // Обтяжка - комментарий
+    },
+    
+    // ВРЕМЕЕНО!!!
+    painting: {
+      title: "Покраска",
+      estimatedAmount: "ufCrm93_1723537303",    // Разработка - расчетная сумма
+      growthCoefficient: "ufCrm93_1723537342",  // Разработка - коэффициент роста
+      finalAmount: "ufCrm93_1723537368",        // Разработка - итоговая сумма
+      comment: "ufCrm93_1723537384"             // Разработка - комментарий
     }
   };
   
