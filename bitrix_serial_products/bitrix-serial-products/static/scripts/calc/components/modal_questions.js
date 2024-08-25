@@ -13,7 +13,7 @@ export default class ModalQuestionsView {
         let contentStatementHTML = '';
 
         for (const question of questions) {
-            console.log("question = ", question);
+            // console.log("question = ", question);
             if (question?.showInQuestions) {
                 contentAnswerHTML += this.getQuestionsAnswerHTML(question);
             } else {

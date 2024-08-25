@@ -11,7 +11,7 @@ export default class ModalSalesRangeView {
     render(salesRange) {
         for (const i in salesRange) {
             this.coefficientCells[i].value = salesRange[i].coefficient;
-            this.costCells[i].value = salesRange[i].price;
+            this.costCells[i].value = roundToTwoDecimals(salesRange[i].price);
 
         }
     }

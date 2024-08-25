@@ -16,13 +16,14 @@ import Calculation from './calculation.js';
 
 
 export default class DataService {
-    constructor(apiClient, calcTypeId, calcFieldsAliases, productTypeId, productId, fabricManager) {
+    constructor(apiClient, calcTypeId, calcFieldsAliases, productTypeId, productId, eventEmitter, cbGetFabric) {
         this.apiClient = apiClient;
         this.calcTypeId = calcTypeId;
         this.calcFieldsAliases = calcFieldsAliases;
         this.productTypeId = productTypeId;
         this.productId = productId;
-        this.fabricManager = fabricManager;
+        this.cbGetFabric = cbGetFabric;
+        this.eventEmitter = eventEmitter;
 
         this.services = {
             fot: null,
@@ -54,15 +55,71 @@ export default class DataService {
         this.services.calculationFields = new CalculationFieldsService(calculationFields, this.calcFieldsAliases);
         
         for (const calculation of calculations) {
-            const calc = new Calculation(this.services, calculation, this.productTypeId);
+            const calc = new Calculation(this.services, calculation, this.productTypeId, this.cbGetFabric);
             this.calculations.push(calc);
         }
+
+        this.eventEmitter.on('changeMaterialPrice', this.changeMaterialPrice.bind(this));
+        this.eventEmitter.on('changeMaterialComment', this.changeMaterialComment.bind(this));
+        this.eventEmitter.on('changeFotPrice', this.changeFotPrice.bind(this));
+        this.eventEmitter.on('changeFotComment', this.changeFotComment.bind(this));
+        this.eventEmitter.on('changeGeneralComment', this.changeGeneralComment.bind(this));
+        this.eventEmitter.on('calculateFot', this.recalculateFot.bind(this));
     }
 
+    addTempCalculation() {
+        let calculation = {
+            id: Date.now(),
+            isTemporary: true,
+        };
+        const calc = new Calculation(this.services, calculation, this.productTypeId, this.cbGetFabric);
+        this.calculations.push(calc);
+        return calc;
+    }
+
+    changeMaterialPrice(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeMaterialPrice(data.material, data.field, data.value);
+        this.eventEmitter.emit('renderCalcualation', calculation);
+    }
+
+    changeMaterialComment(data) {        
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeMaterialComment(data.material, data.value);
+    }
+
+    changeFotPrice(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeFotPrice(data.code, data.field, data.value);
+        this.eventEmitter.emit('renderCalcualation', calculation);
+    }
+
+    changeFotComment(data) {        
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeFotComment(data.code, data.value);
+    }
+
+    changeGeneralComment(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeGeneralComment(data.value);
+    }
+
+    recalculateFot(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.recalculateFot();
+    }
+
+    getCalculation(calculationId) {
+        return this.calculations.find((item) => item.calculationId == calculationId);
+    }
+    
     getCalculations() {
         return this.calculations;
     }
 
+    getDateOfAddingMaterials() {
+        return this.services.materials.getLastDateOfAddingMaterials();
+    }
 
     async fetchData() {
         const checklistcomplexityProductType = PRODUCT_TYPES_CHECKLIST_COMPLEXITY[this.productTypeId];
@@ -137,230 +194,3 @@ export default class DataService {
         return users;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // getCalculationsFullInfo() {
-    //     const calculations = this.calculationsService.getCalculations();
-    //     return calculations.map(calculation => this.getCalculationData(calculation));
-    // }
-
-    // getCalculationData(calculation) {
-    //     const getFieldValue = (fieldAlias, defaultValue = '') => calculation?.[fieldAlias] || defaultValue;
-    
-    //     const createField = (fieldAlias, defaultValue = '', isFixed = false) => ({
-    //         value: getFieldValue(fieldAlias, defaultValue),
-    //         field: fieldAlias,
-    //         isFixed
-    //     });
-    
-    //     const calculationData = {
-    //         id: calculation.id,
-    //         title: getFieldValue(this.calcFieldsAliases?.title, ''),
-    //         createdBy: this.userService.getUser(calculation?.createdBy),
-    //         materials: this.getMaterialsData(calculation),
-    //         dateOfCalculation: createField(this.calcFieldsAliases?.dateOfCalculation, ''),
-    //         dateOfCalculationToday: createField(this.calcFieldsAliases?.dateOfCalculationToday, ''),
-    //         constantExpenses: {
-    //             ...createField(this.calcFieldsAliases?.constantExpenses, 0),
-    //             coefficient: this.coefficientsService.getCoefficientByKey('constantCosts')
-    //         },
-    //         generalComment: createField(this.calcFieldsAliases?.generalComment, ''),
-    //         cost: createField(this.calcFieldsAliases?.cost, 0),
-    //         finalCalculation: createField(this.calcFieldsAliases?.finalCalculation, 'Y') === 'Y',
-    //         totalMaterials: createField(this.calcFieldsAliases?.totalMaterials, 0),
-    //         calculationFixed: createField(this.calcFieldsAliases?.calculationFixed, 0),
-    //         work: {
-    //             amount: createField(this.calcFieldsAliases?.totalWork?.amount, 0),
-    //             comments: createField(this.calcFieldsAliases?.totalWork?.comments, '', false)
-    //         },
-    //         subcontractorWork: {
-    //             amount: createField(this.calcFieldsAliases?.subcontractorWork?.amount, 0),
-    //             comments: createField(this.calcFieldsAliases?.subcontractorWork?.comments, '', false)
-    //         }
-    //     };
-    
-    //     return calculationData;
-    // }
-
-    // getMaterialsData(calculation = this.calculationsService.getCalculations()[0]) {
-    //     const materials = [];
-    
-    //     const getFieldValue = (fieldAlias, defaultValue = '') => calculation?.[fieldAlias] || defaultValue;
-    
-    //     const createField = (fieldAlias, defaultValue = '', isFixed = false) => ({
-    //         value: getFieldValue(fieldAlias, defaultValue),
-    //         field: fieldAlias,
-    //         isFixed
-    //     });
-    
-    //     for (const [fieldAlias, fieldData] of Object.entries(this.calcFieldsAliases)) {
-    //         if (fieldData && (fieldData.type === 'material' || fieldData.type === 'fabric')) {
-    //             const fieldDateOfCalculation = this.calcFieldsAliases?.dateOfCalculation;
-    //             const title = this.calculationsService.getTitleField(fieldData.value);
-    //             const coefficient = this.coefficientsService.getCoefficientByKey(fieldAlias);
-    //             const price = this.getPriceByDate(fieldAlias, fieldData, calculation, calculation[fieldDateOfCalculation]);
-    
-    //             materials.push({
-    //                 fields: fieldData,
-    //                 title,
-    //                 coefficient,
-    //                 price,
-    //                 value: createField(fieldData.value, 0, false),
-    //                 amount: createField(fieldData.amount, 0, true),
-    //                 comments: createField(fieldData.comments, '', false),
-    //             });
-    //         }
-    //     }
-    
-    //     return materials;
-    // }
-
-    // getCoefficientsFot() {
-    //     return this.coefficientsFotService.getCoefficients();
-    // }
-    
-    // getQuestions() {
-    //     return this.checklistcomplexityService.getCheckList();
-    // }
-
-    // getPriceByDate(fieldAlias, fields, calculation, dateTarget) {
-    //     if ('price' in fields) {
-    //         const fieldPrice = this.calcProductFields?.[fieldAlias]?.price;
-    //         return { value: +calculation[fieldPrice] || 0, field: fields.price, isFixed: false };
-    //     } else if (fields?.type === 'fabric') {
-    //         let price = 0;
-    //         switch (fields?.number) {
-    //             // case 1:
-    //             //     price = this.fabricManager.getFabricPrice1();
-    //             //     break;
-    //             // case 2:
-    //             //     price = this.fabricManager.getFabricPrice2();
-    //             //     break;
-    //             // case 3:
-    //             //     price = this.fabricManager.getFabricPrice3();
-    //             //     break;
-    //         }
-    //         return { value: +price, isFixed: true };
-    //     }
-
-    //     const material = this.materialsService.getClosestMaterialPrice(fieldAlias, dateTarget);
-    //     return { value: +material, isFixed: true };
-    // }
-
-
-// getCalculationData(calculation) {
-//     const fieldDateOfCalculation = this.calcFieldsAliases?.dateOfCalculation;
-//     const fieldDateOfCalculationToday = this.calcFieldsAliases?.dateOfCalculationToday;
-//     const fieldConstantExpenses = this.calcFieldsAliases?.constantExpenses;
-//     const fieldGeneralComment = this.calcFieldsAliases?.generalComment;
-//     const fieldCost = this.calcFieldsAliases?.cost;
-//     const filedFinalCalculation = this.calcFieldsAliases?.finalCalculation;
-//     const fieldTotalMaterials = this.calcFieldsAliases?.totalMaterials
-//     const fieldCalculationFixed = this.calcFieldsAliases?.calculationFixed;
-//     const fieldTotalWorkAmount = this.calcFieldsAliases?.totalWork?.amount;
-//     const fieldTotalWorkComments = this.calcFieldsAliases?.totalWork?.comments;
-//     const fieldSubcontractorWorkAmount = this.calcFieldsAliases?.subcontractorWork?.amount;
-//     const fieldSubcontractorWorkComments = this.calcFieldsAliases?.subcontractorWork?.comments;
-//     const calculationData = {
-//         id: calculation.id,
-//         title: calculation?.title || '',
-//         createdBy: this.userService.getUser(calculation?.createdBy),
-//         materials: this.getMaterialsData(calculation),
-//         dateOfCalculation: {
-//             value: calculation[fieldDateOfCalculation] || '',
-//             field: this.calcFieldsAliases.dateOfCalculation
-//         },
-//         dateOfCalculationToday: {
-//             value: calculation[fieldDateOfCalculationToday] || '',
-//             field: this.calcFieldsAliases.dateOfCalculationToday
-//         },
-//         constantExpenses: {
-//             value: calculation[fieldConstantExpenses] || 0,
-//             field: this.calcFieldsAliases.constantExpenses,
-//             coefficient: this.coefficientsService.getCoefficientByKey('constantCosts')
-//         },
-//         generalComment: {
-//             value: calculation[fieldGeneralComment] || '',
-//             field: this.calcFieldsAliases.generalComment
-//         },
-//         cost: {
-//             value: calculation[fieldCost] || 0,
-//             field: this.calcFieldsAliases.cost
-//         },
-//         finalCalculation: {
-//             value: calculation[filedFinalCalculation] === 'Y',
-//             field: this.calcFieldsAliases.finalCalculation
-//         },
-//         totalMaterials: {
-//             value: calculation[fieldTotalMaterials] || 0,
-//             field: this.calcFieldsAliases.totalMaterials
-//         },
-//         calculationFixed: {
-//             value: calculation[fieldCalculationFixed] || 0,
-//             field: this.calcFieldsAliases.calculationFixed
-//         },
-//         work: {
-//             amount: {
-//                 value: calculation[fieldTotalWorkAmount] || 0,
-//                 field: this.calcFieldsAliases?.totalWork?.amount,
-//                 isFixed: false
-//             },
-//             comments: {
-//                 value: calculation[fieldTotalWorkComments] || '',
-//                 field: this.calcFieldsAliases?.totalWork?.comments,
-//                 isFixed: false
-//             },
-//         },
-//         subcontractorWork: {
-//             amount: {
-//                 value: calculation[fieldSubcontractorWorkAmount] || 0,
-//                 field: this.calcFieldsAliases?.subcontractorWork?.amount,
-//                 isFixed: false
-//             },
-//             comments: {
-//                 value: calculation[fieldSubcontractorWorkComments] || '',
-//                 field: this.calcFieldsAliases?.subcontractorWork?.comments,
-//                 isFixed: false
-//             },
-//         }
-//     };
-//     return calculationData;
-// }
-
-// getMaterialsData(calculation) {
-//     let materials = [];
-//     for (const [fieldAlias, fieldData] of Object.entries(this.calcFieldsAliases)) {
-//         if (typeof fieldData === 'object' && fieldData !== null && (fieldData?.type === 'material' || fieldData?.type === 'fabric')) {
-//             const fieldValue = this.calcFieldsAliases?.[fieldAlias]?.value;
-//             const fieldAmount = this.calcFieldsAliases?.[fieldAlias]?.amount;
-//             const fieldComments = this.calcFieldsAliases?.[fieldAlias]?.comments;
-//             const fieldDateOfCalculation = this.calcFieldsAliases?.dateOfCalculation;
-//             materials.push({
-//                 fields: fieldData,
-//                 title: this.calculationsService.getTitleField(fieldData.value),
-//                 coefficient: this.coefficientsService.getCoefficientByKey(fieldAlias),
-//                 price: this.getPriceByDate(fieldAlias, fieldData, calculation, calculation[fieldDateOfCalculation]),
-//                 value: { value: calculation[fieldValue] || 0, field: fieldData.value, isFixed: false },
-//                 amount: { value: calculation[fieldAmount] || 0, field: fieldData.amount, isFixed: true },
-//                 comments: { value: calculation[fieldComments] || '', field: fieldData.comments, isFixed: false },
-//             });
-//         }
-//     }
-//     return materials;
-// }

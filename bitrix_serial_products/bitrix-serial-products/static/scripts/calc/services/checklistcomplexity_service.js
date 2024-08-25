@@ -4,7 +4,7 @@ import { ID_CHECKLIST_COMPLEXITY, FIELD_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_CHEC
 export default class ChecklistComplexityService {
     constructor(checklist) {
         this.checklist = checklist;
-        console.log("checklist = ", this.checklist);
+        // console.log("checklist = ", this.checklist);
     }
 
     getQuestions() {

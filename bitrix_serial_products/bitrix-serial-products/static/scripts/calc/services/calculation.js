@@ -10,9 +10,10 @@ import { ID_MELOCHEVKA } from '../../configs/products/melochevka.js';
 
 
 export default class Calculation {
-    constructor(services, calculationRawData, productTypeId) {
+    constructor(services, calculationRawData, productTypeId, cbGetFabric) {
         this.calculationRawData = calculationRawData;
         this.productTypeId = productTypeId;
+        this.cbGetFabric = cbGetFabric;
 
         this.fotService = services.fot;
         this.userService = services.user;
@@ -22,21 +23,87 @@ export default class Calculation {
         this.checklistcomplexityService = services.checklistcomplexity;
         this.calculationFieldsService = services.calculationFields;
 
+        this.calculationId = null;
+        this.dateOfCalculation = null;
+        this.dateOfCalculationToday = null;
+        this.isFinalCalculation = null;
+        this.createdBy = null;
+
         this.materials = null;
         this.questions = null;
         this.fots = null;
         this.salesRange = null;
+        
+        this.isEditFields = false;
+        this.isEditFots = false;
 
         this.summaryMaterials = 0
         this.summaryFot = 0;
         this.costManagement = 0;
         this.costRent = 0;
+        this.costPrice = 0;
         this.comment = '';
     
         this.initialize();
     }
 
+    changeMaterialPrice(materialCode, field, newValue) {
+        let material = this.materials.find((item) => item.code === materialCode);
+        // console.log("material = ", material);
+        material[field].value = newValue;
+        material.amount.value = material.price.value * material.value.value;
+        this.summaryMaterials = this.materials.reduce((sum, current) => sum + +current.amount.value, 0);
+        this.costPrice = this.initCostPrice();
+        this.salesRange = this.initSalesRange();
+        // console.log("material = ", material);
+        // this.getCalculationSmartData(material)
+
+    }
+
+    changeMaterialComment(materialCode, newValue) {
+        let material = this.materials.find((item) => item.code === materialCode);
+        material.comments.value = newValue;
+        // console.log("material = ", material);
+
+    }
+
+    changeFotPrice(fotCode, field, newValue) {
+        let fot = this.fots.find((item) => item.code === fotCode);
+        fot[field] = +newValue;
+        fot.total = +fot.estimate * +fot.coefficient;
+        this.summaryFot = this.fots.reduce((sum, current) => sum + +current.total, 0);
+        this.costPrice = this.initCostPrice();
+        this.salesRange = this.initSalesRange();
+        console.log("fot = ", fot);
+    }
+
+    changeFotComment(fotCode, newValue) {
+        let fot = this.fots.find((item) => item.code === fotCode);
+        fot.comment = newValue;
+    }
+
+    changeGeneralComment(newValue) {
+        this.comment = newValue;
+    }
+
+    recalculateFot() {
+        console.log("recalculateFot");
+    }
+
+
+
+
     initialize() {
+        const fieldDateOfCalculation = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation');
+        const fieldDateOfCalculationToday = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculationToday');
+        const finalCalculation = this.calculationFieldsService.getFieldKeyByAlias('finalCalculation');
+
+        this.calculationId = this.calculationRawData.id;
+        this.dateOfCalculation = this.calculationRawData[fieldDateOfCalculation] || new Date().toISOString();
+        this.dateOfCalculationToday = this.calculationRawData[fieldDateOfCalculationToday] || '';
+        this.isFinalCalculation = this.calculationRawData[finalCalculation] || false;
+        this.createdBy = this.userService.getUser(this.calculationRawData.createdBy);
+
         this.materials = this.initMaterials();
         this.questions = this.initCheckListQuestions();
         this.fots = this.initFot();
@@ -64,7 +131,7 @@ export default class Calculation {
         for (const [fieldAlias, fieldData] of Object.entries(this.calculationFieldsService.getAliases())) {
             if (fieldData && (fieldData.type === 'material' || fieldData.type === 'fabric')) {
                 materials.push({
-                    // fields: fieldData,
+                    code: fieldAlias,
                     title: this.calculationFieldsService.getTitleField(fieldData.value),
                     coefficient: this.coefficientsService.getCoefficientByKey(fieldAlias),
                     price: this.getPriceByDate(fieldAlias, fieldData),
@@ -84,7 +151,7 @@ export default class Calculation {
 
     initFot() {
         let fotList = [];
-        const fot = this.fotService.getFotByParentId(this.calculationRawData.id);
+        const fot = this.fotService.getFotByParentId(this.calculationRawData.id) || {};
         for (const fotAlias of this.fotService.getFotCodeList()) {
             fotList.push({
                 code: fotAlias,
@@ -163,10 +230,10 @@ export default class Calculation {
     }
 
     initCostPrice() {
-        console.log("this.summaryMaterials = ", this.summaryMaterials);
-        console.log("this.summaryFot = ", this.summaryFot);
-        console.log("this.costManagement = ", this.costManagement);
-        console.log("this.costRent = ", this.costRent);
+        // console.log("this.summaryMaterials = ", this.summaryMaterials);
+        // console.log("this.summaryFot = ", this.summaryFot);
+        // console.log("this.costManagement = ", this.costManagement);
+        // console.log("this.costRent = ", this.costRent);
         return this.summaryMaterials + this.summaryFot + this.costManagement + this.costRent;
     }
 
@@ -196,18 +263,7 @@ export default class Calculation {
                 isFixed: false
             };
         } else if (fieldData?.type === 'fabric') {
-            let price = 0;
-            switch (fieldData?.number) {
-                // case 1:
-                //     price = this.fabricManager.getFabricPrice1();
-                //     break;
-                // case 2:
-                //     price = this.fabricManager.getFabricPrice2();
-                //     break;
-                // case 3:
-                //     price = this.fabricManager.getFabricPrice3();
-                //     break;
-            }
+            let price = this.cbGetFabric(fieldData?.number);
             return {
                 value: +price,
                 isFixed: true
@@ -221,5 +277,35 @@ export default class Calculation {
             field: null,
             isFixed: true
         };
+    }
+
+    getCalculationSmartData() {
+        let data = {
+            [this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation')]: this.dateOfCalculation,
+            [this.calculationFieldsService.getFieldKeyByAlias('generalComment')]: this.comment,
+            [this.calculationFieldsService.getFieldKeyByAlias('cost')]: this.costPrice,
+        };
+        for (let material of this.materials) {
+            for (const key in material) {
+                const fieldData = material[key];
+                console.log
+                if (typeof(fieldData) === 'object' && !fieldData.isFixed) {
+                    data[fieldData.field] = fieldData.value;
+                }
+            }
+        }
+        return data;
+
+    }
+
+    getFotSmartData() {
+        let data = {};
+        for (const fot of this.fots) {
+            data[this.fotService.getEstimateField(fot.code)] = fot.estimate;
+            data[this.fotService.getGrowthField(fot.code)] = fot.coefficient;
+            data[this.fotService.getFinalAmountField(fot.code)] = fot.total;
+            data[this.fotService.getCommentField(fot.code)] = fot.comment;
+        }
+        return data;
     }
 }

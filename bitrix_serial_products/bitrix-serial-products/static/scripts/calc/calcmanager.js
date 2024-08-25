@@ -9,6 +9,10 @@ import ModalRentView from './components/modal_rent.js';
 import ModalCostPriceView from './components/modal_costprice.js';
 import ModalSalesRangeView from './components/modal_salesrange.js';
 import ModalCommentView from './components/modal_comment.js';
+import ModalMetadataView from './components/modal_metadata.js';
+import ModalButtonsView from './components/modal_buttons.js';
+
+import EventEmitter from './eventemitter.js';
 
 
 export default class CalculationManager {
@@ -19,138 +23,94 @@ export default class CalculationManager {
         this.productTypeId = productTypeId;
         this.productId = productId;
 
-        this.dataService = new DataService(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId);
+        this.eventEmitter = new EventEmitter();
+        this.dataService = new DataService(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, this.eventEmitter, this.getFabricData.bind(this));
+
         this.calculationListView = new CalculationsListView(this.createCalculation.bind(this), this.openCalculation.bind(this));
-
-        this.modalMaterialsView = new ModalMaterialsView();
-        this.modalQuestionsView = new ModalQuestionsView();
-        this.modalFotView = new ModalFotView();
-        this.modalManagementView = new ModalManagementView();
-        this.modalRentView = new ModalRentView();
-        this.modalCostPriceView = new ModalCostPriceView();
-        this.modalSalesRangeView = new ModalSalesRangeView();
-        this.modalCommentView = new ModalCommentView();
-
-        this.subscribers = [];
+        this.modalView = new ModalMetadataView(this.eventEmitter);
+        this.modalMaterialsView = new ModalMaterialsView(this.eventEmitter);
+        this.modalQuestionsView = new ModalQuestionsView(this.eventEmitter);
+        this.modalFotView = new ModalFotView(this.eventEmitter);
+        this.modalManagementView = new ModalManagementView(this.eventEmitter);
+        this.modalRentView = new ModalRentView(this.eventEmitter);
+        this.modalCostPriceView = new ModalCostPriceView(this.eventEmitter);
+        this.modalSalesRangeView = new ModalSalesRangeView(this.eventEmitter);
+        this.modalCommentView = new ModalCommentView(this.eventEmitter);
+        this.modalButtonsView = new ModalButtonsView(this.eventEmitter);
     }
 
     async init() {
         await this.dataService.init();
-
+        this.eventEmitter.on('renderCalcualation', this.renderCalculation.bind(this));
+        this.eventEmitter.on('closedCalcualation', this.closedCalcualation.bind(this));
+        this.eventEmitter.on('saveCalcualation', this.saveCalcualation.bind(this));
+        
         const calculations = this.dataService.getCalculations();
-        const calculation = calculations[0];
-        // this.calculationListView.init(calculations);
+        const dateOfAddingMaterials = this.dataService.getDateOfAddingMaterials();
+        this.calculationListView.init(calculations, dateOfAddingMaterials);
+    }
 
-        this.modalMaterialsView.render(calculation.materials, calculation.summaryMaterials);
+    renderCalculation(calculation, isEdit = false) {
+        console.log("isEdit = ", isEdit);
+        this.modalView.render(calculation.calculationId, calculation.dateOfCalculation)
+        this.modalMaterialsView.render(calculation.materials, calculation.summaryMaterials, isEdit);
         this.modalQuestionsView.render(calculation.questions);
-        this.modalFotView.render(calculation.fots, calculation.summaryFot);
+        this.modalFotView.render(calculation.fots, calculation.summaryFot, isEdit);
         this.modalManagementView.render(calculation.costManagement);
         this.modalRentView.render(calculation.costRent);
         this.modalCostPriceView.render(calculation.costPrice);
         this.modalSalesRangeView.render(calculation.salesRange);
         this.modalSalesRangeView.render(calculation.salesRange);
-        this.modalCommentView.render(calculation.comment);
-
-        // const coefficienFot = this.dataService.getCoefficientsFot();
-        // console.log('coefficienFot = ', coefficienFot);
-
-        // this.editCalculationView.render(calculations[0]);
-        // const questions = this.dataService.getQuestions();
-        // console.log('questions = ', questions);
-        // this.editCalculationView.retnderQuestions(questions);
+        this.modalCommentView.render(calculation.comment, isEdit);
     }
 
-    subscribe(callback) {
-        this.subscribers.push(callback);
+    getFabricData(number) {
+        let price = 0;
+        switch (number) {
+            case 1:
+                price = 1;
+                // price = this.fabricManager.getFabricPrice1();
+                break;
+            case 2:
+                price = 2;
+                // price = this.fabricManager.getFabricPrice2();
+                break;
+            case 3:
+                price = 3;
+                // price = this.fabricManager.getFabricPrice3();
+                break;
+        }
+        return price;
     }
 
-    notify() {
-        this.subscribers.forEach(callback => callback(this.data));
-    }
+    getProduct() {
+        return {
 
-    createCalculation() {
-        // создать пустую модель расчета
+        };
     }
 
     openCalculation(calculationId) {
-        // получить данные расчета и открыть их
+        const calculation = this.dataService.getCalculation(calculationId);
+        this.renderCalculation(calculation, true);
+        this.modalView.show();
+    }
+
+    createCalculation() {
+        const calculation = this.dataService.addTempCalculation();
+        // console.log("calculation = ", calculation);
+        this.renderCalculation(calculation, true);
+        this.modalView.show();
+    }
+
+    closedCalcualation() {
+        this.modalView.hide();
+    }
+
+    saveCalcualation(calculationId) {
+        const calculation = this.dataService.getCalculation(calculationId);
+        const calculationData = calculation.getCalculationSmartData();
+        const fotData = calculation.getFotSmartData();
+        // console.log("calculationData = ", calculationData);
+        // console.log("fotData = ", fotData);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// async init() {
-//     await this.dataService.init();
-//     const calculations = this.dataService.getCalculationsFullInfo();
-//     this.calculationListView.render(calculations);
-
-
-//     // const materials = this.dataService.getMaterialsData();
-//     // this.modalMaterialsView.render(materials);
-
-//     // const questions = this.dataService.getQuestions();
-//     // this.modalQuestionsView.render(questions);
-
-//     // const coefficienFot = this.dataService.getCoefficientsFot();
-//     // console.log('coefficienFot = ', coefficienFot);
-
-
-
-//     // this.editCalculationView.render(calculations[0]);
-//     // const questions = this.dataService.getQuestions();
-//     // console.log('questions = ', questions);
-//     // this.editCalculationView.retnderQuestions(questions);
-
-//     // const crmId = this.productManager.getCrmData('id');
-//     // this.connector.init(crmId);
-//     // const { materials, calculations, coefficients, calculationFields, otherCalculations } = await this.connector.getCalculations();
-//     // const usersIds = calculations.map(calculation => calculation.createdBy);
-//     // const users = await this.connector.getUsersFromBx24(usersIds);
-
-//     // this.calculationController = new CalculationController(this.bx24, this.title, this.productManager, this.fabricManager, this.calcProductId, materials, coefficients, calculations, calculationFields, users, currentUser, otherCalculations, this.calcProductFields, isAccess);
-//     // this.calculationController.init();
-// }
-    // updateFabricPrice() {
-    //     this.calculationController.updateFabricPrice();
-    // }
-
-    // async updateCalculation() {
-    //     await this.calculationController.updateCalculation();
-    // }
-
-    // getChangedData() {
-    //     return {
-    //         [this.productManager.getProductFieldName('calculationId')]: this.productManager.getProductData('calculationId'),
-    //     };
-    // }
-
-    // getFinallyCost() {
-    //     return this.calculationController.getFinallyCost();
-    // }
-
-    // copyCalculationToNewProduct(productId) {
-    //     return this.calculationController.copyCalculationToNewProduct(productId);
-    // }

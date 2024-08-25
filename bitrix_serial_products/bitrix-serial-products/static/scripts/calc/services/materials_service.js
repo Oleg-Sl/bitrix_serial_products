@@ -35,4 +35,18 @@ export default class MaterialsService {
         }
         return closestItem;
     }
+
+    getLastDateOfAddingMaterials() {
+        const targetDateObj = new Date();
+        let closestDate = null;
+
+        for (const material of this.materials) {
+            const itemDate = new Date(material[FIELD_MATERIALS.datePriceValidity]);
+            if (!isNaN(itemDate.getTime()) && (itemDate <= targetDateObj && (closestDate === null || itemDate > closestDate))) {
+                closestDate = itemDate;
+            }
+        }
+
+        return closestDate;
+    }
 }

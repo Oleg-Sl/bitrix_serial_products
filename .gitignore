@@ -9,6 +9,7 @@ env
 __pycache__/
 
 html_offline
+html_offline/*.js
 
 fake_api.js
 fake_api_client.js

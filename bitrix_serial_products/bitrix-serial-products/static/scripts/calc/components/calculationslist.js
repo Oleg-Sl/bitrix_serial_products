@@ -11,8 +11,8 @@ export default class CalculationsListView {
         this.btnAddProductCalculation = document.querySelector('#addProductCalculation');
     }
 
-    init(calculationsData) {
-        this.render(calculationsData);
+    init(calculationsData, calculationValidityDate) {
+        this.render(calculationsData, calculationValidityDate);
         this.initHandlers();
     }
 
@@ -21,21 +21,19 @@ export default class CalculationsListView {
         this.containerList.addEventListener('click', (event) => {
             const target = event.target;
             if (target.classList.contains('show-calculation-window')) {
-                const calculationId = target.closest('tr').dataset.id;
+                const calculationId = target.closest('tr').dataset.calculationId;
                 this.cbOpenCalculation(calculationId);
             }
         });
-        // открыть окно сощдания нового расчета
         this.btnNewProductCalculation.addEventListener('click', (event) => {
             this.cbCreateCalculation();
         });
     }
 
-    render(calculations, currentCalculationId, calculationValidityDate) {
+    render(calculations, calculationValidityDate) {
         let calculationHTML = '';
         for (const calculation of calculations) {
-            // calculationHTML += this.getCalculationHTML(calculation, finalyCalculationId, calculationValidityDate);
-            calculationHTML += this.getCalculationHTML(calculation);
+            calculationHTML += this.getCalculationHTML(calculation, calculationValidityDate);
         }
         this.containerList.innerHTML = calculationHTML;
         // this.renderOtherCalculations(otherCalculations);
@@ -49,28 +47,27 @@ export default class CalculationsListView {
         this.productOtherCalculationsList.innerHTML = calculationHTML;
     }
 
-    getCalculationHTML(calculation, finalyCalculationId, calculationValidityDate) {
-        const isActualCalculation = this.calculationDateIsActual(calculation.dateOfCalculation.value, calculationValidityDate);
-        console.log('calculation.createdBy = ', calculation.createdBy);
+    getCalculationHTML(calculation, calculationValidityDate) {
+        const isActualCalculation = this.calculationDateIsActual(calculation.dateOfCalculation, calculationValidityDate);
         return `
-            <tr data-id="${calculation.id}" class="">
+            <tr data-calculation-id="${calculation.calculationId}" class="">
                 <td class="p-0 m-0">
                     <strong class="show-calculation-window"style="text-decoration: underline; color: #0e6efd; cursor: pointer;">Ссылка</strong>
                 </td>
                 <td class="p-0 m-0 ${isActualCalculation ? '' : 'bg-danger'}">
-                    ${this.formatDate(calculation?.dateOfCalculation?.value)}
+                    ${this.formatDate(calculation.dateOfCalculation)}
                 </td>
                 <td class="p-0 m-0">
                     <a href="#" data-user-link="${this.getUserLink(calculation.createdBy)}">${this.getUserName(calculation.createdBy)}</a>
                 </td>
                 <td class="p-0 m-0">
-                    ${calculation?.generalComment?.value}
+                    ${calculation.comment}
                 </td>
                 <td class="p-0 m-0">
-                    ${calculation?.cost?.value?.toLocaleString()}
+                    ${calculation.costPrice.toLocaleString()}
                 </td>
                 <td class="p-0 m-0">
-                    <input class="form-check-input radio-final-calculation" type="radio" name="calculationRadionButton" ${finalyCalculationId == calculation.id ? 'checked' : ''}>
+                    <input class="form-check-input radio-final-calculation" type="radio" name="calculationRadionButton" ${calculation.isFinalCalculation ? 'checked' : ''}>
                 </td>
             </tr>
         `;

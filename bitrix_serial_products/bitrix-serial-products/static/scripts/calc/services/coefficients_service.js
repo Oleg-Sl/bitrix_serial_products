@@ -4,7 +4,7 @@ import {ID_COEFFICIENTS, FIELD_COEFFICIENTS } from '../../configs/calc/coefficie
 export default class CoefficientsService {
     constructor(coefficientsList) {
         this.coefficients = coefficientsList;
-        console.log("this.coefficients = ", this.coefficients);
+        // console.log("this.coefficients = ", this.coefficients);
     }
 
     // getCoefficientById(id) {
