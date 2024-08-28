@@ -1,3 +1,5 @@
+import { ID_FOT, FIELD_FOT } from '../configs/calc/fot.js';
+
 import DataService from './services/data_service.js';
 import CalculationsListView from './components/calculationslist.js';
 import EditCalculationView from './components/calculationedit.js';
@@ -12,21 +14,25 @@ import ModalCommentView from './components/modal_comment.js';
 import ModalMetadataView from './components/modal_metadata.js';
 import ModalButtonsView from './components/modal_buttons.js';
 
+import CalculationRepository from './services/repository.js';
 import EventEmitter from './eventemitter.js';
 
 
 export default class CalculationManager {
-    constructor(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId) {
+    constructor(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, productNameRus, isEditable = true) {
         this.apiClient = apiClient;
         this.calcTypeId = calcTypeId;
         this.calcFieldAliases = calcFieldAliases;
         this.productTypeId = productTypeId;
         this.productId = productId;
+        this.productNameRus = productNameRus;
+        this.isEditable = isEditable;
 
         this.eventEmitter = new EventEmitter();
-        this.dataService = new DataService(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, this.eventEmitter, this.getFabricData.bind(this));
+        this.dataService = new DataService(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, this.eventEmitter, this.productNameRus, this.getProductData.bind(this), this.getFabricData.bind(this));
+        this.calculationRepository = new CalculationRepository(apiClient, calcTypeId, ID_FOT);
 
-        this.calculationListView = new CalculationsListView(this.createCalculation.bind(this), this.openCalculation.bind(this));
+        this.calculationListView = new CalculationsListView(this.opneNewCalculation.bind(this), this.openCalculation.bind(this));
         this.modalView = new ModalMetadataView(this.eventEmitter);
         this.modalMaterialsView = new ModalMaterialsView(this.eventEmitter);
         this.modalQuestionsView = new ModalQuestionsView(this.eventEmitter);
@@ -41,16 +47,18 @@ export default class CalculationManager {
 
     async init() {
         await this.dataService.init();
+
         this.eventEmitter.on('renderCalcualation', this.renderCalculation.bind(this));
         this.eventEmitter.on('closedCalcualation', this.closedCalcualation.bind(this));
         this.eventEmitter.on('saveCalcualation', this.saveCalcualation.bind(this));
-        
+        this.eventEmitter.on('createCalcualation', this.createCalculation.bind(this));
+
         const calculations = this.dataService.getCalculations();
         const dateOfAddingMaterials = this.dataService.getDateOfAddingMaterials();
         this.calculationListView.init(calculations, dateOfAddingMaterials);
     }
 
-    renderCalculation(calculation, isEdit = false) {
+    renderCalculation(calculation, isEdit = true) {
         console.log("isEdit = ", isEdit);
         this.modalView.render(calculation.calculationId, calculation.dateOfCalculation)
         this.modalMaterialsView.render(calculation.materials, calculation.summaryMaterials, isEdit);
@@ -83,9 +91,12 @@ export default class CalculationManager {
         return price;
     }
 
-    getProduct() {
+    getProductData() {
         return {
-
+            id: this.productId,
+            name: this.productNameRus,
+            freeTitle: "This will be free title for this product",
+            linearMeters: 4
         };
     }
 
@@ -95,9 +106,8 @@ export default class CalculationManager {
         this.modalView.show();
     }
 
-    createCalculation() {
+    opneNewCalculation() {
         const calculation = this.dataService.addTempCalculation();
-        // console.log("calculation = ", calculation);
         this.renderCalculation(calculation, true);
         this.modalView.show();
     }
@@ -106,11 +116,31 @@ export default class CalculationManager {
         this.modalView.hide();
     }
 
-    saveCalcualation(calculationId) {
+    createCalculation(calculationId) {
         const calculation = this.dataService.getCalculation(calculationId);
+        this.renderCalculation(calculation, false);
+        this.modalView.show();
+    }
+
+    async saveCalcualation(calculationId) {
+        // target.disabled = true;
+        // setTimeout(() => { target.disabled = false; }, 2000);
+        const calculation = this.dataService.getCalculation(calculationId);
+
         const calculationData = calculation.getCalculationSmartData();
-        const fotData = calculation.getFotSmartData();
-        // console.log("calculationData = ", calculationData);
-        // console.log("fotData = ", fotData);
+        const newCalculation = await this.calculationRepository.createCalculation(calculationData);
+
+        const fotData = calculation.getFotSmartData(newCalculation.id);
+        const newFot = await this.calculationRepository.createFot(fotData);
+
+        const calcObj = this.dataService.addCalculation(newCalculation, newFot);
+
+        console.log("newCalculation = ", newCalculation);
+        console.log("newFot = ", newFot);
+        console.log("calcObj = ", calcObj);
+
+        const calculations = this.dataService.getCalculations();
+        const dateOfAddingMaterials = this.dataService.getDateOfAddingMaterials();
+        this.calculationListView.update(calculations, dateOfAddingMaterials);
     }
 }

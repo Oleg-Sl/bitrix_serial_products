@@ -16,12 +16,14 @@ import Calculation from './calculation.js';
 
 
 export default class DataService {
-    constructor(apiClient, calcTypeId, calcFieldsAliases, productTypeId, productId, eventEmitter, cbGetFabric) {
+    constructor(apiClient, calcTypeId, calcFieldsAliases, productTypeId, productId, eventEmitter, productNameRus, cbGetProductData, cbGetFabric) {
         this.apiClient = apiClient;
         this.calcTypeId = calcTypeId;
         this.calcFieldsAliases = calcFieldsAliases;
         this.productTypeId = productTypeId;
         this.productId = productId;
+        this.productNameRus = productNameRus;
+        this.cbGetProductData = cbGetProductData;
         this.cbGetFabric = cbGetFabric;
         this.eventEmitter = eventEmitter;
 
@@ -55,7 +57,7 @@ export default class DataService {
         this.services.calculationFields = new CalculationFieldsService(calculationFields, this.calcFieldsAliases);
         
         for (const calculation of calculations) {
-            const calc = new Calculation(this.services, calculation, this.productTypeId, this.cbGetFabric);
+            const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, this.cbGetProductData, this.cbGetFabric);
             this.calculations.push(calc);
         }
 
@@ -67,12 +69,19 @@ export default class DataService {
         this.eventEmitter.on('calculateFot', this.recalculateFot.bind(this));
     }
 
+    addCalculation(calculation, fot) {
+        this.services.fot.addFot(fot);
+        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, this.cbGetProductData, this.cbGetFabric);
+        this.calculations.push(calc);
+        return calc;
+    }
+
     addTempCalculation() {
         let calculation = {
             id: Date.now(),
             isTemporary: true,
         };
-        const calc = new Calculation(this.services, calculation, this.productTypeId, this.cbGetFabric);
+        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, this.cbGetProductData, this.cbGetFabric);
         this.calculations.push(calc);
         return calc;
     }

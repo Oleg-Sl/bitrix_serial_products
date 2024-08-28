@@ -8,6 +8,14 @@ export default class FotService {
         
     }
 
+    addFot(fot) {
+        this.fot.push(fot);
+    }
+
+    getFieldParent() {
+        return this.fieldParentId;
+    }
+
     getFotByParentId(parentId) {
         return this.fot.find(item => item[this.fieldParentId] === parentId);
     }

@@ -16,6 +16,10 @@ export default class CalculationsListView {
         this.initHandlers();
     }
 
+    update(calculationsData, calculationValidityDate) {
+        this.render(calculationsData, calculationValidityDate);
+    }
+
     initHandlers() {
         // открыть расчет для редактирования
         this.containerList.addEventListener('click', (event) => {

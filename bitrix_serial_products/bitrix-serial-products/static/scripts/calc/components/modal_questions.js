@@ -29,8 +29,8 @@ export default class ModalQuestionsView {
         return `
             <tr data-id="" class="form-check">
                 <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="" title="${question?.description}">${question?.question}</div></td>
-                <td class="fixed-rows justify-content-center" style="grid-column: 6 / 7;"><input class="" type="radio" name="radioButtonsGroup1" id=""></td>
-                <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;"><input class="" type="radio" name="radioButtonsGroup1" id=""></td>
+                <td class="fixed-rows justify-content-center" style="grid-column: 6 / 7;"><input class="" type="radio" name="radioButtonsGroup1" id="">ДА</td>
+                <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;"><input class="" type="radio" name="radioButtonsGroup1" id="">НЕТ</td>
             </tr>
         `;
     }

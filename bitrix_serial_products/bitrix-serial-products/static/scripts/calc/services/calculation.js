@@ -10,9 +10,12 @@ import { ID_MELOCHEVKA } from '../../configs/products/melochevka.js';
 
 
 export default class Calculation {
-    constructor(services, calculationRawData, productTypeId, cbGetFabric) {
+    constructor(services, calculationRawData, productTypeId, productId, productNameRus, cbGetProductData, cbGetFabric) {
         this.calculationRawData = calculationRawData;
         this.productTypeId = productTypeId;
+        this.productId = productId;
+        this.productNameRus = productNameRus;
+        this.cbGetProductData = cbGetProductData;
         this.cbGetFabric = cbGetFabric;
 
         this.fotService = services.fot;
@@ -163,6 +166,7 @@ export default class Calculation {
                 comment: fot[this.fotService.getCommentField(fotAlias)] || 0,
             });
         }
+        // console.log("fotList = ", fotList);
         return fotList;
     }
 
@@ -279,8 +283,15 @@ export default class Calculation {
         };
     }
 
+    getTitle() {
+        const freeTitle = this.cbGetProductData()?.freeTitle || '-';
+        return `${this.productNameRus} | ${freeTitle || '-'} | ${this.costPrice} (${this.summaryMaterials})`;
+    }
+
     getCalculationSmartData() {
         let data = {
+            [`parentId${this.productTypeId}`]: this.productId,
+            title: this.getTitle(),
             [this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation')]: this.dateOfCalculation,
             [this.calculationFieldsService.getFieldKeyByAlias('generalComment')]: this.comment,
             [this.calculationFieldsService.getFieldKeyByAlias('cost')]: this.costPrice,
@@ -288,7 +299,6 @@ export default class Calculation {
         for (let material of this.materials) {
             for (const key in material) {
                 const fieldData = material[key];
-                console.log
                 if (typeof(fieldData) === 'object' && !fieldData.isFixed) {
                     data[fieldData.field] = fieldData.value;
                 }
@@ -298,8 +308,12 @@ export default class Calculation {
 
     }
 
-    getFotSmartData() {
-        let data = {};
+    getFotSmartData(parentId) {
+        let data = {
+            [this.fotService.getFieldParent()]: parentId,
+            [`parentId${this.productTypeId}`]: this.productId,
+            title: this.getTitle(),
+        };
         for (const fot of this.fots) {
             data[this.fotService.getEstimateField(fot.code)] = fot.estimate;
             data[this.fotService.getGrowthField(fot.code)] = fot.coefficient;
