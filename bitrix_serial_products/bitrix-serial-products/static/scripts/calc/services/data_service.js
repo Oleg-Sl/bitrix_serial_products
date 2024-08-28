@@ -57,7 +57,7 @@ export default class DataService {
         this.services.calculationFields = new CalculationFieldsService(calculationFields, this.calcFieldsAliases);
         
         for (const calculation of calculations) {
-            const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, this.cbGetProductData, this.cbGetFabric);
+            const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, false, this.cbGetProductData, this.cbGetFabric);
             this.calculations.push(calc);
         }
 
@@ -66,12 +66,22 @@ export default class DataService {
         this.eventEmitter.on('changeFotPrice', this.changeFotPrice.bind(this));
         this.eventEmitter.on('changeFotComment', this.changeFotComment.bind(this));
         this.eventEmitter.on('changeGeneralComment', this.changeGeneralComment.bind(this));
-        this.eventEmitter.on('calculateFot', this.recalculateFot.bind(this));
+        // this.eventEmitter.on('calculateFot', this.recalculateFot.bind(this));
     }
 
-    addCalculation(calculation, fot) {
+
+
+    copyCalculation(calculationId) {
+        const calculation = this.getCalculation(calculationId);
+        let calculationData = calculation.getCalculationSmartData();
+        calculationData.id = Date.now();
+        const fotData = calculation.getFotSmartData(calculationData.id);
+        return this.addCalculation(calculationData, fotData, true);
+    }
+
+    addCalculation(calculation, fot, isNewCalculation = false) {
         this.services.fot.addFot(fot);
-        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, this.cbGetProductData, this.cbGetFabric);
+        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, isNewCalculation, this.cbGetProductData, this.cbGetFabric);
         this.calculations.push(calc);
         return calc;
     }
@@ -81,7 +91,7 @@ export default class DataService {
             id: Date.now(),
             isTemporary: true,
         };
-        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, this.cbGetProductData, this.cbGetFabric);
+        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, true, this.cbGetProductData, this.cbGetFabric);
         this.calculations.push(calc);
         return calc;
     }
@@ -89,7 +99,7 @@ export default class DataService {
     changeMaterialPrice(data) {
         const calculation = this.getCalculation(data.calculationId);
         calculation.changeMaterialPrice(data.material, data.field, data.value);
-        this.eventEmitter.emit('renderCalcualation', calculation);
+        this.eventEmitter.emit('rerenderCalcualation', calculation);
     }
 
     changeMaterialComment(data) {        
@@ -100,7 +110,7 @@ export default class DataService {
     changeFotPrice(data) {
         const calculation = this.getCalculation(data.calculationId);
         calculation.changeFotPrice(data.code, data.field, data.value);
-        this.eventEmitter.emit('renderCalcualation', calculation);
+        this.eventEmitter.emit('rerenderCalcualation', calculation);
     }
 
     changeFotComment(data) {        
@@ -113,10 +123,10 @@ export default class DataService {
         calculation.changeGeneralComment(data.value);
     }
 
-    recalculateFot(data) {
-        const calculation = this.getCalculation(data.calculationId);
-        calculation.recalculateFot();
-    }
+    // recalculateFot(data) {
+    //     const calculation = this.getCalculation(data.calculationId);
+    //     calculation.recalculateFot();
+    // }
 
     getCalculation(calculationId) {
         return this.calculations.find((item) => item.calculationId == calculationId);

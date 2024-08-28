@@ -10,13 +10,14 @@ import { ID_MELOCHEVKA } from '../../configs/products/melochevka.js';
 
 
 export default class Calculation {
-    constructor(services, calculationRawData, productTypeId, productId, productNameRus, cbGetProductData, cbGetFabric) {
+    constructor(services, calculationRawData, productTypeId, productId, productNameRus, isNewCalculation, cbGetProductData, cbGetFabric) {
         this.calculationRawData = calculationRawData;
         this.productTypeId = productTypeId;
         this.productId = productId;
         this.productNameRus = productNameRus;
         this.cbGetProductData = cbGetProductData;
         this.cbGetFabric = cbGetFabric;
+        this.smartFotId = null;
 
         this.fotService = services.fot;
         this.userService = services.user;
@@ -39,6 +40,7 @@ export default class Calculation {
         
         this.isEditFields = false;
         this.isEditFots = false;
+        this.isNewCalculation = isNewCalculation;
 
         this.summaryMaterials = 0
         this.summaryFot = 0;
@@ -73,11 +75,11 @@ export default class Calculation {
     changeFotPrice(fotCode, field, newValue) {
         let fot = this.fots.find((item) => item.code === fotCode);
         fot[field] = +newValue;
-        fot.total = +fot.estimate * +fot.coefficient;
+        this.calculateFot(fot);
         this.summaryFot = this.fots.reduce((sum, current) => sum + +current.total, 0);
         this.costPrice = this.initCostPrice();
         this.salesRange = this.initSalesRange();
-        console.log("fot = ", fot);
+        // console.log("fot = ", fot);
     }
 
     changeFotComment(fotCode, newValue) {
@@ -89,12 +91,18 @@ export default class Calculation {
         this.comment = newValue;
     }
 
-    recalculateFot() {
-        console.log("recalculateFot");
+    calculateFots() {
+        for (let fot of this.fots) {
+            this.calculateFot(fot);
+        }
     }
 
-
-
+    calculateFot(fot) {
+        const linearMeters = this.cbGetProductData().linearMeters;
+        const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
+        fot.estimate = linearMeters * costPerHour;
+        fot.total = fot.estimate + fot.coefficient * costPerHour;
+    }
 
     initialize() {
         const fieldDateOfCalculation = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation');
@@ -155,6 +163,7 @@ export default class Calculation {
     initFot() {
         let fotList = [];
         const fot = this.fotService.getFotByParentId(this.calculationRawData.id) || {};
+        this.smartFotId = fot.id;
         for (const fotAlias of this.fotService.getFotCodeList()) {
             fotList.push({
                 code: fotAlias,

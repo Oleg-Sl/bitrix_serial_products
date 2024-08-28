@@ -13,14 +13,17 @@ export default class ModalQuestionsView {
         let contentStatementHTML = '';
 
         for (const question of questions) {
-            // console.log("question = ", question);
-            if (question?.showInQuestions) {
+            console.log("question = ", question);
+            if (!question.show) {
+                continue;
+            }
+            if (question?.isQuestion) {
                 contentAnswerHTML += this.getQuestionsAnswerHTML(question);
             } else {
                 contentStatementHTML += this.getQuestionsStatementHTML(question);
             }
         }
-        
+
         this.containerQuestionsAnswer.innerHTML = contentAnswerHTML;
         this.containerQuestionsStatement.innerHTML = contentStatementHTML;
     }
@@ -29,8 +32,18 @@ export default class ModalQuestionsView {
         return `
             <tr data-id="" class="form-check">
                 <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="" title="${question?.description}">${question?.question}</div></td>
-                <td class="fixed-rows justify-content-center" style="grid-column: 6 / 7;"><input class="" type="radio" name="radioButtonsGroup1" id="">ДА</td>
-                <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;"><input class="" type="radio" name="radioButtonsGroup1" id="">НЕТ</td>
+                <td class="fixed-rows justify-content-center" style="grid-column: 6 / 7;">
+                    <div class="fixed-rows justify-content-center">
+                        <div><input class="" type="radio" name="radioButtonsGroup1" id=""></div>
+                        &nbsp;ДА
+                    </div>
+                </td>
+                <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;">
+                    <div class="fixed-rows justify-content-center">
+                        <div><input class="" type="radio" name="radioButtonsGroup1" id=""></div>
+                        &nbsp;НЕТ
+                    </div>
+                </td>
             </tr>
         `;
     }
@@ -41,7 +54,7 @@ export default class ModalQuestionsView {
                 <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="" title="${question?.description}">${question?.title}</div></td>
                 <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;">
                     <div class="form-check form-switch justify-content-center">
-                        <input class="form-check-input" type="checkbox" role="switch" id="" checked>
+                        <input class="form-check-input" type="checkbox" role="switch">
                     </div>
                 </td>
             </tr>

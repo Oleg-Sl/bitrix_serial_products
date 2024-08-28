@@ -14,10 +14,10 @@ export default class ChecklistComplexityService {
     mapCheckListItem(item) {
         return {
             title: item?.[FIELD_CHECKLIST_COMPLEXITY.title],
-            showInQuestions: item?.[FIELD_CHECKLIST_COMPLEXITY.showInQuestions] === 'Y',
-            question: item?.[FIELD_CHECKLIST_COMPLEXITY.showInApp],
+            isQuestion: item?.[FIELD_CHECKLIST_COMPLEXITY.isQuestion] === 'Y',
+            question: item?.[FIELD_CHECKLIST_COMPLEXITY.question],
             description: item?.[FIELD_CHECKLIST_COMPLEXITY.description],
-            showInCalc: item?.[FIELD_CHECKLIST_COMPLEXITY.showInCalc] === 'Y',
+            show: item?.[FIELD_CHECKLIST_COMPLEXITY.show] === 'Y',
             coefficients: {
                 development: item?.[FIELD_CHECKLIST_COMPLEXITY.coefficietnts.development],
                 saw: item?.[FIELD_CHECKLIST_COMPLEXITY.coefficietnts.saw],

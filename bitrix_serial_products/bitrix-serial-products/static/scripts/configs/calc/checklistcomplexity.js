@@ -27,12 +27,13 @@ export const PRODUCT_TYPES_CHECKLIST_COMPLEXITY = {
 
 
 export const FIELD_CHECKLIST_COMPLEXITY = {
-    title: 'title',                         // Название
-    typeProduct: 'ufCrm95_1723644276',      // Тип изделия
-    showInQuestions: 'ufCrm95_1723802156',  // Показываем в блоке ВОПРОСЫ
-    showInApp: 'ufCrm95_1723644347',        // Вопрос (виден в приложении)
-    description: 'ufCrm95_1723649609',      // Описание вопроса
-    showInCalc: 'ufCrm95_1723649746',       // Показываем в блоке расчета
+    title: 'title',                             // Название
+    typeProduct: 'ufCrm95_1723644276',          // Тип изделия
+    isQuestion: 'ufCrm95_1723802156',           // Показываем в блоке ВОПРОСЫ (является вопросом)
+    question: 'ufCrm95_1723644347',             // Вопрос (виден в приложении)
+    description: 'ufCrm95_1723649609',          // Описание вопроса
+    descriptionAction: 'ufCrm95_1724770245',    // Описание действия
+    show: 'ufCrm95_1723649746',                 // Показываем в блоке расчета (выводится в таблице расчета)
 
     coefficietnts: {
         development: 'ufCrm95_1723649624',          // Коэф. разработка, час

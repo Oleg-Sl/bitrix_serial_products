@@ -19,20 +19,20 @@ import EventEmitter from './eventemitter.js';
 
 
 export default class CalculationManager {
-    constructor(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, productNameRus, isEditable = true) {
+    constructor(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, productNameRus, isEditable = false) {
         this.apiClient = apiClient;
         this.calcTypeId = calcTypeId;
         this.calcFieldAliases = calcFieldAliases;
         this.productTypeId = productTypeId;
         this.productId = productId;
         this.productNameRus = productNameRus;
-        this.isEditable = isEditable;
+        this.isEditable = isEditable;           // все расчеты редактируемые (выводим кнопку "Сохранить") / не редактируемые (кнопка "Копировать")
 
         this.eventEmitter = new EventEmitter();
         this.dataService = new DataService(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, this.eventEmitter, this.productNameRus, this.getProductData.bind(this), this.getFabricData.bind(this));
         this.calculationRepository = new CalculationRepository(apiClient, calcTypeId, ID_FOT);
 
-        this.calculationListView = new CalculationsListView(this.opneNewCalculation.bind(this), this.openCalculation.bind(this));
+        this.calculationListView = new CalculationsListView(this.openNewCalculation.bind(this), this.openCalculation.bind(this));
         this.modalView = new ModalMetadataView(this.eventEmitter);
         this.modalMaterialsView = new ModalMaterialsView(this.eventEmitter);
         this.modalQuestionsView = new ModalQuestionsView(this.eventEmitter);
@@ -48,28 +48,35 @@ export default class CalculationManager {
     async init() {
         await this.dataService.init();
 
-        this.eventEmitter.on('renderCalcualation', this.renderCalculation.bind(this));
-        this.eventEmitter.on('closedCalcualation', this.closedCalcualation.bind(this));
-        this.eventEmitter.on('saveCalcualation', this.saveCalcualation.bind(this));
-        this.eventEmitter.on('createCalcualation', this.createCalculation.bind(this));
-
+        this.eventEmitter.on('rerenderCalcualation', this.rerenderCalcualation.bind(this));
+        this.eventEmitter.on('createCalculation', this.createCalculation.bind(this));
+        this.eventEmitter.on('copyCalculation', this.copyCalculation.bind(this));
+        this.eventEmitter.on('saveCalculation', this.saveCalculation.bind(this));
+        this.eventEmitter.on('closeCalculation', this.closeCalculation.bind(this));
+        this.eventEmitter.on('calculateFot', this.calculateFot.bind(this));
+        
         const calculations = this.dataService.getCalculations();
         const dateOfAddingMaterials = this.dataService.getDateOfAddingMaterials();
         this.calculationListView.init(calculations, dateOfAddingMaterials);
     }
 
-    renderCalculation(calculation, isEdit = true) {
-        console.log("isEdit = ", isEdit);
+    rerenderCalcualation(calculation) {
+        console.log(calculation);
+        this.renderCalculation(calculation, true, calculation.isNewCalculation);
+    }
+
+    renderCalculation(calculation, isEditable = true, isNewCalculation = true) {
         this.modalView.render(calculation.calculationId, calculation.dateOfCalculation)
-        this.modalMaterialsView.render(calculation.materials, calculation.summaryMaterials, isEdit);
+        this.modalMaterialsView.render(calculation.materials, calculation.summaryMaterials, isEditable);
         this.modalQuestionsView.render(calculation.questions);
-        this.modalFotView.render(calculation.fots, calculation.summaryFot, isEdit);
+        this.modalFotView.render(calculation.fots, calculation.summaryFot, isEditable);
         this.modalManagementView.render(calculation.costManagement);
         this.modalRentView.render(calculation.costRent);
         this.modalCostPriceView.render(calculation.costPrice);
         this.modalSalesRangeView.render(calculation.salesRange);
         this.modalSalesRangeView.render(calculation.salesRange);
-        this.modalCommentView.render(calculation.comment, isEdit);
+        this.modalCommentView.render(calculation.comment, isEditable);
+        this.modalButtonsView.render(isEditable, isNewCalculation);
     }
 
     getFabricData(number) {
@@ -96,51 +103,60 @@ export default class CalculationManager {
             id: this.productId,
             name: this.productNameRus,
             freeTitle: "This will be free title for this product",
-            linearMeters: 4
+            linearMeters: 4,
+
         };
     }
 
     openCalculation(calculationId) {
         const calculation = this.dataService.getCalculation(calculationId);
-        this.renderCalculation(calculation, true);
+        this.renderCalculation(calculation, this.isEditable, false);
         this.modalView.show();
     }
 
-    opneNewCalculation() {
+    openNewCalculation() {
         const calculation = this.dataService.addTempCalculation();
         this.renderCalculation(calculation, true);
         this.modalView.show();
     }
 
-    closedCalcualation() {
-        this.modalView.hide();
-    }
-
-    createCalculation(calculationId) {
+    async createCalculation(calculationId) {
         const calculation = this.dataService.getCalculation(calculationId);
-        this.renderCalculation(calculation, false);
-        this.modalView.show();
-    }
-
-    async saveCalcualation(calculationId) {
-        // target.disabled = true;
-        // setTimeout(() => { target.disabled = false; }, 2000);
-        const calculation = this.dataService.getCalculation(calculationId);
-
         const calculationData = calculation.getCalculationSmartData();
         const newCalculation = await this.calculationRepository.createCalculation(calculationData);
-
         const fotData = calculation.getFotSmartData(newCalculation.id);
         const newFot = await this.calculationRepository.createFot(fotData);
-
         const calcObj = this.dataService.addCalculation(newCalculation, newFot);
-
-        console.log("newCalculation = ", newCalculation);
-        console.log("newFot = ", newFot);
-        console.log("calcObj = ", calcObj);
-
+        this.renderCalculation(calcObj, this.isEditable, false);
+        // console.log("newCalculation = ", newCalculation);
+        // console.log("newFot = ", newFot);
+        // console.log("calcObj = ", calcObj);
         const calculations = this.dataService.getCalculations();
         const dateOfAddingMaterials = this.dataService.getDateOfAddingMaterials();
         this.calculationListView.update(calculations, dateOfAddingMaterials);
+    }
+
+    async copyCalculation(calculationId) {
+        const calculation = this.dataService.copyCalculation(calculationId);
+        this.renderCalculation(calculation, true, true);
+        console.log("Copy calculation = ", calculation);
+    }
+
+    async saveCalculation(calculationId) {
+        const calculation = this.dataService.getCalculation(calculationId);
+        const calculationData = calculation.getCalculationSmartData();
+        const updateCalculation = await this.calculationRepository.updateCalculation(calculationData, calculationId);
+        const fotData = calculation.getFotSmartData(updateCalculation.id);
+        const updateFot = await this.calculationRepository.updateFot(fotData, calculation.smartFotId);
+    }
+
+    closeCalculation() {
+        this.modalView.hide();
+    }
+
+    calculateFot(calculationId) {
+        const calculation = this.dataService.getCalculation(calculationId);
+        calculation.calculateFots();
+        this.renderCalculation(calculation, true, calculation.isNewCalculation);
     }
 }

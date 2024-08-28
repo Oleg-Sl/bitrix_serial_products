@@ -8,8 +8,12 @@ env
 *.sqlite3
 __pycache__/
 
+# html_offline/*.js
+# html_offline/**
+# html_offline/**/*.js
 html_offline
-html_offline/*.js
+# !html_offline/**/*.js
+
 
 fake_api.js
 fake_api_client.js
@@ -17,3 +21,4 @@ fake_api_client.js
 fake*
 qr_code.py
 test/
+**/.DS_Store

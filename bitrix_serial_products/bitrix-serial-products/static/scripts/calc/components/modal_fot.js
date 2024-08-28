@@ -49,7 +49,7 @@ export default class ModalFotView {
             <tr data-code="${fot.code}">
                 <td placeholder="">${fot.title || '-'}</td>
                 <td><input type="number" class="border-0 fot-estimate" min="0" value="${fot.estimate || 0}" data-field="estimate" ${classInputEdit}></td>
-                <td><input type="number" class="border-0 fot-coefficient" min="0" value="${fot.coefficient || 0}" data-field="coefficient" ${classInputEdit}></td>
+                <td><input type="number" class="border-0 fot-coefficient" min="0" step="0.5" value="${fot.coefficient || 0}" data-field="coefficient" ${classInputEdit}></td>
                 <td><input type="number" class="border-0 bg-body-secondary" min="0" value="${fot.total || 0}" disabled></td>
                 <td><input type="number" class="border-0 bg-body-secondary" min="0" value="${fot.checksum || 0}" disabled></td>
                 <td style="grid-column: 6 / 8;"><input type="text" class="border-0 fot-comment" min="0" value="${fot.comment || ""}" ${classInputEdit}></td>
