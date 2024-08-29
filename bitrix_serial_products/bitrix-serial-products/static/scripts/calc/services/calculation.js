@@ -10,13 +10,12 @@ import { ID_MELOCHEVKA } from '../../configs/products/melochevka.js';
 
 
 export default class Calculation {
-    constructor(services, calculationRawData, productTypeId, productId, productNameRus, isNewCalculation, cbGetProductData, cbGetFabric) {
+    constructor(services, calculationRawData, productTypeId, productId, productNameRus, isNewCalculation, cbGetProductData) {
         this.calculationRawData = calculationRawData;
         this.productTypeId = productTypeId;
         this.productId = productId;
         this.productNameRus = productNameRus;
         this.cbGetProductData = cbGetProductData;
-        this.cbGetFabric = cbGetFabric;
         this.smartFotId = null;
 
         this.fotService = services.fot;
@@ -74,7 +73,15 @@ export default class Calculation {
 
     changeFotPrice(fotCode, field, newValue) {
         let fot = this.fots.find((item) => item.code === fotCode);
+        // console.log("field = ", field);
+        
         fot[field] = +newValue;
+        // if (field === 'estimate') {
+        //     this.calculateFot(fot, true);
+        // } else {
+        //     this.calculateFot(fot);
+        // }
+        
         this.calculateFot(fot);
         this.summaryFot = this.fots.reduce((sum, current) => sum + +current.total, 0);
         this.costPrice = this.initCostPrice();
@@ -87,27 +94,57 @@ export default class Calculation {
         fot.comment = newValue;
     }
 
+    answerQuestion(questionId, answer) {
+        this.checklistcomplexityService.setAnswer(questionId, answer);
+    }
+
+    isAllAnswered() {
+        return this.checklistcomplexityService.isAllAnswered();
+    }
+
+    isFotValid() {
+        return this.fotService.isValid();
+    }
+
     changeGeneralComment(newValue) {
         this.comment = newValue;
     }
 
+    calculateNewFots() {
+        this.fots.map((fot) => this.calculateNewFot(fot));
+    }
+
+    calculateNewFot(fot) {
+        const linearMeters = this.cbGetProductData().linearMeters;
+        const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
+        const coefficientWorker = this.checklistcomplexityService.getCoefficientWorker(this.cbGetProductData(), fot.code);
+        fot.estimate = linearMeters * costPerHour;
+        fot.total = fot.estimate + fot.coefficient * costPerHour * coefficientWorker;
+        const averageWorkHoursPerMonth = this.coefficientsFotService.getAverageWorkHoursPerMonth();
+        const countProductPerMonth = averageWorkHoursPerMonth / (fot.total / this.coefficientsFotService.getCostPerHour(fot.code));
+        fot.checksum = Math.ceil(countProductPerMonth) * fot.total;
+    }
+
     calculateFots() {
-        for (let fot of this.fots) {
-            this.calculateFot(fot);
-        }
+        this.fots.map((fot) => this.calculateFot(fot));
     }
 
     calculateFot(fot) {
         const linearMeters = this.cbGetProductData().linearMeters;
         const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
-        fot.estimate = linearMeters * costPerHour;
-        fot.total = fot.estimate + fot.coefficient * costPerHour;
+        const coefficientWorker = this.checklistcomplexityService.getCoefficientWorker(this.cbGetProductData(), fot.code);
+        fot.total = fot.estimate + fot.coefficient * costPerHour * coefficientWorker;
+        const averageWorkHoursPerMonth = this.coefficientsFotService.getAverageWorkHoursPerMonth();
+        const countProductPerMonth = averageWorkHoursPerMonth / (fot.total / this.coefficientsFotService.getCostPerHour(fot.code));
+        fot.checksum = Math.ceil(countProductPerMonth) * fot.total;
     }
 
     initialize() {
         const fieldDateOfCalculation = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation');
         const fieldDateOfCalculationToday = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculationToday');
         const finalCalculation = this.calculationFieldsService.getFieldKeyByAlias('finalCalculation');
+
+        this.checklistcomplexityService.initialize();
 
         this.calculationId = this.calculationRawData.id;
         this.dateOfCalculation = this.calculationRawData[fieldDateOfCalculation] || new Date().toISOString();
@@ -276,7 +313,7 @@ export default class Calculation {
                 isFixed: false
             };
         } else if (fieldData?.type === 'fabric') {
-            let price = this.cbGetFabric(fieldData?.number);
+            let price = this.cbGetProductData().fabricPrices?.[fieldData?.number] || 0;
             return {
                 value: +price,
                 isFixed: true

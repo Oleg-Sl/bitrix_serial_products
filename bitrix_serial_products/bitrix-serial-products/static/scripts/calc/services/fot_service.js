@@ -8,6 +8,10 @@ export default class FotService {
         
     }
 
+    isValid() {
+        return true;
+    }
+
     addFot(fot) {
         this.fot.push(fot);
     }

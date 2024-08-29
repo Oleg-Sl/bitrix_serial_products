@@ -49,6 +49,11 @@ export default class ModalButtonsView {
         })
     }
 
+    updateStateButtonCalculate(isAllAnswered, isValidCalculation) {
+        this.btnCalculate.disabled = (isAllAnswered && isValidCalculation) ? false : true;
+
+    }
+
     render(isEditable, isNewCalculation) {
         // console.log(isEditable, isNewCalculation);
         if (!isEditable) {

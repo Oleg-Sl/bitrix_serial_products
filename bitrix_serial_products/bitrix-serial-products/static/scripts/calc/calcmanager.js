@@ -26,10 +26,10 @@ export default class CalculationManager {
         this.productTypeId = productTypeId;
         this.productId = productId;
         this.productNameRus = productNameRus;
-        this.isEditable = isEditable;           // все расчеты редактируемые (выводим кнопку "Сохранить") / не редактируемые (кнопка "Копировать")
+        this.isEditable = isEditable;           // все расчеты редактируемые (выводим кнопку "Сохранить") / иначе не редактируемые (кнопка "Копировать")
 
         this.eventEmitter = new EventEmitter();
-        this.dataService = new DataService(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, this.eventEmitter, this.productNameRus, this.getProductData.bind(this), this.getFabricData.bind(this));
+        this.dataService = new DataService(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, this.eventEmitter, this.productNameRus, this.getProductData.bind(this));
         this.calculationRepository = new CalculationRepository(apiClient, calcTypeId, ID_FOT);
 
         this.calculationListView = new CalculationsListView(this.openNewCalculation.bind(this), this.openCalculation.bind(this));
@@ -54,6 +54,8 @@ export default class CalculationManager {
         this.eventEmitter.on('saveCalculation', this.saveCalculation.bind(this));
         this.eventEmitter.on('closeCalculation', this.closeCalculation.bind(this));
         this.eventEmitter.on('calculateFot', this.calculateFot.bind(this));
+        this.eventEmitter.on('changeStateQuestion', this.changeStateButtons.bind(this));
+        
         
         const calculations = this.dataService.getCalculations();
         const dateOfAddingMaterials = this.dataService.getDateOfAddingMaterials();
@@ -69,7 +71,8 @@ export default class CalculationManager {
         this.modalView.render(calculation.calculationId, calculation.dateOfCalculation)
         this.modalMaterialsView.render(calculation.materials, calculation.summaryMaterials, isEditable);
         this.modalQuestionsView.render(calculation.questions);
-        this.modalFotView.render(calculation.fots, calculation.summaryFot, isEditable);
+        this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
+        this.modalFotView.render(calculation.fots, calculation.summaryFot, isEditable && calculation.isAllAnswered());
         this.modalManagementView.render(calculation.costManagement);
         this.modalRentView.render(calculation.costRent);
         this.modalCostPriceView.render(calculation.costPrice);
@@ -77,45 +80,51 @@ export default class CalculationManager {
         this.modalSalesRangeView.render(calculation.salesRange);
         this.modalCommentView.render(calculation.comment, isEditable);
         this.modalButtonsView.render(isEditable, isNewCalculation);
+        this.modalButtonsView.updateStateButtonCalculate(calculation.isAllAnswered(), calculation.isFotValid());
+
     }
 
-    getFabricData(number) {
-        let price = 0;
-        switch (number) {
-            case 1:
-                price = 1;
-                // price = this.fabricManager.getFabricPrice1();
-                break;
-            case 2:
-                price = 2;
-                // price = this.fabricManager.getFabricPrice2();
-                break;
-            case 3:
-                price = 3;
-                // price = this.fabricManager.getFabricPrice3();
-                break;
-        }
-        return price;
+    changeStateButtons(calculation) {
+        this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
+        this.modalFotView.setActivateInputs(calculation.isAllAnswered());
+        this.modalButtonsView.updateStateButtonCalculate(calculation.isAllAnswered(), calculation.isFotValid());
+        
     }
 
     getProductData() {
         return {
             id: this.productId,
+            // isPotochka: true,
             name: this.productNameRus,
             freeTitle: "This will be free title for this product",
             linearMeters: 4,
-
+            fabricPrices: [ 111, 222, 333 ],
+            questions: {
+                individual: false,               // Диван. Индивидуалка
+                looseFabric: true,              // Рыхлая ткань? требуется оверлог
+                mechanism: true,                // Проверка Механизма
+                shapeRadius: true,              // Форма РАДИУС
+                seamType1: true,                // Проверка типа Шва
+                numberModules: true,            // Кол-во модулей
+                seamType1: true,                // Проверка типа Шва №2
+                woodenSupports: true,           // Деревянные опоры
+                woodenFrameAndSupports: true,   // Деревянная рама и опоры
+            }
         };
     }
 
     openCalculation(calculationId) {
         const calculation = this.dataService.getCalculation(calculationId);
+        calculation.initialize();
+
         this.renderCalculation(calculation, this.isEditable, false);
         this.modalView.show();
     }
 
     openNewCalculation() {
         const calculation = this.dataService.addTempCalculation();
+        calculation.initialize();
+
         this.renderCalculation(calculation, true);
         this.modalView.show();
     }
@@ -127,6 +136,8 @@ export default class CalculationManager {
         const fotData = calculation.getFotSmartData(newCalculation.id);
         const newFot = await this.calculationRepository.createFot(fotData);
         const calcObj = this.dataService.addCalculation(newCalculation, newFot);
+        calculation.initialize();
+
         this.renderCalculation(calcObj, this.isEditable, false);
         // console.log("newCalculation = ", newCalculation);
         // console.log("newFot = ", newFot);
@@ -156,7 +167,31 @@ export default class CalculationManager {
 
     calculateFot(calculationId) {
         const calculation = this.dataService.getCalculation(calculationId);
-        calculation.calculateFots();
+        calculation.calculateNewFots();
+        calculation.initialize();
+
         this.renderCalculation(calculation, true, calculation.isNewCalculation);
     }
+
 }
+
+
+
+// getFabricData(number) {
+//     let price = 0;
+//     switch (number) {
+//         case 1:
+//             price = 1;
+//             // price = this.fabricManager.getFabricPrice1();
+//             break;
+//         case 2:
+//             price = 2;
+//             // price = this.fabricManager.getFabricPrice2();
+//             break;
+//         case 3:
+//             price = 3;
+//             // price = this.fabricManager.getFabricPrice3();
+//             break;
+//     }
+//     return price;
+// }

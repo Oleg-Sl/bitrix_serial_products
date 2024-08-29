@@ -37,6 +37,14 @@ export default class ModalFotView {
         })
     }
 
+    setActivateInputs(isActive) {
+        console.log("isActive = ", isActive);
+        // console.log('All fot-estimate = ', this.container.querySelectorAll('.fot-estimate'));
+        this.container.querySelectorAll('.fot-estimate').forEach(item => item.disabled = !isActive);
+        this.container.querySelectorAll('.fot-coefficient').forEach(item => item.disabled = !isActive);
+        this.container.querySelectorAll('.fot-comment').forEach(item => item.disabled = !isActive);
+    }
+
     render(fotList, summaryCost, isEdit = false) {
         this.setSummary(summaryCost);
         const contentHTML = fotList.map(fot => this.getMaterialsHTML(fot, isEdit)).join('');

@@ -34,6 +34,10 @@ export const FIELD_CHECKLIST_COMPLEXITY = {
     description: 'ufCrm95_1723649609',          // Описание вопроса
     descriptionAction: 'ufCrm95_1724770245',    // Описание действия
     show: 'ufCrm95_1723649746',                 // Показываем в блоке расчета (выводится в таблице расчета)
+   
+    checkFunction: 'ufCrm95_1724916015',        // функция для проверки
+    productField: 'ufCrm95_1724916041',         // название поля в объекте полученном из изделия
+    controlValue: 'ufCrm95_1724916065',         // контрольное значение
 
     coefficietnts: {
         development: 'ufCrm95_1723649624',          // Коэф. разработка, час

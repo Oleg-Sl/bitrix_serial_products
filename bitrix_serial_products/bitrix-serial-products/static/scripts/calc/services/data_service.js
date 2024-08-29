@@ -16,7 +16,7 @@ import Calculation from './calculation.js';
 
 
 export default class DataService {
-    constructor(apiClient, calcTypeId, calcFieldsAliases, productTypeId, productId, eventEmitter, productNameRus, cbGetProductData, cbGetFabric) {
+    constructor(apiClient, calcTypeId, calcFieldsAliases, productTypeId, productId, eventEmitter, productNameRus, cbGetProductData) {
         this.apiClient = apiClient;
         this.calcTypeId = calcTypeId;
         this.calcFieldsAliases = calcFieldsAliases;
@@ -24,7 +24,6 @@ export default class DataService {
         this.productId = productId;
         this.productNameRus = productNameRus;
         this.cbGetProductData = cbGetProductData;
-        this.cbGetFabric = cbGetFabric;
         this.eventEmitter = eventEmitter;
 
         this.services = {
@@ -57,7 +56,7 @@ export default class DataService {
         this.services.calculationFields = new CalculationFieldsService(calculationFields, this.calcFieldsAliases);
         
         for (const calculation of calculations) {
-            const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, false, this.cbGetProductData, this.cbGetFabric);
+            const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, false, this.cbGetProductData);
             this.calculations.push(calc);
         }
 
@@ -66,6 +65,8 @@ export default class DataService {
         this.eventEmitter.on('changeFotPrice', this.changeFotPrice.bind(this));
         this.eventEmitter.on('changeFotComment', this.changeFotComment.bind(this));
         this.eventEmitter.on('changeGeneralComment', this.changeGeneralComment.bind(this));
+        this.eventEmitter.on("answerQuestion", this.answerQuestion.bind(this));
+
         // this.eventEmitter.on('calculateFot', this.recalculateFot.bind(this));
     }
 
@@ -81,7 +82,7 @@ export default class DataService {
 
     addCalculation(calculation, fot, isNewCalculation = false) {
         this.services.fot.addFot(fot);
-        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, isNewCalculation, this.cbGetProductData, this.cbGetFabric);
+        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, isNewCalculation, this.cbGetProductData);
         this.calculations.push(calc);
         return calc;
     }
@@ -91,7 +92,7 @@ export default class DataService {
             id: Date.now(),
             isTemporary: true,
         };
-        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, true, this.cbGetProductData, this.cbGetFabric);
+        const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, true, this.cbGetProductData);
         this.calculations.push(calc);
         return calc;
     }
@@ -111,6 +112,12 @@ export default class DataService {
         const calculation = this.getCalculation(data.calculationId);
         calculation.changeFotPrice(data.code, data.field, data.value);
         this.eventEmitter.emit('rerenderCalcualation', calculation);
+    }
+
+    answerQuestion(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.answerQuestion(data.questionId, data.answer);
+        this.eventEmitter.emit('changeStateQuestion', calculation);
     }
 
     changeFotComment(data) {        

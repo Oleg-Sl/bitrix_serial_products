@@ -7,6 +7,11 @@ export default class CoefficientsFotService {
         // console.log("this.coefficients = ", this.coefficients);
     }
 
+    getAverageWorkHoursPerMonth() {
+        const field = FIELD_COEFFICIENTS_FOT.averageWorkHoursPerMonth;
+        return +this.coefficients[field] || 0;
+    }
+
     getBaseRatePerUnit(key) {
         const field = FIELD_COEFFICIENTS_FOT[key]?.baseRatePerUnit;
         // console.log("field = ", field);
