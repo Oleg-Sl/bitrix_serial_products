@@ -1,4 +1,4 @@
-import { formatDate, getCurrentDate, roundToTwoDecimals } from '../common/utils.js';
+import { formatDate, getCurrentDate, roundToTwoDecimals } from '../../common/utils.js';
 
 
 export default class ModalButtonsView {
@@ -20,7 +20,7 @@ export default class ModalButtonsView {
             const target = event.target;
             target.disabled = true;
             setTimeout(() => { target.disabled = false; }, 500);
-            this.eventEmitter.emit('calculateFot', this.modal.dataset.calculationId);
+            this.eventEmitter.emit('calculateDataFots', this.modal.dataset.calculationId);
         })
 
         this.btnCreateCalculation.addEventListener('click', (event) => {
@@ -50,8 +50,7 @@ export default class ModalButtonsView {
     }
 
     updateStateButtonCalculate(isAllAnswered, isValidCalculation) {
-        this.btnCalculate.disabled = (isAllAnswered && isValidCalculation) ? false : true;
-
+        this.btnCalculate.disabled = (isAllAnswered) ? false : true;
     }
 
     render(isEditable, isNewCalculation) {

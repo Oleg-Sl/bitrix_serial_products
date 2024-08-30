@@ -1,4 +1,4 @@
-import {ID_COEFFICIENTS, FIELD_COEFFICIENTS } from '../../configs/calc/coefficients.js';
+import {ID_COEFFICIENTS, FIELD_COEFFICIENTS } from '../../../configs/calc/coefficients.js';
 
 
 export default class CoefficientsService {

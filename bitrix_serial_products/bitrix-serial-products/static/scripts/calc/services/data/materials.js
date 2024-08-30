@@ -1,4 +1,4 @@
-import { ID_MATERIALS, FIELD_MATERIALS } from '../../configs/calc/materials.js';
+import { ID_MATERIALS, FIELD_MATERIALS } from '../../../configs/calc/materials.js';
 
 
 export default class MaterialsService {

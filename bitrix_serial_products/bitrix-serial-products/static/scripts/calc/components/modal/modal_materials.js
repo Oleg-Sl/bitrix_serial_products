@@ -1,5 +1,5 @@
-import { formatDate, getCurrentDate, roundToTwoDecimals } from '../common/utils.js';
-import Calculation from '../services/calculation.js';
+import { formatDate, getCurrentDate, roundToTwoDecimals } from '../../common/utils.js';
+import Calculation from '../../services/calculation.js';
 
 
 export default class ModalMaterialsView {

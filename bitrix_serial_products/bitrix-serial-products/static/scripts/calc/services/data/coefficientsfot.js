@@ -1,4 +1,4 @@
-import {ID_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT, FIELD_COEFFICIENTS_FOT } from '../../configs/calc/coefficientsfot.js';
+import {ID_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT, FIELD_COEFFICIENTS_FOT } from '../../../configs/calc/coefficientsfot.js';
 
 
 export default class CoefficientsFotService {
@@ -12,15 +12,18 @@ export default class CoefficientsFotService {
         return +this.coefficients[field] || 0;
     }
 
-    getBaseRatePerUnit(key) {
-        const field = FIELD_COEFFICIENTS_FOT[key]?.baseRatePerUnit;
-        // console.log("field = ", field);
+    getBaseSalaryWorker(worker) {
+        const field = FIELD_COEFFICIENTS_FOT[worker]?.baseSalaryRate;
         return this.coefficients[field] || 0;
     }
 
-    getCostPerHour(key) {
-        const field = FIELD_COEFFICIENTS_FOT[key]?.costPerHour;
-        // console.log("field = ", field);
+    getBaseRatePerUnit(worker) {
+        const field = FIELD_COEFFICIENTS_FOT[worker]?.baseRatePerUnit;
+        return this.coefficients[field] || 0;
+    }
+
+    getCostPerHour(worker) {
+        const field = FIELD_COEFFICIENTS_FOT[worker]?.costPerHour;
         return this.coefficients[field] || 0;
     }
 
@@ -39,6 +42,21 @@ export default class CoefficientsFotService {
         const field = FIELD_COEFFICIENTS_FOT.rent?.[key];
         return this.coefficients[field] || 0;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Диван, Кресло, Кровать, Пуф, МСП и ИНОЕ- 
     // Сумма за работу обтясчика / upholstery.costPerHour / upholstery.staffCount * management.baseSalaryRate
 
@@ -141,4 +159,3 @@ export default class CoefficientsFotService {
     //         }
     //     }
     // }
-}

@@ -32,9 +32,9 @@ export default class Calculation {
         this.isFinalCalculation = null;
         this.createdBy = null;
 
-        this.materials = null;
-        this.questions = null;
-        this.fots = null;
+        this.materials = [];
+        this.questions = [];
+        this.fots = [];
         this.salesRange = null;
         
         this.isEditFields = false;
@@ -51,134 +51,39 @@ export default class Calculation {
         this.initialize();
     }
 
-    changeMaterialPrice(materialCode, field, newValue) {
-        let material = this.materials.find((item) => item.code === materialCode);
-        // console.log("material = ", material);
-        material[field].value = newValue;
-        material.amount.value = material.price.value * material.value.value;
-        this.summaryMaterials = this.materials.reduce((sum, current) => sum + +current.amount.value, 0);
-        this.costPrice = this.initCostPrice();
-        this.salesRange = this.initSalesRange();
-        // console.log("material = ", material);
-        // this.getCalculationSmartData(material)
-
-    }
-
-    changeMaterialComment(materialCode, newValue) {
-        let material = this.materials.find((item) => item.code === materialCode);
-        material.comments.value = newValue;
-        // console.log("material = ", material);
-
-    }
-
-    changeFotPrice(fotCode, field, newValue) {
-        let fot = this.fots.find((item) => item.code === fotCode);
-        // console.log("field = ", field);
-        
-        fot[field] = +newValue;
-        // if (field === 'estimate') {
-        //     this.calculateFot(fot, true);
-        // } else {
-        //     this.calculateFot(fot);
-        // }
-        
-        this.calculateFot(fot);
-        this.summaryFot = this.fots.reduce((sum, current) => sum + +current.total, 0);
-        this.costPrice = this.initCostPrice();
-        this.salesRange = this.initSalesRange();
-        // console.log("fot = ", fot);
-    }
-
-    changeFotComment(fotCode, newValue) {
-        let fot = this.fots.find((item) => item.code === fotCode);
-        fot.comment = newValue;
-    }
-
-    answerQuestion(questionId, answer) {
-        this.checklistcomplexityService.setAnswer(questionId, answer);
-    }
-
-    isAllAnswered() {
-        return this.checklistcomplexityService.isAllAnswered();
-    }
-
-    isFotValid() {
-        return this.fotService.isValid();
-    }
-
-    changeGeneralComment(newValue) {
-        this.comment = newValue;
-    }
-
-    calculateNewFots() {
-        this.fots.map((fot) => this.calculateNewFot(fot));
-    }
-
-    calculateNewFot(fot) {
-        const linearMeters = this.cbGetProductData().linearMeters;
-        const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
-        const coefficientWorker = this.checklistcomplexityService.getCoefficientWorker(this.cbGetProductData(), fot.code);
-        fot.estimate = linearMeters * costPerHour;
-        fot.total = fot.estimate + fot.coefficient * costPerHour * coefficientWorker;
-        const averageWorkHoursPerMonth = this.coefficientsFotService.getAverageWorkHoursPerMonth();
-        const countProductPerMonth = averageWorkHoursPerMonth / (fot.total / this.coefficientsFotService.getCostPerHour(fot.code));
-        fot.checksum = Math.ceil(countProductPerMonth) * fot.total;
-    }
-
-    calculateFots() {
-        this.fots.map((fot) => this.calculateFot(fot));
-    }
-
-    calculateFot(fot) {
-        const linearMeters = this.cbGetProductData().linearMeters;
-        const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
-        const coefficientWorker = this.checklistcomplexityService.getCoefficientWorker(this.cbGetProductData(), fot.code);
-        fot.total = fot.estimate + fot.coefficient * costPerHour * coefficientWorker;
-        const averageWorkHoursPerMonth = this.coefficientsFotService.getAverageWorkHoursPerMonth();
-        const countProductPerMonth = averageWorkHoursPerMonth / (fot.total / this.coefficientsFotService.getCostPerHour(fot.code));
-        fot.checksum = Math.ceil(countProductPerMonth) * fot.total;
-    }
-
     initialize() {
         const fieldDateOfCalculation = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation');
         const fieldDateOfCalculationToday = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculationToday');
-        const finalCalculation = this.calculationFieldsService.getFieldKeyByAlias('finalCalculation');
-
-        this.checklistcomplexityService.initialize();
+        const fieldFinalCalculation = this.calculationFieldsService.getFieldKeyByAlias('finalCalculation');
 
         this.calculationId = this.calculationRawData.id;
         this.dateOfCalculation = this.calculationRawData[fieldDateOfCalculation] || new Date().toISOString();
         this.dateOfCalculationToday = this.calculationRawData[fieldDateOfCalculationToday] || '';
-        this.isFinalCalculation = this.calculationRawData[finalCalculation] || false;
+        this.isFinalCalculation = this.calculationRawData[fieldFinalCalculation] || false;
         this.createdBy = this.userService.getUser(this.calculationRawData.createdBy);
 
-        this.materials = this.initMaterials();
-        this.questions = this.initCheckListQuestions();
-        this.fots = this.initFot();
-        this.costManagement = this.initManagement();
-        this.costRent = this.initRent();
-
-        this.summaryMaterials = this.materials.reduce((sum, current) => sum + +current.amount.value, 0);
-        this.summaryFot = this.fots.reduce((sum, current) => sum + +current.total, 0);
-
-        this.costPrice = this.initCostPrice();
-        this.salesRange = this.initSalesRange();
-        this.comment = this.initComment();
+        this.initMaterials();
+        this.initCheckListQuestions();
+        this.initFot();
+        this.initManagement();
+        this.initRent();
+        this.initComment();
+        this.calculateVariableData();
     }
 
     initMaterials() {
-        let materials = [];
+        this.materials = [];
         const getFieldValue = (fieldNameInBx, defaultValue = '') => this.calculationRawData?.[fieldNameInBx] || defaultValue;
-    
+
         const createField = (fieldNameInBx, defaultValue = '', isFixed = false) => ({
             value: getFieldValue(fieldNameInBx, defaultValue),
             field: fieldNameInBx,
             isFixed
         });
-    
+
         for (const [fieldAlias, fieldData] of Object.entries(this.calculationFieldsService.getAliases())) {
             if (fieldData && (fieldData.type === 'material' || fieldData.type === 'fabric')) {
-                materials.push({
+                this.materials.push({
                     code: fieldAlias,
                     title: this.calculationFieldsService.getTitleField(fieldData.value),
                     coefficient: this.coefficientsService.getCoefficientByKey(fieldAlias),
@@ -189,31 +94,30 @@ export default class Calculation {
                 });
             }
         }
-
-        return materials;
     }
 
     initCheckListQuestions() {
-        return this.checklistcomplexityService.getQuestions();
+        this.questions = this.checklistcomplexityService.getQuestions();
     }
 
     initFot() {
-        let fotList = [];
-        const fot = this.fotService.getFotByParentId(this.calculationRawData.id) || {};
-        this.smartFotId = fot.id;
+        this.fots = [];
+        const fotRawData = this.fotService.getFotByParentId(this.calculationRawData.id) || {};
+        this.smartFotId = fotRawData.id;
         for (const fotAlias of this.fotService.getFotCodeList()) {
-            fotList.push({
+            let fot = {
                 code: fotAlias,
                 title: this.fotService.getFotTitle(fotAlias),
-                estimate: fot[this.fotService.getEstimateField(fotAlias)] || 0,
-                coefficient: fot[this.fotService.getGrowthField(fotAlias)] || 0,
-                total: fot[this.fotService.getFinalAmountField(fotAlias)] || 0,
+                estimate: fotRawData[this.fotService.getEstimateField(fotAlias)] || 0,
+                coefficient: fotRawData[this.fotService.getGrowthField(fotAlias)] || 0,
+                total: fotRawData[this.fotService.getFinalAmountField(fotAlias)] || 0,
                 checksum: 0,
-                comment: fot[this.fotService.getCommentField(fotAlias)] || 0,
-            });
+                basicSalary: this.coefficientsFotService.getBaseSalaryWorker(fotAlias),
+                comment: fotRawData[this.fotService.getCommentField(fotAlias)] || 0,
+            };
+            this.calculateFotChecksum(fot);
+            this.fots.push(fot);
         }
-        // console.log("fotList = ", fotList);
-        return fotList;
     }
 
     initManagement() {
@@ -241,7 +145,7 @@ export default class Calculation {
                 const costPerHourPainting = this.coefficientsFotService.getCostPerHour('painting');
                 costManagement = costWorkPainting / costPerHourPainting * baseSalaryRateManagement || 0;
         }
-        return isFinite(costManagement) ? costManagement : 0;
+        this.costManagement = isFinite(costManagement) ? costManagement : 0;
     }
 
     initRent() {
@@ -276,15 +180,7 @@ export default class Calculation {
                 break;
         }
 
-        return isFinite(costRent) ? costRent : 0;
-    }
-
-    initCostPrice() {
-        // console.log("this.summaryMaterials = ", this.summaryMaterials);
-        // console.log("this.summaryFot = ", this.summaryFot);
-        // console.log("this.costManagement = ", this.costManagement);
-        // console.log("this.costRent = ", this.costRent);
-        return this.summaryMaterials + this.summaryFot + this.costManagement + this.costRent;
+        this.costRent = isFinite(costRent) ? costRent : 0;
     }
 
     initSalesRange() {
@@ -302,6 +198,107 @@ export default class Calculation {
     initComment() {
         const field = this.calculationFieldsService.getFieldKeyByAlias('generalComment');
         return this.calculationRawData[field] || '';
+    }
+
+
+
+    calculateVariableData() {
+        this.summaryMaterials = this.materials.reduce((sum, current) => sum + +current.amount.value, 0);
+        this.summaryFot = this.fots.reduce((sum, current) => sum + +current.total, 0);
+        this.costPrice = this.summaryMaterials + this.summaryFot + this.costManagement + this.costRent;
+        this.salesRange = this.initSalesRange();
+    }
+
+    changeMaterialPrice(materialCode, field, newValue) {
+        let material = this.materials.find((item) => item.code === materialCode);
+        material[field].value = newValue;
+        material.amount.value = material.price.value * material.value.value * material.coefficient;
+        this.calculateVariableData();
+    }
+
+    changeMaterialComment(materialCode, newValue) {
+        let material = this.materials.find((item) => item.code === materialCode);
+        material.comments.value = newValue;
+    }
+
+    changeFotEstimate(fotCode, newValue) {
+        let fot = this.fots.find((item) => item.code === fotCode);
+        fot.estimate = +newValue;
+        this.calculateFot(fot);
+        this.calculateVariableData();
+    }
+
+    changeFotCoefficient(fotCode, newValue) {
+        let fot = this.fots.find((item) => item.code === fotCode);
+        fot.coefficient = +newValue;
+        this.calculateFot(fot);
+        this.calculateVariableData();
+    }
+
+    changeFotComment(fotCode, newValue) {
+        let fot = this.fots.find((item) => item.code === fotCode);
+        fot.comment = newValue;
+    }
+
+    answerQuestion(questionId, answer) {
+        this.checklistcomplexityService.setAnswer(questionId, answer);
+    }
+
+    changeGeneralComment(newValue) {
+        this.comment = newValue;
+    }
+
+    calculateDataFots() {
+        const linearMeters = this.cbGetProductData().linearMeters;
+        this.fots.map((fot) => {
+            const baseRatePerUnit = this.coefficientsFotService.getBaseRatePerUnit(fot.code);
+            const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
+            const coefficientWorker = this.checklistcomplexityService.getCoefficientWorker(this.cbGetProductData(), fot.code);
+            fot.coefficientWorker = coefficientWorker;
+            fot.estimate = linearMeters * baseRatePerUnit + coefficientWorker * costPerHour;
+            this.calculateFot(fot);
+            // console.log("fot = ", fot.code);
+            // console.log("baseRatePerUnit = ", baseRatePerUnit);
+            // console.log("coefficientWorker = ", coefficientWorker);
+            // console.log("costPerHour = ", costPerHour);e
+            // console.log("baseRatePerUnit = ", baseRatePerUnit);
+        });
+    }
+
+    calculateFot(fot) {
+        const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
+        // const coefficientWorker = this.checklistcomplexityService.getCoefficientWorker(this.cbGetProductData(), fot.code);
+        fot.total = fot.estimate + fot.coefficient * costPerHour;
+        this.calculateFotChecksum(fot);
+    }
+
+    calculateFotChecksum(fot) {
+        const averageWorkHoursPerMonth = this.coefficientsFotService.getAverageWorkHoursPerMonth();
+        const workerCostpPeroHour = this.coefficientsFotService.getCostPerHour(fot.code)
+        if (workerCostpPeroHour === 0 || fot.total === 0) {
+            fot.checksum = 0;
+            return;
+        } 
+        const countProductPerMonth = Math.ceil(averageWorkHoursPerMonth / (fot.total / workerCostpPeroHour));
+        fot.checksum = countProductPerMonth * fot.total;
+        this.calculateVariableData();
+    }
+
+
+
+    isAllAnswered() {
+        return this.checklistcomplexityService.isAllAnswered();
+    }
+
+    isFotValid() {
+        // console.log(this.fots);
+        const res = this.fots.every((fot) => {
+            // console.log(0.95 * fot.basicSalary, fot.checksum,  1.05 * fot.basicSalary);
+            return 0.95 * fot.basicSalary < fot.checksum && fot.checksum < 1.05 * fot.basicSalary;
+        });
+        // console.log("res = ", res);
+
+        return res;
     }
 
     getPriceByDate(fieldAlias, fieldData) {
@@ -333,6 +330,8 @@ export default class Calculation {
         const freeTitle = this.cbGetProductData()?.freeTitle || '-';
         return `${this.productNameRus} | ${freeTitle || '-'} | ${this.costPrice} (${this.summaryMaterials})`;
     }
+
+
 
     getCalculationSmartData() {
         let data = {
@@ -368,4 +367,7 @@ export default class Calculation {
         }
         return data;
     }
+
+
+
 }

@@ -1,4 +1,4 @@
-import { formatDate, getCurrentDate, roundToTwoDecimals } from '../common/utils.js';
+import { formatDate, getCurrentDate, roundToTwoDecimals } from '../../common/utils.js';
 
 
 export default class ModalSalesRangeView {
@@ -11,8 +11,13 @@ export default class ModalSalesRangeView {
     render(salesRange) {
         for (const i in salesRange) {
             this.coefficientCells[i].value = salesRange[i].coefficient;
-            this.costCells[i].value = roundToTwoDecimals(salesRange[i].price);
-
+            // this.costCells[i].innerHTML = roundToTwoDecimals(salesRange[i].price);
+            this.costCells[i].innerHTML = this.convertNumberWithSpaces(salesRange[i].price);
+            this.costCells[i].title = `${this.convertNumberWithSpaces(salesRange[i].price)} руб.`;
         }
+    }
+
+    convertNumberWithSpaces(n) {
+        return Math.ceil(n).toLocaleString('ru');
     }
 }

@@ -1,4 +1,4 @@
-import { ID_CHECKLIST_COMPLEXITY, FIELD_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_CHECKLIST_COMPLEXITY } from '../../configs/calc/checklistcomplexity.js';
+import { ID_CHECKLIST_COMPLEXITY, FIELD_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_CHECKLIST_COMPLEXITY } from '../../../configs/calc/checklistcomplexity.js';
 
 
 export default class ChecklistComplexityService {
@@ -7,7 +7,7 @@ export default class ChecklistComplexityService {
         this.questions = this.rawChecklist.map(item => this.mapCheckListItem(item));
     }
 
-    initialize() {
+    reset() {
         this.questions = this.rawChecklist.map(item => this.mapCheckListItem(item));
     }
 
@@ -20,19 +20,24 @@ export default class ChecklistComplexityService {
     }
 
     getCoefficientWorker(productData, worker) {
-        let workerCoefficient = 1;
+        let workerCoefficient = 0;
         for (const question of this.questions) {
+            console.log(worker, ' => ', question);
+
             if (question.isQuestion) {
                 if (question.answer) {
-                    workerCoefficient *= question.coefficients[worker];
+                    // console.log(worker, ' => ', question.coefficients[worker]);
+                    workerCoefficient += +question.coefficients[worker] || 0;
                 }
             } else {
                 const isCoefficient = productData.questions?.[question.productField];
+                // console.log(isCoefficient);
                 if (isCoefficient) {
-                    workerCoefficient *= question.coefficients[worker];
+                    workerCoefficient += +question.coefficients[worker] || 0;
                 }
             }
         }
+        // console.log('workerCoefficient => ', workerCoefficient);
         return workerCoefficient;
     }
 

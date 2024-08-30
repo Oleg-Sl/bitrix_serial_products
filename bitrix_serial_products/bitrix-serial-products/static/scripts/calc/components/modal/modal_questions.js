@@ -1,4 +1,4 @@
-import { formatDate, getCurrentDate, roundToTwoDecimals } from '../common/utils.js';
+import { formatDate, getCurrentDate, roundToTwoDecimals } from '../../common/utils.js';
 
 
 export default class ModalQuestionsView {

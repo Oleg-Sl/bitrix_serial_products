@@ -4,14 +4,14 @@ import { ID_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_CHECKLIST_COMPLEXITY, FIELD_CHEC
 import { ID_FOT, FIELD_FOT } from '../../configs/calc/fot.js';
 import { ID_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT, FIELD_COEFFICIENTS_FOT } from '../../configs/calc/coefficientsfot.js';
 
-import UserService from './users_service.js';
-import ChecklistComplexityService from './checklistcomplexity_service.js';
-import CoefficientsService from './coefficients_service.js';
-import CoefficientsFotService from './coefficientsfot_service.js';
-import FotService from './fot_service.js';
-import MaterialsService from './materials_service.js';
-import CalculationsService from './calculations_service.js';
-import CalculationFieldsService from './calculationfields_service.js'
+import UserService from './data/users.js';
+import ChecklistComplexityService from './data/checklistcomplexity.js';
+import CoefficientsService from './data/coefficients.js';
+import CoefficientsFotService from './data/coefficientsfot.js';
+import FotService from './data/fot.js';
+import MaterialsService from './data/materials.js';
+import CalculationsService from './data/calculations.js';
+import CalculationFieldsService from './data/calculationfields.js'
 import Calculation from './calculation.js';
 
 
@@ -62,15 +62,15 @@ export default class DataService {
 
         this.eventEmitter.on('changeMaterialPrice', this.changeMaterialPrice.bind(this));
         this.eventEmitter.on('changeMaterialComment', this.changeMaterialComment.bind(this));
-        this.eventEmitter.on('changeFotPrice', this.changeFotPrice.bind(this));
+
+        this.eventEmitter.on("answerQuestion", this.changeAnswerToQuestion.bind(this));
+        
+        this.eventEmitter.on('changeFotEstimate', this.changeFotEstimate.bind(this));
+        this.eventEmitter.on('changeFotCoefficient', this.changeFotCoefficient.bind(this));
         this.eventEmitter.on('changeFotComment', this.changeFotComment.bind(this));
+
         this.eventEmitter.on('changeGeneralComment', this.changeGeneralComment.bind(this));
-        this.eventEmitter.on("answerQuestion", this.answerQuestion.bind(this));
-
-        // this.eventEmitter.on('calculateFot', this.recalculateFot.bind(this));
     }
-
-
 
     copyCalculation(calculationId) {
         const calculation = this.getCalculation(calculationId);
@@ -100,29 +100,18 @@ export default class DataService {
     changeMaterialPrice(data) {
         const calculation = this.getCalculation(data.calculationId);
         calculation.changeMaterialPrice(data.material, data.field, data.value);
-        this.eventEmitter.emit('rerenderCalcualation', calculation);
+        this.eventEmitter.emit('redrawCalcualation', calculation);
     }
 
-    changeMaterialComment(data) {        
+    changeMaterialComment(data) {
         const calculation = this.getCalculation(data.calculationId);
         calculation.changeMaterialComment(data.material, data.value);
     }
 
-    changeFotPrice(data) {
-        const calculation = this.getCalculation(data.calculationId);
-        calculation.changeFotPrice(data.code, data.field, data.value);
-        this.eventEmitter.emit('rerenderCalcualation', calculation);
-    }
-
-    answerQuestion(data) {
+    changeAnswerToQuestion(data) {
         const calculation = this.getCalculation(data.calculationId);
         calculation.answerQuestion(data.questionId, data.answer);
         this.eventEmitter.emit('changeStateQuestion', calculation);
-    }
-
-    changeFotComment(data) {        
-        const calculation = this.getCalculation(data.calculationId);
-        calculation.changeFotComment(data.code, data.value);
     }
 
     changeGeneralComment(data) {
@@ -130,10 +119,28 @@ export default class DataService {
         calculation.changeGeneralComment(data.value);
     }
 
-    // recalculateFot(data) {
-    //     const calculation = this.getCalculation(data.calculationId);
-    //     calculation.recalculateFot();
-    // }
+    changeFotEstimate(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeFotEstimate(data.code, data.value);
+        this.eventEmitter.emit('redrawCalcualation', calculation);
+    }
+
+    changeFotCoefficient(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeFotCoefficient(data.code, data.value);
+        this.eventEmitter.emit('redrawCalcualation', calculation);
+    }
+
+    changeFotComment(data) {        
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeFotComment(data.code, data.value);
+    }
+
+    resetStateOfQuestions() {
+        this.services.checklistcomplexity.reset();
+    }
+
+
 
     getCalculation(calculationId) {
         return this.calculations.find((item) => item.calculationId == calculationId);
@@ -146,6 +153,7 @@ export default class DataService {
     getDateOfAddingMaterials() {
         return this.services.materials.getLastDateOfAddingMaterials();
     }
+
 
     async fetchData() {
         const checklistcomplexityProductType = PRODUCT_TYPES_CHECKLIST_COMPLEXITY[this.productTypeId];
