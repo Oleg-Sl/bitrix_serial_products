@@ -228,3 +228,41 @@ export default class DataService {
         return users;
     }
 }
+
+
+// export default class DataService {
+//     constructor(apiClient, calcTypeId, calcFieldsAliases, productTypeId, productId, eventEmitter, productNameRus, cbGetProductData) {
+//         this.apiClient = apiClient;
+//         this.calcTypeId = calcTypeId;
+//         this.calcFieldsAliases = calcFieldsAliases;
+//         this.productTypeId = productTypeId;
+//         this.productId = productId;
+//         this.productNameRus = productNameRus;
+//         this.cbGetProductData = cbGetProductData;
+//         this.eventEmitter = eventEmitter;
+
+//         // Инициализация сервисов
+//         this.fetchService = new FetchService(apiClient, calcTypeId, productTypeId, productId);
+//         this.calculationService = new CalculationService();
+//         this.eventService = new EventService(eventEmitter, this.calculationService);
+
+//         this.calculations = [];
+//     }
+
+//     async init() {
+//         const {
+//             materials, coefficients, checklistcomplexity,
+//             fot, coefficientsfot, calculationFields,
+//             calculations, currentUser, users
+//         } = await this.fetchService.fetchData();
+
+//         this.calculationService.initializeServices({
+//             materials, coefficients, checklistcomplexity, fot, coefficientsfot, calculationFields, users, currentUser
+//         }, this.calcFieldsAliases, this.calcTypeId, this.productTypeId, this.productId, this.productNameRus, this.cbGetProductData);
+
+//         this.calculations = this.calculationService.initCalculations(calculations);
+
+//         // Подписка на события
+//         this.eventService.subscribeEvents();
+//     }
+// }
