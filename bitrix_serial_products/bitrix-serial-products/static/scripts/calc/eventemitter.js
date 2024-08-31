@@ -13,7 +13,6 @@ export default class EventEmitter {
     }
 
     emit(event, data) {
-        // console.log("Emit data: ", data);
         if (this.events[event]) {
             this.events[event].forEach(listener => listener(data));
         }

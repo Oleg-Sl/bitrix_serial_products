@@ -1,4 +1,4 @@
-import { ID_FOT, FIELD_FOT } from '../../../configs/calc/fot.js';
+import { ID_FOT, FIELD_FOT } from '../../../import.js';
 
 
 export default class FotService {
