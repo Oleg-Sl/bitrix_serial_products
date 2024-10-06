@@ -11,7 +11,7 @@ export default class FabricManager {
         this.fabric_1 = new Fabric(this.fabricService, this.productService, this.select_1, 'upholsteryFabricCollection_2', 0, this.callbackOutputImage);
     }
 
-    init() {
+    initialize() {
         this.fabric_1.init();
     }
 
