@@ -13,6 +13,8 @@ import { getProductConfig, getProductConfigById } from '../configs/utils.js';
 export async function main(apiClient, App) {
     const elemLoader = document.querySelector("#elemWaitingLoader");
     const elemApp = document.querySelector("#elemAppData");
+    console.log("elemLoader = ", elemLoader);
+    console.log("elemApp = ", elemApp);
 
     const loader = new Loader(elemLoader, elemApp);
     const { title, smartId, field, calcTypeId } = getProductConfigById(smartProcessTypeId);
