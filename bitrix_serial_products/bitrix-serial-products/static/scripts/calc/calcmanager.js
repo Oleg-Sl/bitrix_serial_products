@@ -1,18 +1,9 @@
-import { ID_FOT, FIELD_FOT } from '../configs/calc/fot.js';
+import { ID_FOT, FIELD_FOT } from './import.js';
 
 import DataService from './services/data_service.js';
 import CalculationsListView from './components/calculationslist.js';
 import EditCalculationView from './components/calculationedit.js';
-// import ModalMaterialsView from './components/modal/modal_materials.js';
-// import ModalQuestionsView from './components/modal/modal_questions.js';
-// import ModalFotView from './components/modal/modal_fot.js';
-// import ModalManagementView from './components/modal/modal_management.js';
-// import ModalRentView from './components/modal/modal_rent.js';
-// import ModalCostPriceView from './components/modal/modal_costprice.js';
-// import ModalSalesRangeView from './components/modal/modal_salesrange.js';
-// import ModalCommentView from './components/modal/modal_comment.js';
-// import ModalMetadataView from './components/modal/modal_metadata.js';
-// import ModalButtonsView from './components/modal/modal_buttons.js';
+
 import ModalView from './components/modal.js'
 
 import CalculationRepository from './services/repository.js';
@@ -20,7 +11,7 @@ import EventEmitter from './eventemitter.js';
 
 
 export default class CalculationManager {
-    constructor(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, productNameRus, isEditable = false) {
+    constructor(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, productNameRus, isEditable = true) {
         this.apiClient = apiClient;
         this.calcTypeId = calcTypeId;
         this.calcFieldAliases = calcFieldAliases;
@@ -51,8 +42,6 @@ export default class CalculationManager {
         this.calculationListView.init(calculations, dateOfAddingMaterials);
     }
 
- 
-
     getProductData() {
         return {
             id: this.productId,
@@ -62,7 +51,7 @@ export default class CalculationManager {
             linearMeters: 4,
             fabricPrices: [ 111, 222, 333 ],
             questions: {
-                individual: false,               // Диван. Индивидуалка
+                individual: false,              // Диван. Индивидуалка
                 looseFabric: true,              // Рыхлая ткань? требуется оверлог
                 mechanism: true,                // Проверка Механизма
                 shapeRadius: true,              // Форма РАДИУС
@@ -71,7 +60,6 @@ export default class CalculationManager {
                 seamType1: true,                // Проверка типа Шва №2
                 woodenSupports: true,           // Деревянные опоры
                 woodenFrameAndSupports: true,   // Деревянная рама и опоры
-                // painting: true,
             }
         };
     }

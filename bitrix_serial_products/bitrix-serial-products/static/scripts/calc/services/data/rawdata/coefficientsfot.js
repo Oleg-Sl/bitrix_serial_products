@@ -1,4 +1,4 @@
-import {ID_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT, FIELD_COEFFICIENTS_FOT } from '../../../configs/calc/coefficientsfot.js';
+import { FIELD_COEFFICIENTS_FOT, } from '../../../import.js';
 
 
 export default class CoefficientsFotService {

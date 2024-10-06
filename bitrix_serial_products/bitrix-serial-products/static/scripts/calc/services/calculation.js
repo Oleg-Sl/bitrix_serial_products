@@ -1,12 +1,4 @@
-import { ID_SOFA } from '../../configs/products/sofa.js'
-import { ID_ARMCHAIR } from '../../configs/products/armchair.js';
-import { ID_BED } from '../../configs/products/bed.js';
-import { ID_POUF } from '../../configs/products/pouf.js';
-import { ID_MSP } from '../../configs/products/msp.js';
-import { ID_NIGHTSTAND } from '../../configs/products/nightstand.js';
-import { ID_TABLE } from '../../configs/products/table.js';
-import { ID_CHAIR } from '../../configs/products/chair.js';
-import { ID_MELOCHEVKA } from '../../configs/products/melochevka.js';
+import { ID_SOFA, ID_ARMCHAIR, ID_BED, ID_POUF, ID_MSP, ID_NIGHTSTAND, ID_TABLE, ID_CHAIR, ID_MELOCHEVKA } from '../import.js'
 
 
 export default class Calculation {

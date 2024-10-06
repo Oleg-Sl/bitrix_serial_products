@@ -1,4 +1,4 @@
-import { ID_CHECKLIST_COMPLEXITY, FIELD_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_CHECKLIST_COMPLEXITY } from '../../../configs/calc/checklistcomplexity.js';
+import { ID_CHECKLIST_COMPLEXITY, FIELD_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_CHECKLIST_COMPLEXITY } from '../../../import.js';
 
 
 export default class ChecklistComplexityService {
@@ -22,8 +22,7 @@ export default class ChecklistComplexityService {
     getCoefficientWorker(productData, worker) {
         let workerCoefficient = 0;
         for (const question of this.questions) {
-            console.log(worker, ' => ', question);
-
+            // console.log(worker, ' => ', question);
             if (question.isQuestion) {
                 if (question.answer) {
                     // console.log(worker, ' => ', question.coefficients[worker]);
