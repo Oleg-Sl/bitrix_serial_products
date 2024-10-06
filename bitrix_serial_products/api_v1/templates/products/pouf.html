@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.css"> -->
+
+    <link href="{% static 'scripts/libs/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'scripts/libs/bootstrap/font/bootstrap-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'scripts/libs/cropper/cropper.css' %}">
+
+    <link href="{% static 'scripts/libs/chosen_v1.8.7/chosen.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style/msp.css' %}" rel="stylesheet">
+
+    <script src="//api.bitrix24.com/api/v1/"></script>
+    <script>
+        let smartProcessId = {{ id }};
+        let portalUrl = "{{ portal_url }}";
+    </script>
+
+    <title>Пуф - банкетка</title>
+</head>
+<body>
+    <div id="elemWaitingLoader" class="mt-5 d-flex justify-content-center">
+        <p class="fs-2">Загрузка карточки товара (Пуф - банкетка) ...</p>
+        <div class="ms-3 spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div id="containerProduct" class="product-container text-center m-3 d-none">
+        <div class="row d-flex justify-content-between align-items-start">
+            <div class="col d-flex align-items-start flex-column">
+                <div class="input-group input-group-sm mb-3 product-date-create-container">
+                    <span class="input-group-text col-5">№ лида</span>
+                    <input type="text" id="leadNumber" class="form-control link-primary" aria-label="" aria-describedby="" value="-" readonly>
+                </div>
+                <div class="input-group input-group-sm mb-3 product-date-create-container">
+                    <span class="input-group-text col-5">Название лида</span>
+                    <input type="text" id="leadTitle" class="form-control link-primary" aria-label="" aria-describedby="" value="-" readonly>
+                </div>
+            </div>
+
+            <div class="col d-flex align-items-start flex-column" style="max-width: 350px;">
+                <div class="input-group input-group-sm mb-3 product-date-create-container">
+                    <span class="input-group-text col-5" id="dateCreate">Дата создания</span>
+                    <input type="date" id="createdTime" class="form-control product-date-create-input" aria-label="Sizing example input" aria-describedby="dateCreate" readonly>
+                </div>
+                <div class="input-group input-group-sm product-date-cheanged-container">
+                    <span class="input-group-text col-5" id="dateChanged">Дата изменения</span>
+                    <input type="date" id="updatedTime" class="form-control product-date-cheanged-input" aria-label="Sizing example input" aria-describedby="dateChanged" readonly>
+                </div>
+            </div>
+
+            <div class="col d-flex align-items-start flex-column responsible-container" style="max-width: 650px;">
+                <div class="input-group input-group-sm mb-3 product-date-create-container responsible-created">
+                    <span class="input-group-text col-3 responsible-created-label">Кто заполнил</span>
+                    <input type="text" id="createdBy" class="form-control product-date-create-input responsible-created-url link-primary" aria-label="Sizing example input" aria-describedby="" value="-" readonly>
+                </div>
+                <div class="input-group input-group-sm mb-3 product-date-create-container responsible-changed">
+                    <span class="input-group-text col-3 responsible-changed-label">Кто изменил</span>
+                    <input type="text" id="updatedBy" class="form-control product-date-create-input responsible-changed-url link-primary" aria-label="Sizing example input" aria-describedby="" value="-" readonly>
+                </div>
+            </div>
+
+            <div class="col btn-group-vertical" role="group" aria-label="Vertical button group" style="max-width: 350px;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#instructionChange">Инструкция по изменениям</button>
+                <button type="button" class="btn btn-outline-secondary">История изменения</button>
+            </div>
+
+            <div class="col btn-group-vertical" role="group" aria-label="Vertical button group" style="max-width: 350px;">
+                <button type="button" id="btnOpenDiskFolder" class="btn btn-outline-secondary">Открыть директорию</button>
+                <button type="button" id="btnDownloadFiles" class="btn btn-outline-secondary">
+                    Загрузить файлы
+                    <div class="ms-3 spinner-border spinner-border-sm" role="status" style="display: none;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <input type="file" id="inputDownloadFiles" style="display: none;" multiple>
+                </button>
+            </div>
+        </div>
+        <div class="row mb-3 product-buttons">
+            <div class="col">
+                <button type="button" class="btn btn-secondary w-75 product-btn-save">
+                    Сохранить
+                    <div class="ms-3 spinner-border spinner-border-sm text-light" role="status" style="display: none;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
+            </div>
+            <div class="col">
+                <button type="button" id="btnCreateCopyProduct" class="btn btn-secondary w-75 product-btn-copy">
+                    Копировать
+                    <div class="ms-3 spinner-border spinner-border-sm text-light" role="status" style="display: none;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
+            </div>
+            <div class="col">
+                <button type="button" id="btnDeleteProduct" class="btn btn-secondary w-75 product-btn-remove">
+                    Удалить
+                    <div class="ms-3 spinner-border spinner-border-sm text-light" role="status" style="display: none;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
+            </div>
+            <!-- <div class="col-1 d-flex align-items-center">
+                <div class="form-check w-100">
+                    <input type="checkbox" class="btn-check" id="isMeasured" autocomplete="off" data-field="isMeasured" data-track="true">
+                    <label class="btn btn-outline-success w-100" for="isMeasured">Замер</label><br>
+                </div>
+            </div>
+            <div class="col-1 d-flex align-items-center">
+                <div class="form-check w-100">
+                    <input type="checkbox" class="btn-check" id="isExhibited" autocomplete="off" data-field="isExhibited" data-track="true">
+                    <label class="btn btn-outline-success w-100" for="isExhibited">Выставка</label><br>
+                </div>
+            </div>
+            <div class="col-1 d-flex align-items-center dropdown">
+                <div class="form-check w-100">
+                    <input type="checkbox" class="btn-check" id="sketch" autocomplete="off" data-field="sketch" data-track="true">
+                    <label class="btn btn-outline-success w-100 dropdown-toggle" for="sketch" data-bs-toggle="dropdown">Эскиз</label><br>
+                </div>
+            </div>
+            <div class="col-1 d-flex align-items-center">
+                <div class="form-check w-100">
+                    <input type="checkbox" class="btn-check" id="isActive" autocomplete="off" data-field="isActive" data-track="true">
+                    <label class="btn btn-outline-success w-100" for="isActive">Активен</label><br>
+                </div>
+            </div> -->
+
+        </div>
+        <div class="row mb-3">
+            <div class="product-left col-7">
+                <!-- Главное фото -->
+                <div id="canvasContainerMain" class="card border-secondary-subtle mx-0 mb-3 mh-100 w-100 row mb-3">
+                    <div class="card-header fs-5 fw-bold header-size"  style="width: 100%;">
+                        Общее фото изделия
+                        <input type="file" id="mainPhoto" accept="image/1*" class="input-img-loader d-none">
+                        <button class="px-2 m-2 btn-add-image" disabled><i class="bi bi-image"></i></button>
+                    </div>
+                    <div class="w-100 h-100 p-0">
+                        <div class="w-100 h-100 canvas-container">
+                            <canvas id="canvasMain" class="border-secondary"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ссылка и ориентир -->
+                <div class="product-delivery">
+                    <table class="table table-bordered table-sm mb-3">
+                        <tr>
+                            <td width="25%" class="fw-bold bg-light table-header-size text-start">Ссылка на оригинал:</td>
+                            <td class="p-0 m-0 table-body-size">
+                                <input type="url" id="link" class="mh-100 w-100 py-1 px-2 border-0 text-center" data-field="link" data-track="true">
+                            </td>
+                            <td width="15%" class="fw-bold bg-light table-header-size text-start">ОРИЕНТИР:</td>
+                            <td width="15%" class="p-0 m-0 table-body-size">
+                                <select id="referencePoint" class="form-select form-select-sm border-0 text-center" data-field="referencePoint" data-track="true">
+                                    <option value="1">1</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="25%" class="fw-bold bg-light table-header-size">Город доставки:</td>
+                            <td class="p-0 m-0 table-body-size">
+                                <input type="text" id="deliveryCity" class="mh-100 w-100 py-1 px-2 border-0" data-field="deliveryCity" data-track="true">
+                            </td>
+                            <td width="15%" class="fw-bold bg-light table-header-size">Количество:</td>
+                            <td width="15%" class="p-0 m-0 table-body-size">
+                                <input type="number" step="1" id="quantity" class="mh-100 w-100 py-1 px-2 border-0 validate-integer-input" data-field="quantity" data-track="true">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- Доставка -->
+                <!-- <div class="product-delivery">
+                    <table class="table table-bordered table-sm mb-3">
+                        <tr>
+                            <td width="25%" class="fw-bold bg-light table-header-size">Город доставки:</td>
+                            <td class="p-0 m-0 table-body-size">
+                                <input type="text" id="deliveryCity" class="mh-100 w-100 py-1 px-2 border-0" data-field="deliveryCity" data-track="true">
+                            </td>
+                            <td width="15%" class="fw-bold bg-light table-header-size">Количество:</td>
+                            <td width="15%" class="p-0 m-0 table-body-size">
+                                <input type="number" step="1" id="quantity" class="mh-100 w-100 py-1 px-2 border-0 validate-integer-input" data-field="quantity" data-track="true">
+                            </td>
+                        </tr>
+                    </table>
+                </div> -->
+                <!-- Себестоимость -->
+                <div id="productCalculations" class="product-calculations d-none">
+                    <table class="table table-bordered table-sm mb-1">
+                        <thead class="table-light">
+                            <tr>
+                                <th colspan="6">БЛОК РАСЧЕТА СЕБЕБСТОИМОСТИ</th>
+                            </tr>
+                            <tr>
+                                <th class="table-header-size">Просмотр</th>
+                                <th class="table-header-size">Дата расчета</th>
+                                <th class="table-header-size">Кто делал расчет</th>
+                                <th class="table-header-size">Комментарий</th>
+                                <th class="table-header-size">Себестоимость</th>
+                                <th width="100px" class="table-header-size">Итоговый</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--  -->
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-start mb-3">
+                        <div class="btn-group">
+                            <button type="button" id="newProductCalculation" class="btn btn-primary product-btn-save">Новый</button>
+                        </div>
+                        <!-- <div class="btn-group ms-3">
+                            <button type="button" id="addProductCalculation" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Добавить
+                            </button>
+                            <ul id="productOtherCalculationsList" class="dropdown-menu px-3 calculation-dropdown-menu"></ul>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="product-right col-5">
+                <div class="product-common-data">
+                    <div class="border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
+                        <label for="" class="fs-5 fw-bold header-size">Общие данные</label>
+                        <table class="table table-bordered table-sm mb-0">
+                            <tr>
+                                <td colspan="7" class="p-0 m-0 table-body-size">
+                                    <input type="text" id="freeTitle" class="mh-100 w-100 py-1 px-2 border-0" data-field="freeTitle" data-track="true" placeholder="Свободное название изделия">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%" class="table-header-size">Общий габарит в мм.:</td>
+                                <td colspan="1" style="min-width: 45px;" class="table-header-size btn-show-history" data-field="commonDimensionsWidth">Ш.</td>
+                                <td colspan="1" class="p-0 m-0 table-body-size">
+                                    <input type="number" id="commonDimensionsWidth" class="mh-100 w-100 py-1 px-2 border-0" placeholder="..." data-field="commonDimensionsWidth" data-track="true">
+                                </td>
+                                <td colspan="1" style="min-width: 45px;" class="table-header-size btn-show-history" data-field="commonDimensionsDepth">Г.</td>
+                                <td colspan="1" class="p-0 m-0 table-body-size">
+                                    <input type="number" id="commonDimensionsDepth" class="mh-100 w-100 py-1 px-2 border-0" placeholder="..." data-field="commonDimensionsDepth" data-track="true">
+                                </td>
+                                <td colspan="1" style="min-width: 45px;" class="table-header-size btn-show-history" data-field="commonDimensionsHeight">В.</td>
+                                <td colspan="1" class="p-0 m-0 table-body-size">
+                                    <input type="number" id="commonDimensionsHeight" class="mh-100 w-100 py-1 px-2 border-0" placeholder="..." data-field="commonDimensionsHeight" data-track="true">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="supports">Материал опор:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <select id="supports" class="form-select form-select-sm border-0" data-field="supports" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size">Цвет покраски опор:</td>
+                                <td colspan="2" class="p-0 m-0 table-body-size">
+                                    <input type="text" id="supportColor" class="mh-100 w-100 py-1 px-2 border-0" data-field="supportColor" data-track="true">
+                                </td>
+                                <td style="white-space: nowrap;" class="table-header-size">RAL | NSC:</td>
+                                <td colspan="4" class="p-0 m-0 table-body-size">
+                                    <input type="text" id="ral" class="mh-100 w-100 py-1 px-2 border-0" data-field="ral" data-track="true">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="treeType">Тип дерева:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <select id="treeType" class="form-select form-select-sm border-0" data-field="treeType" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="woodColorType">Тип покраски дерева:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <select id="woodColorType" class="form-select form-select-sm border-0" data-field="woodColorType" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size">Лаковасть / Глянцевость:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <select id="glossiness" class="form-select form-select-sm border-0" data-field="glossiness" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="metalCoatingType">Тип покрытия металла:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <select id="metalCoatingType" class="form-select form-select-sm border-0" data-field="metalCoatingType" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="supportHeight">Высота опор:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <input type="number" id="supportHeight" class="mh-100 w-100 py-1 px-2 border-0" data-field="supportHeight" data-track="true">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="hasBox">Наличие ящика / механизм:</td>
+                                <td colspan="2" class="p-0 m-0 table-body-size">
+                                    <select id="hasBox" class="form-select form-select-sm border-0" data-field="hasBox" data-track="true"></select>
+                                </td>
+                                <td style="white-space: nowrap;" class="table-header-size btn-show-history" data-field="mechanism">Механизм:</td>
+                                <td colspan="4" class="p-0 m-0 table-body-size">
+                                    <select id="mechanism" class="form-select form-select-sm border-0" data-field="mechanism" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="thicknessPerimeterPPU">Толщина ППУ по периметру:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <input type="number" id="thicknessPerimeterPPU" class="mh-100 w-100 py-1 px-2 border-0" data-field="thicknessPerimeterPPU" data-track="true">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size text-start">Тип шва:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <select id="seamType" class="form-select form-select-sm border-0 text-center" data-field="seamType" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="thicknessSeatPPU">Толщина ППУ по сидения:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <input type="text" id="thicknessSeatPPU" class="mh-100 w-100 py-1 px-2 border-0" data-field="thicknessSeatPPU" data-track="true">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="upholsteryFabricCollection">Коллекция ткани:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1">
+                                            <select id="upholsteryFabricCollection" class="flex-grow-1 form-select form-select-sm border-0 fabric-select" data-field="upholsteryFabricCollection" data-track="true"  data-target="fabric-info-1" data-fabric-type-id="upholsteryFabricType" data-fabric-color-id="upholsteryFabricColor"></select>
+                                        </div>
+                                        <div class="btn-group dropstart">
+                                            <i class="bi bi-info-square-fill mx-1 fs-5 text-secondary" id="popoverButton" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></i>
+                                            <div class="dropdown-menu p-0 dropdown-fabric-menu" id="fabric-info-1">
+                                                <div class="dropdown-header bg-secondary-subtle text-center dropdown-fabric-menu-header">Информация по ткани</div>
+                                                <div class="dropdown-fabric-menu-content">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Поставщик:</td>
+                                                                <td class="fabric-provider">-</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Коллекция:</td>
+                                                                <td class="fabric-collection">-</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Цвет:</td>
+                                                                <td class="fabric-color">-</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Цена:</td>
+                                                                <td class="fabric-price">-</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Ссылка на сайт:</td>
+                                                                <td><a class="link-opacity-100 fabric-link" target="_blank" href=""></a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size">Тип и цвет ткани:</td>
+                                <td colspan="2" class="p-0 m-0 table-body-size">
+                                    <input type="text" id="upholsteryFabricType" class="mh-100 w-100 py-1 px-2 border-0" disabled>
+                                </td>
+                                <td style="white-space: nowrap;" class="table-header-size">Цвет:</td>
+                                <td colspan="4" class="p-0 m-0 table-body-size">
+                                    <input type="text" id="upholsteryFabricColor" class="mh-100 w-100 py-1 px-2 border-0" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="decor">Декор (описывается в ручную):</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <textarea class="form-control border-0 table-body-size" id="decor" rows="3" data-field="decor" data-track="true"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size btn-show-history" data-field="managerDescription">Доп. описание и описание декора</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <textarea class="form-control border-0 table-body-size" id="managerDescription" rows="3" data-field="managerDescription" data-track="true"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Доп описание изделия (Видно в НАЧАЛЕ названия)-->
+                <div class="product-description-start col border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
+                    <label for="productDescriptionStart" class="fs-6 fw-bold table-header-size">Доп. описание изделия (будет прописанно в НАЧАЛЕ названия товара)</label>
+                    <textarea class="form-control rounded-0 px-0 text-center" id="productDescriptionStart" rows="3" data-field="productDescriptionStart" data-track="true"></textarea>
+                </div>
+                <!-- Доп описание изделия (Видно в КОНЦЕ названия)-->
+                <div class="product-comment-responsible col border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
+                    <label for="productDescription" class="fs-6 fw-bold table-header-size">Доп. описание изделия (будет прописанно в КОНЦЕ названия товара)</label>
+                    <textarea class="form-control rounded-0 px-0 text-center" id="productDescription" rows="3" data-field="productDescription" data-track="true"></textarea>
+                </div>
+                <div class="product-comment-responsible col border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
+                    <label for="generalResponsibilityComments" class="fs-6 fw-bold table-header-size btn-show-history" data-field="generalCommentsResponsible_2">Общие комментарии ответственного</label>
+                    <textarea class="form-control rounded-0 px-0 text-center" id="generalCommentsResponsible_2" rows="3" data-field="generalCommentsResponsible_2" data-track="true"></textarea>
+                </div>
+                <!-- Комментарий ответственного-->
+                <div class="product-comment-rop col border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
+                    <label for="managerNotes" class="fs-6 fw-bold table-header-size">Заметки руководителя</label>
+                    <textarea class="form-control rounded-0 px-0 text-center" id="managerNotes_3" rows="3" data-field="managerNotes_3" data-track="true"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="canvasesContainer1" class="row mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <input type="file" class="d-none input-img-loader-1" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-2" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-3" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-4" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-5" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-6" style="display: none;">
+    
+                    <button class="btn-add-image btn-add-image-small btn-add-image-1" disabled title="Добавить изображение 1"><div></div></button>
+                    <button class="btn-add-image btn-add-image-small btn-add-image-2" disabled title="Добавить изображение 2"><div></div></button>
+                    <button class="btn-add-image btn-add-image-small btn-add-image-3" disabled title="Добавить изображение 3"><div></div></button>
+                    <button class="btn-add-image btn-add-image-4" disabled title="Добавить изображение 4"><div></div></button>
+                    <button class="btn-add-image btn-add-image-5" disabled title="Добавить изображение 5"><div></div></button>
+                    <button class="btn-add-image btn-add-image-6" disabled title="Добавить изображение 6"><div></div></button>
+                </div>
+                <div style="display: flex;">
+                    <input class="form-control output-message" type="text" value="" aria-label="" readonly>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="px-2 m-2 btn-add-arrow" disabled><i class="bi bi-dash-lg"></i></button>
+                    <button class="px-2 m-2 btn-add-text" disabled><i class="bi bi-alphabet"></i></button>
+                    <button class="px-2 m-2 btn-remove-selected" disabled><i class="bi bi-trash"></i></button>
+                    <div class="d-flex align-items-center"><input type="color" class="input-color-picker"></div>
+                    <button class="px-2 m-2 btn-change-color" disabled><i class="bi bi-paint-bucket"></i></button>
+                </div>
+            </div>
+            <div class="w-100 h-100">
+                <div class="w-100 h-100 canvas-container">
+                    <canvas id="canvas_1"  style="border: 1px solid #000;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div id="canvasesContainer2" class="row mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <input type="file" class="d-none input-img-loader-1" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-2" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-3" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-4" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-5" style="display: none;">
+                    <input type="file" class="d-none input-img-loader-6" style="display: none;">
+    
+                    <button class="btn-add-image btn-add-image-small btn-add-image-1" disabled title="Добавить изображение 1"><div></div></button>
+                    <button class="btn-add-image btn-add-image-small btn-add-image-2" disabled title="Добавить изображение 2"><div></div></button>
+                    <button class="btn-add-image btn-add-image-small btn-add-image-3" disabled title="Добавить изображение 3"><div></div></button>
+                    <button class="btn-add-image btn-add-image-4" disabled title="Добавить изображение 4"><div></div></button>
+                    <button class="btn-add-image btn-add-image-5" disabled title="Добавить изображение 5"><div></div></button>
+                    <button class="btn-add-image btn-add-image-6" disabled title="Добавить изображение 6"><div></div></button>
+                </div>
+                <div style="display: flex;">
+                    <input class="form-control output-message" type="text" value="" aria-label="" readonly>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="px-2 m-2 btn-add-arrow" disabled><i class="bi bi-dash-lg"></i></button>
+                    <button class="px-2 m-2 btn-add-text" disabled><i class="bi bi-alphabet"></i></button>
+                    <button class="px-2 m-2 btn-remove-selected" disabled><i class="bi bi-trash"></i></button>
+                    <div class="d-flex align-items-center"><input type="color" class="input-color-picker"></div>
+                    <button class="px-2 m-2 btn-change-color" disabled><i class="bi bi-paint-bucket"></i></button>
+                </div>
+            </div>
+            <div class="w-100 h-100">
+                <div class="w-100 h-100 canvas-container">
+                    <canvas id="canvas_2"  style="border: 1px solid #000;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно - сообщение -->
+    <div class="modal fade" id="requestResult" tabindex="-1" aria-labelledby="requestResultLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="requestResultLabel">Внимание!</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно с инструкцией по изменениям -->
+    <!-- <div class="modal fade" id="instructionChange" tabindex="-1" aria-labelledby="instructionChangeLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="instructionChangeLabel">Инструкция по изменениям</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div>Принцип цветового обозначения изменений в бланке:</div>
+                        <div class="d-flex flex-row">
+                            <div class="col-3 bg-warning-subtle"></div>
+                            <div class="ml-2"> - первое изменение</div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="col-3 bg-primary-subtle"></div>
+                            <div> - второе изменение</div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="col-3 bg-primary"></div>
+                            <div> - третие изменение</div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="col-3 bg-warning"></div>
+                            <div> - четвертое изменение</div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="col-3 bg-danger"></div>
+                            <div> - пятое изменение</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Модальное окно с расчетами -->
+    <!-- <div id="calculationWindow" class="draggable-window modal-calculation-old d-none">
+        <div class="window-header">Дата актуальности цен: <span class="date-price-validity">01.01.2022</span></div>
+        <div class="row m-0">
+            <div class="d-flex justify-content-center align-items-center p-2 flex-shrink-1 window-grip-left">
+                <i class="bi bi-grip-vertical"></i>
+            </div>
+            <div class="col p-0 window-content calculation-data">
+                <table class="materials-list">
+                    <thead>
+                        <tr>
+                            <th class="fixed-rows-top">Материал</th>
+                            <th class="fixed-rows-top">Стоимость</th>
+                            <th class="fixed-rows-top">Значение</th>
+                            <th class="fixed-rows-top">Сумма</th>
+                            <th class="fixed-rows-top">Комментарий</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <table class="summary-materials-data fixed-tfooter">
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="window-footer">
+            <button id="copyCalculation" type="button" class="btn btn-success btn-sm d-none">Копировать</button>
+            <button id="saveCalculation" type="button" class="btn btn-success btn-sm">Сохранить</button>
+            <button id="closeCalculation" type="button" class="btn btn-danger btn-sm">Закрыть</button>
+        </div>
+    </div> -->
+    <!-- <div id="calculationWindow" class="draggable-window d-none">
+        <div class="window-header">Дата актуальности цен: <span class="date-price-validity">01.01.2022</span></div>
+        <div class="row m-0">
+            <div class="d-flex justify-content-center align-items-center col p-2 window-grip-left">
+                <i class="bi bi-grip-vertical"></i>
+            </div>
+            <div class="col p-0 window-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Материал</th>
+                            <th>Стоимость</th>
+                            <th>Значение</th>
+                            <th>Сумма</th>
+                            <th>Комментарий</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="window-footer">
+            <button id="copyCalculation" type="button" class="btn btn-success btn-sm d-none">Копировать</button>
+            <button id="saveCalculation" type="button" class="btn btn-success btn-sm">Сохранить</button>
+            <button id="closeCalculation" type="button" class="btn btn-danger btn-sm">Закрыть</button>
+        </div>
+    </div> -->
+
+    <!-- Модальное окно с правами доступа -->
+    <!-- <div class="modal" id="permissionModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Управление правами доступа</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="permission-container">
+                    <div class="container">
+                        <div>
+                            <h3>Группы пользователей</h3>
+                            <table class="table table-bordered" id="tableGroupsUsers">
+                              <thead class="table-light">
+                                <tr>
+                                  <th style="width:20%">Название</th>
+                                  <th>Список ID пользователей</th>
+                                  <th style="width:20%">Роль по умолчанию</th>
+                                </tr>
+                              </thead>
+                              <tbody></tbody>
+                            </table>
+                            <button id="saveChangeUsersGroup" type="button" class="btn btn-success mb-3">Сохранить изменения</button>
+                            <button id="addUsersGroup" type="button" class="btn btn-primary mb-3">Добавить группу пользователей</button>
+                        </div>
+                        <div>
+                            <h3>Группы полей</h3>
+                            <table class="table table-bordered" id="tableGroupsFields">
+                                <thead>
+                                    <tr>
+                                        <th style="width:20%">Название</th>
+                                        <th style="width:20%">Список сущностей</th>
+                                        <th>Список полей</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <button id="saveChangeFieldsGroup" type="button" class="btn btn-success mb-3">Сохранить изменения</button>
+                            <button id="addFieldsGroup" type="button" class="btn btn-primary mb-3">Добавить группу полей</button>
+                        </div>
+                        <div>
+                            <h3>Права доступа</h3>
+                            <table class="table table-bordered" id="tablePermissions">
+                                <thead>
+                                    <tr>
+                                        <th style="width:15%">Название</th>
+                                        <th style="width:15%">Тип сущности</th>
+                                        <th style="width:15%">Группа пользователей</th>
+                                        <th style="width:15%">Группа полей</th>
+                                        <th>Список стадий</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <button id="saveChangePermission" type="button" class="btn btn-success mb-3">Сохранить изменения</button>
+                            <button id="addPermissionDeal" type="button" class="btn btn-primary mb-3">Добавить правило для сделки</button>
+                            <button id="addPermissionLead" type="button" class="btn btn-primary mb-3">Добавить правило для лида</button>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div> -->
+
+    <!-- <script src="https://unpkg.com/fabric@5.3.0/dist/fabric.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/cropperjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/draggabilly/2.3.0/draggabilly.pkgd.min.js"></script> -->
+
+    <script src="{% static 'scripts/libs/fabricjs/fabric.min.js' %}"></script>
+    <script src="{% static 'scripts/libs/popper/popper.min.js' %}"></script>
+    <script src="{% static 'scripts/libs/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'scripts/libs/jquery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'scripts/libs/cropper/cropper.js' %}"></script>
+    <script src="{% static 'scripts/libs/draggabilly/draggabilly.pkgd.min.js' %}"></script>
+
+    <script type="module" src="{% static 'scripts/libs/chosen_v1.8.7/docsupport/jquery-3.2.1.min.js' %}"></script>
+    <script type="module" src="{% static 'scripts/libs/chosen_v1.8.7/chosen.jquery.min.js' %}"></script>
+    <script type="module" src="{% static 'scripts/products/pouf/main.js' %}"></script>
+
+    <script>
+
+        document.querySelectorAll('.validate-integer-input').forEach((elem) => {
+            elem.addEventListener('input', (event) => {
+                const target = event.target;
+                let val = target.value;
+                console.log("val = ", val%1);
+                if (isNaN(val) || val % 1 !== 0) {
+                    target.value = parseInt(target.value);
+                }
+            })
+        })
+
+    </script>
+</body>
+</html>

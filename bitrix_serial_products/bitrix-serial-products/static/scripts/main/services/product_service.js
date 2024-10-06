@@ -34,6 +34,12 @@ export default class ProductService {
 
     async getProducts(productType) {
         const { title, smartId, field } = getProductConfig(productType);
+        console.log({
+            productType,
+            title,
+            smartId,
+            field
+        });
         try {
             const cmd = {
                 products: `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC`,
@@ -43,26 +49,13 @@ export default class ProductService {
                 halt: 0,
                 cmd: cmd
             });
-            // const response = await this.apiClient.callMethod('crm.item.list', {
-            //     entityTypeId: smartId,
-            //     filter: {
-            //         [`=${field.isTemplatePotochka}`]: "Y",
-            //         // [`>${field.isExist}`]: 0,
-            //         [`${field.isActive}`]: 'DESC',
-            //         [`${field.isMeasured}`]: 'DESC',
-            //     }
-            // });
             console.log('response', response);
 
             if (!response || !response.result?.products?.items) {
                 throw new Error('Invalid response from batch call');
             }
 
-            return response?.result?.products?.items;
-            // if (!response || !response.items) {
-            //     throw new Error('Invalid response from batch call');
-            // }
-            // return response?.items;
+            return response?.result?.products?.items || [];
         } catch (error) {
             console.error('Error in getProducts:', error);
             throw error;

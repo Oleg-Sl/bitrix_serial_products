@@ -10,7 +10,8 @@ export default class Filter {
         try {
             products = await this.productsService.getProducts(productType);
         } catch (error) {
-            console.error('Error getting products: ', error);
+            // console.error('Error getting products: ', error);
+            alert(`Ошибка получения списка продуктов: ${error.message}`);
         }
 
         this.productsList.displayProducts(products);

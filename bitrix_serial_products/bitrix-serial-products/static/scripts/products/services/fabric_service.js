@@ -16,7 +16,7 @@ export default class FabricService {
     }
 
     getFabricData(fabricId) {
-        return this.fabrics.find(fabric => fabric.id === fabricId);
+        return this.fabrics.find(fabric => fabric.id == fabricId);
     }
 
     getFabricFields() {

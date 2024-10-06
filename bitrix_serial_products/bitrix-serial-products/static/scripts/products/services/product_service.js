@@ -2,14 +2,30 @@ import { mapKeys, mapAliases } from '../../configs/mapping/key_mapping.js';
 
 
 export default class ProductService {
-    constructor(dataService) {
+    constructor(apiClient, dataService, productTypeId) {
+        this.apiClient = apiClient;
         this.dataService = dataService;
+        this.productTypeId = productTypeId;
+        this.cbNotifyAboutChanges = null;
+
 
         this.productData = this.dataService.getProductData();
         this.productFields = this.dataService.getProductFields();
         this.productFieldsMatching = this.dataService.getProductFieldsMatching();
 
         this.changedData = {};
+    }
+
+    isPotochka() {
+        return true;
+    }
+
+    setCbNotifyCalculation(cbNotifyAboutChanges) {
+        this.cbNotifyAboutChanges = cbNotifyAboutChanges;
+    }
+
+    getProductTypeId() {
+        return this.productTypeId;
     }
 
     getProductData() {
@@ -38,11 +54,61 @@ export default class ProductService {
         return this.productFieldsMatching;
     }
 
+    getFieldName(fieldAlias) {
+        return this.productFieldsMatching[fieldAlias];
+    }
+
     updateProductData(fieldAlias, value) {
         const field = this.productFieldsMatching[fieldAlias];
         this.changedData[field] = value;
+        this.cbNotifyAboutChanges();
         console.log("changedData = ", this.changedData);
     }
+
+    updateProductDataByField(field, value) {
+        this.changedData[field] = value;
+        this.cbNotifyAboutChanges();
+        console.log("changedData = ", this.changedData);
+    }
+
+    getChangedData() {
+        return this.changedData;
+    }
+
+    resetChangedData() {
+        this.changedData = {};
+    }
+
+    async updateProduct(newData) {
+        const result = await this.apiClient.callMethod('crm.item.update', {
+            entityTypeId: this.productTypeId,
+            id: this.getValue('id'),
+            fields: newData
+        });
+        return result;
+    }
+
+    async refreshProduct() {
+        const response = await this.apiClient.callMethod('crm.item.get', {
+            entityTypeId: this.productTypeId,
+            id: this.getValue('id'),
+        });
+        this.productData = response?.item;
+        this.resetChangedData();
+    }
+
+    // async updateData(field, value) {
+    //     const fieldInBx24 = this.smartFields?.[field];
+    //     this.changedProductData[fieldInBx24] = value;
+    //     const oldValue = this.product?.[fieldInBx24];
+    //     console.log('this.changedProductData = ', this.changedProductData);
+    //     if (this.isInitializedProduct() && this.isCalculations) {
+    //         // if (this.isInitializedProduct()) {
+    //         // console.log("product isInitializedProduct = ", this.product);
+    //         await this.historyManager.initRecord(this.smartTypeId, this.product?.id, fieldInBx24, oldValue);
+    //         this.historyManager.addChange(fieldInBx24, value, this.currentUser.ID);
+    //     }
+    // }
 
     // setCalculations(calculationsCount) {
     //     this.isCalculations = calculationsCount > 0;
@@ -145,10 +211,10 @@ export default class ProductService {
     // }
 
     // resetChangedData() {
-    //     for (const [key, value] of Object.entries(this.changedProductData)) {
+    //     for (const [key, value] of Object.entries(this.changedData)) {
     //         this.product[key] = value;
     //     }
-    //     this.changedProductData = {};
+    //     this.changedData = {};
     // }
 
     // getCopyData() {

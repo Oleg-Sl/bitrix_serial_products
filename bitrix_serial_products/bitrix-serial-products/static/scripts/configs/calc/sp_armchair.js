@@ -1,4 +1,4 @@
-export const CALC_ID_ARMCHEAIR = 191;
+export const CALC_ID_ARMCHAIR = 191;
 
 export const CALC_FIELD_ARMCHAIR = {
     dateOfCalculation: 'ufCrm59_1713840409',        // Дата актуальности цены (на дату расчета)

@@ -9,15 +9,15 @@ export default class UserService {
     }
 
     getCurrentUser() {
-        return this.currentUser;
+        return this.currentUser || {};
     }
 
     getUpdatedUser() {
-        return this.updatedUser;
+        return this.updatedUser || {};
     }
 
     getCreatedUser() {
-        return this.createdUser;
+        return this.createdUser || {};
     }
 
     getUserName(user) {

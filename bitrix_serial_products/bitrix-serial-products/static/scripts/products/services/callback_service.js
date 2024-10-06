@@ -5,7 +5,7 @@ export default class CallbackService {
     }
 
     openPath(link) {
-        console.log("link = ", link);
+        console.log("Open link = ", link);
         // this.apiClient.openPath(link);
     }
 }

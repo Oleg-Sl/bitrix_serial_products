@@ -1,7 +1,8 @@
 
 export default class FileUploadService {
-    constructor(apiClient, portalUrl, productType, productId) {
+    constructor(apiClient, productService, portalUrl, productType, productId) {
         this.apiClient = apiClient;
+        this.productService = productService;
         this.portalUrl = portalUrl;
         this.productType = productType;
         this.productId = productId;
@@ -20,7 +21,7 @@ export default class FileUploadService {
             id: this.productId,
             fields: newData
         });
-        this.dataManager.setProductData(field, result?.item?.[field]);
+        this.productService.updateProductDataByField(field, result?.item?.[field]);
         const url = result?.item?.[field]?.urlMachine;
         return this.getPublicURL(url);
     }

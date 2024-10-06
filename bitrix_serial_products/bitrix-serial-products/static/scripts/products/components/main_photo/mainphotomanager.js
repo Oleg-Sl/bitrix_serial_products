@@ -1,31 +1,25 @@
-import { Canvas } from '../canvas/canvas.js';
-import { FileUploadService } from '../../services/fileupload_service.js';
+import Canvas from '../canvas/canvas.js';
+import FileUploadService from '../../services/fileupload_service.js';
 
 
 export default class MainPhotoManager {
-    constructor(apiClient, productService, aspectRatio=(17.46/10.15)) {
-        this.apiClient = apiClient;
+    constructor(fileUploadService, productService, aspectRatio=(17.46/10.15)) {
+        this.photoUploader = fileUploadService;
         this.productService = productService;
         this.aspectRatio = aspectRatio;
 
-
-        // this.dataManager = dataManager;
-        // this.portalUrl = portalUrl;
-        // this.aspectRatio = aspectRatio;
-
-        // this.productType = this.dataManager.smartTypeId;
-        // this.productId = this.dataManager.productId;
-        // this.smartFields = this.dataManager.smartFields;
+        this.productType = this.productService.getProductTypeId();
+        this.productId = this.productService.getValue('id');
+        this.smartFields = this.productService.getFieldMatching();
+        console.log("this.smartFields = ", this.smartFields);
         
-        // this.container = document.querySelector('#canvasContainerMain');
-
         this.canvas = new Canvas('canvasMain', this.getUrl.bind(this));
 
-        // this.fieldPhoto =  this.smartFields.mainPhoto;
+        this.fieldPhoto = this.productService.getFieldName('mainPhoto');
+        this.container = document.querySelector('#canvasContainerMain');
         this.btnAddImage = this.container.querySelector('.btn-add-image');
-        // this.inputImgLoader = this.container.querySelector('.input-img-loader');
+        this.inputImgLoader = this.container.querySelector('.input-img-loader');
 
-        this.photoUploader = new FileUploadService(this.apiClient);
     }
 
     async initialize() {
@@ -42,23 +36,20 @@ export default class MainPhotoManager {
 
         this.btnAddImage.disabled = false;
 
-        // this.btnAddImage.addEventListener('click', () => { this.inputImgLoader.click(); });
-        // this.inputImgLoader.addEventListener('change', async (event) => {
-        //     let file = event.target.files[0];
-        //     console.log("file = ", file);
-        //     let link = await this.photoUploader.uploadPhoto(file, async (data) => {
-        //         return await this.uploadFile({[this.fieldPhoto]: data}, this.fieldPhoto);
-        //     });
-        //     this.canvas.addImage(file, 0.0, 0.0, 1.0, 1.0, link, this.dataManager.getProductFieldName('mainPhoto'));
-        // });
+        this.btnAddImage.addEventListener('click', () => { this.inputImgLoader.click(); });
+        this.inputImgLoader.addEventListener('change', async (event) => {
+            let file = event.target.files[0];
+            let link = await this.photoUploader.uploadPhoto(file, async (data) => {
+                return await this.photoUploader.uploadFile({[this.fieldPhoto]: data}, this.fieldPhoto);
+            });
+            this.canvas.addImage(file, 0.0, 0.0, 1.0, 1.0, link, this.productService.getFieldName('mainPhoto'));
+        });
     }
 
     getUrl(field) {
         const urlBx24 = this.productService.getValue(field)?.urlMachine;
         return this.photoUploader.getPublicURL(urlBx24);
     }
-
-
 
     getChangedData() {
         let changedData = {};
