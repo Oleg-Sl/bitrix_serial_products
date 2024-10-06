@@ -15,12 +15,13 @@
     <link rel="stylesheet" href="{% static 'scripts/libs/cropper/cropper.css' %}">
 
     <link href="{% static 'scripts/libs/chosen_v1.8.7/chosen.min.css' %}" rel="stylesheet">
-    <link href="{% static 'style/msp.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/product.css' %}" rel="stylesheet">
 
     <script src="//api.bitrix24.com/api/v1/"></script>
     <script>
-        let smartProcessId = {{ id }};
-        let portalUrl = "{{ portal_url }}";
+        const smartProcessTypeId = {{ smart_type_id }};
+        const smartProcessId = {{ smart_id }};
+        const portalUrl = "{{ portal_url }}";
     </script>
 
     <title>Тумбочка</title>
