@@ -1,4 +1,4 @@
-import { Fabric } from '../common/fabric/fabric.js';
+import Fabric from '../fabric.js';
 
 
 export default class FabricManager {
