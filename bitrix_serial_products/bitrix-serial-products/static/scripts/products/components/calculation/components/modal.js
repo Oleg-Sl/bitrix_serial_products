@@ -1,5 +1,5 @@
 import ModalMaterialsView from './modal/modal_materials.js';
-import ModalQuestionsView from './modal/modal_questions.js';
+// import ModalQuestionsView from './modal/modal_questions.js';
 import ModalFotView from './modal/modal_fot.js';
 import ModalServicePackedView from './modal/modal_servicepacked.js';
 import ModalManagementView from './modal/modal_management.js';
@@ -24,7 +24,7 @@ export default class ModalView {
 
         this.modalView = new ModalMetadataView(this.eventEmitter);
         this.modalMaterialsView = new ModalMaterialsView(this.eventEmitter);
-        this.modalQuestionsView = new ModalQuestionsView(this.eventEmitter);
+        // this.modalQuestionsView = new ModalQuestionsView(this.eventEmitter);
         this.modalFotView = new ModalFotView(this.eventEmitter);
         this.modalServicePackedView = new ModalServicePackedView(this.eventEmitter);
         this.modalManagementView = new ModalManagementView(this.eventEmitter);
@@ -40,24 +40,24 @@ export default class ModalView {
     }
 
     initialize() {
-        this.eventEmitter.on('changeStateQuestion', this.changeStateButtons.bind(this));
+        // this.eventEmitter.on('changeStateQuestion', this.changeStateButtons.bind(this));
         this.eventEmitter.on('redrawCalcualation', this.redrawCalcualation.bind(this));
 
-        const gridContainer = document.querySelector('.check-list-complexity');
-        const toggleButton = document.getElementById('btnCheckListComplexity');
+        // const gridContainer = document.querySelector('.check-list-complexity');
+        // const toggleButton = document.getElementById('btnCheckListComplexity');
 
         // const gridContainer2 = document.querySelector('#containerFot');
         const gridContainer2 = document.querySelector('#tableFot');
         const toggleButton2 = document.getElementById('btnFot');
 
-        toggleButton.addEventListener('click', () => {
-            gridContainer.classList.toggle('collapsed');
-            if (gridContainer.classList.contains('collapsed')) {
-                toggleButton.textContent = '+';
-            } else {
-                toggleButton.textContent = '-';
-            }
-        });
+        // toggleButton.addEventListener('click', () => {
+        //     gridContainer.classList.toggle('collapsed');
+        //     if (gridContainer.classList.contains('collapsed')) {
+        //         toggleButton.textContent = '+';
+        //     } else {
+        //         toggleButton.textContent = '-';
+        //     }
+        // });
 
         toggleButton2.addEventListener('click', () => {
             gridContainer2.classList.toggle('collapsed');
@@ -97,8 +97,8 @@ export default class ModalView {
         this.isNewCalculation = isNewCalculation;
         this.modalView.render(calculation.calculationId, calculation.dateOfCalculation)
         this.modalMaterialsView.render(calculation.materials, calculation.materialPacked, calculation.summaryMaterials, isEditable);
-        this.modalQuestionsView.render(calculation.questions);
-        this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
+        // this.modalQuestionsView.render(calculation.questions);
+        // this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
         this.modalFotView.render(calculation.fots, calculation.summaryFot, isEditable && calculation.isAllAnswered());
         this.modalServicePackedView.render(calculation.costServicePacked);
         this.modalManagementView.render(calculation.costManagement);
@@ -113,7 +113,7 @@ export default class ModalView {
     }
 
     changeStateButtons(calculation) {
-        this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
+        // this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
         this.modalFotView.setActivateInputs(calculation.isAllAnswered(), calculation.isFotValid());
         this.modalButtonsView.updateStateButtonCalculate(calculation.isAllAnswered(), calculation.isFotValid());
     }
@@ -153,33 +153,6 @@ export default class ModalView {
                             </tfoot>
                         </table>
                         <div class="fixed-tfooter">
-                            <!-- ЧЕК-ЛИСТ ВОПРОСОВ -->
-                            <div>
-                                <table class="check-list-complexity-header">
-                                    <tr data-id="">
-                                        <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 8;">
-                                            <div class="d-flex justify-content-center flex-grow-1 fw-bold"><div class="fw-bold">Чек лист определения сложности изделия</div></div>
-                                            <div id="btnCheckListComplexity" class="btn-chek-list text-danger" style="cursor: pointer;">&plus;</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="check-list-complexity collapsed">
-                                    <thead>
-                                        <tr data-id="">
-                                            <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 6;"><div class="fw-bold">Вопросы, требующие ОТВЕТА</div></td>
-                                            <td class="d-flex fixed-rows justify-content-center" style="grid-column: 7 / 9;"><div class="fw-bold">Блок ответов</div></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="check-list-complexity-questions-answer"></tbody>
-                                    <thead>
-                                        <tr data-id="">
-                                            <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 6;"><div class="fw-bold">Вопросы, требующие УТРЕЖДЕНИЯ</div></td>
-                                            <td class="d-flex fixed-rows justify-content-center" style="grid-column: 7 / 9;"><div class="fw-bold">Кликер</div></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="check-list-complexity-questions-statement"></tbody>
-                                </table>
-                            </div>
                             <!-- БЛОК ФОТ -->
                             <div>
                                 <table class="fot-header">
@@ -312,3 +285,31 @@ export default class ModalView {
         // <td class="fixed-rows-bottom" style="grid-column: 2 / 8;"><input type="text" class="border-0 text-start general-comment" min="0" value="0" data-field="0"></td>
     }
 }
+
+// <!-- ЧЕК-ЛИСТ ВОПРОСОВ -->
+// <div>
+//     <table class="check-list-complexity-header">
+//         <tr data-id="">
+//             <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 8;">
+//                 <div class="d-flex justify-content-center flex-grow-1 fw-bold"><div class="fw-bold">Чек лист определения сложности изделия</div></div>
+//                 <div id="btnCheckListComplexity" class="btn-chek-list text-danger" style="cursor: pointer;">&plus;</div>
+//             </td>
+//         </tr>
+//     </table>
+//     <table class="check-list-complexity collapsed">
+//         <thead>
+//             <tr data-id="">
+//                 <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 6;"><div class="fw-bold">Вопросы, требующие ОТВЕТА</div></td>
+//                 <td class="d-flex fixed-rows justify-content-center" style="grid-column: 7 / 9;"><div class="fw-bold">Блок ответов</div></td>
+//             </tr>
+//         </thead>
+//         <tbody class="check-list-complexity-questions-answer"></tbody>
+//         <thead>
+//             <tr data-id="">
+//                 <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 6;"><div class="fw-bold">Вопросы, требующие УТРЕЖДЕНИЯ</div></td>
+//                 <td class="d-flex fixed-rows justify-content-center" style="grid-column: 7 / 9;"><div class="fw-bold">Кликер</div></td>
+//             </tr>
+//         </thead>
+//         <tbody class="check-list-complexity-questions-statement"></tbody>
+//     </table>
+// </div>
