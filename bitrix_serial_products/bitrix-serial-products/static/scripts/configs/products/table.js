@@ -1,5 +1,7 @@
 export const ID_TABLE = 186;
 
+export const ITEM_ID_POTOCHKA = 4359;
+
 export const SCETCH_ITEMS = {
     notSelected: "4693",            // не выбран
     notNeeded: "4567",              // не нужен

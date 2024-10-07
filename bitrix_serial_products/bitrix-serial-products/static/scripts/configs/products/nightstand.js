@@ -1,5 +1,7 @@
 export const ID_NIGHTSTAND = 188;
 
+export const ITEM_ID_POTOCHKA = 4357;
+
 export const SCETCH_ITEMS = {
     notSelected: "4687",            // не выбран
     notNeeded: "4549",              // не нужен

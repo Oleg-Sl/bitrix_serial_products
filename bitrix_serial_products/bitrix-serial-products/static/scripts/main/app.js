@@ -5,9 +5,11 @@ import ProductAction from './components/product_action.js';
 
 
 export default class App {
-    constructor(productsService, userService) {
+    constructor(apiClient, productsService, userService) {
+        this.apiClient = apiClient;
         this.productsService = productsService;
         this.userService = userService;
+
         this.currentUser = null;
         this.productsFields = null;
     }
@@ -23,7 +25,7 @@ export default class App {
         const packed = new PackedParameters(this.specificWeights);
         const productsList = new ProductsList(productsContainer, this.productsFields, this.currentUser, packed);
         const filter = new Filter(filterButtonsContainer, this.productsService, productsList);
-        const productAction = new ProductAction(this.productsService);
+        const productAction = new ProductAction(this.apiClient, this.productsService);
 
         filter.initialize();
         productAction.initialize();

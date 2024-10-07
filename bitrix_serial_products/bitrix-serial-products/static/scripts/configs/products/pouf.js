@@ -1,5 +1,7 @@
 export const ID_POUF = 167;
 
+export const ITEM_ID_POTOCHKA = 4355;
+
 export const SCETCH_ITEMS = {
     notSelected: "4695",            // не выбран
     notNeeded: "4573",              // не нужен

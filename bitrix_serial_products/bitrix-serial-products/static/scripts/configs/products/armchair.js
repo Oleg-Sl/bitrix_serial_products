@@ -1,5 +1,7 @@
 export const ID_ARMCHAIR = 165;
 
+export const ITEM_ID_POTOCHKA = 4351;
+
 export const SCETCH_ITEMS = {
     notSelected: "4683",            // не выбран
     notNeeded: "4537",              // не нужен
@@ -21,7 +23,7 @@ export const FIELD_ARMCHAIR = {
     parentId2: "parentId2",
 
     isTemplatePotochka: "ufCrm57_1716716686",   // Шаблон поточки
-    
+
     sketch: "ufCrm57_1718035870",               // Эскиз
     sentToWorkshop: "ufCrm57_1718036536",       // Отправлено в цех
 

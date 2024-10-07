@@ -1,5 +1,7 @@
 export const ID_SOFA = 158;
 
+export const ITEM_ID_POTOCHKA = 4349;
+
 export const SCETCH_ITEMS = {
     notSelected: "4681",            // не выбран
     notNeeded: "4525",              // не нужен

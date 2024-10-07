@@ -1,5 +1,7 @@
 export const ID_MELOCHEVKA = 162;
 
+export const ITEM_ID_POTOCHKA = 4353;
+
 export const SCETCH_ITEMS = {
     notSelected: "4689",            // не выбран
     notNeeded: "4555",              // не нужен
@@ -20,7 +22,7 @@ export const FIELD_MELOCHEVKA = {
     parentId1: "parentId1",
     parentId2: "parentId2",
 
-    // isTemplatePotochka: "ufCrm57_1716716686",   // Шаблон поточки
+    isTemplatePotochka: "ufCrm63_1728261830",   // Шаблон поточки
 
     sketch: "ufCrm63_1718036033",               // Эскиз
     sentToWorkshop: "ufCrm63_1718036470",       // Отправлено в цех

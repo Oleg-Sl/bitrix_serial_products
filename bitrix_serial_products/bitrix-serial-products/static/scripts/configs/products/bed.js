@@ -1,5 +1,8 @@
 export const ID_BED = 189;
 
+export const ITEM_ID_POTOCHKA = 4347;
+// export const ID_TEMPLATE_POTOCHKA_BED = ;
+
 export const SCETCH_ITEMS = {
     notSelected: "4685",            // не выбран
     notNeeded: "4543",              // не нужен
@@ -20,7 +23,7 @@ export const FIELD_BED = {
     parentId1: "parentId1",
     parentId2: "parentId2",
 
-    // isTemplatePotochka: "ufCrm57_1716716686",   // Шаблон поточки
+    isTemplatePotochka: "ufCrm61_1728261687",   // Шаблон поточки
 
     sketch: "ufCrm61_1718035927",               // Эскиз
     sentToWorkshop: "ufCrm61_1718036516",       // Отправлено в цех

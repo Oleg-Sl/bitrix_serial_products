@@ -1,5 +1,6 @@
 export const ID_MSP = 172;
 
+export const ITEM_ID_POTOCHKA = 4345;
 
 export const SCETCH_ITEMS = {
     notSelected: "4679",            // не выбран
@@ -25,7 +26,7 @@ export const FIELD_MSP = {
     parentId1: "parentId1",
     parentId2: "parentId2",
 
-    // isTemplatePotochka: "ufCrm57_1716716686",   // Шаблон поточки
+    isTemplatePotochka: "ufCrm23_1728261870",   // Шаблон поточки
 
 
     sketch: "ufCrm23_1718035789",               // Эскиз

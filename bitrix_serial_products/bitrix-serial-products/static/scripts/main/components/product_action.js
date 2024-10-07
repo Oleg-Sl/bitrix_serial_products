@@ -21,8 +21,10 @@ import { getProductConfig } from '../../configs/utils.js';
 
 
 export default class ProductAction {
-    constructor(bx24) {
-        this.bx24 = bx24;
+    constructor(apiClient, productsService) {
+        // this.bx24 = bx24;
+        this.apiClient = apiClient;
+        this.productsService = productsService;
 
         this.addProductButtonsContainer = document.getElementById('addProductContainer');
         this.productCardsContainer = document.getElementById('productCardsContainer');
@@ -34,9 +36,11 @@ export default class ProductAction {
             if (event.target.tagName === 'A') {
                 const productType = event.target.getAttribute('data-type');
                 console.log('productType = ', productType);
-                const { title, smartId, field } = getProductConfig(productType);
-                const productId = 1;
-                await this.bx24.openProductCard(smartId, productId, title);
+                // const { title, smartId, field } = getProductConfig(productType);
+                // const productId = 1;
+                const productData = this.productsService.createProduct(productType);
+                console.log('createProductData = ', productData);
+                // await this.apiClient.openProductCard(smartId, productId, title);
             }
         });
 
@@ -48,7 +52,7 @@ export default class ProductAction {
                 const smartTypeId = target.dataset.smartTypeId;
                 console.log('productId = ', productId);
                 console.log('smartTypeId = ', smartTypeId);
-                await this.bx24.openProductCard(smartTypeId, productId, smartTypeId);
+                await this.apiClient.openProductCard(smartTypeId, productId, smartTypeId);
             }
         });
     }

@@ -20,10 +20,10 @@ export default class ProductService {
     }
 
     createProduct(productType) {
-        const { title, smartTypeId, field } = getProductConfig(productType);
+        const { title, smartId, field, potochkaId } = getProductConfig(productType);
 
         const cmd = {
-            products: `crm.item.add?entityTypeId=${smartTypeId}&fields=${JSON.stringify(productFields)}`,
+            products: `crm.item.add?entityTypeId=${smartId}&fields[title]=${title}&fields[${field?.isPotochka}]=${potochkaId}&fields[${field?.isTemplatePotochka}]=Y`,
         };
 
         return this.apiClient.callMethod('batch', {

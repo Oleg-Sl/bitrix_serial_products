@@ -14,7 +14,7 @@ export async function main(apiClient) {
     const productService = new ProductService(apiClient);
     const permissionManager = new PermissionManager(apiClient);
 
-    const app = new App(productService, userService);
+    const app = new App(apiClient, productService, userService);
     
     loader.show();
 

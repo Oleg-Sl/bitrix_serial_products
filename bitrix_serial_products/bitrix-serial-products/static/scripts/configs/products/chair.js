@@ -1,5 +1,7 @@
 export const ID_CHAIR = 150;
 
+export const ITEM_ID_POTOCHKA = 4361;
+
 export const SCETCH_ITEMS = {
     notSelected: "4691",            // не выбран
     notNeeded: "4561",              // не нужен
@@ -20,7 +22,7 @@ export const FIELD_CHAIR = {
     parentId1: "parentId1", 
     parentId2: "parentId2",
 
-    // isTemplatePotochka: "ufCrm57_1716716686",   // Шаблон поточки
+    isTemplatePotochka: "ufCrm77_1728261767",   // Шаблон поточки
 
     sketch: "ufCrm77_1718036074",               // Эскиз
     sentToWorkshop: "ufCrm77_1718036447",       // Отправлено в цех
