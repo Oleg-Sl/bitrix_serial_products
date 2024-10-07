@@ -2,7 +2,7 @@ import ViewHeader from "../components/header.js";
 // import { mapKeys, mapAliases } from '../../configs/mapping/key_mapping.js';
 import MainPhotoManager from '../components/main_photo/mainphotomanager.js';
 import CanvasManager from '../components/canvas/canvasmanager.js';
-
+import { ID_FOT } from '../../configs/calc/fot.js';
 
 export default class BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, productTypeId, productFields) {
