@@ -39,8 +39,7 @@ export default class ProductAction {
                 // const { title, smartId, field } = getProductConfig(productType);
                 // const productId = 1;
                 const response = await this.productsService.createProduct(productType);
-                console.log('response = ', response);
-                const productData = response?.results?.products?.item;
+                const productData = response?.result?.products?.item;
                 console.log('createProductData = ', productData);
                 await this.productsService.openProductCard(productData?.entityTypeId, productData?.id, productData?.title);
                 // await this.apiClient.openProductCard(smartId, productData?.id, productData?.title);
