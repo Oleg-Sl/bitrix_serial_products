@@ -50,6 +50,17 @@ export default class ProductService {
         return data[field];
     }
 
+    getValueText(fieldAlias) {
+        const fieldInBx24 = this.productFieldsMatching[fieldAlias];
+        const fieldData = this.productFields[fieldInBx24];
+        if (fieldData && fieldData.type == 'enumeration') {
+            const items = fieldData.items;
+            const item = items?.find(item => item.ID == this.product?.[fieldInBx24]);
+            return item?.VALUE;
+        }
+        return this.getValue(fieldAlias);
+    }
+
     getFieldMatching() {
         return this.productFieldsMatching;
     }

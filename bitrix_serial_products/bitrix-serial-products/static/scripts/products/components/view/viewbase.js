@@ -19,7 +19,6 @@ export default class BaseView {
             if (elem && fieldData) {
                 let value = this.productService.getValue(fieldAlias);
                 value = (value === null || value === undefined) ? '' : value;
-                // console.log(fieldAlias, value);
                 this.outputData(elem, value, fieldData);
             }
         }
@@ -81,18 +80,19 @@ export default class BaseView {
     }
 
     initHandlers() {
-        // const buttonsSetDefaultValues = document.querySelectorAll('.btn-set-default-values');
-        // buttonsSetDefaultValues.forEach((elem) => {
-        //     elem.addEventListener('click', (event) => {
-        //         const container = event.target.parentElement.parentElement;
-        //         for (const [fieldAlias, fieldNameBx24] of Object.entries(this.fields)) {
-        //             const elem = container.querySelector(`#${fieldAlias}`);
-        //             if (elem) {
-        //                 this.handlerSetDefaultValue(elem, fieldAlias);
-        //             }
-        //         }
-        //     })
-        // })
+        const buttonsSetDefaultValues = document.querySelectorAll('.btn-set-default-values');
+        buttonsSetDefaultValues.forEach((elem) => {
+            elem.addEventListener('click', (event) => {
+                const container = event.target.parentElement.parentElement;
+                const fields = this.productService.getFieldMatching();
+                for (const [fieldAlias, fieldNameBx24] of Object.entries(fields)) {
+                    const elem = container.querySelector(`#${fieldAlias}`);
+                    if (elem) {
+                        this.handlerSetDefaultValue(elem, fieldAlias);
+                    }
+                }
+            })
+        })
         document.addEventListener('change', (event) => {
             const target = event.target;
             if (target.dataset.track && target.dataset.field) {
@@ -118,36 +118,36 @@ export default class BaseView {
     dependentField(target) {
     }
 
-    // handlerSetDefaultValue(elem, fieldAlias) {
-    //     const fieldData = this.dataManager.getProductFieldData(fieldAlias);
-    //     console.log(fieldAlias, fieldData, elem);
-    //     let value = null;
-    //     switch (fieldData.type) {
-    //         case 'string':
-    //             value = elem.tagName == 'INPUT' && elem.type == 'number' ? 0 : '-';
-    //             break;
-    //         case 'enumeration':
-    //             value = this.getFieldIdByValue(fieldData.items, '-');
-    //             break;
-    //         case 'double':
-    //         case 'integer':
-    //             value = 0;
-    //             break;
-    //         case 'crm':
-    //             if (fieldAlias.startsWith('upholsteryFabricCollection')) {
-    //                 value = 1;
-    //             }
-    //             break;
-    //         default:
-    //             break;
-    //     }
+    handlerSetDefaultValue(elem, fieldAlias) {
+        const fieldData = this.productService.getProductFieldData(fieldAlias);
+        // console.log(fieldAlias, fieldData, elem);
+        let value = null;
+        switch (fieldData.type) {
+            case 'string':
+                value = elem.tagName == 'INPUT' && elem.type == 'number' ? 0 : '-';
+                break;
+            case 'enumeration':
+                value = this.getFieldIdByValue(fieldData.items, '-');
+                break;
+            case 'double':
+            case 'integer':
+                value = 0;
+                break;
+            case 'crm':
+                if (fieldAlias.startsWith('upholsteryFabricCollection')) {
+                    value = 1;
+                }
+                break;
+            default:
+                break;
+        }
 
-    //     elem.value = value;
-    //     this.dataManager.updateData(fieldAlias, value);
-    //     this.dependentField(elem);
-    // }
+        elem.value = value;
+        this.productService.updateProductData(fieldAlias, value);
+        this.dependentField(elem);
+    }
 
-    // getFieldIdByValue(items, value) {
-    //     return items?.find(item => item.VALUE == value)?.ID;
-    // }
+    getFieldIdByValue(items, value) {
+        return items?.find(item => item.VALUE == value)?.ID;
+    }
 };
