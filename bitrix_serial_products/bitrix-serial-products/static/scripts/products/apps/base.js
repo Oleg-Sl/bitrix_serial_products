@@ -141,7 +141,7 @@ export default class BaseApp {
             [this.productService.getFieldName('calculationId')]: this.calculation.getSelectedCalculationId(),
             [`parentId${ID_FOT}`]: this.calculation.getSelectedFotCalculationId(),
 
-            ...this.calculation.getChangedData(),
+            // ...this.calculation.getChangedData(),
             ...this.productService.getChangedData(),
             // ...this.fabricManager.getChangedData(),
             ...this.mainPhotoManager.getChangedData(),

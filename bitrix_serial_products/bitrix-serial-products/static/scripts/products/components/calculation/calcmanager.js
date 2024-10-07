@@ -63,8 +63,8 @@ export default class CalculationManager {
         //     return;
         // }
         const calculation = this.dataService.getCalculation(openCalculationId);
-        calculation.recaclulate();
         if (calculation) {
+            calculation.recaclulate();
             this.modalView.render(calculation, isNewCalculation, isNewCalculation);
         }
     }
