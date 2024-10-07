@@ -1,5 +1,5 @@
 import ModalMaterialsView from './modal/modal_materials.js';
-import ModalQuestionsView from './modal/modal_questions.js';
+// import ModalQuestionsView from './modal/modal_questions.js';
 import ModalFotView from './modal/modal_fot.js';
 import ModalManagementView from './modal/modal_management.js';
 import ModalRentView from './modal/modal_rent.js';
@@ -19,7 +19,7 @@ export default class ModalView {
 
         this.modalView = new ModalMetadataView(this.eventEmitter);
         this.modalMaterialsView = new ModalMaterialsView(this.eventEmitter);
-        this.modalQuestionsView = new ModalQuestionsView(this.eventEmitter);
+        // this.modalQuestionsView = new ModalQuestionsView(this.eventEmitter);
         this.modalFotView = new ModalFotView(this.eventEmitter);
         this.modalManagementView = new ModalManagementView(this.eventEmitter);
         this.modalRentView = new ModalRentView(this.eventEmitter);
@@ -43,8 +43,8 @@ export default class ModalView {
     render(calculation, isEditable = true, isNewCalculation = true) {
         this.modalView.render(calculation.calculationId, calculation.dateOfCalculation)
         this.modalMaterialsView.render(calculation.materials, calculation.summaryMaterials, isEditable);
-        this.modalQuestionsView.render(calculation.questions);
-        this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
+        // this.modalQuestionsView.render(calculation.questions);
+        // this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
         this.modalFotView.render(calculation.fots, calculation.summaryFot, isEditable && calculation.isAllAnswered());
         this.modalManagementView.render(calculation.costManagement);
         this.modalRentView.render(calculation.costRent);
@@ -58,7 +58,7 @@ export default class ModalView {
     }
 
     changeStateButtons(calculation) {
-        this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
+        // this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
         this.modalFotView.setActivateInputs(calculation.isAllAnswered(), calculation.isFotValid());
         this.modalButtonsView.updateStateButtonCalculate(calculation.isAllAnswered(), calculation.isFotValid());
     }
@@ -160,62 +160,6 @@ export default class ModalView {
                             </tfoot>
                         </table>
                         <div class="fixed-tfooter">
-                            <!-- ЧЕК-ЛИСТ ВОПРОСОВ -->
-                            <div>
-                                <table class="check-list-complexity-header">
-                                    <tr data-id="">
-                                        <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 6;"><div class="fw-bold">Чек лист определения сложности изделия</div></td>
-                                        <td class="fixed-rows"><button id="btnCheckListComplexity" type="button" class="btn btn-success btn-sm btn-chek-list">Развернуть</button></td>
-                                    </tr>
-                                </table>
-                                <table class="check-list-complexity collapsed">
-                                    <thead>
-                                        <tr data-id="">
-                                            <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 5;"><div class="fw-bold">Вопросы, требующие ОТВЕТА</div></td>
-                                            <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;"><div class="fw-bold">Блок ответов</div></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="check-list-complexity-questions-answer">
-                                        <tr data-id="" class="form-check">
-                                            <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="">Есть ли столярка? (посмотри на опоры и не только)</div></td>
-                                            <td class="fixed-rows justify-content-center" style="grid-column: 6 / 7;"><input class="" type="radio" name="radioButtonsGroup1" id=""></td>
-                                            <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;"><input class="" type="radio" name="radioButtonsGroup1" id=""></td>
-                                        </tr>
-                                    </tbody>
-                                    <thead>
-                                        <tr data-id="">
-                                            <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 5;"><div class="fw-bold">Вопросы, требующие УТРЕЖДЕНИЯ</div></td>
-                                            <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;"><div class="fw-bold">Кликер</div></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="check-list-complexity-questions-statement">
-                                        <tr data-id="" class="form-check">
-                                            <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="">Слажность ткани</div></td>
-                                            <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;"><input class="" type="radio" name="radioButtonsGroup2" id=""></td>
-                                            <!-- <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;"><input class="" type="radio" name="radioButtonsGroup2" id=""></td> -->
-                                        </tr>
-                                        <tr data-id="" class="form-check">
-                                            <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="">Швы сложные</div></td>
-                                            <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;">
-                                                <!-- <div class="form-check form-switch"> -->
-                                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                                    <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
-                                                <!-- </div> -->
-                                            </td>
-                                            <!-- <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;"><input class="" type="radio" name="radioButtonsGroup3" id=""></td> -->
-                                            <!-- <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;"><input class="" type="radio" name="radioButtonsGroup3" id=""></td> -->
-                                        </tr>
-                                        <tr data-id="" class="form-check">
-                                            <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="">Кол-во модуей</div></td>
-                                            <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;">
-                                                <div class="form-check form-switch justify-content-center">
-                                                    <input class="form-check-input" type="checkbox" role="switch" id="" checked>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                             <!-- БЛОК ФОТ -->
                             <div>
                                 <table class="fot-header">
@@ -352,3 +296,60 @@ export default class ModalView {
         `;
     }
 }
+
+// <!-- ЧЕК-ЛИСТ ВОПРОСОВ -->
+// <div>
+//     <table class="check-list-complexity-header">
+//         <tr data-id="">
+//             <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 6;"><div class="fw-bold">Чек лист определения сложности изделия</div></td>
+//             <td class="fixed-rows"><button id="btnCheckListComplexity" type="button" class="btn btn-success btn-sm btn-chek-list">Развернуть</button></td>
+//         </tr>
+//     </table>
+//     <table class="check-list-complexity collapsed">
+//         <thead>
+//             <tr data-id="">
+//                 <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 5;"><div class="fw-bold">Вопросы, требующие ОТВЕТА</div></td>
+//                 <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;"><div class="fw-bold">Блок ответов</div></td>
+//             </tr>
+//         </thead>
+//         <tbody class="check-list-complexity-questions-answer">
+//             <tr data-id="" class="form-check">
+//                 <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="">Есть ли столярка? (посмотри на опоры и не только)</div></td>
+//                 <td class="fixed-rows justify-content-center" style="grid-column: 6 / 7;"><input class="" type="radio" name="radioButtonsGroup1" id=""></td>
+//                 <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;"><input class="" type="radio" name="radioButtonsGroup1" id=""></td>
+//             </tr>
+//         </tbody>
+//         <thead>
+//             <tr data-id="">
+//                 <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 5;"><div class="fw-bold">Вопросы, требующие УТРЕЖДЕНИЯ</div></td>
+//                 <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;"><div class="fw-bold">Кликер</div></td>
+//             </tr>
+//         </thead>
+//         <tbody class="check-list-complexity-questions-statement">
+//             <tr data-id="" class="form-check">
+//                 <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="">Слажность ткани</div></td>
+//                 <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;"><input class="" type="radio" name="radioButtonsGroup2" id=""></td>
+//                 <!-- <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;"><input class="" type="radio" name="radioButtonsGroup2" id=""></td> -->
+//             </tr>
+//             <tr data-id="" class="form-check">
+//                 <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="">Швы сложные</div></td>
+//                 <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;">
+//                     <!-- <div class="form-check form-switch"> -->
+//                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+//                         <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
+//                     <!-- </div> -->
+//                 </td>
+//                 <!-- <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;"><input class="" type="radio" name="radioButtonsGroup3" id=""></td> -->
+//                 <!-- <td class="fixed-rows justify-content-center" style="grid-column: 7 / 8;"><input class="" type="radio" name="radioButtonsGroup3" id=""></td> -->
+//             </tr>
+//             <tr data-id="" class="form-check">
+//                 <td class="d-flex justify-content-center" style="grid-column: 1 / span 5;"><div class="">Кол-во модуей</div></td>
+//                 <td class="fixed-rows justify-content-center" style="grid-column: 6 / 8;">
+//                     <div class="form-check form-switch justify-content-center">
+//                         <input class="form-check-input" type="checkbox" role="switch" id="" checked>
+//                     </div>
+//                 </td>
+//             </tr>
+//         </tbody>
+//     </table>
+// </div>

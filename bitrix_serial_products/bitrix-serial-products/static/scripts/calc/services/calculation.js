@@ -155,10 +155,6 @@ export default class Calculation {
                 const costWorkUpholstery = fotUpholstery.total;
                 const costPerHourUpholstery = this.coefficientsFotService.getCostPerHour('upholstery');
                 const staffCountUpholstery = this.coefficientsFotService.getUpholsteryStaffCount('getUpholsteryStaffCount');
-                // console.log("costWorkUpholstery = ", costWorkUpholstery);
-                // console.log("costPerHourUpholstery = ", costPerHourUpholstery);
-                // console.log("staffCountUpholstery = ", staffCountUpholstery);
-                // console.log("baseSalaryRateRent = ", baseSalaryRateRent);
                 costRent = costWorkUpholstery / costPerHourUpholstery / staffCountUpholstery * baseSalaryRateRent || 0;
                 break;
             case ID_NIGHTSTAND:
@@ -249,11 +245,6 @@ export default class Calculation {
             fot.coefficientWorker = coefficientWorker;
             fot.estimate = linearMeters * baseRatePerUnit + coefficientWorker * costPerHour;
             this.calculateFot(fot);
-            // console.log("fot = ", fot.code);
-            // console.log("baseRatePerUnit = ", baseRatePerUnit);
-            // console.log("coefficientWorker = ", coefficientWorker);
-            // console.log("costPerHour = ", costPerHour);e
-            // console.log("baseRatePerUnit = ", baseRatePerUnit);
         });
     }
 
@@ -283,12 +274,9 @@ export default class Calculation {
     }
 
     isFotValid() {
-        // console.log(this.fots);
         const res = this.fots.every((fot) => {
-            // console.log(0.95 * fot.basicSalary, fot.checksum,  1.05 * fot.basicSalary);
             return 0.95 * fot.basicSalary < fot.checksum && fot.checksum < 1.05 * fot.basicSalary;
         });
-        // console.log("res = ", res);
 
         return res;
     }

@@ -177,6 +177,7 @@ export default class CalculationManager {
             updateCalculation,
             updateFot
         });
+        this.cbSaveChangesOfProduct();
     }
 
     closeCalculation() {
