@@ -78,6 +78,7 @@ body {
   padding: 5px;
   margin-top: 10px;
   min-height: 550px;
+  max-height: 750px;
 }
 .app-container .app-products-container .app-product-buttons {
   height: 100%;
