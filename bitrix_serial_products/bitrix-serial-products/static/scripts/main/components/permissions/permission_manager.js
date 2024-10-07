@@ -31,7 +31,7 @@ import AppUploadAccessManager from './app_upload_access_manager.js';
 import AppUploadAccessControl from './app_upload_access_control.js'
 
 
-const ALLOWED_USERS = ['11789', '1', '351'];
+// const ALLOWED_USERS = ['11789', '1', '351'];
 
 
 export default class PermissionManager {
