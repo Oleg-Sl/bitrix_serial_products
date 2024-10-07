@@ -5,7 +5,8 @@ from rest_framework import routers
 from .views import (
     IndexApiView,
     InstallApiView,
-    SmartApiView
+    SmartApiView,
+    GetImage,
 )
 
 
@@ -18,6 +19,8 @@ urlpatterns = [
     path('index/', IndexApiView.as_view()),
     path('install/', InstallApiView.as_view()),
     path('smart/<int:smart_type_id>/<int:smart_id>/', SmartApiView.as_view()),
+    path('get-image/', GetImage, name='get_image'),
+
 ]
 
 

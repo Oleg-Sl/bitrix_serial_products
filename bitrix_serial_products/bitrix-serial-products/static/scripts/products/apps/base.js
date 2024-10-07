@@ -137,7 +137,7 @@ export default class BaseApp {
     getChangedData() {
         return {
             [this.productService.getFieldName('updatedBy')]: this.userService.getCurrentUser()?.ID,
-            title: this.productNameRus,
+            title: `${this.productNameRus} `,
             [this.productService.getFieldName('calculationId')]: this.calculation.getSelectedCalculationId(),
             [`parentId${ID_FOT}`]: this.calculation.getSelectedFotCalculationId(),
 

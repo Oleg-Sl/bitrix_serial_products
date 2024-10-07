@@ -2,6 +2,8 @@ from rest_framework import views
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.cache import cache_page
+import requests
 import logging
 import json
 
@@ -78,3 +80,14 @@ class SmartApiView(views.APIView):
         }
 
         return render(request, template, context=data)
+    
+
+@cache_page(60 * 60)
+def GetImage(request):
+    image_url = request.GET.get('url', '')
+    try:
+        response = requests.get(image_url, stream=True)
+        response.raise_for_status()
+        return HttpResponse(content=response.content, content_type=response.headers['content-type'])
+    except requests.RequestException as e:
+        return HttpResponse(content=f"Error fetching image: {str(e)}", status=500)
