@@ -35,12 +35,15 @@ export default class ProductAction {
         this.addProductButtonsContainer.addEventListener('click', async (event) => {
             if (event.target.tagName === 'A') {
                 const productType = event.target.getAttribute('data-type');
-                console.log('productType = ', productType);
+                // console.log('productType = ', productType);
                 // const { title, smartId, field } = getProductConfig(productType);
                 // const productId = 1;
-                const productData = await this.productsService.createProduct(productType);
+                const response = await this.productsService.createProduct(productType);
+                console.log('response = ', response);
+                const productData = response?.results?.products?.item;
                 console.log('createProductData = ', productData);
-                // await this.apiClient.openProductCard(smartId, productId, title);
+                await this.apiClient.openProductCard(productData?.entityTypeId, productData?.id, productData?.title);
+                // await this.apiClient.openProductCard(smartId, productData?.id, productData?.title);
             }
         });
 
