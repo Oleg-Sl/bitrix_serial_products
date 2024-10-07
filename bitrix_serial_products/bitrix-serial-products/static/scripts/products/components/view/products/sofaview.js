@@ -21,7 +21,6 @@ export default class SofaView extends BaseView {
                     this.dependentOttomanSideByShapeId(value);
                 }
                 this.outputData(elem, value, fieldDaata);
-                this.lockFieldEdit(elem, fieldAlias);
             }
         }
     }

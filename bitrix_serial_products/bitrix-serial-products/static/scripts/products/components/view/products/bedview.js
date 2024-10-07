@@ -14,7 +14,6 @@ export default class BedView extends BaseView {
                 let value = this.productService.getValue(fieldAlias);
                 value = (value === null || value === undefined) ? '' : value;
                 this.outputData(elem, value, fieldDaata);
-                this.lockFieldEdit(elem, fieldAlias);
             }
         }
     }
