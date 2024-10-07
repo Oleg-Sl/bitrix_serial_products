@@ -42,7 +42,7 @@ export default class ProductAction {
                 console.log('response = ', response);
                 const productData = response?.results?.products?.item;
                 console.log('createProductData = ', productData);
-                await this.apiClient.openProductCard(productData?.entityTypeId, productData?.id, productData?.title);
+                await this.productsService.openProductCard(productData?.entityTypeId, productData?.id, productData?.title);
                 // await this.apiClient.openProductCard(smartId, productData?.id, productData?.title);
             }
         });
