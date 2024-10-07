@@ -15,6 +15,9 @@ export default class Filter {
         }
 
         this.productsList.displayProducts(products);
+        if (BX24) {
+            BX24.fitWindow();
+        }
     }
 
     initialize() {

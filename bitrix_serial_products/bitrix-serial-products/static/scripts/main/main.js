@@ -29,6 +29,9 @@ export async function main(apiClient) {
     
     try {
         await app.initialize();
+        // if (BX24) {
+        //     BX24.fitWindow();
+        // }
     } catch (error) {
         alert(`Ошибка инициализации приложения: ${error.message}`);
         console.error('Ошибка инициализации приложения', error);
