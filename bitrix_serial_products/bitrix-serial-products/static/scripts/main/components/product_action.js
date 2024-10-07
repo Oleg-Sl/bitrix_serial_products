@@ -52,7 +52,8 @@ export default class ProductAction {
                 const smartTypeId = target.dataset.smartTypeId;
                 console.log('productId = ', productId);
                 console.log('smartTypeId = ', smartTypeId);
-                await this.apiClient.openProductCard(smartTypeId, productId, smartTypeId);
+                await this.productsService.openProductCard(smartTypeId, productId, smartTypeId);
+                // await this.apiClient.openProductCard(smartTypeId, productId, smartTypeId);
             }
         });
     }
