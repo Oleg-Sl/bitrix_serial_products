@@ -170,12 +170,19 @@ export default class CalculationManager {
         const calculationData = calculation.getCalculationSmartData();
         const updateCalculation = await this.calculationRepository.updateCalculation(calculationData, calculationId);
         const fotData = calculation.getFotSmartData(updateCalculation.id);
-        const updateFot = await this.calculationRepository.updateFot(fotData, calculation.smartFotId);
+        // const updateFot = await this.calculationRepository.updateFot(fotData, calculation.smartFotId);
+        if (!calculation.smartFotId) {
+            const newFot = await this.calculationRepository.createFot(fotData);
+            this.dataService.addFot(newFot);
+            calculation.initFot();
+        } else {
+            const updateFot = await this.calculationRepository.updateFot(fotData, calculation.smartFotId);
+        }
         console.log("Data for saving calculation = ", {
             calculationData,
             fotData,
             updateCalculation,
-            updateFot
+            // updateFot
         });
         this.cbSaveChangesOfProduct();
     }

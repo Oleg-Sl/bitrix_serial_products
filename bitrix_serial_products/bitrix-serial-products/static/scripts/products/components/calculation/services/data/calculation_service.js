@@ -131,6 +131,10 @@ export default class CalculationService {
         calculation.changeGeneralComment(data.value);
     }
 
+    addFot(fot) {
+        this.services.fot.addFot(fot);
+    }
+
     addCalculation(calculation, fot, isNewCalculation = false) {
         this.services.fot.addFot(fot);
         const calc = new Calculation(this.services, calculation, this.productTypeId, this.productId, this.productNameRus, isNewCalculation, this.cbGetProductData);

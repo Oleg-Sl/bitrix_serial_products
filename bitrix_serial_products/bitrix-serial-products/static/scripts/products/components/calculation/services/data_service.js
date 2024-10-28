@@ -65,6 +65,10 @@ export default class DataService {
         return this.calculationService.selectedCalculation(calculationId);
     }
 
+    addFot(fot) {
+        return this.calculationService.addFot(fot);
+    }
+
     addCalculation(calculation, fot, isNewCalculation = false) {
         return this.calculationService.addCalculation(calculation, fot, isNewCalculation);
 
