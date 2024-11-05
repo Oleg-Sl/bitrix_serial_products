@@ -50,7 +50,7 @@ export default class ProductsList {
                     <div class="product-card-body-freetitle">
                         <p class="text-nowrap text-truncate card-text" title="${product.freeTitle || "-"}">${product.freeTitle || "-"}</p>
                     </div>
-                    <div class="mx-1 product-card-body-footer" style="display: flex;">
+                    <div class="px-0 product-card-body-footer" style="display: flex;">
                         <div>
                             <small class="mx-1 text-secondary" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" data-bs-auto-close="outside"  aria-expanded="false" class="text-body-secondary">info</small>
                             <div class="dropdown-menu p-0 dropdown-fabric-menu" id="fabric-info-1">
