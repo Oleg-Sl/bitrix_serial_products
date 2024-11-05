@@ -16,12 +16,6 @@ export const CALC_FIELD_ARMCHAIR = {
         amount: 'ufCrm59_1713842394',            // Работа (сумма)
         comments: 'ufCrm59_1713842408',          // Работа (комментарии)
     },
-    subcontractorWork: {
-        price: 'ufCrm59_1714097707',             // Работа подрядчиков (цена)
-        value: 'ufCrm59_1714097734',             // Работа подрядчиков (значение)
-        amount: 'ufCrm59_1714097748',            // Работа подрядчиков (сумма)
-        comments: 'ufCrm59_1714097762',          // Работа подрядчиков (комментарии)
-    },
 
     plywood15mm: {
         type: 'material',
@@ -167,5 +161,12 @@ export const CALC_FIELD_ARMCHAIR = {
         value: 'ufCrm59_1713842232',             // Иное №3 (значение)
         amount: 'ufCrm59_1713842277',            // Иное №3 (сумма)
         comments: 'ufCrm59_1713842329',          // Иное №3 (комментарии)
+    },
+    subcontractorWork: {
+        type: 'material',
+        price: 'ufCrm59_1714097707',             // Работа подрядчиков (цена)
+        value: 'ufCrm59_1714097734',             // Работа подрядчиков (значение)
+        amount: 'ufCrm59_1714097748',            // Работа подрядчиков (сумма)
+        comments: 'ufCrm59_1714097762',          // Работа подрядчиков (комментарии)
     },
 };

@@ -16,13 +16,6 @@ export const CALC_FIELD_NIGHTSTAND = {
         amount: 'ufCrm79_1714100381',            // Работа (сумма)
         comments: 'ufCrm79_1714100397',          // Работа (комментарии)
     },
-    subcontractorWork: {
-        price: 'ufCrm79_1714100428',             // Работа подрядчиков (цена)
-        value: 'ufCrm79_1714100440',             // Работа подрядчиков (значение)
-        amount: 'ufCrm79_1714100457',            // Работа подрядчиков (сумма)
-        comments: 'ufCrm79_1714100469',          // Работа подрядчиков (комментарии)
-    },
-
 
     MDF15mm: {
         type: 'material',
@@ -113,5 +106,12 @@ export const CALC_FIELD_NIGHTSTAND = {
         value: 'ufCrm79_1714100228',             
         amount: 'ufCrm79_1714100241',            
         comments: 'ufCrm79_1714100259',          
-    },         
+    },
+    subcontractorWork: {
+        type: 'material',
+        price: 'ufCrm79_1714100428',             // Работа подрядчиков (цена)
+        value: 'ufCrm79_1714100440',             // Работа подрядчиков (значение)
+        amount: 'ufCrm79_1714100457',            // Работа подрядчиков (сумма)
+        comments: 'ufCrm79_1714100469',          // Работа подрядчиков (комментарии)
+    },
 };

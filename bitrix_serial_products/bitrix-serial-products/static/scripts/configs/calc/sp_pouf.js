@@ -18,13 +18,6 @@ export const CALC_FIELD_POUF = {
         amount: 'ufCrm69_1713851335',            // Работа (сумма)
         comments: 'ufCrm69_1713851349',          // Работа (комментарии)
     },
-    subcontractorWork: {
-        price: 'ufCrm69_1714098083',             // Работа подрядчиков (цена)
-        value: 'ufCrm69_1714098093',             // Работа подрядчиков (значение)
-        amount: 'ufCrm69_1714098106',            // Работа подрядчиков (сумма)
-        comments: 'ufCrm69_1714098118',          // Работа подрядчиков (комментарии)
-    },
-
 
     plywood15mm: {
         type: 'material',
@@ -163,5 +156,12 @@ export const CALC_FIELD_POUF = {
         value: 'ufCrm69_1713851197',
         amount: 'ufCrm69_1713851236',
         comments: 'ufCrm69_1713851275',
+    },
+    subcontractorWork: {
+        type: 'material',
+        price: 'ufCrm69_1714098083',             // Работа подрядчиков (цена)
+        value: 'ufCrm69_1714098093',             // Работа подрядчиков (значение)
+        amount: 'ufCrm69_1714098106',            // Работа подрядчиков (сумма)
+        comments: 'ufCrm69_1714098118',          // Работа подрядчиков (комментарии)
     },
 };

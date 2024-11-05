@@ -9,6 +9,7 @@ export const SCETCH_ITEMS = {
     needed: "4551",                 // нужен
     neededSent: "4607",             // нужен (отправлен)
     completed: "4553",              // выполнен
+    completedSent: "4825",          // выполнен (отправлен)
     completedSigned: "4633",        // выполнен (подписан)
 };
 
@@ -23,6 +24,7 @@ export const FIELD_NIGHTSTAND = {
     parentId2: "parentId2",
 
     isTemplatePotochka: "ufCrm73_1719638118",   // Шаблон поточки
+    filter: "ufCrm73_1730291022",               // Для фильтра в Поточке
 
     sketch: "ufCrm73_1718035964",               // Эскиз
     sentToWorkshop: "ufCrm73_1718036494",       // Отправлено в цех

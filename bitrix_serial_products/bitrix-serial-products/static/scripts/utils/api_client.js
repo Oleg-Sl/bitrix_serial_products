@@ -50,7 +50,8 @@ export default class ApiClient {
                 });
             });
         } catch (error) {
-            this.logError(`An error occurred in openPath: ${error}`);
+            console.log('error = ', error);
+            // this.logError(`An error occurred in openPath: ${error}`);
         }
     }
 
@@ -73,7 +74,8 @@ export default class ApiClient {
                 BX24.callMethod(method, params, response => {
                     if (response.status !== 200 || response.error()) {
                         const errorMessage = `${response.error()} (callMethod ${method}: ${JSON.stringify(params)})`;
-                        this.logError(errorMessage);
+                        // this.logError(errorMessage);
+                        console.error(errorMessage);
                         reject(errorMessage);
                     }
                     resolve(response.data());
@@ -83,7 +85,8 @@ export default class ApiClient {
             return result;
         } catch (error) {
             const errorMessage = `An error occurred in callMethod: ${error}`;
-            this.logError(errorMessage);
+            // this.logError(errorMessage);
+            console.error(errorMessage);
             return null;
         }
     }

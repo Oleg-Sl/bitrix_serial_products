@@ -9,6 +9,7 @@ export const SCETCH_ITEMS = {
     needed: "4569",                 // нужен
     neededSent: "4613",             // нужен (отправлен)
     completed: "4571",              // выполнен
+    completedSent: "4831",          // выполнен (отправлен)
     completedSigned: "4639",        // выполнен (подписан)
 };
 
@@ -23,6 +24,7 @@ export const FIELD_TABLE = {
     parentId2: "parentId2",
 
     isTemplatePotochka: "ufCrm75_1716718253",   // Шаблон поточки
+    filter: "ufCrm75_1730291077",               // Для фильтра в Поточке
 
     sketch: "ufCrm75_1718036109",               // Эскиз
     sentToWorkshop: "ufCrm75_1718036424",       // Отправлено в цех

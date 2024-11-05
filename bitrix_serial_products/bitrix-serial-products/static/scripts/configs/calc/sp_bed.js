@@ -18,13 +18,6 @@ export const CALC_FIELD_BED = {
         comments: 'ufCrm71_1713849432',          
     },
     
-    subcontractorWork: {
-        price: 'ufCrm71_1714097867',             
-        value: 'ufCrm71_1714097889',             
-        amount: 'ufCrm71_1714097907',            
-        comments: 'ufCrm71_1714097919',          
-    },
-
     plywood15mm: {
         type: 'material',
         value: 'ufCrm71_1713843107',             
@@ -199,6 +192,14 @@ export const CALC_FIELD_BED = {
         amount: 'ufCrm71_1713849304',            
         comments: 'ufCrm71_1713849357',          
     },
+    subcontractorWork: {
+        type: 'material',
+        price: 'ufCrm71_1714097867',             
+        value: 'ufCrm71_1714097889',             
+        amount: 'ufCrm71_1714097907',            
+        comments: 'ufCrm71_1714097919',          
+    },
+
     // ???
     // Sums: {
     //     materialTotal: 'ufCrm71_1713849381',      

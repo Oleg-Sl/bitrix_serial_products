@@ -21,7 +21,7 @@ export default class App {
 
         const filterButtonsContainer = document.querySelector(".product-buttons");
         const productsContainer = document.querySelector(".app-products-cards");
-        
+
         const packed = new PackedParameters(this.specificWeights);
         const productsList = new ProductsList(productsContainer, this.productsFields, this.currentUser, packed);
         const filter = new Filter(filterButtonsContainer, this.productsService, productsList);

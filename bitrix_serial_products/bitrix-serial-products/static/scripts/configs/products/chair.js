@@ -9,7 +9,14 @@ export const SCETCH_ITEMS = {
     needed: "4563",                 // нужен
     neededSent: "4611",             // нужен (отправлен)
     completed: "4565",              // выполнен
+    completedSent: "4829",          // выполнен (отправлен)
     completedSigned: "4637",        // выполнен (подписан)
+};
+
+export const FRAME_VARIANTS = {
+    woodSelfmade: "5459",           // Деревянный, делаем сами
+    woodPurchased: "5461",          // Деревянный, покупаем готовый
+    metalPurchased: "5463",         // Металлический, покупаем готовый
 };
 
 export const FIELD_CHAIR = {
@@ -23,6 +30,7 @@ export const FIELD_CHAIR = {
     parentId2: "parentId2",
 
     isTemplatePotochka: "ufCrm77_1728261767",   // Шаблон поточки
+    filter: "ufCrm77_1730291060",               // Для фильтра в Поточке
 
     sketch: "ufCrm77_1718036074",               // Эскиз
     sentToWorkshop: "ufCrm77_1718036447",       // Отправлено в цех

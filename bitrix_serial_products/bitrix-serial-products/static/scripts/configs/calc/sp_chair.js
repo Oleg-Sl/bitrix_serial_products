@@ -15,12 +15,6 @@ export const CALC_FIELD_CHAIR = {
         amount: 'ufCrm83_1714908845',            // Работа (сумма)
         comments: 'ufCrm83_1714106575',          // Работа (комментарии)
     },
-    subcontractorWork: {
-        price: 'ufCrm83_1714106606',             // Работа подрядчиков (цена)
-        value: 'ufCrm83_1714106614',             // Работа подрядчиков (значение)
-        amount: 'ufCrm83_1714106627',            // Работа подрядчиков (сумма)
-        comments: 'ufCrm83_1714106640',          // Работа подрядчиков (комментарии)
-    },
 
     MDF10mm: {
         type: 'material',
@@ -156,5 +150,12 @@ export const CALC_FIELD_CHAIR = {
         value: 'ufCrm83_1714106455',
         amount: 'ufCrm83_1714106468',
         comments: 'ufCrm83_1714106481',
+    },
+    subcontractorWork: {
+        type: 'material',
+        price: 'ufCrm83_1714106606',             // Работа подрядчиков (цена)
+        value: 'ufCrm83_1714106614',             // Работа подрядчиков (значение)
+        amount: 'ufCrm83_1714106627',            // Работа подрядчиков (сумма)
+        comments: 'ufCrm83_1714106640',          // Работа подрядчиков (комментарии)
     },
 };

@@ -16,13 +16,6 @@ export const CALC_FIELD_TABLE = {
         amount: 'ufCrm81_1714102621',            // Работа (сумма)
         comments: 'ufCrm81_1714102634',          // Работа (комментарии)
     },
-    subcontractorWork: {
-        price: 'ufCrm81_1714102653',             // Работа подрядчиков (цена)
-        value: 'ufCrm81_1714102672',             // Работа подрядчиков (значение)
-        amount: 'ufCrm81_1714102684',            // Работа подрядчиков (сумма)
-        comments: 'ufCrm81_1714102697',          // Работа подрядчиков (комментарии)
-    },
-
 
     MDF25mm: {
         type: 'material',
@@ -122,5 +115,12 @@ export const CALC_FIELD_TABLE = {
         value: 'ufCrm81_1714102465',
         amount: 'ufCrm81_1714102502',
         comments: 'ufCrm81_1714102530',
+    },
+    subcontractorWork: {
+        type: 'material',
+        price: 'ufCrm81_1714102653',             // Работа подрядчиков (цена)
+        value: 'ufCrm81_1714102672',             // Работа подрядчиков (значение)
+        amount: 'ufCrm81_1714102684',            // Работа подрядчиков (сумма)
+        comments: 'ufCrm81_1714102697',          // Работа подрядчиков (комментарии)
     },
 };

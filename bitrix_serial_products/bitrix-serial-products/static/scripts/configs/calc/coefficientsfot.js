@@ -103,14 +103,15 @@ export const FIELD_COEFFICIENTS_FOT = {
     },
     management: {
         baseSalaryRate: "ufCrm91_1723533810",           // Базовая ставка ЗП для руководителей
-        baseTimeToProduce: "ufCrm91_1723533654"         // Базовое время изготовления изделия для руководителей
+        costPerHour: "ufCrm91_1723533654"               // Стоимость часа работы для руководителей
     },
     rent: {
         baseSalaryRate: "ufCrm91_1723533843",           // Базовая ставка ЗП для аренды
-        baseTimeToProduce: "ufCrm91_1723533687"         // Базовое время изготовления изделия для аренды
+        costPerHour: "ufCrm91_1723533687"               // Стоимость часа работы для аренды
     },
     packaging: {
         costPerUnit: "ufCrm91_1723797057",              // Стоимость упаковки за единицу изделия
-        materialsIncluded: "ufCrm91_1723797096"         // Материалы, входящие в упаковку
+        materialsIncluded: "ufCrm91_1723797096",        // Материалы, входящие в упаковку
+        costPerHour: "ufCrm91_1723796404"               // Стоимость часа работы для упаковки
     }
 };

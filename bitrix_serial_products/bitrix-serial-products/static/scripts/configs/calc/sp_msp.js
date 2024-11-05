@@ -17,13 +17,6 @@ export const CALC_FIELD_MSP = {
         amount: 'ufCrm27_1709392252',            // Работа (сумма)
         comments: 'ufCrm27_1708832266',          // Работа (комментарии)
     },
-    subcontractorWork: {
-        price: 'ufCrm27_1714098015',             // Работа подрядчиков (цена)
-        value: 'ufCrm27_1714098035',             // Работа подрядчиков (значение)
-        amount: 'ufCrm27_1714098047',            // Работа подрядчиков (сумма)
-        comments: 'ufCrm27_1714098057',          // Работа подрядчиков (комментарии)
-    },
-
 
     MDF6mm: {
         type: 'material',
@@ -104,5 +97,13 @@ export const CALC_FIELD_MSP = {
         value: 'ufCrm27_1708832090',               
         amount: 'ufCrm27_1708832104',              
         comments: 'ufCrm27_1708661611',            
-    },             
+    },
+    subcontractorWork: {
+        type: 'material',
+        price: 'ufCrm27_1714098015',             // Работа подрядчиков (цена)
+        value: 'ufCrm27_1714098035',             // Работа подрядчиков (значение)
+        amount: 'ufCrm27_1714098047',            // Работа подрядчиков (сумма)
+        comments: 'ufCrm27_1714098057',          // Работа подрядчиков (комментарии)
+    },
+           
 };

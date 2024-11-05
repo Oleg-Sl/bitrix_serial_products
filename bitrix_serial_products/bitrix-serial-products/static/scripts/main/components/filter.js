@@ -3,14 +3,20 @@ export default class Filter {
         this.filterButtonsContainer = filterButtonsContainer;
         this.productsService = productsService;
         this.productsList = productsList;
+        this.inputFilter = document.getElementById('inputFilter');
+        this.productType = null;
+        this.debounceTimeout = null;
     }
 
-    async applyFilter(productType) {
+    async applyFilter() {
         let products = [];
         try {
-            products = await this.productsService.getProducts(productType);
+            const params = {};
+            if (this.inputFilter.value.length >= 3) {
+                params.filter = `${this.inputFilter.value}%`;
+            }
+            products = await this.productsService.getFilterProducts(this.productType, params);
         } catch (error) {
-            // console.error('Error getting products: ', error);
             alert(`Ошибка получения списка продуктов: ${error.message}`);
         }
 
@@ -20,12 +26,28 @@ export default class Filter {
         }
     }
 
+
     initialize() {
         this.filterButtonsContainer.addEventListener('click', (event) => {
             if (event.target.tagName === 'BUTTON') {
                 const productType = event.target.getAttribute('data-type');
-                this.applyFilter(productType);
+                if (this.productType && productType != this.productType) {
+                    this.inputFilter.value = '';
+                }
+                this.productType = productType;
+                this.applyFilter();
             }
         });
+        this.inputFilter.addEventListener('input', (event) => {
+            const target = event.target;
+            if (this.productType && target.value.length >= 3) {
+                this.debounce(() => this.applyFilter(), 300);
+            }
+        })
+    }
+
+    debounce(func, delay) {
+        clearTimeout(this.debounceTimeout);
+        this.debounceTimeout = setTimeout(func, delay);
     }
 }

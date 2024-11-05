@@ -8,6 +8,17 @@ export default class ProductsList {
         this.productsFields = productsFields;
         this.currentUser = currentUser;
         this.packed = packed;
+
+        this.init();
+    }
+    
+
+    init() {
+        this.productsContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('path-to-smart-process') && event.target.dataset.path) {
+                BX24.openPath(event.target.dataset.path, r => console.log(r));
+            }
+        });
     }
 
     displayProducts(products) {
@@ -20,9 +31,10 @@ export default class ProductsList {
             this.productsContainer.innerHTML = contentHTML;
         }
     }
+    // BX24.openPath('/crm/type/145/details/287/', r => console.log(r))
 
     getProductCardHTML(product) {
-        console.log(product.isTemplatePotochka);
+        console.log(product);
         return `
             <div class="app-products-card-container" data-id="${product.id}" data-smart-type-id="${product.entityTypeId}">
                 <div class="col app-product-card">
@@ -38,7 +50,31 @@ export default class ProductsList {
                     <div class="product-card-body-freetitle">
                         <p class="text-nowrap text-truncate card-text" title="${product.freeTitle || "-"}">${product.freeTitle || "-"}</p>
                     </div>
-                    <div class="product-card-body-footer" style="display: flex;">
+                    <div class="mx-1 product-card-body-footer" style="display: flex;">
+                        <div>
+                            <small class="mx-1 text-secondary" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" data-bs-auto-close="outside"  aria-expanded="false" class="text-body-secondary">info</small>
+                            <div class="dropdown-menu p-0 dropdown-fabric-menu" id="fabric-info-1">
+                                <div class="dropdown-header bg-secondary-subtle text-center dropdown-fabric-menu-header">Связанные СП</div>
+                                <div class="dropdown-fabric-menu-content">
+                                    <table class="table table-bordered table-sm mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td>Карточка:</td>
+                                                <td class="text-end path-to-smart-process" data-path="/crm/type/${product.entityTypeId}/details/${product.id}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.id}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Расчет:</td>
+                                                <td class="text-end path-to-smart-process" data-path="/crm/type/${product.calcTypeId}/details/${product.calculationId}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.calculationId}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ФОТ:</td>
+                                                <td class="text-end path-to-smart-process" data-path="/crm/type/1048/details/${product.parentId1048}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.parentId1048}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         <div style="width: 100%;">
                             <small class="text-body-secondary">Размеры: ${this.getProductSize_(product) || "-"}</small>
                         </div>

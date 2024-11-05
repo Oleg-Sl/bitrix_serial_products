@@ -32,6 +32,44 @@ export default class ProductService {
         });
     }
 
+    async getFilterProducts(productType, params) {
+        const { title, smartId, field, calcTypeId } = getProductConfig(productType);
+        console.log({
+            productType,
+            title,
+            smartId,
+            field,
+            params
+        });
+        try {
+            let commandProducts = `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC`;
+            for (const [key, value] of Object.entries(params)) {
+                commandProducts += `&filter[${field[key]}]=${value}`;
+            }
+
+            const response = await this.apiClient.callMethod('batch', {
+                halt: 0,
+                cmd: {
+                    products: commandProducts
+                }
+            });
+            console.log('response', response);
+
+            if (!response || !response.result?.products?.items) {
+                throw new Error('Invalid response from batch call');
+            }
+            // calcTypeId
+            const products = response?.result?.products?.items || [];
+            return products.map(product => {
+                product.calcTypeId = calcTypeId;
+                return product;
+            });
+        } catch (error) {
+            console.error('Error in getProducts:', error);
+            throw error;
+        }
+    }
+
     async getProducts(productType) {
         const { title, smartId, field } = getProductConfig(productType);
         console.log({
