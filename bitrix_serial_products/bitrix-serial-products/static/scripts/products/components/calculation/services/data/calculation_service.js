@@ -115,6 +115,12 @@ export default class CalculationService {
         this.eventEmitter.emit('redrawCalcualation', calculation);
     }
 
+    changeFotAllocatedHours(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeFotAllocatedHours(data.code, data.value);
+        this.eventEmitter.emit('redrawCalcualation', calculation);
+    }
+
     changeFotCoefficient(data) {
         const calculation = this.getCalculation(data.calculationId);
         calculation.changeFotCoefficient(data.code, data.value);

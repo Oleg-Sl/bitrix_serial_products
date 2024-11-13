@@ -358,6 +358,13 @@ export default class Calculation {
         this.calculateVariableData();
     }
 
+    changeFotAllocatedHours(fotCode, newValue) {
+        let fot = this.fots.find((item) => item.code === fotCode);
+        fot.allocatedHours = +newValue;
+        this.calculateFot(fot);
+        this.calculateVariableData();
+    }
+
     changeFotCoefficient(fotCode, newValue) {
         let fot = this.fots.find((item) => item.code === fotCode);
         fot.coefficient = +newValue;
@@ -394,8 +401,11 @@ export default class Calculation {
     }
 
     calculateFot(fot) {
+        // console.log("fot = ", fot);
         const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
-        fot.allocatedHours = Math.round(fot.estimate / costPerHour * 100) / 100;
+        // console.log("costPerHour = ", costPerHour);
+        // fot.allocatedHours = Math.round(fot.estimate / costPerHour * 100) / 100;
+        fot.estimate = Math.round(fot.allocatedHours * costPerHour * 100) / 100;
         fot.total = Math.ceil(fot.estimate + fot.coefficient * costPerHour);
     }
 

@@ -26,6 +26,15 @@ export default class ModalFotView {
                     value: target.value,
                 };
                 this.eventEmitter.emit("changeFotEstimate", data);
+            } else if (target.classList.contains('fot-estimate-hour')) {
+                const tr = target.closest('tr');
+                const data = {
+                    calculationId: this.modal.dataset.calculationId,
+                    code: tr.dataset.code,
+                    field: target.dataset.field,
+                    value: target.value,
+                };
+                this.eventEmitter.emit("changeFotAllocatedHours", data);
             } else if (target.classList.contains('fot-coefficient')) {
                 const tr = target.closest('tr');
                 const data = {
@@ -48,7 +57,8 @@ export default class ModalFotView {
     }
 
     setActivateInputs(isActiveInputs, isActivateButton) {
-        this.container.querySelectorAll('.fot-estimate').forEach(item => item.disabled = !isActiveInputs);
+        // this.container.querySelectorAll('.fot-estimate').forEach(item => item.disabled = !isActiveInputs);
+        this.container.querySelectorAll('.fot-estimate-hour').forEach(item => item.disabled = !isActiveInputs);
         this.container.querySelectorAll('.fot-coefficient').forEach(item => item.disabled = !isActiveInputs);
         this.container.querySelectorAll('.fot-comment').forEach(item => item.disabled = !isActiveInputs);
         if (isActivateButton) {
@@ -74,8 +84,8 @@ export default class ModalFotView {
         return `
             <tr data-code="${fot.code}">
                 <td>${fot.title || '-'}</td>
-                <td><input type="number" class="border-0 fot-estimate" min="0" value="${fot.estimate}" data-field="estimate" ${classInputEdit}></td>
-                <td><input type="number" class="border-0 fot-estimate-hour" min="0" value="${fot.allocatedHours}" data-field="allocatedHours" disabled></td>
+                <td><input type="number" class="border-0 fot-estimate" min="-11" value="${fot.estimate}" data-field="estimate" disabled></td>
+                <td><input type="number" class="border-0 fot-estimate-hour" min="0" step="0.5" value="${fot.allocatedHours}" data-field="allocatedHours" ${classInputEdit}></td>
                 <td><input type="number" class="border-0 fot-coefficient" step="0.5" value="${fot.coefficient || 0}" data-field="coefficient" ${classInputEdit}></td>
                 <td class="text-end bg-body-secondary px-1">${this.convertNumberWithSpaces(Math.ceil(fot.total))}</td>
                 <td class="text-end ${colorCellChecksum} px-1"  title="${this.getDescOfValidatingCalcualation(fot.basicSalary)}">${this.convertNumberWithSpaces(fot.checksum)}</td>
