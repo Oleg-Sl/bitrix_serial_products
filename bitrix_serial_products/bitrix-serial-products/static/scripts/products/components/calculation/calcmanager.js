@@ -185,6 +185,7 @@ export default class CalculationManager {
             // updateFot
         });
         this.cbSaveChangesOfProduct();
+        this.modalView.hide();
     }
 
     closeCalculation() {

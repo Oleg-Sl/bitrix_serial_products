@@ -13,7 +13,7 @@ export default class Filter {
         try {
             const params = {};
             if (this.inputFilter.value.length >= 3) {
-                params.filter = `${this.inputFilter.value}%`;
+                params.filter = `%${this.inputFilter.value}%`;
             }
             products = await this.productsService.getFilterProducts(this.productType, params);
         } catch (error) {
