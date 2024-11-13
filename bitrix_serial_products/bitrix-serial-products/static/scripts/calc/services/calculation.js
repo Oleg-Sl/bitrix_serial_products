@@ -252,6 +252,7 @@ export default class Calculation {
         const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
         // const coefficientWorker = this.checklistcomplexityService.getCoefficientWorker(this.cbGetProductData(), fot.code);
         fot.total = fot.estimate + fot.coefficient * costPerHour;
+        console.log(fot);
         this.calculateFotChecksum(fot);
     }
 

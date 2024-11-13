@@ -21,6 +21,7 @@ export default class DataService {
         this.eventService = new EventService(eventEmitter, this.calculationService);
     }
 
+
     async init() {
         const servicesData = await this.fetchService.fetchData(this.cbGetProductData().leadId, this.cbGetProductData().dealId);
         this.currentUser = servicesData.currentUser;

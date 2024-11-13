@@ -341,7 +341,7 @@ export default class Calculation {
 
     changeMaterialPrice(materialCode, field, newValue) {
         let material = this.materials.find((item) => item.code === materialCode);
-        material[field].value = newValue;
+        material[field].value = +newValue;
         material.amount.value = Math.ceil(material.price.value * material.value.value * material.coefficient);
         this.calculateVariableData();
     }
@@ -353,14 +353,14 @@ export default class Calculation {
 
     changeFotEstimate(fotCode, newValue) {
         let fot = this.fots.find((item) => item.code === fotCode);
-        fot.estimate = newValue;
+        fot.estimate = +newValue;
         this.calculateFot(fot);
         this.calculateVariableData();
     }
 
     changeFotCoefficient(fotCode, newValue) {
         let fot = this.fots.find((item) => item.code === fotCode);
-        fot.coefficient = newValue;
+        fot.coefficient = +newValue;
         this.calculateFot(fot);
         this.calculateVariableData();
     }
