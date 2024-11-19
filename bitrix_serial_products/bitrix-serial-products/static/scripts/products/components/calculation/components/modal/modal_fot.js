@@ -2,8 +2,10 @@ import { formatDate, getCurrentDate, roundToTwoDecimals } from '../../common/uti
 
 
 export default class ModalFotView {
-    constructor(eventEmitter) {
+    constructor(eventEmitter, fotAccessManager, currentUserId) {
         this.eventEmitter = eventEmitter;
+        this.fotAccessManager = fotAccessManager;
+        this.currentUserId = currentUserId;
 
         this.modal = document.querySelector('#calculationWindow');
         this.btnFot = document.querySelector('#btnFot');
@@ -57,10 +59,13 @@ export default class ModalFotView {
     }
 
     setActivateInputs(isActiveInputs, isActivateButton) {
+        const isCanEdit = this.fotAccessManager.isAccess(this.currentUserId);
+
         // this.container.querySelectorAll('.fot-estimate').forEach(item => item.disabled = !isActiveInputs);
-        this.container.querySelectorAll('.fot-estimate-hour').forEach(item => item.disabled = !isActiveInputs);
-        this.container.querySelectorAll('.fot-coefficient').forEach(item => item.disabled = !isActiveInputs);
-        this.container.querySelectorAll('.fot-comment').forEach(item => item.disabled = !isActiveInputs);
+        // this.container.querySelectorAll('.fot-estimate-hour').forEach(item => item.disabled = false);
+        this.container.querySelectorAll('.fot-estimate-hour').forEach(item => item.disabled = !isActiveInputs || !isCanEdit);
+        this.container.querySelectorAll('.fot-coefficient').forEach(item => item.disabled = !isActiveInputs || !isCanEdit);
+        this.container.querySelectorAll('.fot-comment').forEach(item => item.disabled = !isActiveInputs || !isCanEdit);
         if (isActivateButton) {
             this.btnFot.classList.add("text-success");
             this.btnFot.classList.remove("text-danger");
@@ -77,7 +82,10 @@ export default class ModalFotView {
     }
 
     getMaterialsHTML(fot, isEdit) {
-        const classInputEdit = isEdit ? '' : 'disabled';
+        const isCanEdit = this.fotAccessManager.isAccess(this.currentUserId);
+        console.log("isCanEdit = ", isCanEdit, isEdit);
+        const classInputEdit = isEdit && isCanEdit ? '' : 'disabled';
+        console.log("classInputEdit = ", classInputEdit);
         const colorCellChecksum = this.getColorOfValidatingCalcualation(fot.checksum, fot.basicSalary);
         const descCellChecksum = this.getDescOfValidatingCalcualation(fot.checksum, fot.basicSalary);
 

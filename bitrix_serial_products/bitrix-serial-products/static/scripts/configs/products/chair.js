@@ -38,6 +38,9 @@ export const FIELD_CHAIR = {
     linkClientDoc: "ufCrm77_1714708767",        // Ссылка на документ для клиента
     linkWorkshopDoc: "ufCrm77_1714708772",      // Ссылка на документ для цеха
 
+    isTechOk: "ufCrm77_1731471083",             // tech-OK
+    dateOfTech: "ufCrm77_1731471182",           // Дата проверки tech
+
     deliveryCity: "ufCrm77_1714055105",         // Город доставки
     link: "ufCrm77_1714055075",                 // Ссылка на оригинал
     referencePoint: "ufCrm77_1714055087",       // Ориентир

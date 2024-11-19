@@ -32,6 +32,9 @@ export const FIELD_ARMCHAIR = {
     linkClientDoc: "ufCrm57_1714708571",        // Ссылка на документ для клиента
     linkWorkshopDoc: "ufCrm57_1714708580",      // Ссылка на документ для цеха
 
+    isTechOk: "ufCrm57_1731470976",             // tech-OK
+    dateOfTech: "ufCrm57_1731471248",           // Дата проверки tech
+
     deliveryCity: "ufCrm57_1713503260",             // Город доставки
     link: "ufCrm57_1713503175",                     // Ссылка на оригинал
     referencePoint: "ufCrm57_1713503212",           // Ориентир

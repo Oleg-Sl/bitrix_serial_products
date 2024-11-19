@@ -13,11 +13,13 @@ import ResizableWrapper from './resizable.js';
 
 
 export default class ModalView {
-    constructor(eventEmitter, isEditable) {
+    constructor(eventEmitter, isEditable, fotAccessManager, currentUserId) {
         this.createModal();
 
         this.eventEmitter = eventEmitter;
         this.isEditable = isEditable;
+        this.fotAccessManager = fotAccessManager;
+        this.currentUserId = currentUserId;
 
         this.openCalculationId = null;
         this.isNewCalculation = null;
@@ -25,7 +27,7 @@ export default class ModalView {
         this.modalView = new ModalMetadataView(this.eventEmitter);
         this.modalMaterialsView = new ModalMaterialsView(this.eventEmitter);
         // this.modalQuestionsView = new ModalQuestionsView(this.eventEmitter);
-        this.modalFotView = new ModalFotView(this.eventEmitter);
+        this.modalFotView = new ModalFotView(this.eventEmitter, this.fotAccessManager, this.currentUserId);
         this.modalServicePackedView = new ModalServicePackedView(this.eventEmitter);
         this.modalManagementView = new ModalManagementView(this.eventEmitter);
         this.modalRentView = new ModalRentView(this.eventEmitter);
@@ -269,7 +271,7 @@ export default class ModalView {
                     </div>
         
                 </div>
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column d-none">
                     <button id="btnCalculate" type="button" class="btn btn-primary btn-sm">РАССЧИТАТЬ</button>
                 </div>
                 <div class="window-footer">

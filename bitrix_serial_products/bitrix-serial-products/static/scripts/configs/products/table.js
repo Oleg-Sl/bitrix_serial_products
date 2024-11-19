@@ -32,6 +32,9 @@ export const FIELD_TABLE = {
     linkClientDoc: "ufCrm75_1714708040",        // Ссылка на документ для клиента
     linkWorkshopDoc: "ufCrm75_1714708181",      // Ссылка на документ для цеха
 
+    isTechOk: "ufCrm75_1731471099",             // tech-OK
+    dateOfTech: "ufCrm75_1731471164",           // Дата проверки tech
+
     deliveryCity: "ufCrm75_1714013762",         // Город доставки
     link: "ufCrm75_1714013734",                 // Ссылка на оригинал
     referencePoint: "ufCrm75_1714013745",       // Ориентир

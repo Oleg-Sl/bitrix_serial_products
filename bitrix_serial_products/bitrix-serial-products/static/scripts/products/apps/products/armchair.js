@@ -24,7 +24,9 @@ export default class ArmchairApp extends BaseApp {
             this.productNameRus,
             this.checkData.getProductData.bind(this.checkData),
             false,
-            this.handlerSaveChanges.bind(this)
+            this.handlerSaveChanges.bind(this),
+            this.fotAccessManager,
+            this.currentUserId
         );
     }
 

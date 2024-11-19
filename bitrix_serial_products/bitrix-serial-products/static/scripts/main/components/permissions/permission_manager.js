@@ -29,7 +29,8 @@
 
 import AppUploadAccessManager from './app_upload_access_manager.js';
 import AppUploadAccessControl from './app_upload_access_control.js'
-
+import FotAccessManager from './fot_access_manager.js';
+import FotAccessControl from './fot_access_control.js';
 
 const ALLOWED_USERS = ['11789', '1', '351'];
 
@@ -40,12 +41,16 @@ export default class PermissionManager {
         this.appUploadManager = new AppUploadAccessManager(apiClient);
         this.appUploadAccessControl = new AppUploadAccessControl(apiClient);
 
+        this.fotManager = new FotAccessManager(apiClient);
+        this.fotAccessControl = new FotAccessControl(apiClient);
+
         this.btnEditPermission = document.getElementById('editPermission');
         this.permissionModal = document.getElementById('permissionModal');
     }
 
     async initialize() {
         this.appUploadManager.initialize();
+        this.fotManager.initialize();
 
         this.currentUser = await this.getCurrentUser();
         // проверка доступа пользователя к приложению
@@ -60,6 +65,7 @@ export default class PermissionManager {
 
         this.users = await this.getUsers();
         this.appUploadAccessControl.initialize(this.users);
+        this.fotAccessControl.initialize(this.users);
     }
 
     checkAppLoadPermission() {

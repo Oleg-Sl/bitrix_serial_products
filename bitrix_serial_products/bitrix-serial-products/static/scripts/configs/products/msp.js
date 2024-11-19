@@ -36,6 +36,9 @@ export const FIELD_MSP = {
     linkClientDoc: "ufCrm23_1714708683",        // Ссылка на документ для клиента
     linkWorkshopDoc: "ufCrm23_1714708692",      // Ссылка на документ для цеха
 
+    isTechOk: "ufCrm23_1731470922",             // tech-OK
+    dateOfTech: "ufCrm23_1731471281",           // Дата проверки tech
+
     isMeasured: "ufCrm23_1706958069",           // Замер нужен
     isActive: "ufCrm23_1706958090",             // Товар активен
     itemId: "ufCrm23_1714229941",               // ID товара

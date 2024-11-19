@@ -9,7 +9,7 @@ import EventEmitter from './eventemitter.js';
 
 
 export default class CalculationManager {
-    constructor(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, productNameRus, cbGetProductData, isEditable = false, cbSaveChangesOfProduct) {
+    constructor(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, productNameRus, cbGetProductData, isEditable = false, cbSaveChangesOfProduct, fotAccessManager, currentUserId) {
         this.apiClient = apiClient;
         this.calcTypeId = calcTypeId;
         this.calcFieldAliases = calcFieldAliases;
@@ -18,6 +18,8 @@ export default class CalculationManager {
         this.productNameRus = productNameRus;
         this.cbGetProductData = cbGetProductData;
         this.cbSaveChangesOfProduct = cbSaveChangesOfProduct;
+        this.fotAccessManager = fotAccessManager;
+        this.currentUserId = currentUserId;
 
         this.isEditable = isEditable;           // все расчеты редактируемые (выводим кнопку "Сохранить") / иначе не редактируемые (кнопка "Копировать")
 
@@ -27,7 +29,7 @@ export default class CalculationManager {
         // this.accessManager = new CalculationAccessManager(apiClient);
 
         this.calculationListView = new CalculationsListView(this.eventEmitter);
-        this.modalView = new ModalView(this.eventEmitter, this.isEditable);
+        this.modalView = new ModalView(this.eventEmitter, this.isEditable, this.fotAccessManager, this.currentUserId);
     }
 
     async initialize() {

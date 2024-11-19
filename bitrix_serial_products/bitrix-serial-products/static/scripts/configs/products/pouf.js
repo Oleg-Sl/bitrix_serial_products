@@ -32,6 +32,9 @@ export const FIELD_POUF = {
     linkClientDoc: "ufCrm67_1714708374",        // Ссылка на документ для клиента
     linkWorkshopDoc: "ufCrm67_1714708390",      // Ссылка на документ для цеха
 
+    isTechOk: "ufCrm67_1731471115",             // tech-OK
+    dateOfTech: "ufCrm67_1731471130",           // Дата проверки tech
+
     deliveryCity: "ufCrm67_1713517806",         // Город доставки
     link: "ufCrm67_1713517820",                 // Ссылка на оригинал
     referencePoint: "ufCrm67_1713517832",       // Ориентир

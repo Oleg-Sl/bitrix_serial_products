@@ -33,6 +33,9 @@ export const FIELD_BED = {
     linkClientDoc: "ufCrm61_1714708496",        // Ссылка на документ для клиента
     linkWorkshopDoc: "ufCrm61_1714708506",      // Ссылка на документ для цеха
 
+    isTechOk: "ufCrm61_1731471025",             // tech-OK
+    dateOfTech: "ufCrm61_1731471233",           // Дата проверки tech
+
     deliveryCity: "ufCrm61_1713510730",         // Город доставки
     link: "ufCrm61_1713510684",                 // Ссылка на оригинал
     referencePoint: "ufCrm61_1713510703",       // Ориентир

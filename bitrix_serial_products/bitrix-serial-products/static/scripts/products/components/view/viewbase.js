@@ -1,14 +1,18 @@
+import ButtonsView from './buttons.js';
 
 export default class BaseView {
     constructor(productService, userService, callbackService) {
         this.productService = productService;
         this.userService = userService;
         this.callbackService = callbackService;
-        this.initHandlers();
+        
+        this.buttonsView = new ButtonsView(productService, userService, callbackService);
+        // this.initHandlers();
     }
 
-    init() {
+    initialize() {
         this.initHandlers();
+        this.buttonsView.init();
     }
 
     render() {
@@ -22,6 +26,7 @@ export default class BaseView {
                 this.outputData(elem, value, fieldData);
             }
         }
+        this.buttonsView.render();
     }
 
     outputData(elem, value, fieldData) {

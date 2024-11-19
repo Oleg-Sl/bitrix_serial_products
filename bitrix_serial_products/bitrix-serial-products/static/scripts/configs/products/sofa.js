@@ -32,6 +32,9 @@ export const FIELD_SOFA = {
     linkClientDoc: "ufCrm53_1714708618",        // Ссылка на документ для клиента
     linkWorkshopDoc: "ufCrm53_1714708635",      // Ссылка на документ для цеха
 
+    isTechOk: "ufCrm53_1731470958",             // tech-OK
+    dateOfTech: "ufCrm53_1731471267",           // Дата проверки tech
+
     deliveryCity: "ufCrm53_1713500870",         // Город доставки
     link: "ufCrm53_1713500898",                 // Ссылка на оригинал
     referencePoint: "ufCrm53_1713500963",       // Ориентир

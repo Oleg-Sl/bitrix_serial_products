@@ -42,6 +42,7 @@ export default class ProductsList {
                         <div class="product-card-header-title text-truncate d-flex align-items-center">
                             <div class="text-truncate align-middle w-100 text-center" title="${product.title}">${product.title}</div>
                         </div>
+                        <div class="product-card-header-measure">${this.getMarkerIsTechOk(product.isTechOk)}</div>
                     </div>
                     <div class="product-card-body-img">
                         <div class="overlay d-none"></div>
@@ -123,6 +124,15 @@ export default class ProductsList {
     getPhotoUrl_(url, portalUrl) {
         return url || 'https://database.tamamm.ru/bitrix-crm-card/static/images/default.jpeg';
     }
+
+    getMarkerIsTechOk(value) {
+        console.log('getMarkerIsTechOk value = ', value);
+        if (value == 'Y') {
+            return '✅';
+        }
+        return '';
+    }
+
 
     getProductSize_(product) {
         if ('commonDimensionsDepth' in product) {

@@ -8,14 +8,14 @@ import PermissionManager from './components/permissions/permission_manager.js';
 export async function main(apiClient) {
     const elemLoader = document.querySelector("#elemWaitingLoader");
     const elemApp = document.querySelector("#elemAppData");
-    
+
     const loader = new Loader(elemLoader, elemApp);
     const userService = new UserService(apiClient);
     const productService = new ProductService(apiClient);
     const permissionManager = new PermissionManager(apiClient);
 
     const app = new App(apiClient, productService, userService);
-    
+
     loader.show();
 
     try {
@@ -26,7 +26,7 @@ export async function main(apiClient) {
     } finally {
         loader.hide();
     }
-    
+
     try {
         await app.initialize();
         // if (BX24) {

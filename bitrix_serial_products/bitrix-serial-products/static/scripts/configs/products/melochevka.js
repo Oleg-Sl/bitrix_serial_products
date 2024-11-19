@@ -32,6 +32,9 @@ export const FIELD_MELOCHEVKA = {
     linkClientDoc: "ufCrm63_1714708447",        // Ссылка на документ для клиента
     linkWorkshopDoc: "ufCrm63_1714708455",      // Ссылка на документ для цеха
 
+    isTechOk: "ufCrm63_1731471063",             // tech-OK
+    dateOfTech: "ufCrm63_1731471198",           // Дата проверки tech
+
     deliveryCity: "ufCrm63_1713514517",         // Город доставки
     quantity: "ufCrm63_1713514573",             // Количество
     dirId: "ufCrm63_1713514605",                // ID папки с файлами

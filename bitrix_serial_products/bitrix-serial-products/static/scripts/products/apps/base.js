@@ -2,6 +2,7 @@ import ViewHeader from "../components/header.js";
 // import { mapKeys, mapAliases } from '../../configs/mapping/key_mapping.js';
 import MainPhotoManager from '../components/main_photo/mainphotomanager.js';
 import CanvasManager from '../components/canvas/canvasmanager.js';
+import FotAccessManager from '../../main/components/permissions/fot_access_manager.js';
 import { ID_FOT } from '../../configs/calc/fot.js';
 
 export default class BaseApp {
@@ -13,6 +14,10 @@ export default class BaseApp {
         this.mechanismService = mechanismService;
         this.callbackService = callbackService;
         this.fileUploadService = fileUploadService;
+
+        this.currentUserId = this.userService.getCurrentUser()?.ID;
+
+        this.fotAccessManager = new FotAccessManager(this.apiClient);
         
         // this.portalUrl = portalUrl;
         // this.productId = productId;
@@ -30,8 +35,10 @@ export default class BaseApp {
 
     async initialize() {
         this.productService.setCbNotifyCalculation(this.notifyCalculation.bind(this));
+        this.fotAccessManager.initialize();
         this.fabricManager.initialize();
         this.calculation.initialize();
+        this.viewMain.initialize();
 
         this.viewHeader.render();
         this.viewMain.render();

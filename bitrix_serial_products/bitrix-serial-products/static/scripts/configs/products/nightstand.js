@@ -32,6 +32,9 @@ export const FIELD_NIGHTSTAND = {
     linkClientDoc: "ufCrm73_1714708330",        // Ссылка на документ для клиента
     linkWorkshopDoc: "ufCrm73_1714708341",      // Ссылка на документ для цеха
 
+    isTechOk: "ufCrm73_1731471046",             // tech-OK
+    dateOfTech: "ufCrm73_1731471216",           // Дата проверки tech
+
     deliveryCity: "ufCrm73_1714011425",         // Город доставки
     link: "ufCrm73_1714011384",                 // Ссылка на оригинал
     referencePoint: "ufCrm73_1714011399",       // Ориентир
