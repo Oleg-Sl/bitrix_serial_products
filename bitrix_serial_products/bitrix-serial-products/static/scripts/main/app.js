@@ -2,6 +2,7 @@ import Filter from './components/filter.js';
 import ProductsList from './components/products.js';
 import PackedParameters from './services/packed.js';
 import ProductAction from './components/product_action.js';
+import Paginator from './components/paginator.js';
 
 
 export default class App {
@@ -26,6 +27,8 @@ export default class App {
         const productsList = new ProductsList(productsContainer, this.productsFields, this.currentUser, packed);
         const filter = new Filter(filterButtonsContainer, this.productsService, productsList);
         const productAction = new ProductAction(this.apiClient, this.productsService);
+        const paginator = new Paginator(filter);
+        this.productsService.setPagination(paginator.setPagination.bind(paginator));
 
         filter.initialize();
         productAction.initialize();

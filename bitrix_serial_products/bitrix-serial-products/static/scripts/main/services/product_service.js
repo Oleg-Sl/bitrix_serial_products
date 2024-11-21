@@ -1,5 +1,7 @@
 import { getProductConfig } from '../../configs/utils.js';
 
+// import Paginator from '../components/paginator.js';
+
 import { ID_MSP } from "../../configs/products/msp.js";
 import { ID_SOFA } from "../../configs/products/sofa.js";
 import { ID_BED } from "../../configs/products/bed.js";
@@ -16,7 +18,14 @@ export default class ProductService {
     constructor(apiClient) {
         this.apiClient = apiClient;
 
+        // this.paginator = new Paginator();
+        this.cbSavePagination = null;
+
         this.specificWeights = null;
+    }
+
+    setPagination(cbSavePagination) {
+        this.cbSavePagination = cbSavePagination;
     }
 
     createProduct(productType) {
@@ -32,17 +41,18 @@ export default class ProductService {
         });
     }
 
-    async getFilterProducts(productType, params) {
+    async getFilterProducts(productType, params, page = 1) {
         const { title, smartId, field, calcTypeId } = getProductConfig(productType);
         console.log({
             productType,
             title,
             smartId,
             field,
-            params
+            params,
+            page
         });
         try {
-            let commandProducts = `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC`;
+            let commandProducts = `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC&start=${(page - 1) * 50}`;
             for (const [key, value] of Object.entries(params)) {
                 commandProducts += `&filter[${field[key]}]=${value}`;
             }
@@ -58,19 +68,22 @@ export default class ProductService {
             if (!response || !response.result?.products?.items) {
                 throw new Error('Invalid response from batch call');
             }
-            // calcTypeId
+
+            this.cbSavePagination(page, response?.result_total?.products || 0);
+
             const products = response?.result?.products?.items || [];
             return products.map(product => {
                 product.calcTypeId = calcTypeId;
                 return product;
             });
+            // self.paginator.setPagination(1, totalItems, pageSize);
         } catch (error) {
             console.error('Error in getProducts:', error);
             throw error;
         }
     }
 
-    async getProducts(productType) {
+    async getProducts(productType, page = 1) {
         const { title, smartId, field } = getProductConfig(productType);
         console.log({
             productType,
@@ -80,7 +93,7 @@ export default class ProductService {
         });
         try {
             const cmd = {
-                products: `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC`,
+                products: `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC&start=${(page - 1) * 50}`,
             };
 
             const response = await this.apiClient.callMethod('batch', {
@@ -92,6 +105,8 @@ export default class ProductService {
             if (!response || !response.result?.products?.items) {
                 throw new Error('Invalid response from batch call');
             }
+
+            this.cbSavePagination(page, response?.result_total?.products || 0);
 
             return response?.result?.products?.items || [];
         } catch (error) {

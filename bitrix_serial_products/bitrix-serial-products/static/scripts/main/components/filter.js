@@ -8,14 +8,15 @@ export default class Filter {
         this.debounceTimeout = null;
     }
 
-    async applyFilter() {
+    async applyFilter(page = 1) {
         let products = [];
         try {
             const params = {};
             if (this.inputFilter.value.length >= 3) {
                 params.filter = `%${this.inputFilter.value}%`;
             }
-            products = await this.productsService.getFilterProducts(this.productType, params);
+            this.productsList.displaySpinner();
+            products = await this.productsService.getFilterProducts(this.productType, params, page);
         } catch (error) {
             alert(`Ошибка получения списка продуктов: ${error.message}`);
         }
@@ -25,7 +26,6 @@ export default class Filter {
             BX24.fitWindow();
         }
     }
-
 
     initialize() {
         this.filterButtonsContainer.addEventListener('click', (event) => {

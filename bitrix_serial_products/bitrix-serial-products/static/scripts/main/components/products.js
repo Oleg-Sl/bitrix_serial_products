@@ -21,6 +21,16 @@ export default class ProductsList {
         });
     }
 
+    displaySpinner() {
+        this.productsContainer.innerHTML = `
+            <div class="d-flex justify-content-center w-100">
+                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Загрузка...</span>
+                </div>
+            </div>
+        `;
+    }
+
     displayProducts(products) {
         this.productsContainer.innerHTML = "";
         let contentHTML = "";
@@ -34,7 +44,7 @@ export default class ProductsList {
     // BX24.openPath('/crm/type/145/details/287/', r => console.log(r))
 
     getProductCardHTML(product) {
-        console.log(product);
+        // console.log(product);
         return `
             <div class="app-products-card-container" data-id="${product.id}" data-smart-type-id="${product.entityTypeId}">
                 <div class="col app-product-card">
@@ -126,7 +136,7 @@ export default class ProductsList {
     }
 
     getMarkerIsTechOk(value) {
-        console.log('getMarkerIsTechOk value = ', value);
+        // console.log('getMarkerIsTechOk value = ', value);
         if (value == 'Y') {
             return '✅';
         }
