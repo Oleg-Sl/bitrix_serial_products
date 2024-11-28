@@ -16,6 +16,7 @@ export default class Filter {
         let products = [];
         try {
             const params = this.getFilterParams();
+            console.log('params = ', params);
             // if (this.inputFilter.value.length >= 3) {
             //     params.filter = `%${this.inputFilter.value}%`;
             // }
