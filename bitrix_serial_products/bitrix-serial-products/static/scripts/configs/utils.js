@@ -54,7 +54,6 @@ export function getProductConfig(productType) {
 
 
 export function getProductConfigById(productTypeId) {
-    console.log('productTypeId', productTypeId);
     switch (parseInt(productTypeId)) {
         case ID_ARMCHAIR:
             return { title: 'Кресло', smartId: ID_ARMCHAIR, field: FIELD_ARMCHAIR, calcTypeId: CALC_ID_ARMCHAIR, calcFieldAlias: CALC_FIELD_ARMCHAIR, potochkaId: ITEM_ID_POTOCHKA_ARMCHAIR, fieldIsPotochka: FIELD_ARMCHAIR.isPotochka, fieldIsTemplatePotochka: FIELD_ARMCHAIR.isTemplatePotochka };
@@ -77,6 +76,32 @@ export function getProductConfigById(productTypeId) {
         default:
             return {};
     }
+}
+
+export function getFilterFields(productTypeId) {
+    switch (parseInt(productTypeId)) {
+        case ID_ARMCHAIR:
+            return [];
+        case ID_BED:
+            return ['filterTitle', 'smp', 'liftingMechanism', 'system', 'filterTags'];
+        case ID_CHAIR:
+            return [];
+        case ID_MELOCHEVKA:
+            return [];
+        case ID_MSP:
+            return [];
+        case ID_NIGHTSTAND:
+            return [];
+        case ID_POUF:
+            return [];
+        case ID_SOFA:
+            return ['filterNameCollection', 'shape', 'filterMechanism', 'filterTags'];
+        case ID_TABLE:
+            return [];
+        default:
+            return {};
+    }
+    
 }
 
 // function getProductDescription(productType) {

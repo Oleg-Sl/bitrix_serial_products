@@ -53,7 +53,7 @@ export const FIELD_SOFA = {
     isPotochka: "ufCrm53_1714839607",           // Поточка?
     calculationId: "ufCrm53_1714910311",        // Расчет
     deliveryToMSK: "ufCrm53_1716434545",        // Доставка до МСК
-    
+
     filterMechanism: "ufCrm53_1732095781",      // Фильтр - Наличие механизма
     filterNameCollection: "ufCrm53_1732093381", // Фильтр - Название коллекии
     filterTags: "ufCrm53_1730290956",           // Фильтр - ТЕГИ

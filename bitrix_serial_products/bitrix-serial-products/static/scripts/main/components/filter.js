@@ -1,3 +1,4 @@
+import { getFilterFields } from "../../configs/utils.js";
 export default class Filter {
     constructor(filterButtonsContainer, productsService, productsList, filterFields = []) {
         this.filterButtonsContainer = filterButtonsContainer;
@@ -16,7 +17,6 @@ export default class Filter {
         let products = [];
         try {
             const params = this.getFilterParams();
-            console.log('params = ', params);
             // if (this.inputFilter.value.length >= 3) {
             //     params.filter = `%${this.inputFilter.value}%`;
             // }
@@ -60,7 +60,8 @@ export default class Filter {
 
     render() {
         let contentHTML = '';
-        for (const fieldAlias of this.filterFields) {
+        const filterFields = getFilterFields(this.productType);
+        for (const fieldAlias of filterFields) {
             const fieldData = this.productsList.getFieldData(this.productType, fieldAlias);
             if (fieldData.type === 'enumeration') {
                 contentHTML += this.getSelectHTML(fieldAlias, fieldData.title, fieldData.items);
@@ -100,7 +101,8 @@ export default class Filter {
 
     getFilterParams() {
         let params = {};
-        for (const fieldAlias of this.filterFields) {
+        const filterFields = getFilterFields(this.productType);
+        for (const fieldAlias of filterFields) {
             const elem = document.getElementById(fieldAlias);
             if (!elem || !elem.value) {
                 continue;
