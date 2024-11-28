@@ -101,7 +101,7 @@ export default class Filter {
         let params = {};
         for (const fieldAlias of this.filterFields) {
             const elem = document.getElementById(fieldAlias);
-            if (!elem.value) {
+            if (!elem || !elem.value) {
                 continue;
             }
             if (elem.tagName === 'SELECT') {
