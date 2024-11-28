@@ -1,5 +1,5 @@
 // import { DEAL_FIELDS } from '../config/dealFields';
-import { mapKeys, mapAliases } from '../../configs/mapping/key_mapping.js';
+import { mapKeys, mapAliases, getFieldInBx24 } from '../../configs/mapping/key_mapping.js';
 
 
 export default class ProductsList {
@@ -11,7 +11,6 @@ export default class ProductsList {
 
         this.init();
     }
-    
 
     init() {
         this.productsContainer.addEventListener('click', (event) => {
@@ -19,6 +18,14 @@ export default class ProductsList {
                 BX24.openPath(event.target.dataset.path, r => console.log(r));
             }
         });
+    }
+
+    getFieldData(productType, fieldAlias) {
+        const fieldInBx24 = getFieldInBx24(productType, fieldAlias);
+        if (!fieldInBx24) {
+            return {};
+        }
+        return this.productsFields[productType][fieldInBx24];
     }
 
     displaySpinner() {
@@ -136,7 +143,6 @@ export default class ProductsList {
     }
 
     getMarkerIsTechOk(value) {
-        // console.log('getMarkerIsTechOk value = ', value);
         if (value == 'Y') {
             return '✅';
         }

@@ -20,12 +20,19 @@ export default class App {
         this.productsFields = await this.productsService.getProductsFields();
         this.specificWeights = await this.productsService.getSpecificWeights();
 
+        // console.log('this.productsFields = ', this.productsFields);
+
         const filterButtonsContainer = document.querySelector(".product-buttons");
         const productsContainer = document.querySelector(".app-products-cards");
 
         const packed = new PackedParameters(this.specificWeights);
         const productsList = new ProductsList(productsContainer, this.productsFields, this.currentUser, packed);
-        const filter = new Filter(filterButtonsContainer, this.productsService, productsList);
+        const filter = new Filter(filterButtonsContainer, this.productsService, productsList, [
+            'filterNameCollection',     // - Название коллекции
+            'shape',                    // - Форма дивана
+            'filterMechanism',          // - Механизм (поле ДА/нет)
+            'filterTags',               // - Фильтр общий
+        ]);
         const productAction = new ProductAction(this.apiClient, this.productsService);
         const paginator = new Paginator(filter);
         this.productsService.setPagination(paginator.setPagination.bind(paginator));

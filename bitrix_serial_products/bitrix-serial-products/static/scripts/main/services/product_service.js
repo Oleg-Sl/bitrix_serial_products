@@ -1,4 +1,4 @@
-import { getProductConfig } from '../../configs/utils.js';
+import { getProductConfig, getProductConfigById } from '../../configs/utils.js';
 
 // import Paginator from '../components/paginator.js';
 
@@ -42,7 +42,9 @@ export default class ProductService {
     }
 
     async getFilterProducts(productType, params, page = 1) {
-        const { title, smartId, field, calcTypeId } = getProductConfig(productType);
+        // const { title, smartId, field, calcTypeId } = getProductConfig(productType);
+        const { title, smartId, field, calcTypeId } = getProductConfigById(productType);
+        
         console.log({
             productType,
             title,

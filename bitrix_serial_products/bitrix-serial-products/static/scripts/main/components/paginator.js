@@ -56,7 +56,7 @@ export default class Paginator {
         }
         this.paginationContainer.innerHTML = `
             <nav aria-label="Навигации по страницам">
-                <ul class="pagination">
+                <ul class="pagination mb-0">
                     <li class="page-item ${this.currentPage === 0 || this.currentPage === 1 ? 'disabled' : ''}">
                         <span class="page-link" aria-label="Предыдущая" title="Предыдущая страница" style="cursor: pointer;" data-page="${+this.currentPage - 1}">
                             <span aria-hidden="true" data-page="${+this.currentPage - 1}">&laquo;</span>

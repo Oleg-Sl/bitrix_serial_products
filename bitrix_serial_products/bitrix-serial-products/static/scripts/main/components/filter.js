@@ -1,9 +1,13 @@
 export default class Filter {
-    constructor(filterButtonsContainer, productsService, productsList) {
+    constructor(filterButtonsContainer, productsService, productsList, filterFields = []) {
         this.filterButtonsContainer = filterButtonsContainer;
         this.productsService = productsService;
         this.productsList = productsList;
-        this.inputFilter = document.getElementById('inputFilter');
+        this.filterFields = filterFields;
+
+        // this.inputFilter = document.getElementById('inputFilter');
+        this.container = document.getElementById('filterContainer');
+        this.btnFilter = document.getElementById('btnFilter');
         this.productType = null;
         this.debounceTimeout = null;
     }
@@ -11,10 +15,10 @@ export default class Filter {
     async applyFilter(page = 1) {
         let products = [];
         try {
-            const params = {};
-            if (this.inputFilter.value.length >= 3) {
-                params.filter = `%${this.inputFilter.value}%`;
-            }
+            const params = this.getFilterParams();
+            // if (this.inputFilter.value.length >= 3) {
+            //     params.filter = `%${this.inputFilter.value}%`;
+            // }
             this.productsList.displaySpinner();
             products = await this.productsService.getFilterProducts(this.productType, params, page);
         } catch (error) {
@@ -30,24 +34,82 @@ export default class Filter {
     initialize() {
         this.filterButtonsContainer.addEventListener('click', (event) => {
             if (event.target.tagName === 'BUTTON') {
-                const productType = event.target.getAttribute('data-type');
-                if (this.productType && productType != this.productType) {
-                    this.inputFilter.value = '';
-                }
+                const productType = event.target.getAttribute('data-type-id');
+                // if (this.productType && productType != this.productType) {
+                //     this.inputFilter.value = '';
+                // }
                 this.productType = productType;
+                this.render();
                 this.applyFilter();
             }
         });
-        this.inputFilter.addEventListener('input', (event) => {
-            const target = event.target;
-            if (this.productType && target.value.length >= 3) {
-                this.debounce(() => this.applyFilter(), 300);
-            }
-        })
+        this.btnFilter.addEventListener('click', (event) => this.applyFilter());
+        // this.inputFilter.addEventListener('input', (event) => {
+        //     const target = event.target;
+        //     if (this.productType && target.value.length >= 3) {
+        //         this.debounce(() => this.applyFilter(), 300);
+        //     }
+        // })
     }
 
     debounce(func, delay) {
         clearTimeout(this.debounceTimeout);
         this.debounceTimeout = setTimeout(func, delay);
+    }
+
+    render() {
+        let contentHTML = '';
+        for (const fieldAlias of this.filterFields) {
+            const fieldData = this.productsList.getFieldData(this.productType, fieldAlias);
+            if (fieldData.type === 'enumeration') {
+                contentHTML += this.getSelectHTML(fieldAlias, fieldData.title, fieldData.items);
+            } else if (fieldData.type === 'boolean') {
+                contentHTML += this.getSelectHTML(fieldAlias, fieldData.title, [{ ID: 'Y', VALUE: 'Да' }, { ID: 'N', VALUE: 'Нет' }]);
+            } else if (fieldData.type === 'string') {
+                contentHTML += this.getInputHTML(fieldAlias, fieldData.title);
+            }
+        }
+        this.container.innerHTML = contentHTML;
+    }
+
+    getSelectHTML(fieldAlias, title, options) {
+        let optionsHTML = '';
+        for (const option of options) {
+            optionsHTML += `<option value="${option.ID}">${option.VALUE}</option>`;
+        }
+        return `
+            <div class="d-flex input-group me-1">
+                <span class="input-group-text" id="">${title}</span>
+                <select id="${fieldAlias}" class="form-select form-select-sm" aria-label="">
+                    <option value=""></option>
+                    ${optionsHTML}
+                </select>
+            </div>
+        `;
+    }
+
+    getInputHTML(fieldAlias, title, placeholder = '') {
+        return `
+            <div class="d-flex input-group me-1">
+                <span class="input-group-text" id="">${title}</span>
+                <input type="text" id="${fieldAlias}" class="form-control form-control-sm" placeholder="${placeholder}" aria-label="" aria-describedby="">
+            </div>
+        `;
+    }
+
+    getFilterParams() {
+        let params = {};
+        for (const fieldAlias of this.filterFields) {
+            const elem = document.getElementById(fieldAlias);
+            if (!elem.value) {
+                continue;
+            }
+            if (elem.tagName === 'SELECT') {
+                params[fieldAlias] = elem.value;
+            } else if (elem.tagName === 'INPUT') {
+                params[fieldAlias] = `%${elem.value}%`;
+            }
+        }
+        return params;
     }
 }
