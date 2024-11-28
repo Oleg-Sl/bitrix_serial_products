@@ -2,6 +2,24 @@ import BaseView from '../viewbase.js';
 
 
 export default class SofaView extends BaseView {
+    constructor(productService, userService, callbackService, mechanismService) {
+        super(productService, userService, callbackService);
+
+        this.selectSleepingMechanism = document.querySelector('#sleepingMechanism');
+        this.inputSleepingMechanismDesc = document.querySelector('#sleepingMechanismDesc');
+        this.mechanismService = mechanismService;
+    }
+
+    initHandlers() {
+        super.initHandlers();
+        this.selectSleepingMechanism.addEventListener('change', (event) => {
+            const mechanismId = event.target.value;
+            this.productService.updateProductData('sleepingMechanism', mechanismId);
+            const mechanismData = this.mechanismService.getMechanismData(mechanismId);
+            this.inputSleepingMechanismDesc.value = mechanismData.description || '';
+        });
+    }
+
     render() {
         const fields = this.productService.getFieldMatching();
         for (const [fieldAlias, fieldNameBx24] of Object.entries(fields)) {
@@ -23,6 +41,27 @@ export default class SofaView extends BaseView {
                 this.outputData(elem, value, fieldDaata);
             }
         }
+        this.renderSleepingMechanism();
+    }
+
+    renderSleepingMechanism() {
+        const mechanismId = this.productService.getValue('sleepingMechanism');
+        const mechanismData = this.mechanismService.getMechanismData(mechanismId);
+        let contentHTML = '<option value=""></option>';
+        const sleepingMechanisms = this.mechanismService.getMechanisms();
+        for (const item of sleepingMechanisms) {
+            contentHTML += `<option value="${item.id}">${item.title}</option>`;
+        }
+        this.selectSleepingMechanism.innerHTML = contentHTML;
+
+        for (const option of this.selectSleepingMechanism.querySelectorAll('option')) {
+            if (option.value == mechanismId) {
+                option.selected = true;
+                break;
+            }
+        }
+
+        this.inputSleepingMechanismDesc.value = mechanismData.description || '';
     }
 
     dependentField(target) {

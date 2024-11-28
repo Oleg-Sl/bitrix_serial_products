@@ -96,6 +96,7 @@ export const FIELD_SOFA = {
     
     // totalThickness_4: "ufCrm53_1713499334",             // 4-Общая толщина
     totalThickness_4: "ufCrm53_1716820921",             // 4-Общая толщина
+    seamType_4: "ufCrm53_1725523131",                   // 2-Тип шва
     tiltAngle_4: "ufCrm53_1713499350",                  // 4-Угол наклона
     softnessWish_4: "ufCrm53_1713499455",               // 4-Пожелание по мягкости
     decorationDescription_4: "ufCrm53_1713499477",      // 4-Доп. описание и описание декора

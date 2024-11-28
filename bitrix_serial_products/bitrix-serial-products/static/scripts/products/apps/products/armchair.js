@@ -29,5 +29,4 @@ export default class ArmchairApp extends BaseApp {
             this.currentUserId
         );
     }
-
 }
