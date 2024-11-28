@@ -82,7 +82,7 @@ export default class Filter {
         return `
             <div class="col d-flex flex-nowrap input-group me-1">
                 <span class="input-group-text" id="">${title}</span>
-                <select id="${fieldAlias}" class="form-select form-select-sm" aria-label="">
+                <select id="${fieldAlias}" class="form-select form-select-sm p-0" aria-label="">
                     <option value=""></option>
                     ${optionsHTML}
                 </select>
