@@ -80,7 +80,7 @@ export default class Filter {
             optionsHTML += `<option value="${option.ID}">${option.VALUE}</option>`;
         }
         return `
-            <div class="d-flex input-group me-1">
+            <div class="col d-flex flex-nowrap input-group me-1">
                 <span class="input-group-text" id="">${title}</span>
                 <select id="${fieldAlias}" class="form-select form-select-sm" aria-label="">
                     <option value=""></option>
@@ -92,7 +92,7 @@ export default class Filter {
 
     getInputHTML(fieldAlias, title, placeholder = '') {
         return `
-            <div class="d-flex input-group me-1">
+            <div class="col d-flex flex-nowrap input-group me-1">
                 <span class="input-group-text" id="">${title}</span>
                 <input type="text" id="${fieldAlias}" class="form-control form-control-sm" placeholder="${placeholder}" aria-label="" aria-describedby="">
             </div>
