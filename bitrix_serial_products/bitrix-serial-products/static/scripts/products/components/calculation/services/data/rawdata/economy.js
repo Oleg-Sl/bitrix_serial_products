@@ -36,6 +36,10 @@ export default class EconomyService {
         return FIELD_ECONOMY[key]?.price;
     }
 
+    getCategoryId(key) {
+        return FIELD_ECONOMY[key]?.categoryId;
+    }
+
     // getFabricSmartId(fabricAlias) {
     //     return FIELD_ECONOMY.find(item => item[this.fieldParentId] == parentId);
     // }
@@ -55,4 +59,9 @@ export default class EconomyService {
         const fabric = this.getFabric(fabricAlias);
         return fabric?.[FIELD_FABRICS.name] || '';
     }
+
+    // getFabricId(fabricAlias) {
+    //     const fabric = this.getFabric(fabricAlias);
+    //     return fabric?.[FIELD_FABRICS.name] || '';
+    // }
 }

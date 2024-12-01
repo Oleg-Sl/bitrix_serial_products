@@ -177,6 +177,7 @@ export default class Calculation {
             const fabricSummary = this.economyService.getFabricPrice(economyAlias) * fabricRunningMeters;
             let economy = {
                 code: economyAlias,
+                categoryId: this.economyService.getCategoryId(economyAlias),
                 fabricCategory: this.economyService.getFabricName(economyAlias),
                 fabricPrice: this.economyService.getFabricPrice(economyAlias),
                 fabricSummary: fabricSummary,

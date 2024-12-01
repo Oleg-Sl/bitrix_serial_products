@@ -50,6 +50,10 @@ export default class CalculationManager {
         console.log(">>>>> ", this.cbGetProductData());
     }
 
+    getProductPrices() {
+        return this.dataService.getProductPrices();
+    }
+
     updateCaclulations() {
         const openCalculationId = this.modalView.getOpenCalculationId();
         const isNewCalculation = this.modalView.getStateCaclulation();

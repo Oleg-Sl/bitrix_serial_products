@@ -13,7 +13,7 @@ export default class ArmchairApp extends BaseApp {
 
         this.productNameRus = 'Кресло';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
-        this.viewMain = new ArmchairView(productService, userService, callbackService);
+        this.viewMain = new ArmchairView(productService, userService, callbackService, this.callbackAddProductItem.bind(this));
         this.checkData = new CheckArmchairData(productService, this.fabricManager, this.productNameRus);
         this.calculation = new CalculationManager(
             apiClient,
@@ -28,6 +28,28 @@ export default class ArmchairApp extends BaseApp {
             this.fotAccessManager,
             this.currentUserId
         );
+    }
+
+    async callbackAddProductItem(productId) {
+        let mainItemId = productId;
+        const fileContentData = await this.mainPhotoManager.getFileContent();
+        if (!productId) {
+            // создание главного товара
+            mainItemId = await this.productItemService.createMainProduct(193, 'Тест!', fileContentData);
+        }
+        const productPrices = this.calculation.getProductPrices();
+        // console.log('productPrices = ', productPrices);
+        // console.log('fileContentData = ', fileContentData);
+        // Создание вариаций
+        for (const productPrice of productPrices) {
+            const category = productPrice.fabricCategory;
+            const price = productPrice.price;
+            const categoryId = productPrice.categoryId;
+            // console.log(categoryId, ' = ', price);
+            const result = await this.productItemService.createVariationProduct(mainItemId, 'Название ' + category, fileContentData, price, categoryId);
+            console.log('result = ', result);
+            // return
+        }
     }
 }
 // 

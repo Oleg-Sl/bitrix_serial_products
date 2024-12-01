@@ -1,10 +1,11 @@
 // import ButtonsView from './buttons.js';
 import ButtonComdirokView from './button_comdirok.js';
 import ButtonTechokView from './button_techok.js';
+import ButtonCreateProductView from './button_createproduct.js';
 
 
 export default class BaseView {
-    constructor(productService, userService, callbackService) {
+    constructor(productService, userService, callbackService, callbackAddProductItem) {
         this.productService = productService;
         this.userService = userService;
         this.callbackService = callbackService;
@@ -12,12 +13,14 @@ export default class BaseView {
         // this.buttonView = new ButtonsView(productService, userService, callbackService);
         this.buttonTechokView = new ButtonTechokView(productService, userService, callbackService);
         this.buttonComdirokView = new ButtonComdirokView(productService, userService, callbackService);
+        this.buttonCreateProductView = new ButtonCreateProductView(productService, userService, callbackService, callbackAddProductItem);
     }
 
     initialize() {
         this.initHandlers();
         this.buttonTechokView.init();
         this.buttonComdirokView.init();
+        this.buttonCreateProductView.init();
     }
 
     render() {

@@ -27,6 +27,10 @@ export default class DataService {
         this.eventService.subscribeEvents();
     }
 
+    getProductPrices() {
+        return this.calculationService.getProductPrices();
+    }
+
     getCurrentUser() {
         return this.currentUser;
     }

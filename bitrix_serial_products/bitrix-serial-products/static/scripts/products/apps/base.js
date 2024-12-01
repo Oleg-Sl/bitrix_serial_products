@@ -4,6 +4,7 @@ import MainPhotoManager from '../components/main_photo/mainphotomanager.js';
 import CanvasManager from '../components/canvas/canvasmanager.js';
 import FotAccessManager from '../../main/components/permissions/fot_access_manager.js';
 import { ID_FOT } from '../../configs/calc/fot.js';
+import ProductItemService from '../services/productitem_service.js';
 
 export default class BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, productTypeId, productFields) {
@@ -27,6 +28,8 @@ export default class BaseApp {
         this.viewHeader = new ViewHeader(this.productService, this.userService, this.callbackService);
         this.mainPhotoManager = new MainPhotoManager(this.fileUploadService, this.productService, (17.46/10.15));
         this.canvasManager = new CanvasManager(this.apiClient, this.productService, this.fileUploadService);
+        this.productItemService = new ProductItemService(apiClient);
+        
 
         this.btnSave = document.querySelector(`.product-btn-save`);
         this.btnCopy = document.querySelector(`#btnCreateCopyProduct`);

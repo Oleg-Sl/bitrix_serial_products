@@ -64,6 +64,13 @@ export default class CalculationService {
         this.calculations.map((calculation) => calculation.isSelected = (calculation.calculationId == calculationId));
     }
 
+    getProductPrices() {
+        if (!this.calculations) {
+            return [];
+        }
+        return this.calculations[0].economies;
+    }
+
     getCalculation(calculationId) {
         return this.calculations.find((item) => item.calculationId == calculationId);
     }

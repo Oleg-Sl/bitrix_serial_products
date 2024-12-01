@@ -6,7 +6,7 @@ import UserService from './services/user_service.js';
 import MechanismService from './services/mechanism_service.js';
 import CallbackService from './services/callback_service.js';
 import FileUploadService from './services/fileupload_service.js';
-import CalculationManager from '../products/components/calculation/calcmanager.js';
+// import CalculationManager from '../products/components/calculation/calcmanager.js';
 import { getProductConfig, getProductConfigById } from '../configs/utils.js';
 
 
