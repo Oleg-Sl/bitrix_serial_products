@@ -171,25 +171,27 @@ export default class Calculation {
     initEconomy() {
         this.economies = [];
         const fabricRunningMeters = this.getFabricRunningMeters();
-        const economyRawData = this.economyService.getByParentId(this.calculationRawData.id) || {};
-        this.smartEconomyId = economyRawData.id;
+        const economyRawData = this.economyService.getByParentId(this.calculationRawData.id);
+        this.smartEconomyId = economyRawData?.id;
         for (const economyAlias of this.economyService.getFabricAliases()) {
             const fabricSummary = this.economyService.getFabricPrice(economyAlias) * fabricRunningMeters;
-            const economy = {
+            let economy = {
                 code: economyAlias,
                 fabricCategory: this.economyService.getFabricName(economyAlias),
                 fabricPrice: this.economyService.getFabricPrice(economyAlias),
                 fabricSummary: fabricSummary,
                 totalCost: this.costPrice + fabricSummary,
                 margin: this.coefficientsService.getCoefficient(economyAlias) || 0,
-                price: economyRawData[this.economyService.getPriceField(economyAlias)] || 0,
+                price: economyRawData[this.economyService.getPriceField(economyAlias)] || 0
             }
+            if (economyRawData == undefined) {
+                economy.price = Math.ceil(economy.totalCost * (1 + economy.margin));
+            }
+
             this.economies.push(economy);
         }
-        console.log("ECONOMIES = ", this.economies);
+        // console.log("ECONOMIES = ", this.economies);
     }
-
-
 
     initComment() {
         const fieldComment = this.calculationFieldsService.getFieldKeyByAlias('generalComment');
