@@ -82,6 +82,7 @@ export const CALC_FIELD_POUF = {
     },
     Fabric1_smart: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 1,
         value: 'ufCrm69_1713850234',
         amount: 'ufCrm69_1713850241',
@@ -89,6 +90,7 @@ export const CALC_FIELD_POUF = {
     },
     Fabric2: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm69_1713850280',
         value: 'ufCrm69_1713850312',
         amount: 'ufCrm69_1713850338',
@@ -96,6 +98,7 @@ export const CALC_FIELD_POUF = {
     },
     Fabric3: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm69_1713850299',
         value: 'ufCrm69_1713850328',
         amount: 'ufCrm69_1713850352',

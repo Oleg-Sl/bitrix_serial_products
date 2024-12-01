@@ -53,6 +53,7 @@ export const CALC_FIELD_NIGHTSTAND = {
     },
     Fabric1: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 1,
         value: 'ufCrm79_1714099581',             
         amount: 'ufCrm79_1714099606',            

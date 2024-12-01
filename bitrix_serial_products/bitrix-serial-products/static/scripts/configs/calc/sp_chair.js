@@ -90,6 +90,7 @@ export const CALC_FIELD_CHAIR = {
 
     fabric1: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 1,
         value: 'ufCrm83_1714103434',
         amount: 'ufCrm83_1714103443',

@@ -73,6 +73,7 @@ export const CALC_FIELD_MELOCHEVKA = {
     },
     Fabric1: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm65_1713852170',               
         amount: 'ufCrm65_1713852201',              
         value: 'ufCrm65_1713852255',               
@@ -80,6 +81,7 @@ export const CALC_FIELD_MELOCHEVKA = {
     },
     Fabric2: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm65_1713852180',               
         amount: 'ufCrm65_1713852210',              
         value: 'ufCrm65_1713852275',               

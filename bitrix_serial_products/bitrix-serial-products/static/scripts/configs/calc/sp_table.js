@@ -62,6 +62,7 @@ export const CALC_FIELD_TABLE = {
     },
     fabric1: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 1,
         value: 'ufCrm81_1714101977',
         amount: 'ufCrm81_1714101984',

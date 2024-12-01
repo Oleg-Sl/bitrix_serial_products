@@ -114,6 +114,7 @@ export const CALC_FIELD_SOFA = {
     },
     Fabric1_smart: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 1,
         value: 'ufCrm51_1713686013',
         amount: 'ufCrm51_1713686047',
@@ -121,6 +122,7 @@ export const CALC_FIELD_SOFA = {
     },
     Fabric2: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm51_1713686148',
         value: 'ufCrm51_1713686119',
         amount: 'ufCrm51_1713686170',
@@ -128,6 +130,7 @@ export const CALC_FIELD_SOFA = {
     },
     Fabric3: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm51_1713686207',
         value: 'ufCrm51_1713686271',
         amount: 'ufCrm51_1713686235',
@@ -135,6 +138,7 @@ export const CALC_FIELD_SOFA = {
     },
     Fabric4: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm51_1713688391',
         value: 'ufCrm51_1713688409',
         amount: 'ufCrm51_1713688452',

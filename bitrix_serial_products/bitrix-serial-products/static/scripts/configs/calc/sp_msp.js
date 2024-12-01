@@ -44,6 +44,7 @@ export const CALC_FIELD_MSP = {
     },
     Fabric1: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 1,
         value: 'ufCrm27_1708658296',               
         amount: 'ufCrm27_1708658322',              
@@ -51,6 +52,7 @@ export const CALC_FIELD_MSP = {
     },
     Fabric2: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 2,
         value: 'ufCrm27_1708658336',               
         amount: 'ufCrm27_1708658346',              
@@ -58,6 +60,7 @@ export const CALC_FIELD_MSP = {
     },
     Fabric3: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 3,
         value: 'ufCrm27_1708658363',               
         amount: 'ufCrm27_1708658373',              

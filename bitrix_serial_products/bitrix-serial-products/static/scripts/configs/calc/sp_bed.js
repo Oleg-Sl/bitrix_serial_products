@@ -103,6 +103,7 @@ export const CALC_FIELD_BED = {
     },
     Fabric1Smart: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 1,
         value: 'ufCrm71_1713848377',             
         amount: 'ufCrm71_1713848409',            
@@ -110,6 +111,7 @@ export const CALC_FIELD_BED = {
     },
     Fabric2: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 2,
         value: 'ufCrm71_1713848392',             
         amount: 'ufCrm71_1713848427',            
@@ -117,6 +119,7 @@ export const CALC_FIELD_BED = {
     },
     Fabric3: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm71_1713848492',             
         value: 'ufCrm71_1713848524',             
         amount: 'ufCrm71_1713848579',            
@@ -124,6 +127,7 @@ export const CALC_FIELD_BED = {
     },
     Fabric4: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm71_1713848503',             
         value: 'ufCrm71_1713848541',             
         amount: 'ufCrm71_1713848587',            
