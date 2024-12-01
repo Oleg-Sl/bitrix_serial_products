@@ -23,7 +23,7 @@ export default class CoefficientsService {
     getCoefficient(key) {
         const fieldInBx24 = FIELD_COEFFICIENTS?.[key]?.fieldId;
         if (!fieldInBx24) {
-            return 1;
+            return 0;
         }
         const coefficient = this.coefficients?.[fieldInBx24] || 0;
         return +coefficient;
