@@ -12,6 +12,7 @@ import { ID_NIGHTSTAND } from "../../configs/products/nightstand.js";
 import { ID_TABLE } from "../../configs/products/table.js";
 import { ID_CHAIR } from "../../configs/products/chair.js";
 import { ID_SPECIFIC_WEIGHT } from "../../configs/smart_process/specific_weight.js";
+import { ID_ECONOMY } from "../../configs/calc/economy.js";
 
 
 export default class ProductService {
@@ -74,6 +75,7 @@ export default class ProductService {
             this.cbSavePagination(page, response?.result_total?.products || 0);
 
             const products = response?.result?.products?.items || [];
+            this.getDataEconomies(products);
             return products.map(product => {
                 product.calcTypeId = calcTypeId;
                 return product;
@@ -85,37 +87,61 @@ export default class ProductService {
         }
     }
 
-    async getProducts(productType, page = 1) {
-        const { title, smartId, field } = getProductConfig(productType);
-        console.log({
-            productType,
-            title,
-            smartId,
-            field
-        });
-        try {
-            const cmd = {
-                products: `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[id]=DESC&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC&start=${(page - 1) * 50}`,
-            };
-
-            const response = await this.apiClient.callMethod('batch', {
-                halt: 0,
-                cmd: cmd
-            });
-            console.log('response', response);
-
-            if (!response || !response.result?.products?.items) {
-                throw new Error('Invalid response from batch call');
-            }
-
-            this.cbSavePagination(page, response?.result_total?.products || 0);
-
-            return response?.result?.products?.items || [];
-        } catch (error) {
-            console.error('Error in getProducts:', error);
-            throw error;
+    async getDataEconomies(products) {
+        let cmd = {};
+        for (const product of products) {
+            cmd[product.id] = `crm.item.list?entityTypeId=${ID_ECONOMY}&filter[parentId${product.entityTypeId}]=${product.id}`;
         }
+
+        const response = await this.apiClient.callMethod('batch', {
+            halt: 0,
+            cmd: cmd
+        });
+
+        if (!response || !response.result) {
+            throw new Error('Invalid response from batch call');
+        }
+
+        const economies = {};
+        for (const [productId, economyData] of Object.entries(response.result)) {
+            economies[productId] = economyData?.items?.[0];
+            // economies.push(economyData?.items?.[0]);
+        }
+
+        return economies;
     }
+
+    // async getProducts(productType, page = 1) {
+    //     const { title, smartId, field } = getProductConfig(productType);
+    //     console.log({
+    //         productType,
+    //         title,
+    //         smartId,
+    //         field
+    //     });
+    //     try {
+    //         const cmd = {
+    //             products: `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[id]=DESC&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC&start=${(page - 1) * 50}`,
+    //         };
+
+    //         const response = await this.apiClient.callMethod('batch', {
+    //             halt: 0,
+    //             cmd: cmd
+    //         });
+    //         console.log('response', response);
+
+    //         if (!response || !response.result?.products?.items) {
+    //             throw new Error('Invalid response from batch call');
+    //         }
+
+    //         this.cbSavePagination(page, response?.result_total?.products || 0);
+
+    //         return response?.result?.products?.items || [];
+    //     } catch (error) {
+    //         console.error('Error in getProducts:', error);
+    //         throw error;
+    //     }
+    // }
 
     async getProductsFields() {
         const cmd = {

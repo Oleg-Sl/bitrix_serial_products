@@ -34,6 +34,8 @@ export const FIELD_TABLE = {
 
     isTechOk: "ufCrm75_1731471099",             // tech-OK
     dateOfTech: "ufCrm75_1731471164",           // Дата проверки tech
+    isComDirOk: "ufCrm75_1732253488",           // Ком.дир-OK
+    dateOfComDir: "ufCrm75_1732253560",         // Дата согласования ком.дир
 
     deliveryCity: "ufCrm75_1714013762",         // Город доставки
     link: "ufCrm75_1714013734",                 // Ссылка на оригинал

@@ -1,5 +1,6 @@
 // import { DEAL_FIELDS } from '../config/dealFields';
 import { mapKeys, mapAliases, getFieldInBx24 } from '../../configs/mapping/key_mapping.js';
+import { FIELD_ECONOMY } from '../../configs/calc/economy.js';
 
 
 export default class ProductsList {
@@ -38,24 +39,44 @@ export default class ProductsList {
         `;
     }
 
-    displayProducts(products) {
+    displayProducts(products, economies) {
         this.productsContainer.innerHTML = "";
         let contentHTML = "";
         if (products.length !== 0) {
+            
             products.forEach(product => {
-                contentHTML += this.getProductCardHTML(mapKeys(product));
+                const economy = economies[product.id];
+                contentHTML += this.getProductCardHTML(mapKeys(product), economy);
             });
             this.productsContainer.innerHTML = contentHTML;
         }
     }
     // BX24.openPath('/crm/type/145/details/287/', r => console.log(r))
 
-    getProductCardHTML(product) {
+    getProductCardHTML(product, economy) {
         // console.log(product);
         return `
             <div class="app-products-card-container" data-id="${product.id}" data-smart-type-id="${product.entityTypeId}">
                 <div class="col app-product-card">
                     <div class="product-card-header">
+                        <div class="dropdown">
+                            <button class="btn p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">💲</button>
+                            <div class="dropdown-menu p-0 dropdown-fabric-menu" id="" data-popper-placement="left-start">
+                                <div class="dropdown-fabric-menu-content">
+                                    <table class="w-100">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="text-center" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">Серия</th>
+                                                <th scope="col" class="text-center" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">Цена</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${this.getEconomiesListHTML(economy)}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         <div class="product-card-header-title text-truncate d-flex align-items-center">
                             <div class="text-truncate align-middle w-100 text-center" title="${product.title}">${product.title}</div>
                         </div>
@@ -156,6 +177,26 @@ export default class ProductsList {
         }
 
         return `${product.commonDimensionsWidth || "-"}x${product.commonDimensionsHeight || "-"}`;
+    }
+
+    getEconomiesListHTML(economy) {
+        let contentHTML = '';
+        if (!economy) {
+            return contentHTML;
+        }
+        for (const fabricAlias in FIELD_ECONOMY) {
+            const title = FIELD_ECONOMY[fabricAlias].title;
+            const fieldPrice = FIELD_ECONOMY[fabricAlias].price;
+            const price = economy[fieldPrice] || 0;
+            contentHTML += `
+                <tr>
+                    <td class="text-start" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${title}</td>
+                    <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${price.toLocaleString()}</td>
+                </tr>
+            `;
+        }
+
+        return contentHTML;
     }
 }
 

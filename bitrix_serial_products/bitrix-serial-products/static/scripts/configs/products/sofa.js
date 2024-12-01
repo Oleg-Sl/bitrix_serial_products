@@ -34,6 +34,8 @@ export const FIELD_SOFA = {
 
     isTechOk: "ufCrm53_1731470958",             // tech-OK
     dateOfTech: "ufCrm53_1731471267",           // Дата проверки tech
+    isComDirOk: "ufCrm53_1732253331",           // Ком.дир-OK
+    dateOfComDir: "ufCrm53_1732253669",         // Дата согласования ком.дир
 
     deliveryCity: "ufCrm53_1713500870",         // Город доставки
     link: "ufCrm53_1713500898",                 // Ссылка на оригинал

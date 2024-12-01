@@ -38,6 +38,8 @@ export const FIELD_MSP = {
 
     isTechOk: "ufCrm23_1731470922",             // tech-OK
     dateOfTech: "ufCrm23_1731471281",           // Дата проверки tech
+    isComDirOk: "ufCrm23_1732253286",           // Ком.дир-OK
+    dateOfComDir: "ufCrm23_1732253686",         // Дата согласования ком.дир
 
     isMeasured: "ufCrm23_1706958069",           // Замер нужен
     isActive: "ufCrm23_1706958090",             // Товар активен

@@ -35,6 +35,8 @@ export const FIELD_BED = {
 
     isTechOk: "ufCrm61_1731471025",             // tech-OK
     dateOfTech: "ufCrm61_1731471233",           // Дата проверки tech
+    isComDirOk: "ufCrm61_1732253409",           // Ком.дир-OK
+    dateOfComDir: "ufCrm61_1732253633",         // Дата согласования ком.дир
 
     deliveryCity: "ufCrm61_1713510730",         // Город доставки
     link: "ufCrm61_1713510684",                 // Ссылка на оригинал

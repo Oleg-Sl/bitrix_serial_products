@@ -34,6 +34,8 @@ export const FIELD_NIGHTSTAND = {
 
     isTechOk: "ufCrm73_1731471046",             // tech-OK
     dateOfTech: "ufCrm73_1731471216",           // Дата проверки tech
+    isComDirOk: "ufCrm73_1732253429",           // Ком.дир-OK
+    dateOfComDir: "ufCrm73_1732253614",         // Дата согласования ком.дир
 
     deliveryCity: "ufCrm73_1714011425",         // Город доставки
     link: "ufCrm73_1714011384",                 // Ссылка на оригинал

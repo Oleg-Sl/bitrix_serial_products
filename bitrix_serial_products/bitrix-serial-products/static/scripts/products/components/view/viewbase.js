@@ -1,4 +1,7 @@
-import ButtonsView from './buttons.js';
+// import ButtonsView from './buttons.js';
+import ButtonComdirokView from './button_comdirok.js';
+import ButtonTechokView from './button_techok.js';
+
 
 export default class BaseView {
     constructor(productService, userService, callbackService) {
@@ -6,13 +9,15 @@ export default class BaseView {
         this.userService = userService;
         this.callbackService = callbackService;
         
-        this.buttonsView = new ButtonsView(productService, userService, callbackService);
-        // this.initHandlers();
+        // this.buttonView = new ButtonsView(productService, userService, callbackService);
+        this.buttonTechokView = new ButtonTechokView(productService, userService, callbackService);
+        this.buttonComdirokView = new ButtonComdirokView(productService, userService, callbackService);
     }
 
     initialize() {
         this.initHandlers();
-        this.buttonsView.init();
+        this.buttonTechokView.init();
+        this.buttonComdirokView.init();
     }
 
     render() {
@@ -26,7 +31,8 @@ export default class BaseView {
                 this.outputData(elem, value, fieldData);
             }
         }
-        this.buttonsView.render();
+        this.buttonTechokView.render();
+        this.buttonComdirokView.render();
     }
 
     outputData(elem, value, fieldData) {
@@ -90,6 +96,7 @@ export default class BaseView {
             elem.addEventListener('click', (event) => {
                 const container = event.target.parentElement.parentElement;
                 const fields = this.productService.getFieldMatching();
+                // console.log("fields = ", fields);
                 for (const [fieldAlias, fieldNameBx24] of Object.entries(fields)) {
                     const elem = container.querySelector(`#${fieldAlias}`);
                     if (elem) {
@@ -103,6 +110,7 @@ export default class BaseView {
             if (target.dataset.track && target.dataset.field) {
                 const fieldAlias = target.dataset.field;
                 const value = this.getValueFromTarget(target, fieldAlias);
+                console.log('FFF = ',fieldAlias, value);
                 this.productService.updateProductData(fieldAlias, value);
                 this.dependentField(target);
             }
@@ -148,6 +156,7 @@ export default class BaseView {
         }
 
         elem.value = value;
+        // console.log(">>> ", fieldAlias, value);
         this.productService.updateProductData(fieldAlias, value);
         this.dependentField(elem);
     }

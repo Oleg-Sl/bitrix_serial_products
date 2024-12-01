@@ -34,6 +34,9 @@ export const FIELD_ARMCHAIR = {
 
     isTechOk: "ufCrm57_1731470976",             // tech-OK
     dateOfTech: "ufCrm57_1731471248",           // Дата проверки tech
+    isComDirOk: "ufCrm57_1732253380",           // Ком.дир-OK
+    dateOfComDir: "ufCrm57_1732253651",         // Дата согласования ком.дир
+
 
     deliveryCity: "ufCrm57_1713503260",             // Город доставки
     link: "ufCrm57_1713503175",                     // Ссылка на оригинал

@@ -40,6 +40,8 @@ export const FIELD_CHAIR = {
 
     isTechOk: "ufCrm77_1731471083",             // tech-OK
     dateOfTech: "ufCrm77_1731471182",           // Дата проверки tech
+    isComDirOk: "ufCrm77_1732253472",           // Ком.дир-OK
+    dateOfComDir: "ufCrm77_1732253577",         // Дата согласования ком.дир
 
     deliveryCity: "ufCrm77_1714055105",         // Город доставки
     link: "ufCrm77_1714055075",                 // Ссылка на оригинал

@@ -34,6 +34,8 @@ export const FIELD_POUF = {
 
     isTechOk: "ufCrm67_1731471115",             // tech-OK
     dateOfTech: "ufCrm67_1731471130",           // Дата проверки tech
+    isComDirOk: "ufCrm67_1732253509",           // Ком.дир-OK
+    dateOfComDir: "ufCrm67_1732253523",         // Дата согласования ком.дир
 
     deliveryCity: "ufCrm67_1713517806",         // Город доставки
     link: "ufCrm67_1713517820",                 // Ссылка на оригинал

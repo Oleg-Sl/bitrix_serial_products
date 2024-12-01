@@ -27,12 +27,7 @@ export default class App {
 
         const packed = new PackedParameters(this.specificWeights);
         const productsList = new ProductsList(productsContainer, this.productsFields, this.currentUser, packed);
-        const filter = new Filter(filterButtonsContainer, this.productsService, productsList
-            // 'filterNameCollection',     // - Название коллекции
-            // 'shape',                    // - Форма дивана
-            // 'filterMechanism',          // - Механизм (поле ДА/нет)
-            // 'filterTags',               // - Фильтр общий
-        );
+        const filter = new Filter(filterButtonsContainer, this.productsService, productsList);
         const productAction = new ProductAction(this.apiClient, this.productsService);
         const paginator = new Paginator(filter);
         this.productsService.setPagination(paginator.setPagination.bind(paginator));

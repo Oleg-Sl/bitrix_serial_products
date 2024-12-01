@@ -15,6 +15,7 @@ export default class Filter {
 
     async applyFilter(page = 1) {
         let products = [];
+        let economies = [];
         try {
             const params = this.getFilterParams();
             // if (this.inputFilter.value.length >= 3) {
@@ -22,11 +23,12 @@ export default class Filter {
             // }
             this.productsList.displaySpinner();
             products = await this.productsService.getFilterProducts(this.productType, params, page);
+            economies = await this.productsService.getDataEconomies(products);
         } catch (error) {
             alert(`Ошибка получения списка продуктов: ${error.message}`);
         }
 
-        this.productsList.displayProducts(products);
+        this.productsList.displayProducts(products, economies);
         if (BX24) {
             BX24.fitWindow();
         }

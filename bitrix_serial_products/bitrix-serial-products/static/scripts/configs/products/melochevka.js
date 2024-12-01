@@ -34,6 +34,8 @@ export const FIELD_MELOCHEVKA = {
 
     isTechOk: "ufCrm63_1731471063",             // tech-OK
     dateOfTech: "ufCrm63_1731471198",           // Дата проверки tech
+    isComDirOk: "ufCrm63_1732253447",           // Ком.дир-OK
+    dateOfComDir: "ufCrm63_1732253596",         // Дата согласования ком.дир
 
     deliveryCity: "ufCrm63_1713514517",         // Город доставки
     quantity: "ufCrm63_1713514573",             // Количество
