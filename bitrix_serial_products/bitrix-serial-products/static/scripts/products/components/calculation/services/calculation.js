@@ -182,7 +182,7 @@ export default class Calculation {
                 fabricSummary: fabricSummary,
                 totalCost: this.costPrice + fabricSummary,
                 margin: this.coefficientsService.getCoefficient(economyAlias) || 0,
-                price: economyRawData[this.economyService.getPriceField(economyAlias)] || 0
+                price: economyRawData ? economyRawData[this.economyService.getPriceField(economyAlias)] || 0 : 0,
             }
             if (economyRawData == undefined) {
                 economy.price = Math.ceil(economy.totalCost * (1 + economy.margin));
