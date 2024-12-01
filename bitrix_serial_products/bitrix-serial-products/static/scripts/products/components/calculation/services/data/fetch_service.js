@@ -3,8 +3,8 @@
 // import { ID_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_CHECKLIST_COMPLEXITY, FIELD_CHECKLIST_COMPLEXITY } from '../../../configs/calc/checklistcomplexity.js';
 // import { ID_FOT, FIELD_FOT } from '../../../configs/calc/fot.js';
 // import { ID_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT, FIELD_COEFFICIENTS_FOT } from '../../../configs/calc/coefficientsfot.js';
-import { ID_FOT, ID_MATERIALS, ID_COEFFICIENTS, ID_CHECKLIST_COMPLEXITY, ID_COEFFICIENTS_FOT, } from '../../import.js';
-import { FIELD_CHECKLIST_COMPLEXITY, FIELD_COEFFICIENTS_FOT, } from '../../import.js';
+import { ID_FOT, ID_ECONOMY, ID_MATERIALS, ID_COEFFICIENTS, ID_CHECKLIST_COMPLEXITY, ID_COEFFICIENTS_FOT, ID_FABRIC, } from '../../import.js';
+import { FIELD_ECONOMY, FIELD_CHECKLIST_COMPLEXITY, FIELD_COEFFICIENTS_FOT, } from '../../import.js';
 import { PRODUCT_TYPES_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_COEFFICIENTS_FOT, } from '../../import.js';
 
 
@@ -30,8 +30,12 @@ export default class FetchService {
             calculationFields: `crm.item.fields?entityTypeId=${this.calcTypeId}`,
             calculations: `crm.item.list?entityTypeId=${this.calcTypeId}&filter[parentId${this.productTypeId}]=${this.productId}`,
             fot: `crm.item.list?entityTypeId=${ID_FOT}&filter[parentId${this.productTypeId}]=${this.productId}`,
+            economy: `crm.item.list?entityTypeId=${ID_ECONOMY}&filter[parentId${this.productTypeId}]=${this.productId}`,
             // other_calculations: `crm.item.list?entityTypeId=${this.calcTypeId}&filter[${fieldParent}]=${this.leadId}`,
         };
+        for (const fabric in FIELD_ECONOMY) {
+            cmd[fabric] = `crm.item.get?entityTypeId=${ID_FABRIC}&id=${FIELD_ECONOMY[fabric].smartId}`
+        }
         if (leadId) {
             cmd.leads_calculations = `crm.item.list?entityTypeId=${this.calcTypeId}&filter[parentId1]=${leadId}`;
             cmd.leads_fots = `crm.item.list?entityTypeId=${ID_FOT}&filter[parentId1]=${leadId}`;
@@ -49,6 +53,7 @@ export default class FetchService {
         const coefficients = response?.result?.coefficients?.items?.[0] || {};
         const checklistcomplexity = response?.result?.checklistcomplexity?.items || [];
         const fot = response?.result?.fot?.items || [];
+        const economy = response?.result?.economy?.items || [];
         const coefficientsfot = response?.result?.coefficientsfot?.items || [];
         const calculationFields = response?.result?.calculationFields?.fields || [];
         const calculations = response?.result?.calculations?.items || [];
@@ -60,11 +65,14 @@ export default class FetchService {
         const dealsFots = response?.result?.deals_fots?.items || [];
         const othersFots = [...fot, ...leadsFots, ...dealsFots];
 
+        const fabrics = Object.keys(FIELD_ECONOMY).map(key => response?.result?.[key]?.item);
+
         const currentUser = await this.getCurrentUser();
         const users = await this.getUsers(calculations.map(calculation => calculation.createdBy));
         users[currentUser.ID] = currentUser;
+        
 
-        return { materials, coefficients, checklistcomplexity, fot, coefficientsfot, calculationFields, calculations, currentUser, users, othersCalculations, othersFots };
+        return { materials, coefficients, checklistcomplexity, fot, coefficientsfot, calculationFields, calculations, currentUser, users, othersCalculations, othersFots, economy, fabrics, };
     }
 
     async getCurrentUser() {

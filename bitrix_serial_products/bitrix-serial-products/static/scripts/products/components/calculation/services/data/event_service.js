@@ -16,5 +16,7 @@ export default class EventService {
         this.eventEmitter.on('changeFotCoefficient', this.calculationService.changeFotCoefficient.bind(this.calculationService));
         this.eventEmitter.on('changeFotComment', this.calculationService.changeFotComment.bind(this.calculationService));
         this.eventEmitter.on('changeGeneralComment', this.calculationService.changeGeneralComment.bind(this.calculationService));
+
+        this.eventEmitter.on('changeEconomyMargin', this.calculationService.changeEconomyMargin.bind(this.calculationService));
     }
 }

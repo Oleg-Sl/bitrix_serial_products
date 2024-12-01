@@ -15,12 +15,10 @@ export default class DataService {
         this.cbGetProductData = cbGetProductData;
         this.eventEmitter = eventEmitter;
 
-        
         this.fetchService = new FetchService(apiClient, calcTypeId, productTypeId, productId);
         this.calculationService = new CalculationService(calcFieldsAliases, calcTypeId, productTypeId, productId, productNameRus, this.eventEmitter, cbGetProductData);
         this.eventService = new EventService(eventEmitter, this.calculationService);
     }
-
 
     async init() {
         const servicesData = await this.fetchService.fetchData(this.cbGetProductData().leadId, this.cbGetProductData().dealId);
@@ -53,7 +51,6 @@ export default class DataService {
         return this.calculationService.getFinallyCost();
     }
     
-
     getSelectedCalculationId() {
         return this.calculationService.getSelectedCalculationId();
     }
@@ -68,6 +65,10 @@ export default class DataService {
 
     addFot(fot) {
         return this.calculationService.addFot(fot);
+    }
+
+    addEconomy(economy) {
+        return this.calculationService.addEconomy(economy);
     }
 
     addCalculation(calculation, fot, isNewCalculation = false) {

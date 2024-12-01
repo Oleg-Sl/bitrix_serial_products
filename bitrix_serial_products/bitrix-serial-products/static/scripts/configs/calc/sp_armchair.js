@@ -87,6 +87,7 @@ export const CALC_FIELD_ARMCHAIR = {
     },
     Fabric1Smart: {
         type: 'fabric',
+        fieldType: 'fabric',
         number: 1,
         value: 'ufCrm59_1713841298',             // Ткань №1 из смарт (значение)
         amount: 'ufCrm59_1713841325',            // Ткань №1 из смарт (сумма)
@@ -94,6 +95,7 @@ export const CALC_FIELD_ARMCHAIR = {
     },
     Fabric2: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm59_1713841547',             // Ткань №2 (цена)
         value: 'ufCrm59_1713841593',             // Ткань №2 (значение)
         amount: 'ufCrm59_1713841619',            // Ткань №2 (сумма)
@@ -101,6 +103,7 @@ export const CALC_FIELD_ARMCHAIR = {
     },
     Fabric3: {
         type: 'material',
+        fieldType: 'fabric',
         price: 'ufCrm59_1713841565',             // Ткань №3 (цена)
         value: 'ufCrm59_1713841603',             // Ткань №3 (значение)
         amount: 'ufCrm59_1713841635',            // Ткань №3 (сумма)

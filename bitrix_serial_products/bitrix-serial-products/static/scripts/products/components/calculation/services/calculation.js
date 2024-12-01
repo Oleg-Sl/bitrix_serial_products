@@ -9,8 +9,10 @@ export default class Calculation {
         this.productNameRus = productNameRus;
         this.cbGetProductData = cbGetProductData;
         this.smartFotId = null;
+        this.smartEconomyId = null;
 
         this.fotService = services.fot;
+        this.economyService = services.economy;
         this.userService = services.user;
         this.materialsService = services.materials;
         this.coefficientsService = services.coefficients;
@@ -29,7 +31,7 @@ export default class Calculation {
         this.questions = [];
         this.fots = [];
         this.salesRange = null;
-        
+
         this.isEditFields = false;
         this.isEditFots = false;
         this.isNewCalculation = isNewCalculation;
@@ -62,9 +64,11 @@ export default class Calculation {
         this.initCheckListQuestions();
         this.initFot();
         this.initComment();
-        
+
         this.updateFabricsComments();
         this.calculateVariableData();
+
+        this.initEconomy();
     }
 
     recaclulate() {
@@ -105,6 +109,7 @@ export default class Calculation {
         for (const [fieldAlias, fieldData] of Object.entries(this.calculationFieldsService.getAliases())) {
             if (fieldData && (fieldData.type === 'material' || fieldData.type === 'fabric' || fieldData.type === 'others')) {
                 this.materials.push({
+                    fieldType: fieldData.fieldType,
                     code: fieldAlias,
                     title: this.calculationFieldsService.getTitleField(fieldData.value),
                     coefficient: this.coefficientsService.getCoefficientByKey(fieldAlias),
@@ -115,6 +120,7 @@ export default class Calculation {
                 });
             } else if (fieldData && fieldData.type === 'package') {
                 this.materials.push({
+                    fieldType: fieldData.fieldType,
                     code: fieldAlias,
                     title: this.calculationFieldsService.getTitleField(fieldData.value),
                     coefficient: this.coefficientsService.getCoefficientByKey(fieldAlias),
@@ -126,6 +132,16 @@ export default class Calculation {
             }
         }
         // console.log("MATERIALS = ", this.materials);
+    }
+
+    getFabricRunningMeters() {
+        let fabricRunningMeters = 0;
+        this.materials.forEach(item => {
+            if (item.fieldType === 'fabric') {
+                fabricRunningMeters += +item.value.value;
+            }
+        })
+        return fabricRunningMeters;
     }
 
     initCheckListQuestions() {
@@ -152,14 +168,35 @@ export default class Calculation {
         }
     }
 
+    initEconomy() {
+        this.economies = [];
+        const fabricRunningMeters = this.getFabricRunningMeters();
+        const economyRawData = this.economyService.getByParentId(this.calculationRawData.id) || {};
+        this.smartEconomyId = economyRawData.id;
+        for (const economyAlias of this.economyService.getFabricAliases()) {
+            const fabricSummary = this.economyService.getFabricPrice(economyAlias) * fabricRunningMeters;
+            const economy = {
+                code: economyAlias,
+                fabricCategory: this.economyService.getFabricName(economyAlias),
+                fabricPrice: this.economyService.getFabricPrice(economyAlias),
+                fabricSummary: fabricSummary,
+                totalCost: this.costPrice + fabricSummary,
+                margin: this.coefficientsService.getCoefficient(economyAlias) || 0,
+                price: economyRawData[this.economyService.getPriceField(economyAlias)] || 0,
+            }
+            this.economies.push(economy);
+        }
+        console.log("ECONOMIES = ", this.economies);
+    }
+
+
+
     initComment() {
         const fieldComment = this.calculationFieldsService.getFieldKeyByAlias('generalComment');
         this.comment = this.calculationRawData[fieldComment] || '';
         const fieldCommentFixed = this.calculationFieldsService.getFieldKeyByAlias('calculationFixed');
         this.commentFixed = this.calculationRawData[fieldCommentFixed] || '';
     }
-
-
 
     calculateVariableData() {
         this.calculationMaterialPacked();
@@ -171,6 +208,7 @@ export default class Calculation {
         this.calculateCostPrice()
         this.calculateSalesRange();
         this.calculateChecksum();
+        // this.calculateEconomies();
     }
 
     calculationMaterialPacked() {
@@ -343,6 +381,8 @@ export default class Calculation {
         let material = this.materials.find((item) => item.code === materialCode);
         material[field].value = +newValue;
         material.amount.value = Math.ceil(material.price.value * material.value.value * material.coefficient);
+        this.calculateEconomies();
+
         this.calculateVariableData();
     }
 
@@ -369,6 +409,13 @@ export default class Calculation {
         let fot = this.fots.find((item) => item.code === fotCode);
         fot.coefficient = +newValue;
         this.calculateFot(fot);
+        this.calculateVariableData();
+    }
+
+    changeEconomyMargin(code, value) {
+        let economy = this.economies.find((item) => item.code === code);
+        economy.margin = +value;
+        economy.price = Math.ceil(economy.totalCost * (1 + economy.margin));
         this.calculateVariableData();
     }
 
@@ -401,12 +448,18 @@ export default class Calculation {
     }
 
     calculateFot(fot) {
-        // console.log("fot = ", fot);
         const costPerHour = this.coefficientsFotService.getCostPerHour(fot.code);
-        // console.log("costPerHour = ", costPerHour);
-        // fot.allocatedHours = Math.round(fot.estimate / costPerHour * 100) / 100;
         fot.estimate = Math.round(fot.allocatedHours * costPerHour * 100) / 100;
         fot.total = Math.ceil(fot.estimate + fot.coefficient * costPerHour);
+    }
+
+    calculateEconomies() {
+        const fabricRunningMeters = this.getFabricRunningMeters();
+        this.economies.map((economy) => {
+            economy.fabricSummary = this.economyService.getFabricPrice(economy.code) * fabricRunningMeters;
+            economy.totalCost = this.costPrice + economy.fabricSummary;
+            economy.price = Math.ceil(economy.totalCost * (1 + economy.margin));
+        });
     }
 
     calculateFotChecksum(fot) {
@@ -466,6 +519,11 @@ export default class Calculation {
         return `${this.productNameRus} | ФОТ | ${dealId || '-'}`;
     }
 
+    getEconomyTitle() {
+        const dealId = this.cbGetProductData()?.dealId;
+        return `${this.productNameRus} | Экономика | ${dealId || '-'}`;
+    }
+
     getTitleOtherCalculation() {
         const freeTitle = this.cbGetProductData()?.freeTitle || '-';
         // return `${this.productNameRus} | ${freeTitle || '-'} | ${this.costPrice} (${this.summaryMaterials})`;
@@ -474,6 +532,10 @@ export default class Calculation {
 
     getFotId() {
         return this.smartFotId;
+    }
+
+    getEconomyId() {
+        return this.smartEconomyId;
     }
 
     getCostPrice() {
@@ -528,6 +590,27 @@ export default class Calculation {
             data[this.fotService.getGrowthField(fot.code)] = fot.coefficient;
             data[this.fotService.getFinalAmountField(fot.code)] = fot.total;
             data[this.fotService.getCommentField(fot.code)] = fot.comment;
+        }
+        return data;
+    }
+
+    getEconomySmartData(parentId) {
+        let data = {
+            [this.economyService.getFieldParent()]: parentId,
+            [`parentId${this.productTypeId}`]: this.productId,
+            title: this.getEconomyTitle(),
+        };
+        const leadId = this.cbGetProductData().leadId;
+        const dealId = this.cbGetProductData().dealId;
+        if (leadId) {
+            data.parentId1 = leadId;
+        }
+        if (dealId) {
+            data.parentId2 = dealId;
+        }
+        for (const economy of this.economies) {
+            data[this.economyService.getMarginField(economy.code)] = economy.margin;
+            data[this.economyService.getPriceField(economy.code)] = economy.price;
         }
         return data;
     }

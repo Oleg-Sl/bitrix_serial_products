@@ -1,8 +1,11 @@
 import { ID_FOT, FIELD_FOT } from '../../../configs/calc/fot.js';
+import { ID_ECONOMY, FIELD_ECONOMY } from '../../../configs/calc/economy.js';
 import { ID_MATERIALS, FIELD_MATERIALS } from '../../../configs/calc/materials.js';
 import { ID_COEFFICIENTS, FIELD_COEFFICIENTS } from '../../../configs/calc/coefficients.js';
 import { ID_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_CHECKLIST_COMPLEXITY, FIELD_CHECKLIST_COMPLEXITY } from '../../../configs/calc/checklistcomplexity.js';
 import { ID_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT, FIELD_COEFFICIENTS_FOT } from '../../../configs/calc/coefficientsfot.js';
+
+import { ID_FABRIC, FIELD_FABRICS } from '../../../configs/smart_process/fabric.js';
 
 import { ID_SOFA } from '../../../configs/products/sofa.js'
 import { ID_ARMCHAIR } from '../../../configs/products/armchair.js';
@@ -14,7 +17,7 @@ import { ID_TABLE } from '../../../configs/products/table.js';
 import { ID_CHAIR } from '../../../configs/products/chair.js';
 import { ID_MELOCHEVKA } from '../../../configs/products/melochevka.js';
 
-export { ID_FOT, ID_MATERIALS, ID_COEFFICIENTS, ID_CHECKLIST_COMPLEXITY, ID_COEFFICIENTS_FOT, };
-export { FIELD_FOT, FIELD_MATERIALS, FIELD_COEFFICIENTS, FIELD_CHECKLIST_COMPLEXITY, FIELD_COEFFICIENTS_FOT, };
+export { ID_FOT, ID_ECONOMY, ID_MATERIALS, ID_COEFFICIENTS, ID_CHECKLIST_COMPLEXITY, ID_COEFFICIENTS_FOT, ID_FABRIC, };
+export { FIELD_FOT, FIELD_ECONOMY, FIELD_MATERIALS, FIELD_COEFFICIENTS, FIELD_CHECKLIST_COMPLEXITY, FIELD_COEFFICIENTS_FOT, FIELD_FABRICS, };
 export { PRODUCT_TYPES_CHECKLIST_COMPLEXITY, PRODUCT_TYPES_COEFFICIENTS_FOT, };
 export { ID_SOFA, ID_ARMCHAIR, ID_BED, ID_POUF, ID_MSP, ID_NIGHTSTAND, ID_TABLE, ID_CHAIR, ID_MELOCHEVKA };

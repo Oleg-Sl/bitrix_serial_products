@@ -1,11 +1,10 @@
-import { ID_FOT, FIELD_FOT } from './import.js';
+import { ID_FOT, FIELD_FOT, ID_ECONOMY } from './import.js';
 
 import DataService from './services/data_service.js';
 import CalculationsListView from './components/calculationslist.js';
 import ModalView from './components/modal.js'
 import CalculationRepository from './services/repository.js';
 import EventEmitter from './eventemitter.js';
-// import CalculationAccessManager from './services/accessmanager.js';
 
 
 export default class CalculationManager {
@@ -25,7 +24,7 @@ export default class CalculationManager {
 
         this.eventEmitter = new EventEmitter();
         this.dataService = new DataService(apiClient, calcTypeId, calcFieldAliases, productTypeId, productId, this.eventEmitter, this.productNameRus, this.cbGetProductData);
-        this.calculationRepository = new CalculationRepository(apiClient, calcTypeId, ID_FOT, productTypeId, productId);
+        this.calculationRepository = new CalculationRepository(apiClient, calcTypeId, ID_FOT, productTypeId, productId, ID_ECONOMY);
         // this.accessManager = new CalculationAccessManager(apiClient);
 
         this.calculationListView = new CalculationsListView(this.eventEmitter);
@@ -34,12 +33,6 @@ export default class CalculationManager {
 
     async initialize() {
         await this.dataService.init();
-        // await this.accessManager.init();
-        // const isAccess = this.accessManager.isAccess(this.dataService.getCurrentUser()?.ID);
-        // if (!isAccess) {
-            // this.calculationListView.remove()
-            // return;
-        // }
 
         this.eventEmitter.on('createCalculation', this.createCalculation.bind(this));
         this.eventEmitter.on('copyCalculation', this.copyCalculation.bind(this));
@@ -52,7 +45,6 @@ export default class CalculationManager {
         this.eventEmitter.on('copyFromOtherCalculations', this.copyFromOtherCalculations.bind(this));
         
         const calculations = this.dataService.getCalculations();
-        // const otherCalculations = this.dataService.getOtherCalculations();
         const dateOfAddingMaterials = this.dataService.getDateOfAddingMaterials();
         this.calculationListView.init(calculations, dateOfAddingMaterials, []);
         console.log(">>>>> ", this.cbGetProductData());
@@ -61,9 +53,6 @@ export default class CalculationManager {
     updateCaclulations() {
         const openCalculationId = this.modalView.getOpenCalculationId();
         const isNewCalculation = this.modalView.getStateCaclulation();
-        // if (!isNewCalculation) {
-        //     return;
-        // }
         const calculation = this.dataService.getCalculation(openCalculationId);
         if (calculation) {
             calculation.recaclulate();
@@ -121,7 +110,6 @@ export default class CalculationManager {
     openCalculation(calculationId) {
         const calculation = this.dataService.getCalculation(calculationId);
         this.dataService.resetStateOfQuestions();
-        // this.modalView.render(calculation, this.isEditable, false);
         this.modalView.render(calculation, true, false);
         this.modalView.show();
     }
@@ -142,14 +130,17 @@ export default class CalculationManager {
         const calculationData = calculation.getCalculationSmartData();
         const newCalculation = await this.calculationRepository.createCalculation(calculationData);
         const fotData = calculation.getFotSmartData(newCalculation.id);
+        const economyData = calculation.getEconomySmartData(newCalculation.id);
         const newFot = await this.calculationRepository.createFot(fotData);
+        const newEconomy = await this.calculationRepository.createEconomy(economyData);
         const calcObj = this.dataService.addCalculation(newCalculation, newFot);
         this.dataService.setSelectedCalculationId(calcObj.calculationId);
         console.log("Data for creating calculation = ", {
             calculationData,
             fotData,
             newCalculation,
-            newFot
+            newFot,
+            newEconomy
         });
         this.closeCalculation();
 
@@ -172,6 +163,7 @@ export default class CalculationManager {
         const calculationData = calculation.getCalculationSmartData();
         const updateCalculation = await this.calculationRepository.updateCalculation(calculationData, calculationId);
         const fotData = calculation.getFotSmartData(updateCalculation.id);
+        const economyData = calculation.getEconomySmartData(updateCalculation.id);
         // const updateFot = await this.calculationRepository.updateFot(fotData, calculation.smartFotId);
         if (!calculation.smartFotId) {
             const newFot = await this.calculationRepository.createFot(fotData);
@@ -180,9 +172,17 @@ export default class CalculationManager {
         } else {
             const updateFot = await this.calculationRepository.updateFot(fotData, calculation.smartFotId);
         }
+        if (!calculation.smartEconomyId) {
+            const newEconomy = await this.calculationRepository.createEconomy(economyData);
+            this.dataService.addEconomy(newEconomy);
+            calculation.initEconomy();
+        } else {
+            const updateEconomy = await this.calculationRepository.updateEconomy(economyData, calculation.smartEconomyId);
+        }
         console.log("Data for saving calculation = ", {
             calculationData,
             fotData,
+            economyData,
             updateCalculation,
             // updateFot
         });
@@ -210,9 +210,11 @@ export default class CalculationManager {
         const createdCalculation = await this.calculationRepository.createCalculation(calculationData);
         console.log("createdCalculation = ", createdCalculation);
         let fotData = calculation.getFotSmartData(calculationData.id);
+        let economyData = calculation.getEconomySmartData(calculationData.id);
         fotData[`parentId${this.productTypeId}`] = productId;
         const createdFot = await this.calculationRepository.createFot(fotData);
-        return [createdCalculation?.id, createdFot?.id];
+        const createdEconomy = await this.calculationRepository.createEconomy(economyData);
+        return [createdCalculation?.id, createdFot?.id, createdEconomy?.id];
     }
 
     copyFromOtherCalculations(calculationId) {

@@ -1,6 +1,7 @@
 import ModalMaterialsView from './modal/modal_materials.js';
 // import ModalQuestionsView from './modal/modal_questions.js';
 import ModalFotView from './modal/modal_fot.js';
+import ModalEconomyView from './modal/modal_economy.js';
 import ModalServicePackedView from './modal/modal_servicepacked.js';
 import ModalManagementView from './modal/modal_management.js';
 import ModalRentView from './modal/modal_rent.js';
@@ -28,11 +29,12 @@ export default class ModalView {
         this.modalMaterialsView = new ModalMaterialsView(this.eventEmitter);
         // this.modalQuestionsView = new ModalQuestionsView(this.eventEmitter);
         this.modalFotView = new ModalFotView(this.eventEmitter, this.fotAccessManager, this.currentUserId);
+        this.modalEconomyView = new ModalEconomyView(this.eventEmitter, this.fotAccessManager, this.currentUserId);
         this.modalServicePackedView = new ModalServicePackedView(this.eventEmitter);
         this.modalManagementView = new ModalManagementView(this.eventEmitter);
         this.modalRentView = new ModalRentView(this.eventEmitter);
         this.modalCostPriceView = new ModalCostPriceView(this.eventEmitter);
-        this.modalSalesRangeView = new ModalSalesRangeView(this.eventEmitter);
+        // this.modalSalesRangeView = new ModalSalesRangeView(this.eventEmitter);
         this.modalCommentView = new ModalCommentView(this.eventEmitter);
         this.modalButtonsView = new ModalButtonsView(this.eventEmitter);
 
@@ -45,21 +47,21 @@ export default class ModalView {
         // this.eventEmitter.on('changeStateQuestion', this.changeStateButtons.bind(this));
         this.eventEmitter.on('redrawCalcualation', this.redrawCalcualation.bind(this));
 
-        // const gridContainer = document.querySelector('.check-list-complexity');
-        // const toggleButton = document.getElementById('btnCheckListComplexity');
+        const gridContainer = document.querySelector('#tableEconomy');
+        const toggleButton = document.getElementById('btnEconomy');
 
         // const gridContainer2 = document.querySelector('#containerFot');
         const gridContainer2 = document.querySelector('#tableFot');
         const toggleButton2 = document.getElementById('btnFot');
 
-        // toggleButton.addEventListener('click', () => {
-        //     gridContainer.classList.toggle('collapsed');
-        //     if (gridContainer.classList.contains('collapsed')) {
-        //         toggleButton.textContent = '+';
-        //     } else {
-        //         toggleButton.textContent = '-';
-        //     }
-        // });
+        toggleButton.addEventListener('click', () => {
+            gridContainer.classList.toggle('collapsed');
+            if (gridContainer.classList.contains('collapsed')) {
+                toggleButton.textContent = '+';
+            } else {
+                toggleButton.textContent = '-';
+            }
+        });
 
         toggleButton2.addEventListener('click', () => {
             gridContainer2.classList.toggle('collapsed');
@@ -102,12 +104,12 @@ export default class ModalView {
         // this.modalQuestionsView.render(calculation.questions);
         // this.modalQuestionsView.updateStateButton(calculation.isAllAnswered());
         this.modalFotView.render(calculation.fots, calculation.summaryFot, isEditable && calculation.isAllAnswered());
+        this.modalEconomyView.render(calculation.economies);
         this.modalServicePackedView.render(calculation.costServicePacked);
         this.modalManagementView.render(calculation.costManagement);
         this.modalRentView.render(calculation.costRent);
         this.modalCostPriceView.render(calculation.costPrice);
-        this.modalSalesRangeView.render(calculation.salesRange);
-        this.modalSalesRangeView.render(calculation.salesRange);
+        // this.modalSalesRangeView.render(calculation.salesRange);
         this.modalCommentView.render(calculation.comment, calculation.commentFixed, isEditable);
         this.modalButtonsView.render(isEditable, isNewCalculation);
         this.modalButtonsView.updateStateButtonCalculate(calculation.isAllAnswered(), calculation.isFotValid());
@@ -167,62 +169,62 @@ export default class ModalView {
                                         </tr>
                                     </thead>
                                 </table>
-                                    <table id="tableFot" class="fot collapsed">
-                                        <thead>
-                                            <tr>
-                                                <th>ФОТ отделы</th>
-                                                <th>Расч. руб</th>
-                                                <th>Расч. час</th>
-                                                <th>Коэ-т, ч</th>
-                                                <th>Сумма</th>
-                                                <th>ПРОВЕРКА</th>
-                                                <th style="grid-column: 7 / 9;">Комментарии</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="table-fot-list-body"></tbody>
+                                <table id="tableFot" class="fot collapsed">
+                                    <thead>
+                                        <tr>
+                                            <th>ФОТ отделы</th>
+                                            <th>Расч. руб</th>
+                                            <th>Расч. час</th>
+                                            <th>Коэ-т, ч</th>
+                                            <th>Сумма</th>
+                                            <th>ПРОВЕРКА</th>
+                                            <th style="grid-column: 7 / 9;">Комментарии</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-fot-list-body"></tbody>
 
-                                        <!-- РУКОВОДСТВО И АРЕНДА -->
-                                        <tbody>
-                                            <tr>
-                                                <td placeholder="">Сервис - упаковка</td>
-                                                <td><input type="number" class="border-0 bg-body-secondary service-packed-cost" min="0" value="0" disabled></td>
-                                                <td><input type="number" class="border-0 bg-body-secondary service-packed-cost-hour" min="0" value="0" disabled></td>
-                                                <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                                <td class="text-end bg-body-secondary px-1 service-packed-total"></td>
-                                                <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                                <td style="grid-column: 7 / 9;"><input type="text" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                            </tr>
-                                            <tr>
-                                                <td placeholder="">Руководство</td>
-                                                <td><input type="number" class="border-0 bg-body-secondary management-cost" min="0" value="0" disabled></td>
-                                                <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                                <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                                <td class="text-end bg-body-secondary px-1 management-total"></td>
-                                                <!-- <td><input type="number" class="border-0 bg-body-secondary management-cost" min="0" value="0" disabled></td> -->
-                                                <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                                <td style="grid-column: 7 / 9;"><input type="text" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                            </tr>
-                                            <tr>
-                                                <td placeholder="">Аренда</td>
-                                                <td><input type="number" class="border-0 bg-body-secondary rent-cost" min="0" value="0" disabled></td>
-                                                <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                                <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                                <td class="text-end bg-body-secondary px-1 rent-total"></td>
-                                                <!-- <td><input type="number" class="border-0 bg-body-secondary rent-cost" min="0" value="0" disabled></td> -->
-                                                <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled ></td>
-                                                <td style="grid-column: 7 / 9;"><input type="text" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr data-id="">
-                                                <td class="d-flex justify-content-center" style="grid-column: 1 / span 3;"><div class="fw-bold">ФОТ ИТОГО</div></td>
-                                                <td class="text-end px-1 fot-summary-cost"></td>
-                                                <td class="" style="grid-column: 5 / 8;"><input type="text" class="border-0 bg-body-secondary" min="0" value="" disabled></td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                    <!-- РУКОВОДСТВО И АРЕНДА -->
+                                    <tbody>
+                                        <tr>
+                                            <td placeholder="">Сервис - упаковка</td>
+                                            <td><input type="number" class="border-0 bg-body-secondary service-packed-cost" min="0" value="0" disabled></td>
+                                            <td><input type="number" class="border-0 bg-body-secondary service-packed-cost-hour" min="0" value="0" disabled></td>
+                                            <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                            <td class="text-end bg-body-secondary px-1 service-packed-total"></td>
+                                            <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                            <td style="grid-column: 7 / 9;"><input type="text" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <td placeholder="">Руководство</td>
+                                            <td><input type="number" class="border-0 bg-body-secondary management-cost" min="0" value="0" disabled></td>
+                                            <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                            <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                            <td class="text-end bg-body-secondary px-1 management-total"></td>
+                                            <!-- <td><input type="number" class="border-0 bg-body-secondary management-cost" min="0" value="0" disabled></td> -->
+                                            <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                            <td style="grid-column: 7 / 9;"><input type="text" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <td placeholder="">Аренда</td>
+                                            <td><input type="number" class="border-0 bg-body-secondary rent-cost" min="0" value="0" disabled></td>
+                                            <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                            <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                            <td class="text-end bg-body-secondary px-1 rent-total"></td>
+                                            <!-- <td><input type="number" class="border-0 bg-body-secondary rent-cost" min="0" value="0" disabled></td> -->
+                                            <td><input type="number" class="border-0 bg-body-secondary" min="0" value="0" disabled ></td>
+                                            <td style="grid-column: 7 / 9;"><input type="text" class="border-0 bg-body-secondary" min="0" value="0" disabled></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr data-id="">
+                                            <td class="d-flex justify-content-center" style="grid-column: 1 / span 3;"><div class="fw-bold">ФОТ ИТОГО</div></td>
+                                            <td class="text-end px-1 fot-summary-cost"></td>
+                                            <td class="" style="grid-column: 5 / 8;"><input type="text" class="border-0 bg-body-secondary" min="0" value="" disabled></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
-                            <!-- Себестоимость -->
+                             <!-- СЕБЕСТОИМОСТЬ -->
                             <table class="">
                                 <tfoot>
                                     <tr data-id="">
@@ -233,28 +235,34 @@ export default class ModalView {
                                     </tr>
                                 </tfoot>
                             </table>
-                            <!-- ДИАПОЗОНПРОДАЖИ -->
-                            <table class="sell-range">
-                                <tbody class="">
-                                    <tr>
-                                        <td class="d-flex justify-content-center align-items-center" style="grid-row: 1 / 3; grid-column: 1 / span 2; border-top: 2px solid #c3c3c3; border-bottom: 3px solid #c3c3c3;" placeholder="">Диопозон продажи</td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-coefficient" style="border-top: 2px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-coefficient" style="border-top: 2px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-coefficient" style="border-top: 2px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-coefficient" style="border-top: 2px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-coefficient" style="border-top: 2px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-coefficient" style="border-top: 2px solid #c3c3c3; border-right: 2px solid #c3c3c3"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-cost" style="border-bottom: 3px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-cost" style="border-bottom: 3px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-cost" style="border-bottom: 3px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-cost" style="border-bottom: 3px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-cost" style="border-bottom: 3px solid #c3c3c3;"></td>
-                                        <td class="text-end bg-body-secondary px-1 pl-0 sell-range-cost" style="border-bottom: 3px solid #c3c3c3;"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <!-- БЛОК ЭКОНОМИКИ -->
+                            <div>
+                                <table class="economy-header" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;">
+                                    <thead>
+                                        <tr data-id="">
+                                            <td class="d-flex justify-content-center fixed-rows" style="grid-column: 1 / span 6;">
+                                                <div class="d-flex justify-content-center flex-grow-1 fw-bold"><div class="fw-bold">Блок экономики</div></div>
+                                                <div id="btnEconomy" class="btn-chek-list text-danger" style="cursor: pointer;">+</div>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <table id="tableEconomy" class="economy collapsed" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;">
+                                    <thead>
+                                        <tr>
+                                            <th>Категория</th>
+                                            <th>Цена ткани</th>
+                                            <th>Итого ткань</th>
+                                            <th>Total себес</th>
+                                            <th>Наценка</th>
+                                            <th>ИТОГО РЦ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-economy-list-body"></tbody>
+                                </table>
+                            </div>
+                           
+
                             <!-- КОММЕНТАРИЙ -->
                             <table class="comment">
                                 <tbody>

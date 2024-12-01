@@ -20,6 +20,15 @@ export default class CoefficientsService {
         return +coefficient;
     }
 
+    getCoefficient(key) {
+        const fieldInBx24 = FIELD_COEFFICIENTS?.[key]?.fieldId;
+        if (!fieldInBx24) {
+            return 1;
+        }
+        const coefficient = this.coefficients?.[fieldInBx24] || 0;
+        return +coefficient;
+    }
+
     getMurkup() {
         return FIELD_COEFFICIENTS.markup.map((field) => this.coefficients[field]);
     }

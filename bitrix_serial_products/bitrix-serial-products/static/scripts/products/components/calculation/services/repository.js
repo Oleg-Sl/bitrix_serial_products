@@ -1,12 +1,13 @@
 
 export default class CalculationRepository {
 
-    constructor(apiClient, calculationTypeId, fotTypeId, productTypeId, productId) {
+    constructor(apiClient, calculationTypeId, fotTypeId, productTypeId, productId, economyTypeId) {
         this.apiClient = apiClient;
         this.calculationTypeId = calculationTypeId;
         this.fotTypeId = fotTypeId;
         this.productTypeId = productTypeId;
         this.productId = productId;
+        this.economyTypeId = economyTypeId;
     }
 
     async createCalculation(calculationFields) {
@@ -42,6 +43,25 @@ export default class CalculationRepository {
             entityTypeId: this.fotTypeId,
             id: fotId,
             fields: fotFields
+        });
+
+        return result?.item;
+    }
+
+    async createEconomy(economyFields) {
+        const result = await this.apiClient.callMethodJS('crm.item.add', {
+            entityTypeId: this.economyTypeId,
+            fields: economyFields
+        });
+
+        return result?.item;
+    }
+
+    async updateEconomy(economyFields, economyId) {
+        const result = await this.apiClient.callMethodJS('crm.item.update', {
+            entityTypeId: this.economyTypeId,
+            id: economyId,
+            fields: economyFields
         });
 
         return result?.item;

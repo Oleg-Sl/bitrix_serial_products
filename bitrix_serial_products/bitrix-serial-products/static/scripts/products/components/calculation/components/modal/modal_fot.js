@@ -83,9 +83,9 @@ export default class ModalFotView {
 
     getMaterialsHTML(fot, isEdit) {
         const isCanEdit = this.fotAccessManager.isAccess(this.currentUserId);
-        console.log("isCanEdit = ", isCanEdit, isEdit);
+        // console.log("isCanEdit = ", isCanEdit, isEdit);
         const classInputEdit = isEdit && isCanEdit ? '' : 'disabled';
-        console.log("classInputEdit = ", classInputEdit);
+        // console.log("classInputEdit = ", classInputEdit);
         const colorCellChecksum = this.getColorOfValidatingCalcualation(fot.checksum, fot.basicSalary);
         const descCellChecksum = this.getDescOfValidatingCalcualation(fot.checksum, fot.basicSalary);
 

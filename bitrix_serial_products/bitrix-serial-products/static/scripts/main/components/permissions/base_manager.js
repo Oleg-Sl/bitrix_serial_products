@@ -19,8 +19,8 @@ export class BaseAccessManager {
         if (!this.chosenUsers) {
             return false;
         }
-        console.log("chosenUsers = ", this.chosenUsers);
-        console.log("userId = ", userId);
+        // console.log("chosenUsers = ", this.chosenUsers);
+        // console.log("userId = ", userId);
         return this.chosenUsers.includes(String(userId));
     }
 };

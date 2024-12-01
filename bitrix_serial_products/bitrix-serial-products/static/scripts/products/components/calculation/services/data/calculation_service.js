@@ -4,6 +4,7 @@ import ChecklistComplexityService from './rawdata/checklistcomplexity.js';
 import CoefficientsService from './rawdata/coefficients.js';
 import CoefficientsFotService from './rawdata/coefficientsfot.js';
 import FotService from './rawdata/fot.js';
+import EconomyService from './rawdata/economy.js';
 import MaterialsService from './rawdata/materials.js';
 import CalculationFieldsService from './rawdata/calculationfields.js'
 import Calculation from '../calculation.js';
@@ -30,6 +31,7 @@ export default class CalculationService {
         this.services = {
             // fot: new FotService(servicesData.fot, `parentId${this.calcTypeId}`),
             fot: new FotService(servicesData.othersFots, `parentId${this.calcTypeId}`),
+            economy: new EconomyService(servicesData.economy, `parentId${this.calcTypeId}`, servicesData.fabrics),
             user: new UserService(servicesData.users, servicesData.currentUser),
             materials: new MaterialsService(servicesData.materials),
             coefficients: new CoefficientsService(servicesData.coefficients),
@@ -48,7 +50,6 @@ export default class CalculationService {
     }
 
     initOtherCalculations(calculations) {
-        // console.log("OTHER calculations = ", calculations);
         const uniqCaclulations = calculations.filter(item => item[`parentId${this.productTypeId}`] !== this.productId).reduce((acc, item) => {
             if (acc.findIndex(obj => obj.id === item.id) === -1) {
                 acc.push(item);
@@ -127,6 +128,12 @@ export default class CalculationService {
         this.eventEmitter.emit('redrawCalcualation', calculation);
     }
 
+    changeEconomyMargin(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeEconomyMargin(data.code, data.value);
+        this.eventEmitter.emit('redrawCalcualation', calculation);
+    }
+
     changeFotComment(data) {
         const calculation = this.getCalculation(data.calculationId);
         calculation.changeFotComment(data.code, data.value);
@@ -139,6 +146,10 @@ export default class CalculationService {
 
     addFot(fot) {
         this.services.fot.addFot(fot);
+    }
+
+    addEconomy(economy) {
+        this.services.economy.add(economy);
     }
 
     addCalculation(calculation, fot, isNewCalculation = false) {
@@ -163,6 +174,7 @@ export default class CalculationService {
         let calculationData = calculation.getCalculationSmartData();
         calculationData.id = Date.now();
         const fotData = calculation.getFotSmartData(calculationData.id);
+        const economyData = calculation.getEconomySmartData(calculationData.id);
         return this.addCalculation(calculationData, fotData, true);
     }
 
@@ -174,6 +186,7 @@ export default class CalculationService {
         let calculationData = calculation.getCalculationSmartData();
         calculationData.id = Date.now();
         const fotData = calculation.getFotSmartData(calculationData.id);
+        const economyData = calculation.getEconomySmartData(calculationData.id);
         return this.addCalculation(calculationData, fotData, true);
     }
 
