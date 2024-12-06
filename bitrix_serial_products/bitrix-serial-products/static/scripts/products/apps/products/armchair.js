@@ -67,7 +67,7 @@ export default class ArmchairApp extends BaseApp {
             const price = productPrice.price;
             const categoryId = productPrice.categoryId;
             const title = this.getProductItemvariationTitle(category);
-            const result = await this.productItemService.createVariationProduct(mainItemId, title, fileContentData, price, categoryId);
+            const result = await this.productItemService.createVariationProduct(mainProductItemId, title, fileContentData, price, categoryId);
             variationIds.push(result);
         }
 
@@ -127,22 +127,22 @@ export default class ArmchairApp extends BaseApp {
         // let variationIds = [];
 
         // Создание вариаций
-        for (const productPrice of productPrices) {
-            const category = productPrice.fabricCategory;
-            const price = productPrice.price;
-            const categoryId = productPrice.categoryId;
-            const result = await this.productItemService.createVariationProduct(mainItemId, 'Название ' + category, fileContentData, price, categoryId);
-            variationIds.push(result);
-        }
-        const response = await this.productItemService.saveVariationIdsToProduct(
-            this.productService.getProductTypeId(),
-            this.productService.getValue('id'),
-            {
-                [this.productFields.productVariationIds]: variationIds
-            }
-        );
-        console.log('response = ', response);
-        return variationIds;
+        // for (const productPrice of productPrices) {
+        //     const category = productPrice.fabricCategory;
+        //     const price = productPrice.price;
+        //     const categoryId = productPrice.categoryId;
+        //     const result = await this.productItemService.createVariationProduct(mainItemId, 'Название ' + category, fileContentData, price, categoryId);
+        //     variationIds.push(result);
+        // }
+        // const response = await this.productItemService.saveVariationIdsToProduct(
+        //     this.productService.getProductTypeId(),
+        //     this.productService.getValue('id'),
+        //     {
+        //         [this.productFields.productVariationIds]: variationIds
+        //     }
+        // );
+        // console.log('response = ', response);
+        // return variationIds;
     }
 
     getProductItemvariationTitle(fabric = null) {

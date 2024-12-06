@@ -114,31 +114,31 @@ export default class BaseApp {
         }
     }
 
-    async handlerRemoveProduct(event) {
-        const target = event.target;
-        const isRemoveProduct = confirm("Вы точно хотите УДАЛИТЬ издедие из сделки?");
-        if (!isRemoveProduct) {
-            return;
-        }
-        const spinner = target.querySelector('div');
-        spinner.style.display = 'inline-block';
-        const isConfirmed = confirm("Вы уверены, что хотите удалить этот продукт?");
-        if (isConfirmed) {
-            target.disabled = true;
-            try {
-                // await this.productManager.remove();
-                const result = await this.apiClient.callMethod("crm.item.delete", { entityTypeId: ID_ARMCHAIR, id: this.productId });
-                BX24.closeApplication();
-            } catch (error) {
-                console.error('Error in handlerRemoveProduct:', error);
-            } finally {
-                target.disabled = false;
-                spinner.style.display = 'none';
-            }
-        } else {
-            spinner.style.display = 'none';
-        }
-    }
+    // async handlerRemoveProduct(event) {
+    //     const target = event.target;
+    //     const isRemoveProduct = confirm("Вы точно хотите УДАЛИТЬ издедие из сделки?");
+    //     if (!isRemoveProduct) {
+    //         return;
+    //     }
+    //     const spinner = target.querySelector('div');
+    //     spinner.style.display = 'inline-block';
+    //     const isConfirmed = confirm("Вы уверены, что хотите удалить этот продукт?");
+    //     if (isConfirmed) {
+    //         target.disabled = true;
+    //         try {
+    //             // await this.productManager.remove();
+    //             const result = await this.apiClient.callMethod("crm.item.delete", { entityTypeId: ID_ARMCHAIR, id: this.productId });
+    //             BX24.closeApplication();
+    //         } catch (error) {
+    //             console.error('Error in handlerRemoveProduct:', error);
+    //         } finally {
+    //             target.disabled = false;
+    //             spinner.style.display = 'none';
+    //         }
+    //     } else {
+    //         spinner.style.display = 'none';
+    //     }
+    // }
 
     displayFabric(link, ind) {
         console.log("link = ", link, " ind = ", ind);
