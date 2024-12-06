@@ -68,6 +68,7 @@ export default class CalculationService {
         if (!this.calculations) {
             return [];
         }
+        console.log("this.calculations = ", this.calculations);
         return this.calculations[0].economies;
     }
 

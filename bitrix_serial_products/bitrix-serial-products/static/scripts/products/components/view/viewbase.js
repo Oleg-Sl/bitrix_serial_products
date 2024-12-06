@@ -18,9 +18,26 @@ export default class BaseView {
 
     initialize() {
         this.initHandlers();
+        this.blockFields();
         this.buttonTechokView.init();
         this.buttonComdirokView.init();
         this.buttonCreateProductView.init();
+    }
+
+    blockFields() {
+        const productVariationIds = this.productService.getValue('productVariationIds');
+        if (productVariationIds && productVariationIds.length > 0) {
+            document.getElementById('btnOpenCreateProductModal').disabled = true;
+        }
+        
+
+        // const fields = this.productService.getFieldMatching();
+        // for (const [fieldAlias, fieldNameBx24] of Object.entries(fields)) {
+        //     const elem = document.querySelector(`#${fieldAlias}`);
+        //     if (elem) {
+        //         elem.disabled = true;
+        //     }
+        // }
     }
 
     render() {

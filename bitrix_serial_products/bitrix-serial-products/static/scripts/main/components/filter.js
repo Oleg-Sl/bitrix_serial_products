@@ -63,14 +63,16 @@ export default class Filter {
     render() {
         let contentHTML = '';
         const filterFields = getFilterFields(this.productType);
-        for (const fieldAlias of filterFields) {
+        for (const field of filterFields) {
+            const fieldAlias = field.alias;
+            const fieldTitle = field.title;
             const fieldData = this.productsList.getFieldData(this.productType, fieldAlias);
             if (fieldData.type === 'enumeration') {
-                contentHTML += this.getSelectHTML(fieldAlias, fieldData.title, fieldData.items);
+                contentHTML += this.getSelectHTML(fieldAlias, fieldTitle, fieldData.items);
             } else if (fieldData.type === 'boolean') {
-                contentHTML += this.getSelectHTML(fieldAlias, fieldData.title, [{ ID: 'Y', VALUE: 'Да' }, { ID: 'N', VALUE: 'Нет' }]);
+                contentHTML += this.getSelectHTML(fieldAlias, fieldTitle, [{ ID: 1, VALUE: 'Да' }, { ID: 0, VALUE: 'Нет' }]);
             } else if (fieldData.type === 'string') {
-                contentHTML += this.getInputHTML(fieldAlias, fieldData.title);
+                contentHTML += this.getInputHTML(fieldAlias, fieldTitle);
             }
         }
         this.container.innerHTML = contentHTML;
@@ -104,7 +106,8 @@ export default class Filter {
     getFilterParams() {
         let params = {};
         const filterFields = getFilterFields(this.productType);
-        for (const fieldAlias of filterFields) {
+        for (const field of filterFields) {
+            const fieldAlias = field.alias;
             const elem = document.getElementById(fieldAlias);
             if (!elem || !elem.value) {
                 continue;

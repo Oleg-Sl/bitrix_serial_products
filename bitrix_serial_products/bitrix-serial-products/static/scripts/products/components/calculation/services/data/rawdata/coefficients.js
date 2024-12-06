@@ -33,5 +33,8 @@ export default class CoefficientsService {
         return FIELD_COEFFICIENTS.markup.map((field) => this.coefficients[field]);
     }
 
-
+    getMurkupWorkshop() {
+        const field = FIELD_COEFFICIENTS.markupWorkshop;
+        return this.coefficients[field] || 1;
+    }
 }

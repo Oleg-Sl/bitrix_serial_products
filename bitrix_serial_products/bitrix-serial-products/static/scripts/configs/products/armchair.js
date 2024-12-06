@@ -36,7 +36,8 @@ export const FIELD_ARMCHAIR = {
     dateOfTech: "ufCrm57_1731471248",           // Дата проверки tech
     isComDirOk: "ufCrm57_1732253380",           // Ком.дир-OK
     dateOfComDir: "ufCrm57_1732253651",         // Дата согласования ком.дир
-
+    productVariationIds: "ufCrm57_1733073381",  // ID_вариации_каталога
+    productMainId: "ufCrm57_1733204801",        // ID_головного товара
 
     deliveryCity: "ufCrm57_1713503260",             // Город доставки
     link: "ufCrm57_1713503175",                     // Ссылка на оригинал

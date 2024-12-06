@@ -83,7 +83,13 @@ export function getFilterFields(productTypeId) {
         case ID_ARMCHAIR:
             return [];
         case ID_BED:
-            return ['filterTitle', 'smp', 'liftingMechanism', 'system', 'filterTags'];
+            return [
+                { alias: 'filterTitle', title: 'Наименование' },
+                { alias: 'smp', title: 'СМП' },
+                { alias: 'liftingMechanism', title: 'Механизм' },
+                { alias: 'system', title: 'Система' },
+                { alias: 'filterTags', title: 'Тег' },
+            ];
         case ID_CHAIR:
             return [];
         case ID_MELOCHEVKA:
@@ -95,7 +101,12 @@ export function getFilterFields(productTypeId) {
         case ID_POUF:
             return [];
         case ID_SOFA:
-            return ['filterNameCollection', 'shape', 'filterMechanism', 'filterTags'];
+            return [
+                { alias: 'filterNameCollection', title: 'Коллекция' },
+                { alias: 'shape', title: 'Форма' },
+                { alias: 'filterMechanism', title: 'Механизм' },
+                { alias: 'filterTags', title: 'Тег' },
+            ];
         case ID_TABLE:
             return [];
         default:

@@ -36,6 +36,8 @@ export default class Calculation {
         this.isEditFots = false;
         this.isNewCalculation = isNewCalculation;
 
+        this.murkupWorkshop = +this.coefficientsService.getMurkupWorkshop();
+        
         this.summaryMaterials = 0
         this.summaryFot = 0;
         this.costManagement = 0;
@@ -182,7 +184,7 @@ export default class Calculation {
                 fabricPrice: this.economyService.getFabricPrice(economyAlias),
                 fabricSummary: fabricSummary,
                 totalCost: this.costPrice + fabricSummary,
-                margin: this.coefficientsService.getCoefficient(economyAlias) || 0,
+                margin: economyRawData ? economyRawData[this.economyService.getMarginField(economyAlias)] || 0 : 0,
                 price: economyRawData ? economyRawData[this.economyService.getPriceField(economyAlias)] || 0 : 0,
             }
             if (economyRawData == undefined) {
@@ -418,7 +420,7 @@ export default class Calculation {
     changeEconomyMargin(code, value) {
         let economy = this.economies.find((item) => item.code === code);
         economy.margin = +value;
-        economy.price = Math.ceil(economy.totalCost * (1 + economy.margin));
+        economy.price = Math.ceil(economy.totalCost * (0 + economy.margin));
         this.calculateVariableData();
     }
 

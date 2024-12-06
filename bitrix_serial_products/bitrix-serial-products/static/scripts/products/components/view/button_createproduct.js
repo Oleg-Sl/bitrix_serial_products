@@ -1,31 +1,79 @@
 
 
 export default class ButtonCreateProductView {
-    constructor(productService, userService, callbackService, callbackAddProductItem) {
+    constructor(productService, userService, callbackService, callbackProductItem) {
         this.productService = productService;
         this.userService = userService;
         this.callbackService = callbackService;
-        this.callbackAddProductItem = callbackAddProductItem;
+        this.callbackProductItem = callbackProductItem;
         // this.buttonCreateProduct = document.getElementById('createProductItem');
+        this.btnOpenCreateProductModal = document.getElementById('btnOpenCreateProductModal');
+        this.btnUpdateProductIems = document.getElementById('btnUpdateProductIems');
+        this.spinnerBtnUpdateProductIems = this.btnUpdateProductIems.querySelector('div');
     }
 
     init() {
-        document.body.insertAdjacentHTML('beforeend', this.getModalHTML());
-
-        this.modal = new bootstrap.Modal('#createProductModal', {});
-        this.inputProductId = document.getElementById('inputProductId');
-
-        this.initHandlers();
+        if (this.isBlock()) {
+            this.btnOpenCreateProductModal.disabled = true;
+            this.btnUpdateProductIems.disabled = false;
+            // this.btnOpenCreateProductModal.title = 'Вариации уже созданы';
+            this.initUpdateProductHandler();
+            return;
+        } else {
+            this.btnOpenCreateProductModal.disabled = false;
+            this.btnUpdateProductIems.disabled = true;
+            document.body.insertAdjacentHTML('beforeend', this.getModalHTML());
+            this.modal = new bootstrap.Modal('#createProductModal', {});
+            this.inputProductId = document.getElementById('inputProductId');
+            this.initCreateProductHandler();
+        }
     }
 
-    initHandlers() {
+    initUpdateProductHandler() {
+        this.btnUpdateProductIems.addEventListener('click', async () => {
+            this.btnUpdateProductIems.disabled = true;
+            this.spinnerBtnUpdateProductIems.classList.remove('d-none');
+            const result = await this.callbackProductItem(1);
+            this.btnUpdateProductIems.disabled = false;
+            this.spinnerBtnUpdateProductIems.classList.add('d-none');
+        })
+    }
+
+    initCreateProductHandler() {
         document.getElementById('btnCreateProduct').addEventListener('click', async () => {
             const productId = this.inputProductId.value;
-            if (this.callbackAddProductItem) {
-                await this.callbackAddProductItem(productId);
+            if (this.callbackProductItem) {
+                this.showSpinner();
+                const result = await this.callbackProductItem(0, productId);
+                if (result) {
+                    this.btnOpenCreateProductModal.disabled = true;
+                    this.btnUpdateProductIems.disabled = false;
+                    // this.btnOpenCreateProductModal.title = 'Вариации уже созданы';
+                } else {
+                    alert('Произошла ошибка при создании товара');
+                }
+                this.hideSpinner();
             }
             this.modal.hide();
         })
+    }
+
+    isBlock() {
+        const productVariationIds = this.productService.getValue('productVariationIds');
+        if (productVariationIds && productVariationIds.length > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    showSpinner() {
+        document.getElementById('btnCreateProduct').classList.add('disabled');
+        document.querySelector('.spinner').classList.remove('d-none');
+    }
+
+    hideSpinner() {
+        document.getElementById('btnCreateProduct').classList.remove('disabled');
+        document.querySelector('.spinner').classList.add('d-none');
     }
 
     getModalHTML() {
@@ -45,7 +93,10 @@ export default class ButtonCreateProductView {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                        <button type="button" class="btn btn-primary" id="btnCreateProduct">Создать</button>
+                        <button type="button" class="btn btn-primary" id="btnCreateProduct">
+                            <span class="spinner spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            Создать
+                        </button>
                     </div>
                     </div>
                 </div>

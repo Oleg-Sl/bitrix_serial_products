@@ -73,5 +73,6 @@ export const FIELD_COEFFICIENTS = {
         'ufCrm33_1723443743',            // Наценка №4
         'ufCrm33_1723443945',            // Наценка №5
         'ufCrm33_1723443956',            // Наценка №6
-    ],
+    ],     
+    markupWorkshop: 'ufCrm33_1732255162' // Наценка Цех
 };

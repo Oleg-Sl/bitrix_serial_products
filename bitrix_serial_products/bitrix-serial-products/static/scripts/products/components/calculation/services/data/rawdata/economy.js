@@ -60,6 +60,14 @@ export default class EconomyService {
         return fabric?.[FIELD_FABRICS.name] || '';
     }
 
+    // getCoefficientMargin(fabricAlias) {
+    //     // const fabric = this.getFabric(fabricAlias);
+    //     console.log("this.arr = ", this.arr);
+    //     // const economy = this.arr.find(item => item[this.fieldParentId] == fabric?.[FIELD_FABRICS.smartId]);
+    //     // console.log("!!!!! fabric = ", fabric, fabricAlias, FIELD_ECONOMY?.[fabricAlias].margin, fabric?.[FIELD_ECONOMY?.[fabricAlias].margin]);
+    //     // return fabric?.[FIELD_ECONOMY?.[fabricAlias].margin] || 1;
+    // }
+
     // getFabricId(fabricAlias) {
     //     const fabric = this.getFabric(fabricAlias);
     //     return fabric?.[FIELD_FABRICS.name] || '';

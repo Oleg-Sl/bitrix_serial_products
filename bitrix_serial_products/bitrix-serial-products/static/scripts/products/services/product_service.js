@@ -10,7 +10,6 @@ export default class ProductService {
 
         // this.productItemService = new ProductItemService(apiClient);
 
-
         this.productData = this.dataService.getProductData();
         this.productFields = this.dataService.getProductFields();
         this.productFieldsMatching = this.dataService.getProductFieldsMatching();
@@ -57,7 +56,7 @@ export default class ProductService {
         const fieldData = this.productFields[fieldInBx24];
         if (fieldData && fieldData.type == 'enumeration') {
             const items = fieldData.items;
-            const item = items?.find(item => item.ID == this.product?.[fieldInBx24]);
+            const item = items?.find(item => item.ID == this.productData?.[fieldInBx24]);
             return item?.VALUE;
         }
         return this.getValue(fieldAlias);

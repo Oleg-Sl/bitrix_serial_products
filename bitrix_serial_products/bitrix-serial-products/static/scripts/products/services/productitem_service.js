@@ -64,6 +64,7 @@ export default class ProductItemService {
             parentId: parentProductId,
             name: title,
             purchasingCurrency: "RUB",
+            measure: "5",
             quantity: 0,
             vatId: 11,
             vatIncluded: "Y",
@@ -86,4 +87,39 @@ export default class ProductItemService {
 
         return response?.offer?.id;
     }
+
+    async updateVariationProduct(variationId, title, fileContent, purchasingPrice, categoryId) {
+        let fields = {
+            name: title,
+            measure: "5",
+            property347: [],
+            property467: null,
+            purchasingPrice: purchasingPrice,
+        };
+
+        if (fileContent && fileContent.length > 0) {
+            fields.property347.push({ value: { fileData: fileContent } });
+        }
+
+        if (categoryId) {
+            fields.property467 = { value: categoryId };
+        }
+
+        const response = await this.apiClient.callMethod('catalog.product.offer.update', {
+            id: variationId,
+            fields: fields,
+        });
+
+        return response;
+    }
+
+    async saveVariationIdsToProduct(entityTypeId, productId, fields) {
+        const response = await this.apiClient.callMethod('crm.item.update', {
+            entityTypeId: entityTypeId,
+            id: productId,
+            fields: fields,
+        });
+        return response;
+    }
+
 }

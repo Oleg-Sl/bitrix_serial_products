@@ -108,7 +108,11 @@ export default class ModalView {
         this.modalServicePackedView.render(calculation.costServicePacked);
         this.modalManagementView.render(calculation.costManagement);
         this.modalRentView.render(calculation.costRent);
-        this.modalCostPriceView.render(calculation.costPrice);
+        this.modalCostPriceView.render(
+            calculation.costPrice,
+            calculation.murkupWorkshop,
+            calculation.costPrice * calculation.murkupWorkshop,
+        );
         // this.modalSalesRangeView.render(calculation.salesRange);
         this.modalCommentView.render(calculation.comment, calculation.commentFixed, isEditable);
         this.modalButtonsView.render(isEditable, isNewCalculation);
@@ -225,13 +229,15 @@ export default class ModalView {
                                 </table>
                             </div>
                              <!-- СЕБЕСТОИМОСТЬ -->
-                            <table class="">
+                            <table class="" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;">
                                 <tfoot>
                                     <tr data-id="">
-                                        <td class="d-flex justify-content-center" style="grid-column: 1 / span 4;"><div class="fw-bold">Себестоимость</div></td>
-                                        <td class="text-end bg-body-secondary px-1 cost-price"></td>
-                                        <!-- <td class=""><input type="number" class="border-0 bg-body-secondary cost-price updated-field " value="0" disabled></td> -->
-                                        <td class="" style="grid-column: 6 / 9;"><input type="text" class="border-0 bg-body-secondary" min="0" value="" disabled></td>
+                                        <td class="d-flex justify-content-center"><div class="fw-bold">Себес (мат+фот)</div></td>
+                                        <td class="text-end bg-body-secondary px-1 cost-price-mat-and-fot" id="costPriceMatAndFot"></td>
+                                        <td class="d-flex justify-content-center"><div class="fw-bold">Наценка цех</div></td>
+                                        <td class="text-end bg-body-secondary px-1 cost-price-ceh" id="costPriceCeh"></td>
+                                        <td class="d-flex justify-content-center"><div class="fw-bold">Total себес</div></td>
+                                        <td class="text-end bg-body-secondary px-1 cost-price-total" id="costPriceTotal"></td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -262,7 +268,6 @@ export default class ModalView {
                                 </table>
                             </div>
                            
-
                             <!-- КОММЕНТАРИЙ -->
                             <table class="comment">
                                 <tbody>
@@ -295,6 +300,12 @@ export default class ModalView {
         // <td class="fixed-rows-bottom" style="grid-column: 2 / 8;"><input type="text" class="border-0 text-start general-comment" min="0" value="0" data-field="0"></td>
     }
 }
+
+// Дополняем блок РАСЧЕТ наценкой Цеха. Для этого предлагаю преобразовать строку Себестоимость таким образом:
+// Делим на 3 группы:
+// - Себес (мат+фот) - вывод сумму (это текущая сумма)
+// - Наценка цех - вывод коэ. наценки (коэ. нацеки берем из Смарта 49 (там где все коэффинценты)
+// - Total себес - вывод суммы (формула Себес * на коэфицент) - записывам в новое поле в смартах Расчеты (Total себес)
 
 // <!-- ЧЕК-ЛИСТ ВОПРОСОВ -->
 // <div>

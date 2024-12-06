@@ -6,6 +6,7 @@ import FotAccessManager from '../../main/components/permissions/fot_access_manag
 import { ID_FOT } from '../../configs/calc/fot.js';
 import ProductItemService from '../services/productitem_service.js';
 
+
 export default class BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, productTypeId, productFields) {
         this.apiClient = apiClient;
