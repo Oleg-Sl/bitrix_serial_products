@@ -30,7 +30,7 @@ export default class ArmchairApp extends BaseApp {
         );
     }
 
-    async createProductItemVariations(mainProductItemId = null) {
+    async createProductItem(mainProductItemId = null, detailText = null) {
         const productMainId = this.productService.getValue('productMainId');
         const productVariationIds = this.productService.getValue('productVariationIds');
         if (productMainId) {
@@ -45,9 +45,13 @@ export default class ArmchairApp extends BaseApp {
         const fileContentData = await this.mainPhotoManager.getFileContent();
         // создание главного товара
         if (mainProductItemId == 11) {
-            mainProductItemId = await this.productItemService.createMainProduct(193, this.getProductItemvariationTitle(), fileContentData);
+            const w = this.productService.getValue('commonDimensionsWidth') || '-';
+            const d = this.productService.getValue('commonDimensionsDepth') || '-';
+            const h = this.productService.getValue('commonDimensionsHeight') || '-';
+            const overallDimensions = `${w}x${d}x${h} мм`;
+            mainProductItemId = await this.productItemService.createMainProduct(193, this.getMainProductItemTitle(), detailText, overallDimensions, fileContentData);
         }
-        
+
         if (!mainProductItemId) {
             alert('Не удалось создать главный товар');
         }
@@ -59,8 +63,8 @@ export default class ArmchairApp extends BaseApp {
             alert('Расчет не выполнен или не загружен');
             return;
         }
-        let variationIds = [];
 
+        let variationIds = [];
         // Создание вариаций
         for (const productPrice of productPrices) {
             const category = productPrice.fabricCategory;
@@ -70,6 +74,9 @@ export default class ArmchairApp extends BaseApp {
             const result = await this.productItemService.createVariationProduct(mainProductItemId, title, fileContentData, price, categoryId);
             variationIds.push(result);
         }
+
+        const responseSaveRetailPrice = await this.productItemService.saveRetailPrice(productVariationIds, productPrices.map(item => item.price));
+        console.log('responseSaveRetailPrice = ', responseSaveRetailPrice);
 
         // Сохранение ID главного товара и вариаций в изделие
         const response = await this.productItemService.saveVariationIdsToProduct(
@@ -83,7 +90,7 @@ export default class ArmchairApp extends BaseApp {
         console.log('response = ', response);
     }
 
-    async updateProductItemsVaritions() {
+    async updateProductItem() {
         const productVariationIds = this.productService.getValue('productVariationIds');
         if (productVariationIds && productVariationIds.length > 0) {
             let productPrices;
@@ -93,7 +100,9 @@ export default class ArmchairApp extends BaseApp {
                 alert('Расчет не выполнен или не загружен');
                 return;
             }
+            await this.productItemService.removeImages(productVariationIds);
             const fileContentData = await this.mainPhotoManager.getFileContent();
+            await this.productItemService.updateMainProduct(this.productService.getValue('productMainId'), fileContentData);
             for (const i in productVariationIds) {
                 const productVariationId = productVariationIds[i];
                 const price = productPrices[i].price;
@@ -102,47 +111,27 @@ export default class ArmchairApp extends BaseApp {
                 const response = await this.productItemService.updateVariationProduct(productVariationId, title, fileContentData, price, categoryId);
                 console.log('response = ', response);
             }
+
+            const responseSaveRetailPrice = await this.productItemService.saveRetailPrice(productVariationIds, productPrices.map(item => item.price));
+            console.log('responseSaveRetailPrice = ', responseSaveRetailPrice);
         } else {
             alert('Вариации отсутствуют');
         }
     }
 
-    async callbackProductItem(action, productId = null) {
+    async callbackProductItem(action, productId = null, detailText = null) {
         // action = 0 - создание главного товара и вариаций
         // action = 1 - обновление вариаций
         if (action == 0) {
-            return await this.createProductItemVariations(productId);
+            return await this.createProductItem(productId, detailText);
         } else if (action == 1) {
-            return await this.updateProductItemsVaritions();
+            return await this.updateProductItem();
         }
+    }
 
-
-        // let mainItemId = productId;
-        // const fileContentData = await this.mainPhotoManager.getFileContent();
-        // if (productId == 11) {
-        //     // создание главного товара
-        //     mainItemId = await this.productItemService.createMainProduct(193, 'Тест!', fileContentData);
-        // }
-        // const productPrices = this.calculation.getProductPrices();
-        // let variationIds = [];
-
-        // Создание вариаций
-        // for (const productPrice of productPrices) {
-        //     const category = productPrice.fabricCategory;
-        //     const price = productPrice.price;
-        //     const categoryId = productPrice.categoryId;
-        //     const result = await this.productItemService.createVariationProduct(mainItemId, 'Название ' + category, fileContentData, price, categoryId);
-        //     variationIds.push(result);
-        // }
-        // const response = await this.productItemService.saveVariationIdsToProduct(
-        //     this.productService.getProductTypeId(),
-        //     this.productService.getValue('id'),
-        //     {
-        //         [this.productFields.productVariationIds]: variationIds
-        //     }
-        // );
-        // console.log('response = ', response);
-        // return variationIds;
+    getMainProductItemTitle() {          
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
+        return `${this.productNameRus} ${collection}`;
     }
 
     getProductItemvariationTitle(fabric = null) {
@@ -153,12 +142,10 @@ export default class ArmchairApp extends BaseApp {
         const support = this.productService.getValueText('supports') || '-';
         const useInFillers = this.productService.getValueText('useInFillers_3') || '-';
         
-        let title = `Кресло ${description} (коллекция tamamm). Общий размер: Ш*Г*В - ${w}*${d}*${h} мм. Опоры: ${support}. Наполнитель с использованием: ${useInFillers || '-'}.`;
+        let title = `Кресло ${description} (коллекция tamamm). Общий размер: Ш*Г*В - ${w}*${d}*${h} мм. Опоры: ${support}.`;
         if (fabric) {
             title += ` Ткань: ${fabric}.`;
         }
         return title;
     }
 }
-
-

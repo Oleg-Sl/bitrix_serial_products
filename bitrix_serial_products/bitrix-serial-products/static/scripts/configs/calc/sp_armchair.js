@@ -6,6 +6,8 @@ export const CALC_FIELD_ARMCHAIR = {
     constantExpenses: 'ufCrm59_1713842449',         // Постоянные затраты
     generalComment: 'ufCrm59_1713842467',           // Общий комментарий
     cost: 'ufCrm59_1713842481',                     // СЕБЕСТОИМОСТЬ
+    total: 'ufCrm59_1733206000',                     // СЕБЕСТОИМОСТЬ (Total)
+
     totalMaterials: 'ufCrm59_1713842348',           // Материал ИТОГО
     finalCalculation: 'ufCrm59_1714905443',         // Итоговый расчет?
     calculationFixed: 'ufCrm59_1719148435',         // Фиксация рассчитанного изделия

@@ -81,7 +81,10 @@ export function getProductConfigById(productTypeId) {
 export function getFilterFields(productTypeId) {
     switch (parseInt(productTypeId)) {
         case ID_ARMCHAIR:
-            return [];
+            return [
+                { alias: 'filterNameCollection', title: 'Коллекция' },
+                { alias: 'filterTags', title: 'Тег' },
+            ];
         case ID_BED:
             return [
                 { alias: 'filterTitle', title: 'Наименование' },

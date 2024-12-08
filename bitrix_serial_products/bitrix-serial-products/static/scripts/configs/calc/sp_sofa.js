@@ -6,7 +6,7 @@ export const CALC_FIELD_SOFA = {
     dateOfCalculationToday: 'ufCrm51_1713671774',
     constantExpenses: 'ufCrm51_1713689945',
     generalComment: 'ufCrm51_1713690012',
-    cost: 'ufCrm51_1713690024',
+    cost: 'ufCrm51_1713690024', // Материалы + работа
     totalMaterials: 'ufCrm51_1713689697',
     finalCalculation: 'ufCrm51_1714906252',         // Итоговый расчет?
     calculationFixed: 'ufCrm51_1719148556',         // Фиксация рассчитанного изделия

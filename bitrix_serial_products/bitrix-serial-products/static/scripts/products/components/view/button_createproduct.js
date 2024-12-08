@@ -25,6 +25,7 @@ export default class ButtonCreateProductView {
             document.body.insertAdjacentHTML('beforeend', this.getModalHTML());
             this.modal = new bootstrap.Modal('#createProductModal', {});
             this.inputProductId = document.getElementById('inputProductId');
+            this.inputProductDetailText = document.getElementById('inputProductDetailText');
             this.initCreateProductHandler();
         }
     }
@@ -42,9 +43,10 @@ export default class ButtonCreateProductView {
     initCreateProductHandler() {
         document.getElementById('btnCreateProduct').addEventListener('click', async () => {
             const productId = this.inputProductId.value;
+            const detailText = this.inputProductDetailText.value;
             if (this.callbackProductItem) {
                 this.showSpinner();
-                const result = await this.callbackProductItem(0, productId);
+                const result = await this.callbackProductItem(0, productId, detailText);
                 if (result) {
                     this.btnOpenCreateProductModal.disabled = true;
                     this.btnUpdateProductIems.disabled = false;
@@ -89,6 +91,10 @@ export default class ButtonCreateProductView {
                         <div class="mb-3">
                             <label for="inputProductId" class="col-form-label">ID овного товара:</label>
                             <input type="number" min="0" step="1" class="form-control" id="inputProductId">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputProductDetailText" class="col-form-label">Детальное описание товара:</label>
+                            <textarea class="form-control" id="inputProductDetailText" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

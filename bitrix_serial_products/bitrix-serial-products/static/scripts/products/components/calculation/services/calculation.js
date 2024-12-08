@@ -43,6 +43,7 @@ export default class Calculation {
         this.costManagement = 0;
         this.costRent = 0;
         this.costPrice = 0;
+        this.totalPrice = 0;
         this.comment = '';
         this.commentFixed = '';
 
@@ -375,7 +376,8 @@ export default class Calculation {
     }
 
     calculateCostPrice() {
-        this.costPrice = Math.ceil(this.summaryMaterials + this.summaryFot);
+        this.costPrice = Math.ceil((this.summaryMaterials + this.summaryFot) / 100) * 100;
+        this.totalPrice = Math.ceil(this.costPrice * this.murkupWorkshop / 100) * 100;
     }
 
     calculateChecksum() {
@@ -420,7 +422,7 @@ export default class Calculation {
     changeEconomyMargin(code, value) {
         let economy = this.economies.find((item) => item.code === code);
         economy.margin = +value;
-        economy.price = Math.ceil(economy.totalCost * (0 + economy.margin));
+        economy.price = Math.ceil((economy.totalCost * economy.margin) / 100) * 100;
         this.calculateVariableData();
     }
 
@@ -463,7 +465,7 @@ export default class Calculation {
         this.economies.map((economy) => {
             economy.fabricSummary = this.economyService.getFabricPrice(economy.code) * fabricRunningMeters;
             economy.totalCost = this.costPrice + economy.fabricSummary;
-            economy.price = Math.ceil(economy.totalCost * (1 + economy.margin));
+            economy.price = Math.ceil((economy.totalCost * economy.margin) / 100) * 100;
         });
     }
 
@@ -554,6 +556,7 @@ export default class Calculation {
             [this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation')]: this.dateOfCalculation,
             [this.calculationFieldsService.getFieldKeyByAlias('generalComment')]: this.comment,
             [this.calculationFieldsService.getFieldKeyByAlias('cost')]: this.costPrice,
+            [this.calculationFieldsService.getFieldKeyByAlias('total')]: this.totalPrice,
         };
         const leadId = this.cbGetProductData().leadId;
         const dealId = this.cbGetProductData().dealId;

@@ -111,7 +111,8 @@ export default class ModalView {
         this.modalCostPriceView.render(
             calculation.costPrice,
             calculation.murkupWorkshop,
-            calculation.costPrice * calculation.murkupWorkshop,
+            // calculation.costPrice * calculation.murkupWorkshop,
+            calculation.totalPrice
         );
         // this.modalSalesRangeView.render(calculation.salesRange);
         this.modalCommentView.render(calculation.comment, calculation.commentFixed, isEditable);

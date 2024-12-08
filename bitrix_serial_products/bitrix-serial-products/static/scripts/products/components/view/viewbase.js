@@ -29,8 +29,6 @@ export default class BaseView {
         if (productVariationIds && productVariationIds.length > 0) {
             document.getElementById('btnOpenCreateProductModal').disabled = true;
         }
-        
-
         // const fields = this.productService.getFieldMatching();
         // for (const [fieldAlias, fieldNameBx24] of Object.entries(fields)) {
         //     const elem = document.querySelector(`#${fieldAlias}`);

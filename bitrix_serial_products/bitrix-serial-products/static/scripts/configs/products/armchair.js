@@ -62,6 +62,9 @@ export const FIELD_ARMCHAIR = {
     btnRemove: "ufCrm57_1714990826",                // Кнопка "удалить"
     btnCopy: "ufCrm57_1714990842",                  // Кнопка "копировать"
 
+    filterNameCollection: "ufCrm57_1733553271",     // Фильтр - Название коллекии
+    filterTags: "ufCrm57_1730290983",               // Фильтр - ТЕГИ
+
     createdBy: 'ufCrm57_1715516293',
     updatedBy: 'ufCrm57_1715516309',
 
