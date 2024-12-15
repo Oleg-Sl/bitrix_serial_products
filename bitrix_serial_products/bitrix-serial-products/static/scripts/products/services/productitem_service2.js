@@ -148,7 +148,7 @@ export default class ProductItemService {
         for (let i = 0; i < variationIds.length; i++) {
             const variationId = variationIds[i];
             const retailPrice = retailPrices[i];
-            cmd[`price${variationId}`] = `catalog.price.add?id=fields[catalogGroupId]=2&fields[currency]=RUB&fields[price]=${retailPrice}&fields[productId]=${variationId}`;
+            cmd[`price${variationId}`] = `catalog.price.add?fields[catalogGroupId]=2&fields[currency]=RUB&fields[price]=${retailPrice}&fields[productId]=${variationId}`;
         }
 
         const response = await this.apiClient.callMethod('batch', {
