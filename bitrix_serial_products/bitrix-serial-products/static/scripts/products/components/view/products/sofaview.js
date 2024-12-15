@@ -2,8 +2,8 @@ import BaseView from '../viewbase.js';
 
 
 export default class SofaView extends BaseView {
-    constructor(productService, userService, callbackService, mechanismService) {
-        super(productService, userService, callbackService);
+    constructor(productService, userService, callbackService, callbackAddProductItem, mechanismService) {
+        super(productService, userService, callbackService, callbackAddProductItem);
 
         this.selectSleepingMechanism = document.querySelector('#sleepingMechanism');
         this.inputSleepingMechanismDesc = document.querySelector('#sleepingMechanismDesc');

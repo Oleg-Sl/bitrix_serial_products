@@ -13,7 +13,7 @@ export default class SofaApp extends BaseApp {
 
         this.productNameRus = 'Диван';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
-        this.viewMain = new SofaView(productService, userService, callbackService, mechanismService);
+        this.viewMain = new SofaView(productService, userService, callbackService, this.callbackProductItem.bind(this), mechanismService);
         this.checkData = new CheckSofaData(productService, this.fabricManager, this.productNameRus);
         this.calculation = new CalculationManager(
             apiClient,
