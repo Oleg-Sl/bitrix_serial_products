@@ -52,7 +52,7 @@ export default class ButtonCreateProductView {
                     this.btnUpdateProductIems.disabled = false;
                     // this.btnOpenCreateProductModal.title = 'Вариации уже созданы';
                 } else {
-                    alert('Произошла ошибка при создании товара');
+                    // alert('Произошла ошибка при создании товара');
                 }
                 this.hideSpinner();
             }
