@@ -94,7 +94,8 @@ export default class BaseApp {
         }
 
         if (!mainProductItemId) {
-            alert('Не удалось создать главный товар');
+            alert('Не указан головной товар. Для создания нового укажите - 11');
+            return;
         }
 
         let productPrices;
