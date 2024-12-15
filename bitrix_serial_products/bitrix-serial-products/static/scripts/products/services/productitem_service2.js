@@ -143,6 +143,21 @@ export default class ProductItemService {
         return response;
     }
 
+    async createRetailPrice(variationIds, retailPrices) {
+        let cmd = {};
+        for (let i = 0; i < variationIds.length; i++) {
+            const variationId = variationIds[i];
+            const retailPrice = retailPrices[i];
+            cmd[`price${variationId}`] = `catalog.price.add?id=fields[catalogGroupId]=2&fields[currency]=RUB&fields[price]=${retailPrice}&fields[productId]=${variationId}`;
+        }
+
+        const response = await this.apiClient.callMethod('batch', {
+            halt: 0,
+            cmd: cmd
+        })
+        return response;
+    }
+
     async saveRetailPrice(variationIds, retailPrices) {
         let cmd = {};
         for (let i = 0; i < variationIds.length; i++) {

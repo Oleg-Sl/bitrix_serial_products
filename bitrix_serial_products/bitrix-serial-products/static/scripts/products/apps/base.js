@@ -144,7 +144,7 @@ export default class BaseApp {
             variationIds.push(result);
         }
 
-        const responseSaveRetailPrice = await this.productItemService.saveRetailPrice(productVariationIds, productPrices.map(item => item.price));
+        const responseSaveRetailPrice = await this.productItemService.createRetailPrice(productVariationIds, productPrices.map(item => item.price));
         console.log('responseSaveRetailPrice = ', responseSaveRetailPrice);
 
         // Сохранение ID главного товара и вариаций в изделие
