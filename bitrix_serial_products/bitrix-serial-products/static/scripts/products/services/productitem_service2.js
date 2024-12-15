@@ -42,27 +42,6 @@ export default class ProductItemService {
         console.log("responseRemoveImages = ", responseRemoveImages);
     }
 
-    async createProductItem(data) {
-        // создаем новый товар
-        newItemId = await this.productService.createMainProduct(
-            data.fileId,
-            productTitle,
-            productCost,
-            data.quantity,
-        );
-
-        const photo = await data.cbGetMainPhoto();
-        // создаем вариацию товара созанного товара
-        variationItemId = await this.productService.createVariationProduct(
-            newItemId,
-            productTitle,
-            0,
-            photo,
-            data.quantity,
-            productCost
-        );
-    }
-
     async createMainProduct(fileId, title, detailText, overallDimensions, fileContent) {
         let fields = {
             active: "Y",
@@ -106,7 +85,31 @@ export default class ProductItemService {
         }
     }
 
-    async createVariationProduct(parentProductId, title, fileContent, purchasingPrice, categoryId) {
+    // async createVariationProduct(parentProductId, title, fileContent, purchasingPrice, categoryId) {
+    async createVariationProduct(fields) {
+        // let fields = {
+        //     iblockId: 25,
+        //     productType: 3,
+        //     parentId: parentProductId,
+        //     name: title,
+        //     purchasingCurrency: "RUB",
+        //     measure: "9",
+        //     quantity: 0,
+        //     vatId: 11,
+        //     vatIncluded: "Y",
+        //     property347: [],
+        //     property467: null,
+        //     // purchasingPrice: purchasingPrice,
+        // };
+
+        // if (fileContent && fileContent.length > 0) {
+        //     fields.property347.push({ value: { fileData: fileContent } });
+        // }
+
+        // if (categoryId) {
+        //     fields.property467 = { value: categoryId };
+        // }
+
         const response = await this.apiClient.callMethod('catalog.product.offer.add', {
             fields: fields,
         });
@@ -114,7 +117,24 @@ export default class ProductItemService {
         return response?.offer?.id;
     }
 
+    // async updateVariationProduct(variationId, title, fileContent, purchasingPrice, categoryId) {
     async updateVariationProduct(variationId, fields) {
+        // let fields = {
+        //     name: title,
+        //     measure: "9",
+        //     property347: [],
+        //     property467: null,
+        //     // purchasingPrice: purchasingPrice,
+        // };
+
+        // if (fileContent && fileContent.length > 0) {
+        //     fields.property347.push({ value: { fileData: fileContent } });
+        // }
+
+        // if (categoryId) {
+        //     fields.property467 = { value: categoryId };
+        // }
+
         const response = await this.apiClient.callMethod('catalog.product.offer.update', {
             id: variationId,
             fields: fields,

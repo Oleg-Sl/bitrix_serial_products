@@ -4,7 +4,7 @@ import MainPhotoManager from '../components/main_photo/mainphotomanager.js';
 import CanvasManager from '../components/canvas/canvasmanager.js';
 import FotAccessManager from '../../main/components/permissions/fot_access_manager.js';
 import { ID_FOT } from '../../configs/calc/fot.js';
-import ProductItemService from '../services/productitem_service.js';
+import ProductItemService from '../services/productitem_service2.js';
 
 
 export default class BaseApp {
@@ -58,6 +58,162 @@ export default class BaseApp {
         this.btnSave.addEventListener('click', this.handlerSaveChanges.bind(this));
         // Копировать изделие
         this.btnCopy.addEventListener('click', this.handlerCreateCopyProduct.bind(this));
+    }
+
+    async callbackProductItem(action, productId = null, detailText = null) {
+        // action = 0 - создание главного товара и вариаций
+        // action = 1 - обновление вариаций
+        if (action == 0) {
+            return await this.createProductItem(productId, detailText);
+        } else if (action == 1) {
+            return await this.updateProductItem();
+        }
+    }
+
+    async createProductItem(mainProductItemId = null, detailText = null, dataFields = {}) {
+        const productMainId = this.productService.getValue('productMainId');
+        const productVariationIds = this.productService.getValue('productVariationIds');
+        if (productMainId) {
+            alert('Главный товар уже создан');
+            return;
+        }
+        if (productVariationIds && productVariationIds.length > 0) {
+            alert('Вариации уже созданы');
+            return;
+        }
+
+        const fileContentData = await this.mainPhotoManager.getFileContent();
+
+        // создание главного товара
+        if (mainProductItemId == 11) {
+            const w = this.productService.getValue('commonDimensionsWidth') || '-';
+            const d = this.productService.getValue('commonDimensionsDepth') || '-';
+            const h = this.productService.getValue('commonDimensionsHeight') || '-';
+            const overallDimensions = `${w}x${d}x${h} мм`;
+            mainProductItemId = await this.productItemService.createMainProduct(193, this.getMainProductItemTitle(), detailText, overallDimensions, fileContentData);
+        }
+
+        if (!mainProductItemId) {
+            alert('Не удалось создать главный товар');
+        }
+
+        let productPrices;
+        try {
+            productPrices = this.calculation.getProductPrices();
+        } catch (error) {
+            alert('Расчет не выполнен или не загружен');
+            return;
+        }
+
+        // Создание вариаций
+        let variationIds = [];
+        for (const productPrice of productPrices) {
+            const category = productPrice.fabricCategory;
+            const price = productPrice.price;
+            const categoryId = productPrice.categoryId;
+            const title = this.getProductItemvariationTitle(category);
+            let fields = {
+                iblockId: 25,
+                productType: 3,
+                parentId: mainProductItemId,
+                name: title,
+                purchasingCurrency: "RUB",
+                measure: "9",
+                quantity: 0,
+                vatId: 11,
+                vatIncluded: "Y",
+                property347: [],
+                property467: null,
+                // purchasingPrice: purchasingPrice,
+                ...dataFields
+            };
+
+            if (fileContentData && fileContentData.length > 0) {
+                fields.property347.push({ value: { fileData: fileContentData } });
+            }
+
+            if (categoryId) {
+                fields.property467 = { value: categoryId };
+            }
+
+            const result = await this.productItemService.createVariationProduct(
+                fields
+                // mainProductItemId, title, fileContentData, price, categoryId
+            );
+            variationIds.push(result);
+        }
+
+        const responseSaveRetailPrice = await this.productItemService.saveRetailPrice(productVariationIds, productPrices.map(item => item.price));
+        console.log('responseSaveRetailPrice = ', responseSaveRetailPrice);
+
+        // Сохранение ID главного товара и вариаций в изделие
+        const response = await this.productItemService.saveVariationIdsToProduct(
+            this.productService.getProductTypeId(),
+            this.productService.getValue('id'),
+            {
+                [this.productFields.productMainId]: mainProductItemId,
+                [this.productFields.productVariationIds]: variationIds
+            }
+        );
+        console.log('response = ', response);
+    }
+
+    async updateProductItem(dataFields = {}) {
+        const productVariationIds = this.productService.getValue('productVariationIds');
+        if (productVariationIds && productVariationIds.length > 0) {
+            let productPrices;
+            try {
+                productPrices = this.calculation.getProductPrices();
+            } catch (error) {
+                alert('Расчет не выполнен или не загружен');
+                return;
+            }
+            await this.productItemService.removeImages(productVariationIds);
+            const fileContentData = await this.mainPhotoManager.getFileContent();
+            await this.productItemService.updateMainProduct(this.productService.getValue('productMainId'), fileContentData);
+            for (const i in productVariationIds) {
+                const productVariationId = productVariationIds[i];
+                const price = productPrices[i].price;
+                const categoryId = productPrices[i].categoryId;
+                const title = this.getProductItemvariationTitle(productPrices[i]?.fabricCategory);
+
+                let fields = {
+                    name: title,
+                    measure: "9",
+                    property347: [],
+                    property467: null,
+                    // purchasingPrice: purchasingPrice,
+                    ...dataFields
+                };
+        
+                if (fileContentData && fileContentData.length > 0) {
+                    fields.property347.push({ value: { fileData: fileContentData } });
+                }
+        
+                if (categoryId) {
+                    fields.property467 = { value: categoryId };
+                }
+                const response = await this.productItemService.updateVariationProduct(
+                    productVariationId,
+                    fields 
+                    // title, fileContentData, price, categoryId
+                );
+                console.log('response = ', response);
+            }
+
+            const responseSaveRetailPrice = await this.productItemService.saveRetailPrice(productVariationIds, productPrices.map(item => item.price));
+            console.log('responseSaveRetailPrice = ', responseSaveRetailPrice);
+        } else {
+            alert('Вариации отсутствуют');
+        }
+    }
+
+    getMainProductItemTitle() {          
+        return '-';
+    }
+
+    getProductItemvariationTitle(fabric = null) {
+        return '-';
     }
 
     async handlerSaveChanges(event) {
