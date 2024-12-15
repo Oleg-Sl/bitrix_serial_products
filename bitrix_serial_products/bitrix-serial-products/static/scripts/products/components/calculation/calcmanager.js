@@ -213,16 +213,20 @@ export default class CalculationManager {
         const selectedCalculationId = this.getSelectedCalculationId();
         // console.log("selectedCalculationId = ", selectedCalculationId);
         const calculation = this.dataService.copyCalculation(selectedCalculationId);
+        // let fotData = calculation.getFotSmartData(987654321);
+        // console.log("fotData = ", fotData);
         let calculationData = calculation.getCalculationSmartData();
         calculationData[`parentId${this.productTypeId}`] = productId;
         // console.log("calculationData = ", calculationData);
         const createdCalculation = await this.calculationRepository.createCalculation(calculationData);
-        // console.log("createdCalculation = ", createdCalculation);
-        let fotData = calculation.getFotSmartData(calculationData.id);
+        console.log("createdCalculation = ", createdCalculation);
+        let fotData = calculation.getFotSmartData(createdCalculation.id);
         // // let economyData = calculation.getEconomySmartData(calculationData.id);
         fotData[`parentId${this.productTypeId}`] = productId;
-        // console.log("fotData = ", fotData);
+        console.log("fotData = ", fotData);
         const createdFot = await this.calculationRepository.createFot(fotData);
+        console.log("createdFot = ", createdFot);
+
         // // const createdEconomy = await this.calculationRepository.createEconomy(economyData);
         return [createdCalculation?.id, createdFot?.id];
     }

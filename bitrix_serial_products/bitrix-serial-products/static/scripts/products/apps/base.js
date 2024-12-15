@@ -101,6 +101,8 @@ export default class BaseApp {
         try {
             const copyData = await this.getCopyData();
             console.log("copyData = ", copyData);
+            // const [calculationId, fotId] = await this.calculation.copyCalculationToNewProduct(98654321);
+
             // await this.calculation.copyCalculationToNewProduct(111);
             const result = await this.apiClient.callMethod("crm.item.add", { entityTypeId: this.productTypeId, fields: copyData });
             const coopyProductId = result?.item?.id;
