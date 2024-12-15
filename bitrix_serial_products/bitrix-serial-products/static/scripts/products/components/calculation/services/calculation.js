@@ -558,14 +558,14 @@ export default class Calculation {
             [this.calculationFieldsService.getFieldKeyByAlias('cost')]: this.costPrice,
             [this.calculationFieldsService.getFieldKeyByAlias('total')]: this.totalPrice,
         };
-        const leadId = this.cbGetProductData().leadId;
-        const dealId = this.cbGetProductData().dealId;
-        if (leadId) {
-            data.parentId1 = leadId;
-        }
-        if (dealId) {
-            data.parentId2 = dealId;
-        }
+        // const leadId = this.cbGetProductData().leadId;
+        // const dealId = this.cbGetProductData().dealId;
+        // if (leadId) {
+        //     data.parentId1 = leadId;
+        // }
+        // if (dealId) {
+        //     data.parentId2 = dealId;
+        // }
         for (let material of this.materials) {
             for (const key in material) {
                 const fieldData = material[key];

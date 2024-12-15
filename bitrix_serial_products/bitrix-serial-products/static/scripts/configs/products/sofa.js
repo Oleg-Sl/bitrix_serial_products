@@ -37,6 +37,9 @@ export const FIELD_SOFA = {
     isComDirOk: "ufCrm53_1732253331",           // Ком.дир-OK
     dateOfComDir: "ufCrm53_1732253669",         // Дата согласования ком.дир
 
+    productVariationIds: "ufCrm53_1733073352",  // ID_вариации_каталога
+    productMainId: "ufCrm53_1733204778",        // ID_головного товара
+
     deliveryCity: "ufCrm53_1713500870",         // Город доставки
     link: "ufCrm53_1713500898",                 // Ссылка на оригинал
     referencePoint: "ufCrm53_1713500963",       // Ориентир

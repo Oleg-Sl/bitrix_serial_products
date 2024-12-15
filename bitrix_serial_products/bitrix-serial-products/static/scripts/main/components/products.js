@@ -74,6 +74,22 @@ export default class ProductsList {
                                             ${this.getEconomiesListHTML(economy)}
                                         </tbody>
                                     </table>
+                                    <table class="w-100">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="text-center" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">ID головного товара</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-start" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">
+                                                    <a class="" data-path="/crm/catalog/24/product/${product?.productMainId || '-'}/" target="_blank" href="https://99frank.bitrix24.ru/crm/catalog/24/product/${product?.productMainId || '-'}/">
+                                                        ${product?.productMainId || '-'}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

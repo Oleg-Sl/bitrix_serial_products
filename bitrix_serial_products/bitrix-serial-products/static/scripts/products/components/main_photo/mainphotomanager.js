@@ -140,9 +140,9 @@ export default class MainPhotoManager {
             const base64Data = btoa(jsonString);
             data[this.smartFields.canvasMain] = [`${this.productType}_${this.productId}.json`, base64Data];
             data[this.smartFields.canvasScreenMain] = [`${this.productType}_${this.productId}.png`, base64ScreenShot];
-            const urlPhotoMain = this.dataManager.getProductData('mainPhoto')?.urlMachine;
+            const urlPhotoMain = this.productService.getValue('mainPhoto')?.urlMachine;
             if (urlPhotoMain) {
-                const base64PhotoMain = await this.bx24.loadFileToBase64FromUrl(urlPhotoMain);
+                const base64PhotoMain = await this.loadDataByURL(urlPhotoMain);
                 data[this.smartFields.mainPhoto] = [`${this.productType}_${this.productId}.png`, base64PhotoMain];
             }
         }

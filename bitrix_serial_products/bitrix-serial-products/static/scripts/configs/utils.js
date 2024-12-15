@@ -87,10 +87,11 @@ export function getFilterFields(productTypeId) {
             ];
         case ID_BED:
             return [
-                { alias: 'filterTitle', title: 'Наименование' },
-                { alias: 'smp', title: 'СМП' },
-                { alias: 'liftingMechanism', title: 'Механизм' },
-                { alias: 'system', title: 'Система' },
+                { alias: 'filterNameCollection', title: 'Коллекция' },
+                // { alias: 'filterTitle', title: 'Наименование' },
+                // { alias: 'smp', title: 'СМП' },
+                // { alias: 'liftingMechanism', title: 'Механизм' },
+                // { alias: 'system', title: 'Система' },
                 { alias: 'filterTags', title: 'Тег' },
             ];
         case ID_CHAIR:

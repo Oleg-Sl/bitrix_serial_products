@@ -172,6 +172,7 @@ export default class CanvasManager {
             const urlPhoto1_4 = this.dataManager.getValue('photo1_4')?.urlMachine;
             const urlPhoto1_5 = this.dataManager.getValue('photo1_5')?.urlMachine;
             const urlPhoto1_6 = this.dataManager.getValue('photo1_6')?.urlMachine;
+
             if (urlPhoto1_1) {
                 const base64Photo1_1 = await this.bx24.loadFileToBase64FromUrl(urlPhoto1_1);
                 data[this.smartFields.photo1_1] = [`${this.productType}_${this.productId}.png`, base64Photo1_1];
@@ -198,7 +199,18 @@ export default class CanvasManager {
             }
             data[this.smartFields.canvas_1] = [`${this.productType}_${this.productId}`, base64Data1];
             data[this.smartFields.canvasScreen_1] = [`${this.productType}_${this.productId}.png`, base64ScreenShot1];
+            // console.log({
+            //     "canvas_1": [`${this.productType}_${this.productId}`, base64Data1],
+            //     "canvasScreen_1": [`${this.productType}_${this.productId}.png`, base64ScreenShot1],
+            //     "photo1_1": urlPhoto1_1,
+            //     "photo1_2": urlPhoto1_2,
+            //     "photo1_3": urlPhoto1_3,
+            //     "photo1_4": urlPhoto1_4,
+            //     "photo1_5": urlPhoto1_5,
+            //     "photo1_6": urlPhoto1_6
+            // });
         }
+        // console.log('data 1 = ', data);
         if (jsonData2) {
             const base64ScreenShot2 = this.canvas2.getScreenShot();
             const jsonString2 = JSON.stringify(jsonData2);
@@ -236,7 +248,20 @@ export default class CanvasManager {
             
             data[this.smartFields.canvas_2] = [`${this.productType}_${this.productId}`, base64Data2];
             data[this.smartFields.canvasScreen_2] = [`${this.productType}_${this.productId}.png`, base64ScreenShot2];
+            // console.log({
+            //     "canvas_2": [`${this.productType}_${this.productId}`, base64Data2],
+            //     "canvasScreen_2": [`${this.productType}_${this.productId}.png`, base64ScreenShot2],
+            //     "photo2_1": urlPhoto2_1,
+            //     "photo2_2": urlPhoto2_2,
+            //     "photo2_3": urlPhoto2_3,
+            //     "photo2_4": urlPhoto2_4,
+            //     "photo2_5": urlPhoto2_5,
+            //     "photo2_6": urlPhoto2_6
+            // });
         }
+
+        // console.log('data 2 = ', data);
+
         return data;
     }
 

@@ -57,7 +57,7 @@ export const FIELD_BED = {
     calculationId: "ufCrm61_1714909977",        // Расчет
     deliveryToMSK: "ufCrm61_1716434585",        // Доставка до МСК
 
-    
+    filterNameCollection: "ufCrm61_1732096195", // Фильтр - Название коллекии
     filterTitle: "ufCrm61_1732096195",          // Фильтр - Название
     filterTags: "ufCrm61_1730291004",           // Фильтр - ТЕГИ
 

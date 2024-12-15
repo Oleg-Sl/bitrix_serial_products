@@ -47,6 +47,9 @@ export default class CalculationManager {
         const calculations = this.dataService.getCalculations();
         const dateOfAddingMaterials = this.dataService.getDateOfAddingMaterials();
         this.calculationListView.init(calculations, dateOfAddingMaterials, []);
+        if (calculations.length > 0 && !this.getSelectedCalculationId()) {
+            this.selectedCalculation(calculations[0].calculationId);
+        }
         console.log(">>>>> ", this.cbGetProductData());
     }
 
@@ -208,17 +211,20 @@ export default class CalculationManager {
 
     async copyCalculationToNewProduct(productId) {
         const selectedCalculationId = this.getSelectedCalculationId();
+        // console.log("selectedCalculationId = ", selectedCalculationId);
         const calculation = this.dataService.copyCalculation(selectedCalculationId);
         let calculationData = calculation.getCalculationSmartData();
         calculationData[`parentId${this.productTypeId}`] = productId;
+        // console.log("calculationData = ", calculationData);
         const createdCalculation = await this.calculationRepository.createCalculation(calculationData);
-        console.log("createdCalculation = ", createdCalculation);
+        // console.log("createdCalculation = ", createdCalculation);
         let fotData = calculation.getFotSmartData(calculationData.id);
-        let economyData = calculation.getEconomySmartData(calculationData.id);
+        // // let economyData = calculation.getEconomySmartData(calculationData.id);
         fotData[`parentId${this.productTypeId}`] = productId;
+        // console.log("fotData = ", fotData);
         const createdFot = await this.calculationRepository.createFot(fotData);
-        const createdEconomy = await this.calculationRepository.createEconomy(economyData);
-        return [createdCalculation?.id, createdFot?.id, createdEconomy?.id];
+        // // const createdEconomy = await this.calculationRepository.createEconomy(economyData);
+        return [createdCalculation?.id, createdFot?.id];
     }
 
     copyFromOtherCalculations(calculationId) {

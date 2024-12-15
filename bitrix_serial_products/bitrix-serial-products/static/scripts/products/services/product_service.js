@@ -13,6 +13,7 @@ export default class ProductService {
         this.productData = this.dataService.getProductData();
         this.productFields = this.dataService.getProductFields();
         this.productFieldsMatching = this.dataService.getProductFieldsMatching();
+        this.currentUser = this.dataService.getCurrentUser();
 
         this.changedData = {};
     }
@@ -70,6 +71,12 @@ export default class ProductService {
         return this.productFieldsMatching[fieldAlias];
     }
 
+
+    // getProductFieldName(field) {
+    //     const fieldInBx24 = this.smartFields?.[field];
+    //     return fieldInBx24;
+    // }
+
     updateProductData(fieldAlias, value) {
         const field = this.productFieldsMatching[fieldAlias];
         this.changedData[field] = value;
@@ -108,4 +115,56 @@ export default class ProductService {
         this.productData = response?.item;
         this.resetChangedData();
     }
+
+    getCopyData() {
+        let data = {};
+        const notCopyFields = [
+            'id', 'createdBy', 'updatedBy', 'createdTime', 'updatedTime',
+            'parentId1', 'parentId2',
+            'sketch', 'sentToWorkshop',
+            'linkClientDoc', 'linkWorkshopDoc',
+            'isTechOk', 'dateOfTech', 'isComDirOk', 'dateOfComDir',
+            'productVariationIds', 'productMainId',
+            'itemId', 'itemPositionId', 'itemPotochkaId',
+            'calculationId',
+            'canvasMain', 'canvasScreenMain', 'mainPhoto',
+            'canvas_1', 'canvasScreen_1', 'photo1_1', 'photo1_2', 'photo1_3', 'photo1_4', 'photo1_5', 'photo1_6',
+            'canvas_2', 'canvasScreen_2', 'photo2_1', 'photo2_2', 'photo2_3', 'photo2_4', 'photo2_5', 'photo2_6',
+            'canvas_3', 'canvasScreen_3', 'photo3_1', 'photo3_2', 'photo3_3', 'photo3_4', 'photo3_5', 'photo3_6'
+        ];
+        for (const fieldAlias in this.productFieldsMatching) {
+            const fieldInBx24 = this.productFieldsMatching[fieldAlias];
+            // console.log(fieldAlias, " = ", fieldInBx24);
+            if (notCopyFields.includes(fieldAlias)) {
+                continue;
+            }
+            if (this.changedData.hasOwnProperty(fieldInBx24)) {
+                data[fieldInBx24] = this.changedData[fieldInBx24];
+            } else if (this.productData.hasOwnProperty(fieldInBx24)) {
+                data[fieldInBx24] = this.productData[fieldInBx24];
+            }
+            // if (fieldAlias === 'id' || fieldAlias === 'createdBy' || fieldAlias === 'updatedBy' ||
+            //     fieldAlias === 'createdTime' || fieldAlias === 'updatedTime' ||
+            //     fieldAlias == 'itemId' || fieldAlias == 'itemPositionId') {
+            //     continue;
+            // } else if (this.changedData.hasOwnProperty(this.productFields[key])) {
+            //     data[this.productFields[key]] = this.changedData[this.productFields[key]];
+            // } else if (this.productData.hasOwnProperty(this.productFields[key])) {
+            //     data[this.productFields[key]] = this.productData[this.productFields[key]];
+            // }
+        }
+        // console.log("this.currentUser = ", this.currentUser);
+        console.log("this.productData = ", this.productData);
+        // console.log("this.productFields = ", this.productFields);
+        // console.log("this.productFieldsMatching = ", this.productFieldsMatching);
+
+        // console.log("this.productFields.createdBy = ", this.productFields);
+        // console.log("this.productFields.freeTitle = ", this.productFields.freeTitle);
+        
+        data.createdBy = this.currentUser?.ID;
+        data.updatedBy = this.currentUser?.ID;
+        data[this.productFieldsMatching.freeTitle] = `Копия ${this.productData[this.productFieldsMatching.freeTitle]}`;
+        return data;
+    }
+
 }

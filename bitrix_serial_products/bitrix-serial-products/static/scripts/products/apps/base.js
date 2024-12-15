@@ -54,9 +54,10 @@ export default class BaseApp {
     }
 
     initHandlers() {
+        // Сохранить изменения
         this.btnSave.addEventListener('click', this.handlerSaveChanges.bind(this));
+        // Копировать изделие
         this.btnCopy.addEventListener('click', this.handlerCreateCopyProduct.bind(this));
-        // this.btnRemove.addEventListener('click', this.handlerRemoveProduct.bind(this));
     }
 
     async handlerSaveChanges(event) {
@@ -100,12 +101,19 @@ export default class BaseApp {
         try {
             const copyData = await this.getCopyData();
             console.log("copyData = ", copyData);
-            const result = await this.apiClient.callMethod("crm.item.add", { entityTypeId: ID_ARMCHAIR, fields: copyData });
+            // await this.calculation.copyCalculationToNewProduct(111);
+            const result = await this.apiClient.callMethod("crm.item.add", { entityTypeId: this.productTypeId, fields: copyData });
             const coopyProductId = result?.item?.id;
             if (coopyProductId) {
-                await this.calculation.copyCalculationToNewProduct(result?.item?.id);
+                const [calculationId, fotId] = await this.calculation.copyCalculationToNewProduct(coopyProductId);
+                // this.productService.updateProductData('calculationId', calculationId);
+                const resultUpdateProduct = await this.apiClient.callMethod("crm.item.update", { entityTypeId: this.productTypeId, id: coopyProductId, fields: { [this.productService.getFieldName('calculationId')]: calculationId } });
+                console.log("resultUpdateProduct = ", resultUpdateProduct);                
+                // const changedData = this.getChangedData();
+                // console.log("changedData = ", changedData);
+                // const result = await this.productService.updateProduct(changedData);
             }
-            this.showRequestResult("Копия товара создана");
+            this.showRequestResult("Копия изделия создана. ID копии изделия: " + coopyProductId);
         } catch (error) {
             console.error('Error in handlerCreateCopyProduct:', error);
         } finally {
@@ -162,12 +170,8 @@ export default class BaseApp {
 
     async getCopyData() {
         return {
-            [this.productService.getFieldName('updatedBy')]: this.userService.getCurrentUser()?.ID,
-            [this.productService.getProductFieldName('createdBy')]: this.userService.getCurrentUser()?.ID,
             title: this.productNameRus,
-            // parentId1: this.dataManager.getProductData('parentId1'),
             ...this.productService.getCopyData(),
-            // ...this.fabricManager.getCopyData(),
             ...await this.mainPhotoManager.getCopyData(),
             ...await this.canvasManager.getCopyData()
         };
