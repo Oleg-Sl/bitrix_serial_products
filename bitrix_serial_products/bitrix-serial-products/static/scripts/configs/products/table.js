@@ -63,6 +63,9 @@ export const FIELD_TABLE = {
     btnRemove: "ufCrm75_1714991742",            // Кнопка "удалить"
     btnCopy: "ufCrm75_1714991754",              // Кнопка "копировать"
 
+    filterNameCollection: "ufCrm75_1733553570",     // Фильтр - Название коллекии
+    filterTags: "ufCrm75_1730291077",               // Фильтр - ТЕГИ
+
     // Столешница
     freeTitle: "ufCrm75_1714013792",                    // 1-Свободное название изделия
     commonDimensionsWidth: "ufCrm75_1714013812",        // 1-Общие габариты (Ш.)

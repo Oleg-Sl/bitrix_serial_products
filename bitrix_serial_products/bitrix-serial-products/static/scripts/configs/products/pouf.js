@@ -63,6 +63,9 @@ export const FIELD_POUF = {
     btnRemove: "ufCrm67_1714991637",            // Кнопка "удалить"
     btnCopy: "ufCrm67_1714991652",              // Кнопка "копировать"
 
+    filterNameCollection: "ufCrm67_1733553623",     // Фильтр - Название коллекии
+    filterTags: "ufCrm67_1730291092",               // Фильтр - ТЕГИ
+
     freeTitle: "ufCrm67_1713518136",                    // 1-Свободное название изделия
     commonDimensionsWidth: "ufCrm67_1713518148",        // 1-Общие габариты (Ш.)
     commonDimensionsDepth: "ufCrm67_1713518155",        // 1-Общие габариты (Г.)

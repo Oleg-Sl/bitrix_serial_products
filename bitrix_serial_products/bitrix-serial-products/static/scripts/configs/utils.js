@@ -88,22 +88,33 @@ export function getFilterFields(productTypeId) {
         case ID_BED:
             return [
                 { alias: 'filterNameCollection', title: 'Коллекция' },
-                // { alias: 'filterTitle', title: 'Наименование' },
-                // { alias: 'smp', title: 'СМП' },
-                // { alias: 'liftingMechanism', title: 'Механизм' },
-                // { alias: 'system', title: 'Система' },
+                { alias: 'smp', title: 'СМП' },
+                { alias: 'liftingMechanism', title: 'Механизм' },
+                { alias: 'hasStorageBox', title: 'Ящик' },
                 { alias: 'filterTags', title: 'Тег' },
             ];
         case ID_CHAIR:
-            return [];
+            return [
+                { alias: 'filterNameCollection', title: 'Коллекция' },
+                { alias: 'filterTags', title: 'Тег' },
+            ];
         case ID_MELOCHEVKA:
             return [];
         case ID_MSP:
-            return [];
+            return [
+                { alias: 'filterNameCollection', title: 'Коллекция' },
+                { alias: 'filterTags', title: 'Тег' },
+            ];
         case ID_NIGHTSTAND:
-            return [];
+            return [
+                { alias: 'filterNameCollection', title: 'Коллекция' },
+                { alias: 'filterTags', title: 'Тег' },
+            ];
         case ID_POUF:
-            return [];
+            return [
+                { alias: 'filterNameCollection', title: 'Коллекция' },
+                { alias: 'filterTags', title: 'Тег' },
+            ];
         case ID_SOFA:
             return [
                 { alias: 'filterNameCollection', title: 'Коллекция' },
@@ -112,7 +123,10 @@ export function getFilterFields(productTypeId) {
                 { alias: 'filterTags', title: 'Тег' },
             ];
         case ID_TABLE:
-            return [];
+            return [
+                { alias: 'filterNameCollection', title: 'Коллекция' },
+                { alias: 'filterTags', title: 'Тег' },
+            ];
         default:
             return {};
     }

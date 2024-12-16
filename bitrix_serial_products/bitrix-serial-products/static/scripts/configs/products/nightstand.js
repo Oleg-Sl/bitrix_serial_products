@@ -63,6 +63,9 @@ export const FIELD_NIGHTSTAND = {
     btnRemove: "ufCrm73_1714991531",            // Кнопка "удалить"
     btnCopy: "ufCrm73_1714991546",              // Кнопка "копировать"
 
+    filterNameCollection: "ufCrm73_1733553453",     // Фильтр - Название коллекии
+    filterTags: "ufCrm73_1730291022",               // Фильтр - ТЕГИ
+
     freeTitle: "ufCrm73_1714011680",                    // 1-Свободное название изделия
     commonDimensionsWidth: "ufCrm73_1714011692",        // 1-Общие габариты (Ш.)
     commonDimensionsDepth: "ufCrm73_1714011704",        // 1-Общие габариты (Г.)

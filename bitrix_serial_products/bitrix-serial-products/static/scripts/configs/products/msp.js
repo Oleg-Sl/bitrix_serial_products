@@ -61,6 +61,9 @@ export const FIELD_MSP = {
     btnRemove: "ufCrm23_1714991418",            // Кнопка "удалить"
     btnCopy: "ufCrm23_1714991432",              // Кнопка "копировать"
 
+    filterNameCollection: "ufCrm23_1733553184",     // Фильтр - Название коллекии
+    filterTags: "ufCrm23_1730290916",               // Фильтр - ТЕГИ
+
     // Комментарии
     generalResponsibilityComments: "ufCrm23_1706606516",    // ОБЩИЕ КОММЕНТАРИИ ОТВЕТСТВЕННОГО
     managerNotes: "ufCrm23_1706606735",                     // ЗАМЕТКИ РУКОВОДИТЕЛЯ

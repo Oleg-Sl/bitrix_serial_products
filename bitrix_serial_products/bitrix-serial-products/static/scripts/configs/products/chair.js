@@ -66,6 +66,9 @@ export const FIELD_CHAIR = {
     btnRemove: "ufCrm77_1714991144",            // Кнопка "удалить"
     btnCopy: "ufCrm77_1714991165",              // Кнопка "копировать"
 
+    filterNameCollection: "ufCrm77_1733553532",     // Фильтр - Название коллекии
+    filterTags: "ufCrm77_1730291060",               // Фильтр - ТЕГИ
+
     createdBy: "ufCrm77_1715516585",            // Кем создан
     updatedBy: "ufCrm77_1715516603",            // Кем обновлён
 
