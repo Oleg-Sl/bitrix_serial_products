@@ -29,4 +29,79 @@ export default class BedApp extends BaseApp {
             this.currentUserId
         );
     }
+
+    isMechanism() {
+        const liftingMechanism = this.productService.getValue('liftingMechanism');
+        return liftingMechanism && liftingMechanism != 4071;
+    }
+
+    isStorageBox() {
+        const hasStorageBox = this.productService.getValue('hasStorageBox');
+        return hasStorageBox && hasStorageBox != 4075;
+    }
+
+    getSmp() {
+        const smp = this.productService.getValue('smp');
+        const widthSmp = smp.split('*')?.[0];
+        switch (widthSmp) {
+            case '800':
+                return 349;
+            case '900':
+                return 351;
+            case '1000':
+                return 353;
+            case '1200':
+                return 403;
+            case '1400':
+                return 357;
+            case '1600':
+                return 311;
+            case '1800':
+                return 313;
+            case '2000':
+                return 315;
+            default:
+                return null;
+        }
+    }
+
+    // - Ящик - данные берем из поля Ящик для хранения
+    async callbackProductItem(action, productId = null, detailText = null) {
+        let fields = {
+            property471: this.isMechanism() ? 327 : 333,
+            property473: this.isStorageBox() ? 329 : 335,
+        };
+        const smp = this.getSmp();
+        if (smp) {
+            fields['property465'] = smp;
+        }
+        // action = 0 - создание главного товара и вариаций
+        // action = 1 - обновление вариаций
+        if (action == 0) {
+            return await this.createProductItem(productId, detailText, fields);
+        } else if (action == 1) {
+            return await this.updateProductItem(fields);
+        }
+    }
+
+    getMainProductItemTitle() {          
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
+        return `${collection}`;
+    }
+
+    getProductItemvariationTitle(fabric = null) {
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
+        const smp = this.productService.getValue('smp');
+        const mechanism = isMechanism ? 'С механизмом' : 'Без механизма';
+        const storageBox = isStorageBox ? 'С ящиком' : 'Без ящика';
+        const w = this.productService.getValue('commonDimensionsWidth') || '-';
+        const d = this.productService.getValue('commonDimensionsDepth') || '-';
+        const h = this.productService.getValue('commonDimensionsHeight') || '-';
+        
+        let title = `${this.productNameRus} ${collection} (коллекция tamamm). Общий габарит: ${w}*${d}*${h} мм. Под матрас - ${smp}. ${mechanism}. ${storageBox}.`;
+        if (fabric) {
+            title += ` Ткань: ${fabric}.`;
+        }
+        return title;
+    }
 }

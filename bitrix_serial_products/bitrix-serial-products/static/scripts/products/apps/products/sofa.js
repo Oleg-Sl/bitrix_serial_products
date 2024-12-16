@@ -29,8 +29,7 @@ export default class SofaApp extends BaseApp {
             this.currentUserId
         );
     }
-
-    
+  
     async callbackProductItem(action, productId = null, detailText = null) {
         const ottomanSide = this.productService.getValue('ottomanSide');
         let fields = {
@@ -76,7 +75,7 @@ export default class SofaApp extends BaseApp {
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
         const support = this.productService.getValueText('supports') || '-';
         
-        let title = `Кресло ${collection} (коллекция tamamm). Форма: ${shape}. Общий габарит: ${w}*${d}*${h} мм. ${mechanism}. Опоры: ${support}.`;
+        let title = `${this.productNameRus} ${collection} (коллекция tamamm). Форма: ${shape}. Общий габарит: ${w}*${d}*${h} мм. ${mechanism}. Опоры: ${support}.`;
         if (fabric) {
             title += ` Ткань: ${fabric}.`;
         }

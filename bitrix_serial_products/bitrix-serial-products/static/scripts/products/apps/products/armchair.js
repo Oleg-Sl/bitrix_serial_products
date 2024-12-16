@@ -135,14 +135,15 @@ export default class ArmchairApp extends BaseApp {
     }
 
     getProductItemvariationTitle(fabric = null) {
-        const description = this.productService.getValue('freeTitle');
+        // const description = this.productService.getValue('freeTitle');
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
         const w = this.productService.getValue('commonDimensionsWidth') || '-';
         const d = this.productService.getValue('commonDimensionsDepth') || '-';
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
         const support = this.productService.getValueText('supports') || '-';
         const useInFillers = this.productService.getValueText('useInFillers_3') || '-';
         
-        let title = `Кресло ${description} (коллекция tamamm). Общий размер: Ш*Г*В - ${w}*${d}*${h} мм. Опоры: ${support}.`;
+        let title = `Кресло ${collection} (коллекция tamamm). Общий размер: Ш*Г*В - ${w}*${d}*${h} мм. Опоры: ${support}.`;
         if (fabric) {
             title += ` Ткань: ${fabric}.`;
         }
