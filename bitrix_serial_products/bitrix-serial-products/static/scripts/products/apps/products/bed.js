@@ -92,8 +92,8 @@ export default class BedApp extends BaseApp {
     getProductItemvariationTitle(fabric = null) {
         const collection = this.productService.getValueText('filterNameCollection') || '-';
         const smp = this.productService.getValue('smp');
-        const mechanism = isMechanism ? 'С механизмом' : 'Без механизма';
-        const storageBox = isStorageBox ? 'С ящиком' : 'Без ящика';
+        const mechanism = this.isMechanism() ? 'С механизмом' : 'Без механизма';
+        const storageBox = this.isStorageBox() ? 'С ящиком' : 'Без ящика';
         const w = this.productService.getValue('commonDimensionsWidth') || '-';
         const d = this.productService.getValue('commonDimensionsDepth') || '-';
         const h = this.productService.getValue('commonDimensionsHeight') || '-';

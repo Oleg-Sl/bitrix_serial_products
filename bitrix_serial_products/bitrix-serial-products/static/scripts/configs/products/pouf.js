@@ -81,6 +81,7 @@ export const FIELD_POUF = {
     hasBox: "ufCrm67_1713518573",                       // 1-Наличие ящика
     mechanism: "ufCrm67_1713518623",                    // 1-Механизм
     thicknessPerimeterPPU: "ufCrm67_1713518667",        // 1-Толщина ППУ по периметру
+    seamType: "ufCrm67_1726481213",                     // Тип шва
     thicknessSeatPPU: "ufCrm67_1713518725",             // 1-Толщина ППУ по сидения
     upholsteryFabricCollection: "ufCrm67_1713518754",   // 1-Коллекция и цвет обивочной ткани
     decor: "ufCrm67_1713518816",                        // 1-Декор (описывается в ручную)

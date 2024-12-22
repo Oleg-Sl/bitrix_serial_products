@@ -100,7 +100,7 @@ export default class CalculationsListView {
                     ${calculation.comment}
                 </td>
                 <td class="p-0 m-0 text-end">
-                    ${calculation.costPrice.toLocaleString('ru')}
+                    ${calculation.totalPrice.toLocaleString('ru')}
                 </td>
                 <td class="p-0 m-0">
                     <input class="form-check-input radio-final-calculation" type="radio" name="calculationRadionButton" ${calculation.isSelected ? 'checked' : ''}>

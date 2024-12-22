@@ -29,4 +29,42 @@ export default class PoufApp extends BaseApp {
             this.currentUserId
         );
     }
+
+    isStorageBox() {
+        const hasStorageBox = this.productService.getValue('hasBox');
+        return hasStorageBox && hasStorageBox != 4181;
+    }
+
+    async callbackProductItem(action, productId = null, detailText = null) {
+        let fields = {
+            property473: this.isStorageBox() ? 329 : 335,
+        };
+
+        // action = 0 - создание главного товара и вариаций
+        // action = 1 - обновление вариаций
+        if (action == 0) {
+            return await this.createProductItem(productId, detailText, fields);
+        } else if (action == 1) {
+            return await this.updateProductItem(fields);
+        }
+    }
+
+    getMainProductItemTitle() {          
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
+        return `${collection}`;
+    }
+
+    getProductItemvariationTitle(fabric = null) {
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
+        const storageBox = this.isStorageBox() ? 'С ящиком' : 'Без ящика';
+        const w = this.productService.getValue('commonDimensionsWidth') || '-';
+        const d = this.productService.getValue('commonDimensionsDepth') || '-';
+        const h = this.productService.getValue('commonDimensionsHeight') || '-';
+        
+        let title = `${this.productNameRus} ${collection} тест (коллекция tamamm). Общий габарит: ${w}*${d}*${h} мм. ${storageBox}.`;
+        if (fabric) {
+            title += ` Ткань: ${fabric}.`;
+        }
+        return title;
+    }
 }

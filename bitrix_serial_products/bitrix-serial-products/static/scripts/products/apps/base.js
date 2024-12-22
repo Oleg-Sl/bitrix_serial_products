@@ -1,4 +1,4 @@
-import ViewHeader from "../components/header.js";
+// import ViewHeader from "../components/header.js";
 // import { mapKeys, mapAliases } from '../../configs/mapping/key_mapping.js';
 import MainPhotoManager from '../components/main_photo/mainphotomanager.js';
 import CanvasManager from '../components/canvas/canvasmanager.js';
@@ -26,7 +26,7 @@ export default class BaseApp {
         this.productTypeId = productTypeId;
         this.productFields = productFields;
 
-        this.viewHeader = new ViewHeader(this.productService, this.userService, this.callbackService);
+        // this.viewHeader = new ViewHeader(this.productService, this.userService, this.callbackService);
         this.mainPhotoManager = new MainPhotoManager(this.fileUploadService, this.productService, (17.46/10.15));
         this.canvasManager = new CanvasManager(this.apiClient, this.productService, this.fileUploadService);
         this.productItemService = new ProductItemService(apiClient);
@@ -44,7 +44,7 @@ export default class BaseApp {
         this.calculation.initialize();
         this.viewMain.initialize();
 
-        this.viewHeader.render();
+        // this.viewHeader.render();
         this.viewMain.render();
 
         this.mainPhotoManager.initialize();

@@ -29,4 +29,33 @@ export default class MspApp extends BaseApp {
             this.currentUserId
         );
     }
+
+    async callbackProductItem(action, productId = null, detailText = null) {
+        let fields = {};
+        // action = 0 - создание главного товара и вариаций
+        // action = 1 - обновление вариаций
+        if (action == 0) {
+            return await this.createProductItem(productId, detailText, fields);
+        } else if (action == 1) {
+            return await this.updateProductItem(fields);
+        }
+    }
+
+    getMainProductItemTitle() {          
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
+        return `${collection}`;
+    }
+
+    getProductItemvariationTitle(fabric = null) {
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
+        const w = this.productService.getValue('commonDimensionsWidth') || '-';
+        const d = this.productService.getValue('commonDimensionsDepth') || '-';
+        const h = this.productService.getValue('commonDimensionsHeight') || '-';
+        
+        let title = `Мягкая стеновая панель, ${collection}, тест (коллекция tamamm). Общий габарит: ${w}*${d}*${h} мм.`;
+        if (fabric) {
+            title += ` Ткань: ${fabric}.`;
+        }
+        return title;
+    }
 }
