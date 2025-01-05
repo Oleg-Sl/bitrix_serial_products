@@ -38,6 +38,9 @@ export const FIELD_BED = {
     isComDirOk: "ufCrm61_1732253409",           // Ком.дир-OK
     dateOfComDir: "ufCrm61_1732253633",         // Дата согласования ком.дир
 
+    productVariationIds: "ufCrm61_1733073406",  // ID_вариации_каталога
+    productMainId: "ufCrm61_1733204818",        // ID_головного товара
+
     deliveryCity: "ufCrm61_1713510730",         // Город доставки
     link: "ufCrm61_1713510684",                 // Ссылка на оригинал
     referencePoint: "ufCrm61_1713510703",       // Ориентир
