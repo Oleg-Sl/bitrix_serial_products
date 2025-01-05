@@ -33,15 +33,15 @@ export default class SofaApp extends BaseApp {
     async callbackProductItem(action, productId = null, detailText = null) {
         const ottomanSide = this.productService.getValue('ottomanSide');
         let fields = {
-            property471: this.isMechanism() ? 327 : 333,
+            property471: { value: this.isMechanism() ? 327 : 333 },
             // property621: this.isMechanism() ? 327 : 333,
         }
         if (ottomanSide == 4503) {
             // правая
-            fields['property621'] = 701;
+            fields['property621'] = { value: 701 };
         } else if (ottomanSide == 4505) {
             // левая
-            fields['property621'] = 703;
+            fields['property621'] = { value: 703 };
         }
         // action = 0 - создание главного товара и вариаций
         // action = 1 - обновление вариаций
