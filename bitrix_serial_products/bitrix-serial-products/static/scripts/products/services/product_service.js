@@ -59,7 +59,9 @@ export default class ProductService {
         console.log({
             "fieldAlias": fieldAlias,
             "fieldInBx24": fieldInBx24,
-            "fieldData": fieldData
+            "fieldData": fieldData,
+            "this.productData": this.productData,
+            "this.productData?.[fieldInBx24]": this.productData?.[fieldInBx24]
         })
         if (fieldData && fieldData.type == 'enumeration') {
             const items = fieldData.items;
