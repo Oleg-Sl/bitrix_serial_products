@@ -13,7 +13,8 @@ export default class BedApp extends BaseApp {
 
         this.productNameRus = 'Кровать';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
-        this.viewMain = new BedView(productService, userService, callbackService);
+        this.viewMain = new BedView(productService, userService, callbackService, this.callbackProductItem.bind(this));
+        
         this.checkData = new CheckBedData(productService, this.fabricManager, this.productNameRus);
         this.calculation = new CalculationManager(
             apiClient,
