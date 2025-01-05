@@ -28,6 +28,7 @@ export default class ArmchairApp extends BaseApp {
             this.fotAccessManager,
             this.currentUserId
         );
+        // const collection = this.productService.getValueText('filterNameCollection') || '-';
     }
 
     // async createProductItem(mainProductItemId = null, detailText = null) {

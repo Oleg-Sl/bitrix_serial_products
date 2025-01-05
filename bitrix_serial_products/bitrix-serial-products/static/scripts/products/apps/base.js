@@ -51,6 +51,7 @@ export default class BaseApp {
         this.canvasManager.initialize();
 
         this.initHandlers();
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
     }
 
     initHandlers() {

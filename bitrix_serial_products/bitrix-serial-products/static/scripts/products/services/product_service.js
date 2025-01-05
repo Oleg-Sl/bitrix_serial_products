@@ -54,7 +54,13 @@ export default class ProductService {
 
     getValueText(fieldAlias) {
         const fieldInBx24 = this.productFieldsMatching[fieldAlias];
+
         const fieldData = this.productFields[fieldInBx24];
+        console.log({
+            "fieldAlias": fieldAlias,
+            "fieldInBx24": fieldInBx24,
+            "fieldData": fieldData
+        })
         if (fieldData && fieldData.type == 'enumeration') {
             const items = fieldData.items;
             const item = items?.find(item => item.ID == this.productData?.[fieldInBx24]);
