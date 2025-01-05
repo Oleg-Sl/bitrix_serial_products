@@ -44,6 +44,12 @@ export default class ButtonCreateProductView {
         document.getElementById('btnCreateProduct').addEventListener('click', async () => {
             const productId = this.inputProductId.value;
             const detailText = this.inputProductDetailText.value;
+            console.log({
+                productId: productId,
+                detailText: detailText,
+                callbackProductItem: this.callbackProductItem,
+
+            });
             if (this.callbackProductItem) {
                 this.showSpinner();
                 const result = await this.callbackProductItem(0, productId, detailText);
