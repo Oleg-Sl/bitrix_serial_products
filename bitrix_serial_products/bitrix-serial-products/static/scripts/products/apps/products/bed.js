@@ -44,6 +44,11 @@ export default class BedApp extends BaseApp {
     getSmp() {
         const smp = this.productService.getValue('smp');
         const widthSmp = smp.split('*')?.[0];
+        console.log({
+            smp: smp,
+            widthSmp: widthSmp
+        });
+
         switch (widthSmp) {
             case '800':
                 return 349;
