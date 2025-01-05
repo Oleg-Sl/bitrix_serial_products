@@ -33,12 +33,12 @@ export default class BedApp extends BaseApp {
 
     isMechanism() {
         const liftingMechanism = this.productService.getValue('liftingMechanism');
-        return liftingMechanism && liftingMechanism != 4071;
+        return liftingMechanism && liftingMechanism == 4071;
     }
 
     isStorageBox() {
         const hasStorageBox = this.productService.getValue('hasStorageBox');
-        return hasStorageBox && hasStorageBox != 4075;
+        return hasStorageBox && hasStorageBox == 4075;
     }
 
     getSmp() {
@@ -69,12 +69,12 @@ export default class BedApp extends BaseApp {
     // - Ящик - данные берем из поля Ящик для хранения
     async callbackProductItem(action, productId = null, detailText = null) {
         let fields = {
-            property471: this.isMechanism() ? 327 : 333,
-            property473: this.isStorageBox() ? 329 : 335,
+            property471: { value: this.isMechanism() ? 327 : 333 },
+            property473: { value: this.isStorageBox() ? 329 : 335 },
         };
         const smp = this.getSmp();
         if (smp) {
-            fields['property465'] = smp;
+            fields['property465'] = { value: smp };
         }
         // action = 0 - создание главного товара и вариаций
         // action = 1 - обновление вариаций
@@ -87,7 +87,7 @@ export default class BedApp extends BaseApp {
 
     getMainProductItemTitle() {          
         const collection = this.productService.getValueText('filterNameCollection') || '-';
-        return `${collection}`;
+        return `${this.productNameRus} ${collection}`;
     }
 
     getProductItemvariationTitle(fabric = null) {
