@@ -185,7 +185,7 @@ export default class Calculation {
                 fabricPrice: this.economyService.getFabricPrice(economyAlias),
                 fabricSummary: fabricSummary,
                 totalCost: this.totalPrice + fabricSummary,
-                margin: economyRawData ? economyRawData[this.economyService.getMarginField(economyAlias)] || 0 : 0,
+                margin: economyRawData ? economyRawData[this.economyService.getMarginField(economyAlias)] || 1 : 1,
                 price: economyRawData ? economyRawData[this.economyService.getPriceField(economyAlias)] || 0 : 0,
             }
             if (economyRawData == undefined) {
@@ -423,6 +423,7 @@ export default class Calculation {
         let economy = this.economies.find((item) => item.code === code);
         economy.margin = +value;
         economy.price = Math.ceil((economy.totalCost * economy.margin) / 1000) * 1000;
+
         this.calculateVariableData();
     }
 
@@ -465,7 +466,8 @@ export default class Calculation {
         this.economies.map((economy) => {
             economy.fabricSummary = this.economyService.getFabricPrice(economy.code) * fabricRunningMeters;
             economy.totalCost = this.totalPrice + economy.fabricSummary;
-            economy.price = Math.ceil((economy.totalCost * economy.margin) / 1000) * 1000;
+            // economy.price = Math.ceil((economy.totalCost * economy.margin) / 1000) * 1000;
+            economy.margin = economy.price / economy.totalCost;
         });
     }
 
