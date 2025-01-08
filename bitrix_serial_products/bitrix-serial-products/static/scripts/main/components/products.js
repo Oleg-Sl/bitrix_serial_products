@@ -80,8 +80,8 @@ export default class ProductsList {
                         <div class="product-card-header-title text-truncate d-flex align-items-center">
                             <div class="text-truncate align-middle w-100 text-center" title="${product.title}">${product.title}</div>
                         </div>
-                        <div class="product-card-header-measure">${this.getMarkerIsTechOk(product.isTechOk)}</div>
-                        <div class="product-card-header-comdirok">${this.getMarkerIsComDirOk(product.isComDirOk)}</div>
+                        <div class="d-flex align-items-center product-card-header-measure">${this.getMarkerIsTechOk(product.isTechOk)}</div>
+                        <div class="d-flex align-items-center product-card-header-comdirok">${this.getMarkerIsComDirOk(product.isComDirOk)}</div>
                     </div>
                     <div class="product-card-body-img">
                         <div class="overlay d-none"></div>
