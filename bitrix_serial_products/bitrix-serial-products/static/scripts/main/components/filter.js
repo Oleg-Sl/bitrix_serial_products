@@ -1,4 +1,5 @@
 import { getFilterFields } from "../../configs/utils.js";
+
 export default class Filter {
     constructor(filterButtonsContainer, productsService, productsList, filterFields = []) {
         this.filterButtonsContainer = filterButtonsContainer;

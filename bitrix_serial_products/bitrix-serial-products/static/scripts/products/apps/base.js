@@ -109,6 +109,11 @@ export default class BaseApp {
 
         // Создание вариаций
         let variationIds = [];
+        productPrices.push({
+            fabricCategory: null,
+            price: 0,
+            categoryId: 499,    // 'couture',
+        });
         for (const productPrice of productPrices) {
             const category = productPrice.fabricCategory;
             const price = productPrice.price;
@@ -171,6 +176,11 @@ export default class BaseApp {
                 alert('Расчет не выполнен или не загружен');
                 return;
             }
+            productPrices.push({
+                fabricCategory: null,
+                price: 0,
+                categoryId: 499,    // 'couture',
+            });
             await this.productItemService.removeImages(productVariationIds);
             const fileContentData = await this.mainPhotoManager.getFileContent();
             await this.productItemService.updateMainProduct(this.productService.getValue('productMainId'), fileContentData);

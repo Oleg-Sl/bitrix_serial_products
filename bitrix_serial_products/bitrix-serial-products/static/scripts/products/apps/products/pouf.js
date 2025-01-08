@@ -13,7 +13,7 @@ export default class PoufApp extends BaseApp {
 
         this.productNameRus = 'Пуф';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
-        this.viewMain = new PoufView(productService, userService, callbackService);
+        this.viewMain = new PoufView(productService, userService, callbackService, this.callbackProductItem.bind(this));
         this.checkData = new CheckPoufData(productService, this.fabricManager, this.productNameRus);
         this.calculation = new CalculationManager(
             apiClient,

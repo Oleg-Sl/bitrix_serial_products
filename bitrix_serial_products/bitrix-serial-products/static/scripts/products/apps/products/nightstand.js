@@ -13,7 +13,7 @@ export default class NightstandApp extends BaseApp {
 
         this.productNameRus = 'Тумба';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
-        this.viewMain = new NightstandView(productService, userService, callbackService);
+        this.viewMain = new NightstandView(productService, userService, callbackService, this.callbackProductItem.bind(this));
         this.checkData = new CheckNightstandData(productService, this.fabricManager, this.productNameRus);
         this.calculation = new CalculationManager(
             apiClient,
@@ -28,5 +28,56 @@ export default class NightstandApp extends BaseApp {
             this.fotAccessManager,
             this.currentUserId
         );
+    }
+
+    getProperty553() {
+        const filterTopMaterial = this.productService.getValue('filterTopMaterial');
+        if (filterTopMaterial == 5991) {
+            // Нат. камен
+            return 485;
+        } else if (filterTopMaterial == 5987) {
+            // Стекло
+            return 483;
+        } else if (filterTopMaterial == 5989) {
+            // Вставка из кож
+            return 487;
+        }
+    }
+
+    async callbackProductItem(action, productId = null, detailText = null) {
+        let fields = {};
+        const property553 = this.getProperty553();
+        if (property553) {
+            fields.property553 = property553;
+        }
+
+        // action = 0 - создание главного товара и вариаций
+        // action = 1 - обновление вариаций
+        if (action == 0) {
+            return await this.createProductItem(productId, detailText, fields);
+        } else if (action == 1) {
+            return await this.updateProductItem(fields);
+        }
+    }
+
+    getMainProductItemTitle() {          
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
+        return `${this.productNameRus} ${collection}`;
+    }
+
+    getProductItemvariationTitle(fabric = null) {
+        const collection = this.productService.getValueText('filterNameCollection') || '-';
+        const filterSize = this.productService.getValueText('filterSize') || '-';
+        const filterSizeDesc = this.productService.getValue('filterSizeDesc') || '-';
+        const w = this.productService.getValue('commonDimensionsWidth') || '-';
+        const d = this.productService.getValue('commonDimensionsDepth') || '-';
+        const h = this.productService.getValue('commonDimensionsHeight') || '-';
+        const filterTopMaterial = this.productService.getValueText('filterTopMaterial') || '-';
+
+        let title = `${this.productNameRus} ${collection}. ${filterSize}. ${filterSizeDesc}. Коллекция tamamm. Общий габарит: Ш*Г*В - ${w}*${d}*${h} мм. Материал столешницы: ${filterTopMaterial}.`;
+        // if (fabric) {
+        //     title += ` Ткань: ${fabric}.`;
+        // }
+        return title;
     }
 }

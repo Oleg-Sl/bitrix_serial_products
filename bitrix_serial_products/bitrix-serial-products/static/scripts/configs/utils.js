@@ -107,8 +107,10 @@ export function getFilterFields(productTypeId) {
             ];
         case ID_NIGHTSTAND:
             return [
+                { alias: 'filterSize', title: 'Размер тумбы' },
                 { alias: 'filterNameCollection', title: 'Коллекция' },
                 { alias: 'filterTags', title: 'Тег' },
+                
             ];
         case ID_POUF:
             return [

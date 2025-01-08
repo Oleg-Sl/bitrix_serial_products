@@ -128,11 +128,24 @@ export default class BaseView {
             if (target.dataset.track && target.dataset.field) {
                 const fieldAlias = target.dataset.field;
                 const value = this.getValueFromTarget(target, fieldAlias);
-                console.log('FFF = ',fieldAlias, value);
+                console.log('FFF = ', fieldAlias, value);
                 this.productService.updateProductData(fieldAlias, value);
                 this.dependentField(target);
             }
         })
+
+        const smpElem = document.querySelector('#smp');
+        if (smpElem) {
+            smpElem.addEventListener('keyup', (event) => {
+                const target = event.target;
+                if (target.dataset.track && target.dataset.field) {
+                    const fieldAlias = target.dataset.field;
+                    const value = this.getValueFromTarget(target, fieldAlias);
+                    this.productService.updateProductData(fieldAlias, value);
+                    this.dependentField(target);
+                }
+            })
+        };
     }
 
     getValueFromTarget(target, fieldAlias = null) {

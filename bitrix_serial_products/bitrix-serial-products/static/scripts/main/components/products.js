@@ -81,6 +81,7 @@ export default class ProductsList {
                             <div class="text-truncate align-middle w-100 text-center" title="${product.title}">${product.title}</div>
                         </div>
                         <div class="product-card-header-measure">${this.getMarkerIsTechOk(product.isTechOk)}</div>
+                        <div class="product-card-header-comdirok">${this.getMarkerIsComDirOk(product.isComDirOk)}</div>
                     </div>
                     <div class="product-card-body-img">
                         <div class="overlay d-none"></div>
@@ -186,6 +187,12 @@ export default class ProductsList {
         return '';
     }
 
+    getMarkerIsComDirOk(value) {
+        if (value == 'Y') {
+            return '💰';
+        }
+        return '';
+    }
 
     getProductSize_(product) {
         if ('commonDimensionsDepth' in product) {

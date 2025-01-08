@@ -94,6 +94,7 @@ export const FIELD_BED = {
     commonDimensionsDepth_2: "ufCrm61_1713513422",      // 2-Общие габариты (Г.)
     commonDimensionsHeight_2: "ufCrm61_1713513434",     // 2-Общие габариты (В.)
     thicknessPPU_2: "ufCrm61_1713513456",               // 2-Толщина ППУ
+    seamType: "ufCrm61_1726218793",                     // 2-Тип шва
     upholsteryFabricCollection_2: "ufCrm61_1713513510", // 2-Коллекция и цвет обивочной ткани
     baseboardCutout_2: "ufCrm61_1713513572",            // 2-Вырез под плинтус
     baseboardHeight_2: "ufCrm61_1713513690",            // 2-Высота плинтуса
