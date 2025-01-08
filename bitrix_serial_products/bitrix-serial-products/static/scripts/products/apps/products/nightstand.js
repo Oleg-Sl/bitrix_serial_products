@@ -74,7 +74,7 @@ export default class NightstandApp extends BaseApp {
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
         const filterTopMaterial = this.productService.getValueText('filterTopMaterial') || '-';
 
-        let title = `${this.productNameRus} ${collection}. ${filterSize}. ${filterSizeDesc}. Коллекция tamamm. Общий габарит: Ш*Г*В - ${w}*${d}*${h} мм. Материал столешницы: ${filterTopMaterial}.`;
+        let title = `${this.productNameRus} ${collection}. ${filterSize}. ${filterSizeDesc} (индивидуальное изделие код №2). Общий габарит: Ш*Г*В - ${w}*${d}*${h} мм. Материал столешницы: ${filterTopMaterial}.`;
         // if (fabric) {
         //     title += ` Ткань: ${fabric}.`;
         // }

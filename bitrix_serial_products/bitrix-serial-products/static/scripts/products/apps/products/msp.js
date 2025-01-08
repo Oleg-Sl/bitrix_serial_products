@@ -52,7 +52,7 @@ export default class MspApp extends BaseApp {
         const d = this.productService.getValue('commonDimensionsDepth') || '-';
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
         
-        let title = `Мягкая стеновая панель, ${collection}, тест (коллекция tamamm). Общий габарит: ${w}*${d}*${h} мм.`;
+        let title = `Мягкая стеновая панель, ${collection}, тест (индивидуальное изделие код №2). Общий габарит: ${w}*${d}*${h} мм.`;
         if (fabric) {
             title += ` Ткань: ${fabric}.`;
         }

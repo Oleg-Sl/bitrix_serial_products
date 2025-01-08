@@ -75,7 +75,7 @@ export default class SofaApp extends BaseApp {
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
         const support = this.productService.getValueText('supports') || '-';
         
-        let title = `${this.productNameRus} ${collection} (коллекция tamamm). Форма: ${shape}. Общий габарит: ${w}*${d}*${h} мм. ${mechanism}. Опоры: ${support}.`;
+        let title = `${this.productNameRus} ${collection} (индивидуальное изделие код №2). Форма: ${shape}. Общий габарит: ${w}*${d}*${h} мм. ${mechanism}. Опоры: ${support}.`;
         if (fabric) {
             title += ` Ткань: ${fabric}.`;
         }
