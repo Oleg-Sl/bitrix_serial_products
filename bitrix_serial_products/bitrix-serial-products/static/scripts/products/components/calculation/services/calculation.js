@@ -467,7 +467,7 @@ export default class Calculation {
             economy.fabricSummary = this.economyService.getFabricPrice(economy.code) * fabricRunningMeters;
             economy.totalCost = this.totalPrice + economy.fabricSummary;
             // economy.price = Math.ceil((economy.totalCost * economy.margin) / 1000) * 1000;
-            economy.margin = economy.price / economy.totalCost;
+            economy.margin = Math.ceil(1000 * economy.price / economy.totalCost) / 1000;
         });
     }
 
