@@ -5,6 +5,22 @@ export const FIELD_COEFFICIENTS = {
         fieldId: 'ufCrm33_1708830433',             // МДФ 6мм для МСП
         coefficientFieldId: 'ufCrm33_1708830698',  // Что входит в коэф. МДФ 6мм
     },
+    MDF10mm: {
+        fieldId: 'ufCrm33_1708830433',             // МДФ 6мм для МСП
+        coefficientFieldId: 'ufCrm33_1708830698',  // Что входит в коэф. МДФ 6мм
+    },
+    MDF15mm: {
+        fieldId: 'ufCrm33_1708830433',             // МДФ 6мм для МСП
+        coefficientFieldId: 'ufCrm33_1708830698',  // Что входит в коэф. МДФ 6мм
+    },
+    MDF19mm: {
+        fieldId: 'ufCrm33_1708830433',             // МДФ 6мм для МСП
+        coefficientFieldId: 'ufCrm33_1708830698',  // Что входит в коэф. МДФ 6мм
+    },
+    MDF25mm: {
+        fieldId: 'ufCrm33_1708830433',             // МДФ 6мм для МСП
+        coefficientFieldId: 'ufCrm33_1708830698',  // Что входит в коэф. МДФ 6мм
+    },
     PPU_EL: {
         fieldId: 'ufCrm33_1708830476',            // ППУ ЕЛ и Elax
         coefficientFieldId: 'ufCrm33_1708830738', // Что входит в коэф. ППУ
@@ -32,6 +48,14 @@ export const FIELD_COEFFICIENTS = {
     plywood3mm: {
         fieldId: 'ufCrm33_1713685670',            // Фанера 3мм
         coefficientFieldId: 'ufCrm33_1713685729', // Что входит в коэфф Фанера 03 мм
+    },
+    fiberboard: {
+        fieldId: 'ufCrm33_1713685670',            // ДВП
+        coefficientFieldId: 'ufCrm33_1713685729', // Что входит в коэфф ДВП
+    },
+    elecCardboard: {
+        fieldId: 'ufCrm33_1734622134',            // Элек. картон
+        coefficientFieldId: 'ufCrm33_1713685729', // Что входит в коэфф Элек. картон
     },
     // latexMemory: {
     //     fieldId: 'ufCrm33_1713685754',            // Латекс и Мемори

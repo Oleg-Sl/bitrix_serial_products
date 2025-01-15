@@ -17,17 +17,47 @@ export const CALC_FIELD_NIGHTSTAND = {
         comments: 'ufCrm79_1714100397',          // Работа (комментарии)
     },
 
+    MDF10mm: {
+        type: 'material',
+        value: 'ufCrm79_1714099423',             
+        amount: 'ufCrm79_1714099442',            
+        comments: 'ufCrm79_1714099456',          
+    },
     MDF15mm: {
         type: 'material',
         value: 'ufCrm79_1714099234',             
         amount: 'ufCrm79_1714099255',            
         comments: 'ufCrm79_1714099267',          
     },
-    MDF10mm: {
+    MDF19mm: {
         type: 'material',
-        value: 'ufCrm79_1714099423',             
-        amount: 'ufCrm79_1714099442',            
-        comments: 'ufCrm79_1714099456',          
+        value: 'ufCrm79_1734621390',
+        amount: 'ufCrm79_1734621405',
+        comments: 'ufCrm79_1734621423',
+    },
+    MDF25mm: {
+        type: 'material',
+        value: 'ufCrm79_1734621519',             
+        amount: 'ufCrm79_1734621537',            
+        comments: 'ufCrm79_1734621556',          
+    },
+    plywood3mm: {
+        type: 'material',
+        value: 'ufCrm79_1734612940',             // Фанера 3мм (значение)
+        amount: 'ufCrm79_1734613002',            // Фанера 3мм (сумма)
+        comments: 'ufCrm79_1734613028',          // Фанера 3мм (комментарии)
+    },
+    fiberboard: {
+        type: 'material',
+        value: 'ufCrm79_1734621606',             // ДВП (значение)
+        amount: 'ufCrm79_1734621622',            // ДВП (сумма)
+        comments: 'ufCrm79_1734621637',          // ДВП (комментарии)
+    },
+    elecCardboard: {
+        type: 'material',
+        value: 'ufCrm79_1734622044',             // Элек. картон (значение)
+        amount: 'ufCrm79_1734622077',            // Элек. картон (сумма)
+        comments: 'ufCrm79_1734622091',          // Элек. картон (комментарии)
     },
     // Опора (шт)
     Support: {
