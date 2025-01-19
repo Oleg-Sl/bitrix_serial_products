@@ -28,6 +28,8 @@ export default class ChairView extends BaseView {
                 this.outputData(elem, value, fieldDaata);
             }
         }
+
+        this.linksView.render();
     }
 
     handleMaterialChange(value, veneerFieldAlias) {

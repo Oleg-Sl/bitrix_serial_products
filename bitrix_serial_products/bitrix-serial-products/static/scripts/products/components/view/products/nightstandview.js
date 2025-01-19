@@ -27,6 +27,8 @@ export default class NightstandView extends BaseView {
                 this.outputData(elem, value, fieldDaata);
             }
         }
+
+        this.linksView.render();
     }
 
     handleMaterialChange(value, veneerFieldAlias) {

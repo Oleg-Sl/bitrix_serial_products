@@ -19,6 +19,7 @@ export default class BaseView {
     }
 
     initialize() {
+        console.log("INIT BaseView");
         this.initHandlers();
         this.blockFields();
         this.buttonTechokView.init();
