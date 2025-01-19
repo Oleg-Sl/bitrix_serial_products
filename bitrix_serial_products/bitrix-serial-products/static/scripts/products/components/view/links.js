@@ -22,19 +22,50 @@ export default class LinksView {
         `;
     }
 
+    // generateLinkBlock(category, links) {
+    //     return `
+    //         <div class="col-${category.colSize} p-1">
+    //             <div class="card">
+    //                 <div class="bg-secondary-subtle text-nowrap p-1">${category.title}</div>
+    //                 <div class="card-body d-flex justify-content-around p-1">
+    //                     ${links.map(link => `
+    //                         <div class="col overflow-hidden p-1">
+    //                             <a class="btn btn-secondary text-nowrap px-0" href="${link.href || '-'}" role="button" target="_blank" style="display: block;">${link.text}</a>
+    //                         </div>
+    //                     `).join('')}
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     `;
+    // }
+
     generateLinkBlock(category, links) {
         return `
             <div class="col-${category.colSize} p-1">
                 <div class="card">
                     <div class="bg-secondary-subtle text-nowrap p-1">${category.title}</div>
                     <div class="card-body d-flex justify-content-around p-1">
-                        ${links.map(link => `
-                            <div class="col overflow-hidden p-1">
-                                <a class="btn btn-primary text-nowrap px-0" href="${link.href || '-'}" role="button" target="_blank" style="display: block;">${link.text}</a>
-                            </div>
-                        `).join('')}
+                        ${links.map(link => this.generateLinkHTML(link)).join('')}
                     </div>
                 </div>
+            </div>
+        `;
+    }
+
+    generateLinkHTML(link) {
+        if (!link.href) {
+            return `
+                <div class="col overflow-hidden p-1">
+                    <button class="btn btn-secondary text-nowrap px-0" style="display: block;" disabled>${link.text}</button>
+                </div>
+            `;
+        }
+
+        return `
+            <div class="col overflow-hidden p-1">
+                <a class="btn btn-secondary text-nowrap px-0" href="${link.href}" role="button" target="_blank" style="display: block;">
+                    ${link.text}
+                </a>
             </div>
         `;
     }
