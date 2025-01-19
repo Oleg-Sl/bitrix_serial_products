@@ -8,6 +8,7 @@ export default class LinksView {
     }
 
     render() {
+        console.log("Render of LinksView = ", this.container);
         const containerHTML = this.generateLayoutHTML();
         this.container.insertAdjacentHTML('afterbegin', containerHTML);
     }
