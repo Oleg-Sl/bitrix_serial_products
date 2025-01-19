@@ -2,6 +2,7 @@
 import ButtonComdirokView from './button_comdirok.js';
 import ButtonTechokView from './button_techok.js';
 import ButtonCreateProductView from './button_createproduct.js';
+import LinksView from './links.js';
 
 
 export default class BaseView {
@@ -14,6 +15,7 @@ export default class BaseView {
         this.buttonTechokView = new ButtonTechokView(productService, userService, callbackService);
         this.buttonComdirokView = new ButtonComdirokView(productService, userService, callbackService);
         this.buttonCreateProductView = new ButtonCreateProductView(productService, userService, callbackService, callbackAddProductItem);
+        this.linksView = new LinksView(productService, userService)
     }
 
     initialize() {
@@ -51,6 +53,7 @@ export default class BaseView {
         }
         this.buttonTechokView.render();
         this.buttonComdirokView.render();
+        this.linksView.render();
     }
 
     outputData(elem, value, fieldData) {

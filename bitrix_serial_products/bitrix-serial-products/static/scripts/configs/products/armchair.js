@@ -69,6 +69,18 @@ export const FIELD_ARMCHAIR = {
     createdBy: 'ufCrm57_1715516293',
     updatedBy: 'ufCrm57_1715516309',
 
+    tzDevelopment: 'ufCrm57_1737287660',            // ТЗ-разработка
+    tzSaw: 'ufCrm57_1737287878',                    // ТЗ-пилка
+    tzAssembly: 'ufCrm57_1737287947',               // ТЗ-сборка
+    tzPPU: 'ufCrm57_1737288148',                    // ТЗ-ппу
+    tzSewing: 'ufCrm57_1737288233',                 // ТЗ-швейка
+    tzCovering: 'ufCrm57_1737288374',               // ТЗ-обтяжка
+    tzCarpentry: 'ufCrm57_1737288512',              // ТЗ-столярка
+    tzGrinding: 'ufCrm57_1737288896',               // ТЗ-шлифовка
+    tzMolar: 'ufCrm57_1737288954',                  // ТЗ-молярка
+    tzPackage: 'ufCrm57_1737289111',                // ТЗ-упаковка
+    tzDelivery: 'ufCrm57_1737289172',               // ТЗ-доставка
+
     freeTitle: "ufCrm57_1713504224",                    // 1-Свободное название изделия
     commonDimensionsWidth: "ufCrm57_1713504591",        // 1-Общие габариты (Ш.)
     commonDimensionsDepth: "ufCrm57_1713504619",        // 1-Общие габариты (Г.)

@@ -72,6 +72,18 @@ export const FIELD_CHAIR = {
     createdBy: "ufCrm77_1715516585",            // Кем создан
     updatedBy: "ufCrm77_1715516603",            // Кем обновлён
 
+    tzDevelopment: 'ufCrm77_1737287745',            // ТЗ-разработка
+    tzSaw: 'ufCrm77_1737287823',                    // ТЗ-пилка
+    tzAssembly: 'ufCrm77_1737288011',               // ТЗ-сборка
+    tzPPU: 'ufCrm77_1737288073',                    // ТЗ-ппу
+    tzSewing: 'ufCrm77_1737288289',                 // ТЗ-швейка
+    tzCovering: 'ufCrm77_1737288336',               // ТЗ-обтяжка
+    tzCarpentry: 'ufCrm77_1737288545',              // ТЗ-столярка
+    tzGrinding: 'ufCrm77_1737288859',               // ТЗ-шлифовка
+    tzMolar: 'ufCrm77_1737289012',                  // ТЗ-молярка
+    tzPackage: 'ufCrm77_1737289076',                // ТЗ-упаковка
+    tzDelivery: 'ufCrm77_1737289210',               // ТЗ-доставка
+
     freeTitle: "ufCrm77_1714055263",                    // 1-Свободное название изделия
     commonDimensionsWidth: "ufCrm77_1714055274",        // 1-Общие габариты (Ш.)
     commonDimensionsDepth: "ufCrm77_1714055293",        // 1-Общие габариты (Г.)

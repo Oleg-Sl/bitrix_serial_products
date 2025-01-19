@@ -58,6 +58,18 @@ export const FIELD_TABLE = {
 
     createdBy: "ufCrm75_1715516669",
     updatedBy: "ufCrm75_1715516681",
+    
+    tzDevelopment: 'ufCrm75_1737287754',            // ТЗ-разработка
+    tzSaw: 'ufCrm75_1737287813',                    // ТЗ-пилка
+    tzAssembly: 'ufCrm75_1737288020',               // ТЗ-сборка
+    tzPPU: 'ufCrm75_1737288065',                    // ТЗ-ппу
+    tzSewing: 'ufCrm75_1737288297',                 // ТЗ-швейка
+    tzCovering: 'ufCrm75_1737288327',               // ТЗ-обтяжка
+    tzCarpentry: 'ufCrm75_1737288554',              // ТЗ-столярка
+    tzGrinding: 'ufCrm75_1737288848',               // ТЗ-шлифовка
+    tzMolar: 'ufCrm75_1737289020',                  // ТЗ-молярка
+    tzPackage: 'ufCrm75_1737289063',                // ТЗ-упаковка
+    tzDelivery: 'ufCrm75_1737289220',               // ТЗ-доставка
 
     btnSave: "ufCrm75_1714991732",              // Кнопка "сохранить"
     btnRemove: "ufCrm75_1714991742",            // Кнопка "удалить"

@@ -55,6 +55,18 @@ export const FIELD_MELOCHEVKA = {
     createdBy: "ufCrm63_1715516519",          // Когда создан
     updatedBy: "ufCrm63_1715516532",          // Когда обновлён
 
+    tzDevelopment: 'ufCrm63_1737287734',            // ТЗ-разработка
+    tzSaw: 'ufCrm63_1737287835',                    // ТЗ-пилка
+    tzAssembly: 'ufCrm63_1737288001',               // ТЗ-сборка
+    tzPPU: 'ufCrm63_1737288083',                    // ТЗ-ппу
+    tzSewing: 'ufCrm63_1737288276',                 // ТЗ-швейка
+    tzCovering: 'ufCrm63_1737288346',               // ТЗ-обтяжка
+    tzCarpentry: 'ufCrm63_1737288537',              // ТЗ-столярка
+    tzGrinding: 'ufCrm63_1737288868',               // ТЗ-шлифовка
+    tzMolar: 'ufCrm63_1737288986',                  // ТЗ-молярка
+    tzPackage: 'ufCrm63_1737289086',                // ТЗ-упаковка
+    tzDelivery: 'ufCrm63_1737289199',               // ТЗ-доставка
+
     workType: "ufCrm63_1715475502",             // Тип работы
 
     btnSave: "ufCrm63_1714991307",              // Кнопка "сохранить"

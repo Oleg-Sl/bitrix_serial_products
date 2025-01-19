@@ -71,6 +71,18 @@ export const FIELD_BED = {
     createdBy: "ufCrm61_1715516369",            // Кем создан
     updatedBy: "ufCrm61_1715516390",            // Кем обновлён
 
+    tzDevelopment: 'ufCrm61_1737287704',            // ТЗ-разработка
+    tzSaw: 'ufCrm61_1737287860',                    // ТЗ-пилка
+    tzAssembly: 'ufCrm61_1737287969',               // ТЗ-сборка
+    tzPPU: 'ufCrm61_1737288100',                    // ТЗ-ппу
+    tzSewing: 'ufCrm61_1737288259',                 // ТЗ-швейка
+    tzCovering: 'ufCrm61_1737288364',               // ТЗ-обтяжка
+    tzCarpentry: 'ufCrm61_1737288520',              // ТЗ-столярка
+    tzGrinding: 'ufCrm61_1737288887',               // ТЗ-шлифовка
+    tzMolar: 'ufCrm61_1737288963',                  // ТЗ-молярка
+    tzPackage: 'ufCrm61_1737289103',                // ТЗ-упаковка
+    tzDelivery: 'ufCrm61_1737289181',               // ТЗ-доставка
+
     // Основные данные
     freeTitle: "ufCrm61_1713511268",                    // 1-Свободное название изделия
     commonDimensionsWidth: "ufCrm61_1713511299",        // 1-Общие габариты (Ш.)

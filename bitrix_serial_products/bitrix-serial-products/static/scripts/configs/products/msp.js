@@ -57,6 +57,18 @@ export const FIELD_MSP = {
     createdBy: "ufCrm23_1715516015",
     updatedBy: "ufCrm23_1715516039",
 
+    tzDevelopment: 'ufCrm23_1737287307',            // ТЗ-разработка
+    tzSaw: 'ufCrm23_1737287898',                    // ТЗ-пилка
+    tzAssembly: 'ufCrm23_1737287909',               // ТЗ-сборка
+    tzPPU: 'ufCrm23_1737288167',                    // ТЗ-ппу
+    tzSewing: 'ufCrm23_1737288203',                 // ТЗ-швейка
+    tzCovering: 'ufCrm23_1737288466',               // ТЗ-обтяжка
+    tzCarpentry: 'ufCrm23_1737288480',              // ТЗ-столярка
+    tzGrinding: 'ufCrm23_1737288916',               // ТЗ-шлифовка
+    tzMolar: 'ufCrm23_1737288925',                  // ТЗ-молярка
+    tzPackage: 'ufCrm23_1737289130',                // ТЗ-упаковка
+    tzDelivery: 'ufCrm23_1737289140',               // ТЗ-доставка
+
     btnSave: "ufCrm23_1714991412",              // Кнопка "сохранить"
     btnRemove: "ufCrm23_1714991418",            // Кнопка "удалить"
     btnCopy: "ufCrm23_1714991432",              // Кнопка "копировать"

@@ -59,6 +59,18 @@ export const FIELD_NIGHTSTAND = {
     createdBy: "ufCrm73_1715516444",
     updatedBy: "ufCrm73_1715516459",
 
+    tzDevelopment: 'ufCrm73_1737287721',            // ТЗ-разработка
+    tzSaw: 'ufCrm73_1737287846',                    // ТЗ-пилка
+    tzAssembly: 'ufCrm73_1737287978',               // ТЗ-сборка
+    tzPPU: 'ufCrm73_1737288091',                    // ТЗ-ппу
+    tzSewing: 'ufCrm73_1737288268',                 // ТЗ-швейка
+    tzCovering: 'ufCrm73_1737288354',               // ТЗ-обтяжка
+    tzCarpentry: 'ufCrm73_1737288528',              // ТЗ-столярка
+    tzGrinding: 'ufCrm73_1737288878',               // ТЗ-шлифовка
+    tzMolar: 'ufCrm73_1737288972',                  // ТЗ-молярка
+    tzPackage: 'ufCrm73_1737289094',                // ТЗ-упаковка
+    tzDelivery: 'ufCrm73_1737289191',               // ТЗ-доставка
+
     btnSave: "ufCrm73_1714991521",              // Кнопка "сохранить"
     btnRemove: "ufCrm73_1714991531",            // Кнопка "удалить"
     btnCopy: "ufCrm73_1714991546",              // Кнопка "копировать"

@@ -59,6 +59,18 @@ export const FIELD_POUF = {
     createdBy: "ufCrm67_1715516733",
     updatedBy: "ufCrm67_1715516756",
 
+    tzDevelopment: 'ufCrm67_1737287766',            // ТЗ-разработка
+    tzSaw: 'ufCrm67_1737287789',                    // ТЗ-пилка
+    tzAssembly: 'ufCrm67_1737288030',               // ТЗ-сборка
+    tzPPU: 'ufCrm67_1737288038',                    // ТЗ-ппу
+    tzSewing: 'ufCrm67_1737288304',                 // ТЗ-швейка
+    tzCovering: 'ufCrm67_1737288312',               // ТЗ-обтяжка
+    tzCarpentry: 'ufCrm67_1737288564',              // ТЗ-столярка
+    tzGrinding: 'ufCrm67_1737288814',               // ТЗ-шлифовка
+    tzMolar: 'ufCrm67_1737289028',                  // ТЗ-молярка
+    tzPackage: 'ufCrm67_1737289045',                // ТЗ-упаковка
+    tzDelivery: 'ufCrm67_1737289229',               // ТЗ-доставка
+
     btnSave: "ufCrm67_1714991630",              // Кнопка "сохранить"
     btnRemove: "ufCrm67_1714991637",            // Кнопка "удалить"
     btnCopy: "ufCrm67_1714991652",              // Кнопка "копировать"

@@ -66,6 +66,18 @@ export const FIELD_SOFA = {
     createdBy: "ufCrm53_1715516212",
     updatedBy: "ufCrm53_1715516230",
 
+    tzDevelopment: 'ufCrm53_1737287650',            // ТЗ-разработка
+    tzSaw: 'ufCrm53_1737287887',                    // ТЗ-пилка
+    tzAssembly: 'ufCrm53_1737287924',               // ТЗ-сборка
+    tzPPU: 'ufCrm53_1737288157',                    // ТЗ-ппу
+    tzSewing: 'ufCrm53_1737288222',                 // ТЗ-швейка
+    tzCovering: 'ufCrm53_1737288382',               // ТЗ-обтяжка
+    tzCarpentry: 'ufCrm53_1737288504',              // ТЗ-столярка
+    tzGrinding: 'ufCrm53_1737288908',               // ТЗ-шлифовка
+    tzMolar: 'ufCrm53_1737288943',                  // ТЗ-молярка
+    tzPackage: 'ufCrm53_1737289121',                // ТЗ-упаковка
+    tzDelivery: 'ufCrm53_1737289162',               // ТЗ-доставка
+
     btnSave: "ufCrm53_1714989111",              // Кнопка "сохранить"
     btnRemove: "ufCrm53_1714989140",            // Кнопка "удалить"
     btnCopy: "ufCrm53_1714989154",              // Кнопка "копировать"
