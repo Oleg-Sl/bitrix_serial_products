@@ -56,7 +56,7 @@ export default class LinksView {
         if (!link.href) {
             return `
                 <div class="col overflow-hidden p-1">
-                    <button class="btn btn-secondary text-nowrap px-0" style="display: block;" disabled>${link.text}</button>
+                    <button class="btn btn-secondary text-nowrap px-0 w-100" style="display: block;" disabled>${link.text}</button>
                 </div>
             `;
         }
