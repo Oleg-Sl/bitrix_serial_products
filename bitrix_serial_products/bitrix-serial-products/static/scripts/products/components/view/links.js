@@ -8,7 +8,6 @@ export default class LinksView {
     }
 
     render() {
-        console.log("Render of LinksView = ", this.container);
         const containerHTML = this.generateLayoutHTML();
         this.container.insertAdjacentHTML('afterbegin', containerHTML);
     }
@@ -17,7 +16,7 @@ export default class LinksView {
         const categories = this.getCategories();
         const linksHtml = categories.map(category => this.generateLinkBlock(category, category.links)).join('');
         return `
-            <div class="text-center container-link">
+            <div class="row justify-content-between text-center container-link">
                 ${linksHtml}
             </div>
         `;
@@ -31,7 +30,7 @@ export default class LinksView {
                     <div class="card-body d-flex justify-content-around p-1">
                         ${links.map(link => `
                             <div class="col overflow-hidden p-1">
-                                <a class="btn btn-primary text-nowrap px-0" href="${link.href}" role="button" target="_blank" style="display: block;">${link.text}</a>
+                                <a class="btn btn-primary text-nowrap px-0" href="${link.href || '-'}" role="button" target="_blank" style="display: block;">${link.text}</a>
                             </div>
                         `).join('')}
                     </div>
@@ -46,41 +45,41 @@ export default class LinksView {
                 title: "Разработка",
                 colSize: 1,
                 links: [
-                    { href: this.productService.getValue('tzDevelopment') || '', text: "Технологии" }
+                    { href: this.productService.getValue('tzDevelopment'), text: "Технологии" }
                 ]
             },
             {
                 title: "Пилка-сборка",
                 colSize: 2,
                 links: [
-                    { href: this.productService.getValue('tzSaw') || '', text: "Пилка (ЧПУ)" },
-                    { href: this.productService.getValue('tzAssembly') || '', text: "Сборка" }
+                    { href: this.productService.getValue('tzSaw'), text: "Пилка (ЧПУ)" },
+                    { href: this.productService.getValue('tzAssembly'), text: "Сборка" }
                 ]
             },
             {
                 title: "Мякоть",
                 colSize: 3,
                 links: [
-                    { href: this.productService.getValue('tzPPU') || '', text: "ППУ" },
-                    { href: this.productService.getValue('tzSewing') || '', text: "Швейка" },
-                    { href: this.productService.getValue('tzCovering') || '', text: "Обтяжка" }
+                    { href: this.productService.getValue('tzPPU'), text: "ППУ" },
+                    { href: this.productService.getValue('tzSewing'), text: "Швейка" },
+                    { href: this.productService.getValue('tzCovering'), text: "Обтяжка" }
                 ]
             },
             {
                 title: "Столярка-молярка",
                 colSize: 3,
                 links: [
-                    { href: this.productService.getValue('tzCarpentry') || '', text: "Столярка" },
-                    { href: this.productService.getValue('tzGrinding') || '', text: "Шлифовка" },
-                    { href: this.productService.getValue('tzMolar') || '', text: "Молярка" }
+                    { href: this.productService.getValue('tzCarpentry'), text: "Столярка" },
+                    { href: this.productService.getValue('tzGrinding'), text: "Шлифовка" },
+                    { href: this.productService.getValue('tzMolar'), text: "Молярка" }
                 ]
             },
             {
                 title: "Сервис",
                 colSize: 2,
                 links: [
-                    { href: this.productService.getValue('tzPackage') || '', text: "Упаковка" },
-                    { href: this.productService.getValue('tzDelivery') || '', text: "Доставка" }
+                    { href: this.productService.getValue('tzPackage'), text: "Упаковка" },
+                    { href: this.productService.getValue('tzDelivery'), text: "Доставка" }
                 ]
             }
         ];
