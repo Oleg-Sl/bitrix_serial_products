@@ -17,7 +17,7 @@ export default class BedView extends BaseView {
             }
         }
 
-        this.linksView.render();
+        // this.linksView.render();
     }
 
     dependentField(target) {

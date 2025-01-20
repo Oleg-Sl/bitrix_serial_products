@@ -26,7 +26,7 @@ export default class BaseView {
         this.buttonComdirokView.init();
         this.buttonCreateProductView.init();
 
-        // this.linksView.render();
+        this.linksView.render();
     }
 
     blockFields() {

@@ -48,7 +48,7 @@ export default class SofaView extends BaseView {
         }
         this.renderSleepingMechanism();
 
-        this.linksView.render();
+        // this.linksView.render();
     }
 
     renderSleepingMechanism() {
