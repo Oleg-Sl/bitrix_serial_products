@@ -25,6 +25,8 @@ export default class BaseView {
         this.buttonTechokView.init();
         this.buttonComdirokView.init();
         this.buttonCreateProductView.init();
+
+        this.linksView.render();
     }
 
     blockFields() {
@@ -54,7 +56,6 @@ export default class BaseView {
         }
         this.buttonTechokView.render();
         this.buttonComdirokView.render();
-        this.linksView.render();
     }
 
     outputData(elem, value, fieldData) {
