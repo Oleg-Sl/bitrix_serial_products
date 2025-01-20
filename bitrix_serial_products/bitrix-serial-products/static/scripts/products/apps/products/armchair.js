@@ -145,7 +145,8 @@ export default class ArmchairApp extends BaseApp {
         const support = this.productService.getValueText('supports') || '-';
         const useInFillers = this.productService.getValueText('useInFillers_3') || '-';
         
-        let title = `Кресло ${collection} (индивидуальное изделие код №2). Общий размер: Ш*Г*В - ${w}*${d}*${h} мм. Опоры: ${support}.`;
+        let title = `Кресло ${collection}. Общий размер: Ш*Г*В - ${w}*${d}*${h} мм. Опоры: ${support}.`;
+        // let title = `Кресло ${collection} (индивидуальное изделие код №2). Общий размер: Ш*Г*В - ${w}*${d}*${h} мм. Опоры: ${support}.`;
         if (fabric) {
             title += ` Ткань: ${fabric}.`;
         }
