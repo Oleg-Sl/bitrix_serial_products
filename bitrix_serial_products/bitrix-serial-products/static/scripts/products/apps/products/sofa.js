@@ -63,6 +63,7 @@ export default class SofaApp extends BaseApp {
         const shapeId = this.productService.getValue('shape') || '-';
         let ottomanSide = '';
         if (shapeId == 3705) {
+            // Диван с оттоманкой
             ottomanSide = this.productService.getValueText('ottomanSide') || '';
             console.log("ottomanSide = ", ottomanSide);
             ottomanSide = ottomanSide.toLowerCase();
@@ -76,6 +77,14 @@ export default class SofaApp extends BaseApp {
     getProductItemvariationTitle(fabric = null) {
         const collection = this.productService.getValueText('filterNameCollection') || '-';
         const shape = this.productService.getValueText('shape') || '-';
+        const shapeId = this.productService.getValue('shape') || '-';
+        if (shapeId == 3705) {
+            // Диван с оттоманкой
+            let ottomanSide = this.productService.getValueText('ottomanSide') || '';
+            ottomanSide = ottomanSide.toLowerCase();
+            shape += ' (ottomanSide)'
+        }
+
         const sleepingMechanism = this.productService.getValue('sleepingMechanism');
         const mechanism = sleepingMechanism && sleepingMechanism != 1 ? 'С механизмом' : 'Без механизма';
         const w = this.productService.getValue('commonDimensionsWidth') || '-';
