@@ -37,6 +37,9 @@ export const FIELD_NIGHTSTAND = {
     isComDirOk: "ufCrm73_1732253429",           // Ком.дир-OK
     dateOfComDir: "ufCrm73_1732253614",         // Дата согласования ком.дир
 
+    productVariationIds: "ufCrm73_1733073433",  // ID_вариации_каталога
+    productMainId: "ufCrm73_1733204835",        // ID_головного товара
+
     deliveryCity: "ufCrm73_1714011425",         // Город доставки
     link: "ufCrm73_1714011384",                 // Ссылка на оригинал
     referencePoint: "ufCrm73_1714011399",       // Ориентир

@@ -44,6 +44,29 @@ export default class NightstandApp extends BaseApp {
         }
     }
 
+    getProperty547() {
+        const filterSize = this.productService.getValueText('filterSize') || '-';
+        if (filterSize == 5949) {
+            // XS
+            return 713;
+        } else if (filterSize == 5951) {
+            // S
+            return 473;
+        } else if (filterSize == 5953) {
+            // M
+            return 475;
+        } else if (filterSize == 5955) {
+            // L
+            return 477;
+        } else if (filterSize == 5957) {
+            // XL
+            return 715;
+        } else if (filterSize == 5959) {
+            // XXL
+            return 717;
+        }
+    }
+
     async callbackProductItem(action, productId = null, detailText = null) {
         let fields = {};
         const property553 = this.getProperty553();
@@ -51,6 +74,10 @@ export default class NightstandApp extends BaseApp {
             fields.property553 = { value: property553 };
         }
 
+        const property547 = this.getProperty547();
+        if (property547) {
+            fields.property547 = { value: property547 };
+        }
         // action = 0 - создание главного товара и вариаций
         // action = 1 - обновление вариаций
         if (action == 0) {
@@ -74,7 +101,7 @@ export default class NightstandApp extends BaseApp {
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
         const filterTopMaterial = this.productService.getValueText('filterTopMaterial') || '-';
 
-        let title = `${this.productNameRus} ${collection}. ${filterSize}. ${filterSizeDesc}. Общий габарит: Ш*Г*В - ${w}*${d}*${h} мм. Материал столешницы: ${filterTopMaterial}.`;
+        let title = `${this.productNameRus} ${collection} ${filterSize} ${filterSizeDesc}. Общий габарит: Ш*Г*В - ${w}*${d}*${h} мм. Материал столешницы: ${filterTopMaterial}.`;
         // let title = `${this.productNameRus} ${collection}. ${filterSize}. ${filterSizeDesc} (индивидуальное изделие код №2). Общий габарит: Ш*Г*В - ${w}*${d}*${h} мм. Материал столешницы: ${filterTopMaterial}.`;
         // if (fabric) {
         //     title += ` Ткань: ${fabric}.`;
