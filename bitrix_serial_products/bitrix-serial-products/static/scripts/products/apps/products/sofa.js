@@ -76,7 +76,7 @@ export default class SofaApp extends BaseApp {
 
     getProductItemvariationTitle(fabric = null) {
         const collection = this.productService.getValueText('filterNameCollection') || '-';
-        const shape = this.productService.getValueText('shape') || '-';
+        let shape = this.productService.getValueText('shape') || '-';
         const shapeId = this.productService.getValue('shape') || '-';
         if (shapeId == 3705) {
             // Диван с оттоманкой
