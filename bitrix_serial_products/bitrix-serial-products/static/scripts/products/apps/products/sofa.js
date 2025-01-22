@@ -42,6 +42,8 @@ export default class SofaApp extends BaseApp {
         } else if (ottomanSide == 4505) {
             // левая
             fields['property621'] = { value: 703 };
+        } else {
+            fields['property621'] = { value: 0 };
         }
         // action = 0 - создание главного товара и вариаций
         // action = 1 - обновление вариаций
