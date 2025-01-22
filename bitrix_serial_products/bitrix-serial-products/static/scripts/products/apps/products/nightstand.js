@@ -42,11 +42,17 @@ export default class NightstandApp extends BaseApp {
         } else if (filterTopMaterial == 5989) {
             // Вставка из кож
             return 487;
+        } else if (filterTopMaterial == 5985) {
+            // Шпон
+            return 683;
+        } else if (filterTopMaterial == 5983) {
+            // Эмаль
+            return 719;
         }
     }
 
     getProperty547() {
-        const filterSize = this.productService.getValueText('filterSize') || '-';
+        const filterSize = this.productService.getValue('filterSize') || '-';
         console.log('filterSize = ', filterSize);
         if (filterSize == 5949) {
             // XS
