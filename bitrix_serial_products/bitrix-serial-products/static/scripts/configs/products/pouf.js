@@ -37,6 +37,9 @@ export const FIELD_POUF = {
     isComDirOk: "ufCrm67_1732253509",           // Ком.дир-OK
     dateOfComDir: "ufCrm67_1732253523",         // Дата согласования ком.дир
 
+    productVariationIds: "ufCrm67_1733073520",  // ID_вариации_каталога
+    productMainId: "ufCrm67_1733204895",        // ID_головного товара
+
     deliveryCity: "ufCrm67_1713517806",         // Город доставки
     link: "ufCrm67_1713517820",                 // Ссылка на оригинал
     referencePoint: "ufCrm67_1713517832",       // Ориентир
@@ -47,6 +50,7 @@ export const FIELD_POUF = {
     itemId: "ufCrm67_1714232435",               // ID товара
     itemPositionId: "ufCrm67_1714367656",       // ID товарной позиции
     itemPotochkaId: "ufCrm67_1716305107",       // ID_товар_поточка_вариация
+    // 67_1733073520
 
     isExist: "ufCrm67_1714295272",                  // Товар создан (отображаются только созданные)
     productDescription: "ufCrm67_1714389015",       // Доп описание изделия (будет видно в наименовании товара)
