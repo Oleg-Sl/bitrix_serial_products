@@ -82,7 +82,7 @@ export default class SofaApp extends BaseApp {
             // Диван с оттоманкой
             let ottomanSide = this.productService.getValueText('ottomanSide') || '';
             ottomanSide = ottomanSide.toLowerCase();
-            shape += ' (ottomanSide)'
+            shape += ` (${ottomanSide})`;
         }
 
         const sleepingMechanism = this.productService.getValue('sleepingMechanism');
