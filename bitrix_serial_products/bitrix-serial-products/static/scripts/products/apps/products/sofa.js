@@ -61,8 +61,10 @@ export default class SofaApp extends BaseApp {
         const collection = this.productService.getValueText('filterNameCollection') || '-';
         const shape = this.productService.getValueText('shape') || '-';
         const shapeId = this.productService.getValue('shape') || '-';
+        let ottomanSide = '';
         if (shapeId == 3705) {
-            let ottomanSide = this.productService.getValueText('ottomanSide') || '';
+            ottomanSide = this.productService.getValueText('ottomanSide') || '';
+            console.log("ottomanSide = ", ottomanSide);
             ottomanSide = ottomanSide.toLowerCase();
 
         }
