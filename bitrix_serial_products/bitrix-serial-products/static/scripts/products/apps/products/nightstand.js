@@ -32,6 +32,7 @@ export default class NightstandApp extends BaseApp {
 
     getProperty553() {
         const filterTopMaterial = this.productService.getValue('filterTopMaterial');
+        console.log('filterTopMaterial = ', filterTopMaterial);
         if (filterTopMaterial == 5991) {
             // Нат. камен
             return 485;
@@ -46,6 +47,7 @@ export default class NightstandApp extends BaseApp {
 
     getProperty547() {
         const filterSize = this.productService.getValueText('filterSize') || '-';
+        console.log('filterSize = ', filterSize);
         if (filterSize == 5949) {
             // XS
             return 713;
@@ -70,14 +72,20 @@ export default class NightstandApp extends BaseApp {
     async callbackProductItem(action, productId = null, detailText = null) {
         let fields = {};
         const property553 = this.getProperty553();
+        console.log('property553 = ', property553);
+
         if (property553) {
             fields.property553 = { value: property553 };
         }
 
         const property547 = this.getProperty547();
+        console.log('property547 = ', property547);
+
         if (property547) {
             fields.property547 = { value: property547 };
         }
+        console.log('fields = ', fields);
+        
         // action = 0 - создание главного товара и вариаций
         // action = 1 - обновление вариаций
         if (action == 0) {
