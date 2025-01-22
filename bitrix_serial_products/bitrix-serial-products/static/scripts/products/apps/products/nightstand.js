@@ -48,7 +48,7 @@ export default class NightstandApp extends BaseApp {
         let fields = {};
         const property553 = this.getProperty553();
         if (property553) {
-            fields.property553 = property553;
+            fields.property553 = { value: property553 };
         }
 
         // action = 0 - создание главного товара и вариаций

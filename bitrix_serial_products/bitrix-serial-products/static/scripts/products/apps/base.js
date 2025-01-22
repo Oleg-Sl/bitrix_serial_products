@@ -92,6 +92,7 @@ export default class BaseApp {
             const h = this.productService.getValue('commonDimensionsHeight') || '-';
             const overallDimensions = `${w}x${d}x${h} мм`;
             mainProductItemId = await this.productItemService.createMainProduct(193, this.getMainProductItemTitle(), detailText, overallDimensions, fileContentData);
+            console.log("Create product with id = ", mainProductItemId);
         }
 
         if (!mainProductItemId) {
@@ -110,7 +111,7 @@ export default class BaseApp {
         // Создание вариаций
         let variationIds = [];
         productPrices.push({
-            fabricCategory: null,
+            fabricCategory: 'Couture',
             price: 0,
             categoryId: 499,    // 'couture',
         });
@@ -177,7 +178,7 @@ export default class BaseApp {
                 return;
             }
             productPrices.push({
-                fabricCategory: null,
+                fabricCategory: 'Couture',
                 price: 0,
                 categoryId: 499,    // 'couture',
             });

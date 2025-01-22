@@ -59,10 +59,16 @@ export default class SofaApp extends BaseApp {
 
     getMainProductItemTitle() {          
         const collection = this.productService.getValueText('filterNameCollection') || '-';
-        const ottomanSide = this.productService.getValueText('ottomanSide') || '-';
+        const shape = this.productService.getValueText('shape') || '-';
+        const shapeId = this.productService.getValue('shape') || '-';
+        if (shapeId == 3705) {
+            let ottomanSide = this.productService.getValueText('ottomanSide') || '';
+            ottomanSide = ottomanSide.toLowerCase();
+
+        }
         const w = this.productService.getValue('commonDimensionsWidth') || '-';
 
-        return `${this.productNameRus} ${collection} ${ottomanSide} ${w} мм`;
+        return `${this.productNameRus} ${collection} | ${shape} ${ottomanSide} ${w} мм`;
     }
 
     getProductItemvariationTitle(fabric = null) {
