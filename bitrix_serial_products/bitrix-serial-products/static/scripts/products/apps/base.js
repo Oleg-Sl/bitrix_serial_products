@@ -17,6 +17,8 @@ export default class BaseApp {
         this.callbackService = callbackService;
         this.fileUploadService = fileUploadService;
 
+        this.isFabrics = true;
+
         this.currentUserId = this.userService.getCurrentUser()?.ID;
 
         this.fotAccessManager = new FotAccessManager(this.apiClient);
@@ -115,6 +117,7 @@ export default class BaseApp {
             price: 0,
             categoryId: 499,    // 'couture',
         });
+
         for (const productPrice of productPrices) {
             const category = productPrice.fabricCategory;
             const price = productPrice.price;
@@ -140,7 +143,7 @@ export default class BaseApp {
                 fields.property347.push({ value: { fileData: fileContentData } });
             }
 
-            if (categoryId) {
+            if (this.isFabrics && categoryId) {
                 fields.property467 = { value: categoryId };
             }
 
@@ -149,6 +152,9 @@ export default class BaseApp {
                 // mainProductItemId, title, fileContentData, price, categoryId
             );
             variationIds.push(result);
+            if (!this.isFabrics) {
+                break;
+            }
         }
         console.log('variationIds = ', variationIds);
         console.log('productPrices = ', productPrices);
@@ -204,7 +210,7 @@ export default class BaseApp {
                     fields.property347.push({ value: { fileData: fileContentData } });
                 }
         
-                if (categoryId) {
+                if (this.isFabrics && categoryId) {
                     fields.property467 = { value: categoryId };
                 }
                 const response = await this.productItemService.updateVariationProduct(
