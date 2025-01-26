@@ -12,6 +12,7 @@ export default class NightstandApp extends BaseApp {
         super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_NIGHTSTAND, FIELD_NIGHTSTAND);
 
         this.productNameRus = 'Тумба';
+        this.isFabrics = false;
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
         this.viewMain = new NightstandView(productService, userService, callbackService, this.callbackProductItem.bind(this));
         this.checkData = new CheckNightstandData(productService, this.fabricManager, this.productNameRus);

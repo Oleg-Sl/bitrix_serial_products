@@ -12,7 +12,6 @@ export default class PoufApp extends BaseApp {
         super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_POUF, FIELD_POUF);
 
         this.productNameRus = 'Пуф';
-        this.isFabrics = false;
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
         this.viewMain = new PoufView(productService, userService, callbackService, this.callbackProductItem.bind(this));
         this.checkData = new CheckPoufData(productService, this.fabricManager, this.productNameRus);
