@@ -116,7 +116,7 @@ export default class Filter {
             if (elem.tagName === 'SELECT') {
                 params[fieldAlias] = elem.value;
             } else if (elem.tagName === 'INPUT') {
-                params[fieldAlias] = `%${elem.value}%`;
+                params[fieldAlias] = `%25${elem.value}%25`;
             }
         }
         return params;

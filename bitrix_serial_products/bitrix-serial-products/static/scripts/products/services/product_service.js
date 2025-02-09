@@ -176,8 +176,9 @@ export default class ProductService {
     }
 
     async updateField(fieldAlias, fieldValue) {
+        const fieldInBx24 = this.productFieldsMatching[fieldAlias];
         await this.updateProduct({
-            [fieldAlias]: fieldValue
+            [fieldInBx24]: fieldValue
         });
     }
 

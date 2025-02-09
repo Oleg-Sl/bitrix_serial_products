@@ -53,7 +53,7 @@ export default class LinksView {
     }
 
     updateButtonLink(fieldAlias, fieldValue) {
-        const button = this.modalElement.querySelector(`[data-field=${fieldAlias}]`);
+        const button = this.container.querySelector(`[data-field=${fieldAlias}]`)
         if (button) {
             button.outerHTML = `
                 <a class="btn btn-secondary text-nowrap px-0" href="${fieldValue}" data-field="${fieldAlias}" role="button" target="_blank" style="display: block;">
@@ -175,7 +175,6 @@ export default class LinksView {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                            <button type="button" class="btn btn-primary" id="linkViewModalSave">Сохранить</button>
                             
                             <button class="btn btn-primary" type="button" id="linkViewModalSave">
                                 <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
