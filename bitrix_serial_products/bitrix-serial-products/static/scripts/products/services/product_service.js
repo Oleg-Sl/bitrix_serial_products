@@ -175,4 +175,10 @@ export default class ProductService {
         return data;
     }
 
+    async updateField(fieldAlias, fieldValue) {
+        await this.updateProduct({
+            [fieldAlias]: fieldValue
+        });
+    }
+
 }
