@@ -7,11 +7,12 @@ import { CALC_ID_POUF, CALC_FIELD_POUF } from '../../../configs/calc/sp_pouf.js'
 import CheckPoufData from '../../components/validity/poufquestionvalidity.js'
 
 
+const MAIN_PHOTO_RATIO = (17.46/10.15);
+
+
 export default class PoufApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        this.mainPhotoRatio = (17.46/10.15);
-
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_POUF, FIELD_POUF, this.mainPhotoRatio);
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_POUF, FIELD_POUF, MAIN_PHOTO_RATIO);
 
         this.productNameRus = 'Пуф';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

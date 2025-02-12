@@ -7,11 +7,12 @@ import { CALC_ID_NIGHTSTAND, CALC_FIELD_NIGHTSTAND } from '../../../configs/calc
 import CheckNightstandData from '../../components/validity/nightstandquestionvalidity.js'
 
 
+const MAIN_PHOTO_RATIO = (17.46/10.15);
+
+
 export default class NightstandApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        this.mainPhotoRatio = (17.46/10.15);
-
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_NIGHTSTAND, FIELD_NIGHTSTAND, this.mainPhotoRatio);
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_NIGHTSTAND, FIELD_NIGHTSTAND, MAIN_PHOTO_RATIO);
 
         this.productNameRus = 'Тумба';
         this.isFabrics = false;

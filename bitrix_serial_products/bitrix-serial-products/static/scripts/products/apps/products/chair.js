@@ -7,11 +7,12 @@ import { CALC_ID_CHAIR, CALC_FIELD_CHAIR } from '../../../configs/calc/sp_chair.
 import CheckChairData from '../../components/validity/chairquestionvalidity.js'
 
 
+const MAIN_PHOTO_RATIO = (17.46/10.15);
+
+
 export default class ChairApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        this.mainPhotoRatio = (17.46/10.15);
-
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_CHAIR, FIELD_CHAIR, this.mainPhotoRatio);
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_CHAIR, FIELD_CHAIR, MAIN_PHOTO_RATIO);
 
         this.productNameRus = 'Стул';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

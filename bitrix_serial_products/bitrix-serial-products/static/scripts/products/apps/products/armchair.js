@@ -7,11 +7,11 @@ import { CALC_ID_ARMCHAIR, CALC_FIELD_ARMCHAIR } from '../../../configs/calc/sp_
 import CheckArmchairData from '../../components/validity/armchairquestionvalidity.js'
 
 
+const MAIN_PHOTO_RATIO = (17.46/10.15);
+
 export default class ArmchairApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        this.mainPhotoRatio = (17.46/10.15);
-
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_ARMCHAIR, FIELD_ARMCHAIR, this.mainPhotoRatio);
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_ARMCHAIR, FIELD_ARMCHAIR, MAIN_PHOTO_RATIO);
 
         this.productNameRus = 'Кресло';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

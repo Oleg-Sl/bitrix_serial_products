@@ -7,11 +7,12 @@ import { CALC_ID_MSP, CALC_FIELD_MSP } from '../../../configs/calc/sp_msp.js';
 import CheckMspData from '../../components/validity/mspquestionvalidity.js'
 
 
+const MAIN_PHOTO_RATIO = (17.46/10.15);
+
+
 export default class MspApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        this.mainPhotoRatio = (17.46/10.15);
-
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_MSP, FIELD_MSP, this.mainPhotoRatio);
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_MSP, FIELD_MSP, MAIN_PHOTO_RATIO);
 
         this.productNameRus = 'МСП';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

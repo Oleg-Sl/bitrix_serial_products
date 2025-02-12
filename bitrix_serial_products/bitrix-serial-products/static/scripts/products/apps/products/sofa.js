@@ -7,11 +7,12 @@ import { CALC_ID_SOFA, CALC_FIELD_SOFA } from '../../../configs/calc/sp_sofa.js'
 import CheckSofaData from '../../components/validity/sofaquestionvalidity.js'
 
 
+const MAIN_PHOTO_RATIO = (17.46/10.15);
+
+
 export default class SofaApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        this.mainPhotoRatio = (17.46/10.15);
-
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_SOFA, FIELD_SOFA, this.mainPhotoRatio);
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_SOFA, FIELD_SOFA, MAIN_PHOTO_RATIO);
 
         this.productNameRus = 'Диван';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

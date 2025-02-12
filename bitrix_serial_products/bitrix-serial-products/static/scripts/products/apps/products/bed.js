@@ -7,11 +7,12 @@ import { CALC_ID_BED, CALC_FIELD_BED } from '../../../configs/calc/sp_bed.js';
 import CheckBedData from '../../components/validity/bedquestionvalidity.js'
 
 
+const MAIN_PHOTO_RATIO = (17.46/10.15);
+
+
 export default class BedApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        this.mainPhotoRatio = (17.46/10.15);
-
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_BED, FIELD_BED, this.mainPhotoRatio);
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_BED, FIELD_BED, MAIN_PHOTO_RATIO);
 
         this.productNameRus = 'Кровать';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

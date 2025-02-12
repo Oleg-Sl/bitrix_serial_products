@@ -7,11 +7,12 @@ import { CALC_ID_MELOCHEVKA, CALC_FIELD_MELOCHEVKA } from '../../../configs/calc
 import CheckMelochevkaData from '../../components/validity/melochevkaquestionvalidity.js'
 
 
+const MAIN_PHOTO_RATIO = (17.46/10.15);
+
+
 export default class MelochevkaApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        this.mainPhotoRatio = (17.46/10.15);
-
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_MELOCHEVKA, FIELD_MELOCHEVKA, this.mainPhotoRatio);
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_MELOCHEVKA, FIELD_MELOCHEVKA, MAIN_PHOTO_RATIO);
 
         this.productNameRus = 'Мелочевка';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
