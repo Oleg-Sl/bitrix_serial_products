@@ -9,7 +9,9 @@ import CheckArmchairData from '../../components/validity/armchairquestionvalidit
 
 export default class ArmchairApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_ARMCHAIR, FIELD_ARMCHAIR);
+        this.mainPhotoRatio = (17.46/10.15);
+
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_ARMCHAIR, FIELD_ARMCHAIR, this.mainPhotoRatio);
 
         this.productNameRus = 'Кресло';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

@@ -9,7 +9,9 @@ import CheckNightstandData from '../../components/validity/nightstandquestionval
 
 export default class NightstandApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_NIGHTSTAND, FIELD_NIGHTSTAND);
+        this.mainPhotoRatio = (17.46/10.15);
+
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_NIGHTSTAND, FIELD_NIGHTSTAND, this.mainPhotoRatio);
 
         this.productNameRus = 'Тумба';
         this.isFabrics = false;

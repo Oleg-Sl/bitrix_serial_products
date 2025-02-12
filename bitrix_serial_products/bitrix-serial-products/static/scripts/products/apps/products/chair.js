@@ -9,7 +9,9 @@ import CheckChairData from '../../components/validity/chairquestionvalidity.js'
 
 export default class ChairApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_CHAIR, FIELD_CHAIR);
+        this.mainPhotoRatio = (17.46/10.15);
+
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_CHAIR, FIELD_CHAIR, this.mainPhotoRatio);
 
         this.productNameRus = 'Стул';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

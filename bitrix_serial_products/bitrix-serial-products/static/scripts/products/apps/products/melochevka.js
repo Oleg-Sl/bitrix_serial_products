@@ -9,7 +9,9 @@ import CheckMelochevkaData from '../../components/validity/melochevkaquestionval
 
 export default class MelochevkaApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_MELOCHEVKA, FIELD_MELOCHEVKA);
+        this.mainPhotoRatio = (17.46/10.15);
+
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_MELOCHEVKA, FIELD_MELOCHEVKA, this.mainPhotoRatio);
 
         this.productNameRus = 'Мелочевка';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

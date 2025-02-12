@@ -9,7 +9,9 @@ import CheckPoufData from '../../components/validity/poufquestionvalidity.js'
 
 export default class PoufApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_POUF, FIELD_POUF);
+        this.mainPhotoRatio = (17.46/10.15);
+
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_POUF, FIELD_POUF, this.mainPhotoRatio);
 
         this.productNameRus = 'Пуф';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

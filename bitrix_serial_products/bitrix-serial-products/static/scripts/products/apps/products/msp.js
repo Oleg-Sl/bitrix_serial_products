@@ -9,7 +9,9 @@ import CheckMspData from '../../components/validity/mspquestionvalidity.js'
 
 export default class MspApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_MSP, FIELD_MSP);
+        this.mainPhotoRatio = (17.46/10.15);
+
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_MSP, FIELD_MSP, this.mainPhotoRatio);
 
         this.productNameRus = 'МСП';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

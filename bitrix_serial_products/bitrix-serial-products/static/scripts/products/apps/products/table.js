@@ -9,7 +9,9 @@ import CheckTableData from '../../components/validity/tablequestionvalidity.js'
 
 export default class TableApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_TABLE, FIELD_TABLE);
+        this.mainPhotoRatio = (17.43/13.2);
+
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_TABLE, FIELD_TABLE, this.mainPhotoRatio);
 
         this.productNameRus = 'Стол';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));

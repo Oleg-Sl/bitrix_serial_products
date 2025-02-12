@@ -8,7 +8,7 @@ import ProductItemService from '../services/productitem_service2.js';
 
 
 export default class BaseApp {
-    constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, productTypeId, productFields) {
+    constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, productTypeId, productFields, mainPhotoRatio) {
         this.apiClient = apiClient;
         this.productService = productService;
         this.fabricService = fabricService;
@@ -29,7 +29,7 @@ export default class BaseApp {
         this.productFields = productFields;
 
         // this.viewHeader = new ViewHeader(this.productService, this.userService, this.callbackService);
-        this.mainPhotoManager = new MainPhotoManager(this.fileUploadService, this.productService, (17.46/10.15));
+        this.mainPhotoManager = new MainPhotoManager(this.fileUploadService, this.productService, mainPhotoRatio); // (17.46/10.15)
         this.canvasManager = new CanvasManager(this.apiClient, this.productService, this.fileUploadService);
         this.productItemService = new ProductItemService(apiClient);
         

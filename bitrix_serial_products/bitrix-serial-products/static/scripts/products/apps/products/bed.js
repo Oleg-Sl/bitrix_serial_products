@@ -9,7 +9,9 @@ import CheckBedData from '../../components/validity/bedquestionvalidity.js'
 
 export default class BedApp extends BaseApp {
     constructor(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService) {
-        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_BED, FIELD_BED);
+        this.mainPhotoRatio = (17.46/10.15);
+
+        super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_BED, FIELD_BED, this.mainPhotoRatio);
 
         this.productNameRus = 'Кровать';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
