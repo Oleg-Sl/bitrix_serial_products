@@ -7,7 +7,7 @@ import { CALC_ID_NIGHTSTAND, CALC_FIELD_NIGHTSTAND } from '../../../configs/calc
 import CheckNightstandData from '../../components/validity/nightstandquestionvalidity.js'
 
 
-const MAIN_PHOTO_RATIO = (17.46/10.15);
+const MAIN_PHOTO_RATIO = (17.34/12.8);
 
 
 export default class NightstandApp extends BaseApp {

@@ -7,7 +7,7 @@ import { CALC_ID_MSP, CALC_FIELD_MSP } from '../../../configs/calc/sp_msp.js';
 import CheckMspData from '../../components/validity/mspquestionvalidity.js'
 
 
-const MAIN_PHOTO_RATIO = (17.46/10.15);
+const MAIN_PHOTO_RATIO = (17.35/13.05);
 
 
 export default class MspApp extends BaseApp {

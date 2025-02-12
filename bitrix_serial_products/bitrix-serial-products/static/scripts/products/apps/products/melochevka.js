@@ -7,7 +7,7 @@ import { CALC_ID_MELOCHEVKA, CALC_FIELD_MELOCHEVKA } from '../../../configs/calc
 import CheckMelochevkaData from '../../components/validity/melochevkaquestionvalidity.js'
 
 
-const MAIN_PHOTO_RATIO = (17.46/10.15);
+const MAIN_PHOTO_RATIO = (17.3/12.77);
 
 
 export default class MelochevkaApp extends BaseApp {

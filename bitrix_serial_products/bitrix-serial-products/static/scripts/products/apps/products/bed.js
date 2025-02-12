@@ -7,7 +7,7 @@ import { CALC_ID_BED, CALC_FIELD_BED } from '../../../configs/calc/sp_bed.js';
 import CheckBedData from '../../components/validity/bedquestionvalidity.js'
 
 
-const MAIN_PHOTO_RATIO = (17.46/10.15);
+const MAIN_PHOTO_RATIO = (17.5/12.6);
 
 
 export default class BedApp extends BaseApp {

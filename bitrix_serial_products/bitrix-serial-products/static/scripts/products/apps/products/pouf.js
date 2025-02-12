@@ -7,7 +7,7 @@ import { CALC_ID_POUF, CALC_FIELD_POUF } from '../../../configs/calc/sp_pouf.js'
 import CheckPoufData from '../../components/validity/poufquestionvalidity.js'
 
 
-const MAIN_PHOTO_RATIO = (17.46/10.15);
+const MAIN_PHOTO_RATIO = (17.43/13.2);
 
 
 export default class PoufApp extends BaseApp {

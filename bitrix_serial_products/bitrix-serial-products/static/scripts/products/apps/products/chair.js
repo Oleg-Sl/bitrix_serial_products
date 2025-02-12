@@ -7,7 +7,7 @@ import { CALC_ID_CHAIR, CALC_FIELD_CHAIR } from '../../../configs/calc/sp_chair.
 import CheckChairData from '../../components/validity/chairquestionvalidity.js'
 
 
-const MAIN_PHOTO_RATIO = (17.46/10.15);
+const MAIN_PHOTO_RATIO = (17.4/12.5);
 
 
 export default class ChairApp extends BaseApp {
