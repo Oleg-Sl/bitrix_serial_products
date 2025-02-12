@@ -33,6 +33,7 @@ export default class Canvas {
     }
 
     initSize(aspectRatio=Math.SQRT2) {
+        console.log('++++++++++++++++++++++++++++++++++++++++++ aspectRatio = ', aspectRatio);
         this.aspectRatio = aspectRatio;
         // const coefficient = Math.SQRT2;
         // const coefficient = (28.39 / 17.02);
