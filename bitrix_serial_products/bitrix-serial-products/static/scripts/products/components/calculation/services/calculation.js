@@ -511,9 +511,10 @@ export default class Calculation {
         const dateOfCalculationField = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation');
         const dateOfCalculation = this.calculationRawData?.[dateOfCalculationField];
         const materialPrice = this.materialsService.getClosestMaterialPrice(fieldAlias, dateOfCalculation);
+        const materialPriceField = this.materialsService.getField(fieldAlias);
         return {
             value: materialPrice,
-            field: null,
+            field: materialPriceField,
             isFixed: true
         };
     }

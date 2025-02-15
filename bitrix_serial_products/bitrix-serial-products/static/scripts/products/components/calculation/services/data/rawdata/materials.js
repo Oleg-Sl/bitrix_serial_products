@@ -15,8 +15,13 @@ export default class MaterialsService {
     //     if (!material) return 0;
     // }
 
+    getField(key) {
+        return FIELD_MATERIALS[key];
+    }
+
     getClosestMaterialPrice(key, targetDate=new Date().toISOString()) {
         const closestMaterial = this.getMaterialPricesClosestDateLessOrEqual(targetDate);
+        console.log('closestMaterial = ', closestMaterial);
         if (!closestMaterial) return 0;
         const field = FIELD_MATERIALS[key];
         return +closestMaterial[field];
