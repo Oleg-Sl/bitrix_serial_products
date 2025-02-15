@@ -58,7 +58,7 @@ export default class ProductsList {
         return `
             <div class="app-products-card-container" data-id="${product.id}" data-smart-type-id="${product.entityTypeId}">
                 <div class="col app-product-card">
-                    <div class="product-card-header">
+                    <div class="product-card-header px-0">
                         <div class="dropdown">
                             <button class="btn p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">💲</button>
                             <div class="dropdown-menu p-0 dropdown-fabric-menu" id="" data-popper-placement="left-start">
@@ -80,8 +80,8 @@ export default class ProductsList {
                         <div class="product-card-header-title text-truncate d-flex align-items-center">
                             <div class="text-truncate align-middle w-100 text-center" title="${product.title}">${product.title}</div>
                         </div>
+                        <div class="d-flex align-items-center product-card-header-comdirok" style="font-size: 24px;">${this.getMarkerIsComDirOk(product.isComDirOk)}</div>
                         <div class="d-flex align-items-center product-card-header-measure">${this.getMarkerIsTechOk(product.isTechOk)}</div>
-                        <div class="d-flex align-items-center product-card-header-comdirok">${this.getMarkerIsComDirOk(product.isComDirOk)}</div>
                     </div>
                     <div class="product-card-body-img">
                         <div class="overlay d-none"></div>
