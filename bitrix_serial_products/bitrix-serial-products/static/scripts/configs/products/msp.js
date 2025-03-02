@@ -41,6 +41,9 @@ export const FIELD_MSP = {
     isComDirOk: "ufCrm23_1732253286",           // Ком.дир-OK
     dateOfComDir: "ufCrm23_1732253686",         // Дата согласования ком.дир
 
+    productVariationIds: "ufCrm23_1733073294",  // ID_вариации_каталога
+    productMainId: "ufCrm23_1733204747",        // ID_головного товара
+
     isMeasured: "ufCrm23_1706958069",           // Замер нужен
     isActive: "ufCrm23_1706958090",             // Товар активен
     itemId: "ufCrm23_1714229941",               // ID товара

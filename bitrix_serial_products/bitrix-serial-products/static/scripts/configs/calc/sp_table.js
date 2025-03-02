@@ -7,6 +7,8 @@ export const CALC_FIELD_TABLE = {
     constantExpenses: 'ufCrm81_1714102725',
     generalComment: 'ufCrm81_1714102740',
     cost: 'ufCrm81_1714102751',
+    total: 'ufCrm81_1733206085',                     // СЕБЕСТОИМОСТЬ (Total)
+
     totalMaterials: 'ufCrm81_1714102558',
     finalCalculation: 'ufCrm81_1714906302',         // Итоговый расчет?
     calculationFixed: 'ufCrm81_1719148452',         // Фиксация рассчитанного изделия

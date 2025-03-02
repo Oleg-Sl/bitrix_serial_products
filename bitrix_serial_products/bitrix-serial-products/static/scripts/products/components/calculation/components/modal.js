@@ -111,7 +111,6 @@ export default class ModalView {
         this.modalCostPriceView.render(
             calculation.costPrice,
             calculation.murkupWorkshop,
-            // calculation.costPrice * calculation.murkupWorkshop,
             calculation.totalPrice
         );
         // this.modalSalesRangeView.render(calculation.salesRange);
@@ -229,7 +228,7 @@ export default class ModalView {
                                     </tfoot>
                                 </table>
                             </div>
-                             <!-- СЕБЕСТОИМОСТЬ -->
+                              <!-- СЕБЕСТОИМОСТЬ -->
                             <table class="" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;">
                                 <tfoot>
                                     <tr data-id="">

@@ -127,6 +127,7 @@ export function getFilterFields(productTypeId) {
         case ID_TABLE:
             return [
                 { alias: 'filterNameCollection', title: 'Коллекция' },
+                { alias: 'filterSize', title: 'Размер' },
                 { alias: 'filterTags', title: 'Тег' },
             ];
         default:

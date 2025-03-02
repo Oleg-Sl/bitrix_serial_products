@@ -37,6 +37,9 @@ export const FIELD_TABLE = {
     isComDirOk: "ufCrm75_1732253488",           // Ком.дир-OK
     dateOfComDir: "ufCrm75_1732253560",         // Дата согласования ком.дир
 
+    productVariationIds: "ufCrm75_1733073500",  // ID_вариации_каталога
+    productMainId: "ufCrm75_1733204879",        // ID_головного товара
+
     deliveryCity: "ufCrm75_1714013762",         // Город доставки
     link: "ufCrm75_1714013734",                 // Ссылка на оригинал
     referencePoint: "ufCrm75_1714013745",       // Ориентир
@@ -77,6 +80,8 @@ export const FIELD_TABLE = {
 
     filterNameCollection: "ufCrm75_1733553570",     // Фильтр - Название коллекии
     filterTags: "ufCrm75_1730291077",               // Фильтр - ТЕГИ
+    filterSize: "ufCrm75_1740889253",               // Фильтр - размер стола (список)
+ 
 
     // Столешница
     freeTitle: "ufCrm75_1714013792",                    // 1-Свободное название изделия

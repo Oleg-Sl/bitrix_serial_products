@@ -43,6 +43,9 @@ export const FIELD_CHAIR = {
     isComDirOk: "ufCrm77_1732253472",           // Ком.дир-OK
     dateOfComDir: "ufCrm77_1732253577",         // Дата согласования ком.дир
 
+    productVariationIds: "ufCrm77_1733073480",  // ID_вариации_каталога
+    productMainId: "ufCrm77_1733204864",        // ID_головного товара
+
     deliveryCity: "ufCrm77_1714055105",         // Город доставки
     link: "ufCrm77_1714055075",                 // Ссылка на оригинал
     referencePoint: "ufCrm77_1714055087",       // Ориентир

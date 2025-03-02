@@ -7,6 +7,8 @@ export const CALC_FIELD_SOFA = {
     constantExpenses: 'ufCrm51_1713689945',
     generalComment: 'ufCrm51_1713690012',
     cost: 'ufCrm51_1713690024', // Материалы + работа
+    total: 'ufCrm51_1733205956',                     // СЕБЕСТОИМОСТЬ (Total)
+
     totalMaterials: 'ufCrm51_1713689697',
     finalCalculation: 'ufCrm51_1714906252',         // Итоговый расчет?
     calculationFixed: 'ufCrm51_1719148556',         // Фиксация рассчитанного изделия

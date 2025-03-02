@@ -6,7 +6,9 @@ export const CALC_FIELD_MSP = {
     dateOfCalculationToday: 'ufCrm27_1707314281',        
     constantExpenses: 'ufCrm27_1711594918',         
     generalComment: 'ufCrm27_1708681913',           
-    cost: 'ufCrm27_1713689975',   
+    cost: 'ufCrm27_1713689975',
+    total: 'ufCrm27_1733206071',                     // СЕБЕСТОИМОСТЬ (Total)
+
     totalMaterials: 'ufCrm27_1708681937',
     finalCalculation: 'ufCrm27_1714906091',         // Итоговый расчет?
     calculationFixed: 'ufCrm27_1719148542',         // Фиксация рассчитанного изделия

@@ -7,6 +7,8 @@ export const CALC_FIELD_POUF = {
     constantExpenses: 'ufCrm69_1713851367',
     generalComment: 'ufCrm69_1713851380',
     cost: 'ufCrm69_1713851395',
+    total: 'ufCrm69_1733206058',                     // СЕБЕСТОИМОСТЬ (Total)
+
     totalMaterials: 'ufCrm69_1713851296',
     finalCalculation: 'ufCrm69_1714906209',         // Итоговый расчет?
     calculationFixed: 'ufCrm69_1719148526',         // Фиксация рассчитанного изделия

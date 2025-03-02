@@ -6,7 +6,9 @@ export const CALC_FIELD_NIGHTSTAND = {
     dateOfCalculationToday: 'ufCrm79_1714099187',                  
     constantExpenses: 'ufCrm79_1714100504',       
     generalComment: 'ufCrm79_1714100547',         
-    cost: 'ufCrm79_1714100559', 
+    cost: 'ufCrm79_1714100559',
+    total: 'ufCrm79_1733206043',                     // СЕБЕСТОИМОСТЬ (Total)
+
     totalMaterials: 'ufCrm79_1714100309',         
     finalCalculation: 'ufCrm79_1714906156',         // Итоговый расчет?
     calculationFixed: 'ufCrm79_1719148379',         // Фиксация рассчитанного изделия

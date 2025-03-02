@@ -7,6 +7,8 @@ export const CALC_FIELD_MELOCHEVKA = {
     constantExpenses: 'ufCrm65_1713853109',         
     generalComment: 'ufCrm65_1713853122',           
     cost: 'ufCrm65_1713853134',   
+    total: 'ufCrm65_1733206120',                     // СЕБЕСТОИМОСТЬ (Total)
+
     totalMaterials: 'ufCrm65_1713853011',           
     finalCalculation: 'ufCrm65_1714906027',         // Итоговый расчет?           
     calculationFixed: 'ufCrm65_1719148511',         // Фиксация рассчитанного изделия

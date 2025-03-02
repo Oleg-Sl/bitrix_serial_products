@@ -7,6 +7,8 @@ export const CALC_FIELD_BED = {
     constantExpenses: 'ufCrm71_1713849457',         
     generalComment: 'ufCrm71_1713849476',           
     cost: 'ufCrm71_1713849496',
+    total: 'ufCrm71_1733206023',                     // СЕБЕСТОИМОСТЬ (Total)
+
     totalMaterials: 'ufCrm71_1713849381',
     finalCalculation: 'ufCrm71_1714905665',         // Итоговый расчет?           
     calculationFixed: 'ufCrm71_1719148487',         // Фиксация рассчитанного изделия

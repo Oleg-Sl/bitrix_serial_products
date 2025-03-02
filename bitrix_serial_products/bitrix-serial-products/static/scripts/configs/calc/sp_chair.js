@@ -6,6 +6,8 @@ export const CALC_FIELD_CHAIR = {
     constantExpenses: 'ufCrm83_1714106658',
     generalComment: 'ufCrm83_1714106694',
     cost: 'ufCrm83_1714106706',
+    total: 'ufCrm83_1733206105',                     // СЕБЕСТОИМОСТЬ (Total)
+
     totalMaterials: 'ufCrm83_1714106518',
     finalCalculation: 'ufCrm83_1714905770',
     calculationFixed: 'ufCrm83_1719148466',         // Фиксация рассчитанного изделия
