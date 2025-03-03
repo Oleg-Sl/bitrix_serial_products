@@ -16,9 +16,9 @@ export default class SofaView extends BaseView {
             const mechanismId = event.target.value;
             this.productService.updateProductData('sleepingMechanism', mechanismId);
             if (!mechanismId || mechanismId == '1') {
-                this.productService.updateProductData('filterMechanism', 0);
+                this.productService.updateProductData('filterMechanism', 'N');
             } else {
-                this.productService.updateProductData('filterMechanism', 1);
+                this.productService.updateProductData('filterMechanism', 'Y');
             }
             const mechanismData = this.mechanismService.getMechanismData(mechanismId);
             this.inputSleepingMechanismDesc.value = mechanismData.description || '';
