@@ -7,7 +7,8 @@ import { CALC_ID_TABLE, CALC_FIELD_TABLE } from '../../../configs/calc/sp_table.
 import CheckTableData from '../../components/validity/tablequestionvalidity.js'
 
 
-const MAIN_PHOTO_RATIO = (17.49/13.83);
+// const MAIN_PHOTO_RATIO = (17.49/13.83);
+const MAIN_PHOTO_RATIO = (17.46/10.15);
 
 
 export default class TableApp extends BaseApp {
