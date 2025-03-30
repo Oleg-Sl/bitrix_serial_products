@@ -50,7 +50,7 @@ export default class PriceModules {
                 if (!(fabricTitle in data)) {
                     data[fabricTitle] = 0;
                 }
-                data[fabricTitle] += productPrices[fabricTitle] * product.productCount;
+                data[fabricTitle] += product.productPrices[fabricTitle] * product.productCount;
             }
 
             contentHTML += `
