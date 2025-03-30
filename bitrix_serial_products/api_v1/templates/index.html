@@ -176,29 +176,21 @@
     <script type="module" src="{% static 'scripts/index.js' %}"></script>
 
     <script>
-        // window.screen.height
-        const screenHeight = window.screen.height;
-        const maxHeight = screenHeight - 184 - 100;
-        const containerOfProducts = document.querySelector('.app-products-container');
-        console.log('containerOfProducts = ', containerOfProducts)
-        containerOfProducts.style.maxHeight = maxHeight;
-        
-        // async function fitWindow(isCollapsed=false) {
-        //     const target = document.querySelector('.head-accordion');
-        //     if (isCollapsed === true) {
-        //         document.querySelector('.deal-products').style.height = '900px';
-        //     } else if (target.classList.contains('collapsed')) {
-        //         document.querySelector('.deal-products').style.height = '900px';
-        //     } else {
-        //         document.querySelector('.deal-products').style.height = '550px';
-        //     }
-        //     setTimeout(() => {
-        //         const frameSize = BX24.getScrollSize();
-        //         console.log('document.body.clientHeight = ', document.body.clientHeight);
-        //         BX24.resizeWindow(frameSize.scrollWidth, document.body.clientHeight + 55);
-        //     }, 500); 
-        // }
-        // document.querySelector('.head-accordion').addEventListener('click', fitWindow.bind(this));
+        document.addEventListener("DOMContentLoaded", async function() {
+            BX24.init(async function() {
+                const screenHeight = window.screen.height;
+                const maxHeight = screenHeight - 184 - 100;
+                const containerOfProducts = document.querySelector('.app-products-container');
+                console.log('maxHeight = ', maxHeight)
+                console.log('containerOfProducts = ', containerOfProducts)
+
+                if (containerOfProducts) {
+                    containerOfProducts.style.maxHeight = `${maxHeight}px`;
+                } else {
+                    console.error('Элемент .app-products-container не найден');
+                }
+            });
+        });
     </script>
 </body>
 </html>
