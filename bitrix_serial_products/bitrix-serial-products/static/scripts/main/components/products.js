@@ -1,6 +1,7 @@
 // import { DEAL_FIELDS } from '../config/dealFields';
 import { mapKeys, mapAliases, getFieldInBx24 } from '../../configs/mapping/key_mapping.js';
 import { FIELD_ECONOMY } from '../../configs/calc/economy.js';
+import { ID_SOFA, FIELD_SOFA } from '../../configs/products/sofa.js';
 
 
 export default class ProductsList {
@@ -80,9 +81,7 @@ export default class ProductsList {
                                 </div>
                             </div>
                         </div>
-                        <div class="product-card-header-count-of-modules">
-                            <input class="form-control form-control-sm" type="number" data-id="${product.id}" min="0" max="99" step="1">
-                        </div>
+                        ${this.getCountOfModulesHTML(product)}
                         <div class="product-card-header-title text-truncate d-flex align-items-center">
                             <div class="text-truncate align-middle w-100 text-center" title="${product.title}">${product.title}</div>
                         </div>
@@ -262,6 +261,17 @@ export default class ProductsList {
         }
 
         return result;
+    }
+
+    getCountOfModulesHTML(product) {
+        if (product.entityTypeId == ID_SOFA) {
+            return `
+                <div class="product-card-header-count-of-modules" style="width: 50px;">
+                    <input class="form-control form-control-sm" type="number" data-id="${product.id}" min="0" max="99" step="1">
+                </div>
+            `;
+        }
+        return '';
     }
 }
 
