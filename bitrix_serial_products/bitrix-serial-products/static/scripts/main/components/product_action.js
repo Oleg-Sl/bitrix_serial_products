@@ -49,7 +49,9 @@ export default class ProductAction {
         // редактирование изделия
         this.productCardsContainer.addEventListener('dblclick', async (event) => {
             const target = event.target.closest('[data-id]');
-            if (target) {
+            const header = event.target.closest('.product-card-header');
+
+            if (target && !header) {
                 const productId = target.dataset.id;
                 const smartTypeId = target.dataset.smartTypeId;
                 await this.productsService.openProductCard(smartTypeId, productId, smartTypeId);

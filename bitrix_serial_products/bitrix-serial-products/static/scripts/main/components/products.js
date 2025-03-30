@@ -58,7 +58,6 @@ export default class ProductsList {
     // BX24.openPath('/crm/type/145/details/287/', r => console.log(r))
 
     getProductCardHTML(product, economy) {
-        // console.log(product);
         return `
             <div class="app-products-card-container" data-id="${product.id}" data-smart-type-id="${product.entityTypeId}">
                 <div class="col app-product-card">
@@ -248,8 +247,6 @@ export default class ProductsList {
             for (const fabricAlias in FIELD_ECONOMY) {
                 const title = FIELD_ECONOMY[fabricAlias].title;
                 const fieldPrice = FIELD_ECONOMY[fabricAlias].price;
-                // productPrices.price = economy[fieldPrice] || 0;
-                // productPrices.title = title
                 productPrices[title] = economy[fieldPrice] || 0;
             }
             result.push({
