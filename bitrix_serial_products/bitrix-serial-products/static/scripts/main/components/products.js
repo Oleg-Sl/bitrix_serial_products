@@ -243,7 +243,7 @@ export default class ProductsList {
                 continue;
             }
             
-            const economy = this.economies[productId];
+            const economy = this.economies[productId] || {};
             let productPrices = {};
             for (const fabricAlias in FIELD_ECONOMY) {
                 const title = FIELD_ECONOMY[fabricAlias].title;
