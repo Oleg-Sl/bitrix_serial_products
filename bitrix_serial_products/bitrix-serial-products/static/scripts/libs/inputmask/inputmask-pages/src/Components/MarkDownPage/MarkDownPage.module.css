@@ -1,9 +1,18 @@
 .MarkDownPage {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-grow: 1;
-  flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100%;
 }
+
 .MarkDownPage > pre {
   white-space: pre-wrap;
-}/*# sourceMappingURL=MarkDownPage.module.css.map */
+}
+/*# sourceMappingURL=MarkDownPage.module.css.map */

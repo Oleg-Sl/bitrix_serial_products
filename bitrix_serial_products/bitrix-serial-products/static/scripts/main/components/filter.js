@@ -31,12 +31,12 @@ export default class Filter {
 
         this.productsList.displayProducts(products, economies);
         if (BX24) {
-            // BX24.fitWindow();
-            const frameSize = BX24.getScrollSize();
-            console.log('frameSize = ', frameSize);
-            console.log('document.body.clientHeight = ', document.body.clientHeight);
+            BX24.fitWindow();
+            // const frameSize = BX24.getScrollSize();
+            // console.log('frameSize = ', frameSize);
+            // console.log('document.body.clientHeight = ', document.body.clientHeight);
 
-            BX24.resizeWindow(frameSize.scrollWidth, document.body.clientHeight + 55);
+            // BX24.resizeWindow(frameSize.scrollWidth, document.body.clientHeight + 55);
         }
     }
 
