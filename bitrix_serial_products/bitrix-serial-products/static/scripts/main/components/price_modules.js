@@ -54,7 +54,7 @@ export default class PriceModules {
         }
 
         for (const fabricTitle in data) {
-            const price = data[data];
+            const price = data[fabricTitle];
             contentHTML += `
                 <tr>
                     <td class="text-start" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${fabricTitle}</td>
