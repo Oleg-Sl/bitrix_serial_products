@@ -3,6 +3,7 @@ import ProductsList from './components/products.js';
 import PackedParameters from './services/packed.js';
 import ProductAction from './components/product_action.js';
 import Paginator from './components/paginator.js';
+import PriceModules from './components/price_modules.js';
 
 
 export default class App {
@@ -30,9 +31,11 @@ export default class App {
         const filter = new Filter(filterButtonsContainer, this.productsService, productsList);
         const productAction = new ProductAction(this.apiClient, this.productsService);
         const paginator = new Paginator(filter);
+        const calcModulesPrices = new PriceModules(productsList);
         this.productsService.setPagination(paginator.setPagination.bind(paginator));
 
         filter.initialize();
         productAction.initialize();
+        calcModulesPrices.initialize();
     }
 }

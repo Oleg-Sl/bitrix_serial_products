@@ -40,6 +40,9 @@ export default class ProductsList {
     }
 
     displayProducts(products, economies) {
+        this.products = products;
+        this.economies = economies;
+
         this.productsContainer.innerHTML = "";
         let contentHTML = "";
         if (products.length !== 0) {
@@ -76,6 +79,9 @@ export default class ProductsList {
                                     </table>
                                 </div>
                             </div>
+                        </div>
+                        <div class="product-card-header-count-of-modules">
+                            <input class="form-control form-control-sm" type="number" data-id="${product.id}" min="0" max="99" step="1">
                         </div>
                         <div class="product-card-header-title text-truncate d-flex align-items-center">
                             <div class="text-truncate align-middle w-100 text-center" title="${product.title}">${product.title}</div>
@@ -220,6 +226,42 @@ export default class ProductsList {
         }
 
         return contentHTML;
+    }
+
+    calcModulesPrice() {
+        const productCards = this.productsContainer.querySelectorAll('.product-card-header-count-of-modules input');
+
+        for (const productCard of productCards) {
+            const productId = productCards.dataset.id;
+            const countOfModules = +productCard.value || 0;
+            if (!productId || !countOfModules || countOfModules === 0) {
+                continue;
+            }
+
+            const product = this.products.find(item => item.id == productId);
+            if (!product) {
+                console.error(`Не найдены данные изделия с id = ${productId}`);
+                continue;
+            }
+            
+            const economy = economies[productId];
+            let productPrices = {};
+            for (const fabricAlias in FIELD_ECONOMY) {
+                const title = FIELD_ECONOMY[fabricAlias].title;
+                const fieldPrice = FIELD_ECONOMY[fabricAlias].price;
+                // productPrices.price = economy[fieldPrice] || 0;
+                // productPrices.title = title
+                productPrices[title] = economy[fieldPrice] || 0;
+            }
+            result.push({
+                productId: productId,
+                productTitle: mapKeys(product).title,
+                productCount: countOfModules,
+                productPrices: productPrices
+            });
+        }
+
+        return result;
     }
 }
 
