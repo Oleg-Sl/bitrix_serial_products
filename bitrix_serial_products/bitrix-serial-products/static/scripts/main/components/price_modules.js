@@ -44,7 +44,6 @@ export default class PriceModules {
         }
 
         let data = {};
-        
         for (const product of products) {
             for (const fabricTitle in product.productPrices) {
                 if (!(fabricTitle in data)) {
@@ -52,13 +51,6 @@ export default class PriceModules {
                 }
                 data[fabricTitle] += product.productPrices[fabricTitle] * product.productCount;
             }
-
-            contentHTML += `
-                <tr>
-                    <td class="text-start" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${title}</td>
-                    <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${price.toLocaleString()}</td>
-                </tr>
-            `;
         }
 
         for (const fabricTitle in data) {
