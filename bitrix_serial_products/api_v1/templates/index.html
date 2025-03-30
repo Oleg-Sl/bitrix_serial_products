@@ -176,21 +176,27 @@
     <script type="module" src="{% static 'scripts/index.js' %}"></script>
 
     <script>
-        async function fitWindow(isCollapsed=false) {
-            const target = document.querySelector('.head-accordion');
-            if (isCollapsed === true) {
-                document.querySelector('.deal-products').style.height = '900px';
-            } else if (target.classList.contains('collapsed')) {
-                document.querySelector('.deal-products').style.height = '900px';
-            } else {
-                document.querySelector('.deal-products').style.height = '550px';
-            }
-            setTimeout(() => {
-                const frameSize = BX24.getScrollSize();
-                console.log('document.body.clientHeight = ', document.body.clientHeight);
-                BX24.resizeWindow(frameSize.scrollWidth, document.body.clientHeight + 55);
-            }, 500); 
-        }
+        // window.screen.height
+        const screenHeight = window.screen.height;
+        const maxHeight = screenHeight - 184 - 100;
+        const containerOfProducts = document.querySelector('.app-products-container');
+        containerOfProducts.style.maxHeight = maxHeight;
+        
+        // async function fitWindow(isCollapsed=false) {
+        //     const target = document.querySelector('.head-accordion');
+        //     if (isCollapsed === true) {
+        //         document.querySelector('.deal-products').style.height = '900px';
+        //     } else if (target.classList.contains('collapsed')) {
+        //         document.querySelector('.deal-products').style.height = '900px';
+        //     } else {
+        //         document.querySelector('.deal-products').style.height = '550px';
+        //     }
+        //     setTimeout(() => {
+        //         const frameSize = BX24.getScrollSize();
+        //         console.log('document.body.clientHeight = ', document.body.clientHeight);
+        //         BX24.resizeWindow(frameSize.scrollWidth, document.body.clientHeight + 55);
+        //     }, 500); 
+        // }
         // document.querySelector('.head-accordion').addEventListener('click', fitWindow.bind(this));
     </script>
 </body>
