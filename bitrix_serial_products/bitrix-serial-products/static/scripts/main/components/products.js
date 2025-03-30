@@ -229,7 +229,7 @@ export default class ProductsList {
     }
 
     calcModulesPrice() {
-        result = [];
+        let result = [];
         const productCards = this.productsContainer.querySelectorAll('.product-card-header-count-of-modules input');
         for (const productCard of productCards) {
             const productId = productCard.dataset.id;
