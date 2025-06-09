@@ -41,7 +41,8 @@ export default class PoufApp extends BaseApp {
 
     async callbackProductItem(action, productId = null, detailText = null) {
         let fields = {
-            property473: { value: this.isStorageBox() ? 329 : 335 },
+            property473: { value: this.isStorageBox() ? 329 : 0 },
+            // property473: { value: this.isStorageBox() ? 329 : 335 },
         };
 
         // action = 0 - создание главного товара и вариаций
