@@ -36,7 +36,7 @@ export default class PoufApp extends BaseApp {
 
     isStorageBox() {
         const hasStorageBox = this.productService.getValue('hasBox');
-        return hasStorageBox && hasStorageBox != 4181;
+        return hasStorageBox && hasStorageBox == 4181;
     }
 
     async callbackProductItem(action, productId = null, detailText = null) {
