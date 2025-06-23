@@ -15,6 +15,8 @@ export const CALC_FIELD_POUF = {
 
     // additionalDescription: 'ufCrm69_1714382817',
     
+    recomendationROP: 'ufCrm69_1748941548',         // Рекомендация РОП
+
     totalWork: {
         value: 'ufCrm69_1713851318',             // Работа (значение)
         amount: 'ufCrm69_1713851335',            // Работа (сумма)

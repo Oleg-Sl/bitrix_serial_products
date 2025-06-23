@@ -2,6 +2,7 @@
 import { mapKeys, mapAliases, getFieldInBx24 } from '../../configs/mapping/key_mapping.js';
 import { FIELD_ECONOMY } from '../../configs/calc/economy.js';
 import { ID_SOFA, FIELD_SOFA } from '../../configs/products/sofa.js';
+import { CALC_FIELD_SOFA } from '../../configs/calc/sp_sofa.js';
 
 
 export default class ProductsList {
@@ -40,16 +41,25 @@ export default class ProductsList {
         `;
     }
 
-    displayProducts(products, economies) {
+    displayProducts(products, economies, calculations, fots) {
         this.products = products;
         this.economies = economies;
+        this.calculations = calculations;
+        this.fots = fots;
 
         this.productsContainer.innerHTML = "";
         let contentHTML = "";
         if (products.length !== 0) {
-            
             products.forEach(product => {
-                const economy = economies[product.id];
+                // const economy = economies[product.id];
+                const economy = economies.find(item => item[`parentId${product.entityTypeId}`] == product.id);
+                const calculation = calculations.find(item => item[`parentId${product.entityTypeId}`] == product.id);
+                const fot = fots.find(item => item[`parentId${product.entityTypeId}`] == product.id);
+                
+                // console.log('product.id = ', product.id);
+                // console.log('economy = ', economy);
+                // console.log('calculation = ', calculation);
+                // console.log('fot = ', fot);
                 contentHTML += this.getProductCardHTML(mapKeys(product), economy);
             });
             this.productsContainer.innerHTML = contentHTML;
@@ -242,18 +252,31 @@ export default class ProductsList {
                 continue;
             }
             
-            const economy = this.economies[productId] || {};
+            // const economy = this.economies[productId] || {};
+            const economy = this.economies.find(item => item[`parentId${product.entityTypeId}`] == product.id) || {};
             let productPrices = {};
             for (const fabricAlias in FIELD_ECONOMY) {
                 const title = FIELD_ECONOMY[fabricAlias].title;
                 const fieldPrice = FIELD_ECONOMY[fabricAlias].price;
                 productPrices[title] = economy[fieldPrice] || 0;
             }
+
+            const calculation = this.calculations.find(item => item[`parentId${product.entityTypeId}`] == product.id) || {};
+            const fot = this.fots.find(item => item[`parentId${product.entityTypeId}`] == product.id) || {};
+
+            const productAliasesData = mapKeys(product);
             result.push({
                 productId: productId,
-                productTitle: mapKeys(product).title,
+                productTitle: productAliasesData.title,
+                freeTitle: productAliasesData.freeTitle,
+                width: productAliasesData.commonDimensionsWidth,
+                height: productAliasesData.commonDimensionsHeight,
+                depth: productAliasesData.commonDimensionsDepth,
                 productCount: countOfModules,
-                productPrices: productPrices
+                productPrices: productPrices,
+                productTotalMaterials: calculation?.[CALC_FIELD_SOFA.totalMaterials],
+                productTotal: calculation?.[CALC_FIELD_SOFA.total],
+                productTotalFot: calculation?.[CALC_FIELD_SOFA.cost] - calculation?.[CALC_FIELD_SOFA.totalMaterials]
             });
         }
 

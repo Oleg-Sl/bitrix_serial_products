@@ -92,7 +92,8 @@ export const FIELD_NIGHTSTAND = {
     frameVeneer: "ufCrm73_1714012080",                  // 1-Шпон
     frameColor:  "ufCrm73_1714012146",                  // 1-Цвет (окраска) - каркас
     frameRal:  "ufCrm73_1714012204",                    // 1-RAL | NSC - каркас    
-    topMaterial: "ufCrm73_1714012271",                  // 1-Материал ТОП
+    // topMaterial: "ufCrm73_1714012271",                  // 1-Материал ТОП
+    topMaterial: "ufCrm73_1736099439",                  // 1-Материал ТОП
     topVeneer: "ufCrm73_1714012376",                    // 1-Шпон ТОП
     topColor:  "ufCrm73_1714012393",                    // 1-Цвет (окраска) - ТОП
     topRal:  "ufCrm73_1714012407",                      // 1-RAL | NSC - ТОП

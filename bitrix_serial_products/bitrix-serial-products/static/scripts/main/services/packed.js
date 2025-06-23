@@ -425,7 +425,7 @@ export default class PackedParameters {
                 return 1.2 * this.getNumber(product.commonDimensionsWidth) * 0.001 * this.getNumber(product.commonDimensionsDepth) * 0.001 * this.getNumber(product.commonDimensionsHeight) * 0.001;
             case '3713':
                 // Модульный
-                console.log("Модульный");
+                // console.log("Модульный");
                 return 0;
         }
         return 0;

@@ -17,6 +17,8 @@ export default class Filter {
     async applyFilter(page = 1) {
         let products = [];
         let economies = [];
+        let fots = [];
+        let calculations = [];
         try {
             const params = this.getFilterParams();
             // if (this.inputFilter.value.length >= 3) {
@@ -24,12 +26,16 @@ export default class Filter {
             // }
             this.productsList.displaySpinner();
             products = await this.productsService.getFilterProducts(this.productType, params, page);
-            economies = await this.productsService.getDataEconomies(products);
+            // economies = await this.productsService.getDataEconomies(products);
+            let calculationData = await this.productsService.getCalculationData(products);
+            fots = calculationData.fots;
+            calculations = calculationData.calculations;
+            economies = calculationData.economies;
         } catch (error) {
             alert(`Ошибка получения списка продуктов: ${error.message}`);
         }
 
-        this.productsList.displayProducts(products, economies);
+        this.productsList.displayProducts(products, economies, calculations, fots);
         if (BX24) {
             BX24.fitWindow();
             // const frameSize = BX24.getScrollSize();

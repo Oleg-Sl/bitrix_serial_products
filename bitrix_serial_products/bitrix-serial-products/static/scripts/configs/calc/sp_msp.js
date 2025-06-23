@@ -13,6 +13,8 @@ export const CALC_FIELD_MSP = {
     finalCalculation: 'ufCrm27_1714906091',         // Итоговый расчет?
     calculationFixed: 'ufCrm27_1719148542',         // Фиксация рассчитанного изделия
 
+    recomendationROP: 'ufCrm27_1748941561',         // Рекомендация РОП
+
     totalWork: {
         overallRating: 'ufCrm27_1708832160',     // Работа (общая оценка на работу)
         value: 'ufCrm59_1713842381',             // Работа (значение)

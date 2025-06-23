@@ -152,6 +152,11 @@ export default class CalculationService {
         calculation.changeGeneralComment(data.value);
     }
 
+    changeRecomedationROP(data) {
+        const calculation = this.getCalculation(data.calculationId);
+        calculation.changeRecomedationROP(data.value);
+    }
+
     addFot(fot) {
         this.services.fot.addFot(fot);
     }

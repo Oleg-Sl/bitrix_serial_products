@@ -22,3 +22,8 @@ fake*
 qr_code.py
 test/
 **/.DS_Store
+
+*/utils/fake_api_client.js
+*/static/templates/*
+*/bitrix_serial_products/bitrix-serial-products/static/templates/*
+bitrix_serial_products/bitrix-serial-products/static/templates/*

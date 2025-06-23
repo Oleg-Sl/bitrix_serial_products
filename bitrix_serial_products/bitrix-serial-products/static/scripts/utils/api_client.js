@@ -14,7 +14,7 @@ export default class ApiClient {
     }
 
     async init() {
-        this.domain = await BX24.getDomain();
+        this.domain = BX24 ? await BX24.getDomain() : null;
         this.baseUrl = await this.getSettingsApp('webhook');
         if (!this.baseUrl) {
             throw new Error('Webhook url not found');

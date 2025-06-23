@@ -13,6 +13,8 @@ export const CALC_FIELD_TABLE = {
     finalCalculation: 'ufCrm81_1714906302',         // Итоговый расчет?
     calculationFixed: 'ufCrm81_1719148452',         // Фиксация рассчитанного изделия
 
+    recomendationROP: 'ufCrm81_1748941574',         // Рекомендация РОП
+
     totalWork: {
         value: 'ufCrm81_1714102605',             // Работа (значение)
         amount: 'ufCrm81_1714102621',            // Работа (сумма)

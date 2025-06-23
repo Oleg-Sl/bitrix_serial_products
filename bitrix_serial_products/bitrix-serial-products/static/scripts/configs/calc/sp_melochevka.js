@@ -13,6 +13,8 @@ export const CALC_FIELD_MELOCHEVKA = {
     finalCalculation: 'ufCrm65_1714906027',         // Итоговый расчет?           
     calculationFixed: 'ufCrm65_1719148511',         // Фиксация рассчитанного изделия
 
+    recomendationROP: 'ufCrm65_1748941602',         // Рекомендация РОП
+
     totalWork: {
         value: 'ufCrm65_1713853050',             // Работа (значение)
         amount: 'ufCrm65_1713853042',            // Работа (сумма)

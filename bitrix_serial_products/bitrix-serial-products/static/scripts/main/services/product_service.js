@@ -13,6 +13,8 @@ import { ID_TABLE } from "../../configs/products/table.js";
 import { ID_CHAIR } from "../../configs/products/chair.js";
 import { ID_SPECIFIC_WEIGHT } from "../../configs/smart_process/specific_weight.js";
 import { ID_ECONOMY } from "../../configs/calc/economy.js";
+import { ID_FOT } from "../../configs/calc/fot.js";
+import { CALC_ID_SOFA } from "../../configs/calc/sp_sofa.js";
 
 
 export default class ProductService {
@@ -109,6 +111,38 @@ export default class ProductService {
         }
 
         return economies;
+    }
+
+    async getCalculationData(products) {
+        if (!products || products.length === 0) {
+            return [];
+        }
+
+        let cmd = {};
+        cmd['fots'] = `crm.item.list?entityTypeId=${ID_FOT}`;
+        cmd['calculations'] = `crm.item.list?entityTypeId=${CALC_ID_SOFA}`;
+        cmd['economies'] = `crm.item.list?entityTypeId=${ID_ECONOMY}`;
+
+        for (const product of products) {
+            cmd['fots'] += `&filter[@parentId${product.entityTypeId}][]=${product.id}`;
+            cmd['calculations'] += `&filter[@parentId${product.entityTypeId}][]=${product.id}`;
+            cmd['economies'] += `&filter[@parentId${product.entityTypeId}][]=${product.id}`;
+        }
+
+        const response = await this.apiClient.callMethod('batch', {
+            halt: 0,
+            cmd: cmd
+        });
+
+        if (!response || !response?.result) {
+            throw new Error('Invalid response from batch call');
+        }
+
+        return {
+            fots: response.result?.fots?.items || [],
+            calculations: response.result?.calculations?.items || [],
+            economies: response.result?.economies?.items || []
+        };
     }
 
     // async getProducts(productType, page = 1) {

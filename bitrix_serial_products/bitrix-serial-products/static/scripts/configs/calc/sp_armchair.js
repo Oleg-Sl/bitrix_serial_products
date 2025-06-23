@@ -12,6 +12,8 @@ export const CALC_FIELD_ARMCHAIR = {
     finalCalculation: 'ufCrm59_1714905443',         // Итоговый расчет?
     calculationFixed: 'ufCrm59_1719148435',         // Фиксация рассчитанного изделия
 
+    recomendationROP: 'ufCrm59_1748941499',         // Рекомендация РОП
+
     totalWork: {
         overallRating: 'ufCrm59_1713842371',     // Работа (общая оценка на работу)
         value: 'ufCrm59_1713842381',             // Работа (значение)

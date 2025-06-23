@@ -13,6 +13,8 @@ export const CALC_FIELD_BED = {
     finalCalculation: 'ufCrm71_1714905665',         // Итоговый расчет?           
     calculationFixed: 'ufCrm71_1719148487',         // Фиксация рассчитанного изделия
 
+    recomendationROP: 'ufCrm71_1748941519',         // Рекомендация РОП
+
     totalWork: {
         overallRating: 'ufCrm71_1713849393',     
         value: 'ufCrm71_1713849403',             

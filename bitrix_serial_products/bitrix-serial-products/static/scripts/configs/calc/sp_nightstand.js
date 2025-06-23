@@ -13,6 +13,8 @@ export const CALC_FIELD_NIGHTSTAND = {
     finalCalculation: 'ufCrm79_1714906156',         // Итоговый расчет?
     calculationFixed: 'ufCrm79_1719148379',         // Фиксация рассчитанного изделия
 
+    recomendationROP: 'ufCrm79_1748941534',         // Рекомендация РОП
+
     totalWork: {
         value: 'ufCrm79_1714100361',             // Работа (значение)
         amount: 'ufCrm79_1714100381',            // Работа (сумма)

@@ -4,6 +4,7 @@ import PackedParameters from './services/packed.js';
 import ProductAction from './components/product_action.js';
 import Paginator from './components/paginator.js';
 import PriceModules from './components/price_modules.js';
+import ModuleComparison from './components/modal_of_module_comparison.js';
 
 
 export default class App {
@@ -32,10 +33,12 @@ export default class App {
         const productAction = new ProductAction(this.apiClient, this.productsService);
         const paginator = new Paginator(filter);
         const calcModulesPrices = new PriceModules(productsList);
+        const moduleComparison = new ModuleComparison(productsList);
         this.productsService.setPagination(paginator.setPagination.bind(paginator));
 
         filter.initialize();
         productAction.initialize();
         calcModulesPrices.initialize();
+        moduleComparison.initialize();
     }
 }

@@ -12,6 +12,8 @@ export const CALC_FIELD_CHAIR = {
     finalCalculation: 'ufCrm83_1714905770',
     calculationFixed: 'ufCrm83_1719148466',         // Фиксация рассчитанного изделия
 
+    recomendationROP: 'ufCrm83_1748941588',         // Рекомендация РОП
+
     totalWork: {
         value: 'ufCrm83_1714106545',             // Работа (значение)
         amount: 'ufCrm83_1714908845',            // Работа (сумма)

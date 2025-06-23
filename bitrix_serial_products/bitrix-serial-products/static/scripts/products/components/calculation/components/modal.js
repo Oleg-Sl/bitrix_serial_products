@@ -11,6 +11,7 @@ import ModalCommentView from './modal/modal_comment.js';
 import ModalMetadataView from './modal/modal_metadata.js';
 import ModalButtonsView from './modal/modal_buttons.js';
 import ResizableWrapper from './resizable.js';
+import ModalRecomedationRopView from './modal/modal_recomedation.js';
 
 
 export default class ModalView {
@@ -37,6 +38,7 @@ export default class ModalView {
         // this.modalSalesRangeView = new ModalSalesRangeView(this.eventEmitter);
         this.modalCommentView = new ModalCommentView(this.eventEmitter);
         this.modalButtonsView = new ModalButtonsView(this.eventEmitter);
+        this.modalRecomedationRopView = new ModalRecomedationRopView(this.eventEmitter);
 
         this.resizable = new ResizableWrapper('calculationWindow');
 
@@ -115,6 +117,7 @@ export default class ModalView {
         );
         // this.modalSalesRangeView.render(calculation.salesRange);
         this.modalCommentView.render(calculation.comment, calculation.commentFixed, isEditable);
+        this.modalRecomedationRopView.render(calculation.recomedationROP, isEditable);
         this.modalButtonsView.render(isEditable, isNewCalculation);
         this.modalButtonsView.updateStateButtonCalculate(calculation.isAllAnswered(), calculation.isFotValid());
         this.changeStateButtons(calculation);
@@ -267,6 +270,16 @@ export default class ModalView {
                                     <tbody class="table-economy-list-body"></tbody>
                                 </table>
                             </div>
+
+                            <!-- Рекомендация РОП -->
+                            <table class="recomendation-rop">
+                                <tbody>
+                                    <tr>
+                                        <td class="d-flex justify-content-center align-items-center fixed-rows-bottom" style="grid-column: 1 / span 2;">Рекомендация РОП</td>
+                                        <td class="fixed-rows-bottom" style="grid-column: 3 / 9;"><textarea class="border-0 text-start recomendation-rop-text"rows="1"></textarea></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                            
                             <!-- КОММЕНТАРИЙ -->
                             <table class="comment">

@@ -46,6 +46,7 @@ export default class Calculation {
         this.totalPrice = 0;
         this.comment = '';
         this.commentFixed = '';
+        this.recomedationROP = '';
 
         this.isSelected = false;
 
@@ -67,6 +68,7 @@ export default class Calculation {
         this.initCheckListQuestions();
         this.initFot();
         this.initComment();
+        this.initRecomedationROP();
 
         this.updateFabricsComments();
         this.calculateVariableData();
@@ -202,6 +204,11 @@ export default class Calculation {
         this.comment = this.calculationRawData[fieldComment] || '';
         const fieldCommentFixed = this.calculationFieldsService.getFieldKeyByAlias('calculationFixed');
         this.commentFixed = this.calculationRawData[fieldCommentFixed] || '';
+    }
+
+    initRecomedationROP() {
+        const fieldRecomendationROP = this.calculationFieldsService.getFieldKeyByAlias('recomendationROP');
+        this.recomedationROP = this.calculationRawData[fieldRecomendationROP] || '';
     }
 
     calculateVariableData() {
@@ -440,6 +447,10 @@ export default class Calculation {
         this.comment = newValue;
     }
 
+    changeRecomedationROP(newValue) {
+        this.recomedationROP = newValue;
+    }
+
     calculateDataFots() {
         const productData = this.cbGetProductData();
         const linearMeters = productData.baseValue;
@@ -509,9 +520,9 @@ export default class Calculation {
             };
         }
         const dateOfCalculationField = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation');
-        console.log('dateOfCalculationField = ', dateOfCalculationField);
+        // console.log('dateOfCalculationField = ', dateOfCalculationField);
         const dateOfCalculation = this.calculationRawData?.[dateOfCalculationField];
-        console.log('dateOfCalculation = ', dateOfCalculation);
+        // console.log('dateOfCalculation = ', dateOfCalculation);
         const materialPrice = this.materialsService.getClosestMaterialPrice(fieldAlias, dateOfCalculation);
         const materialPriceField = this.materialsService.getField(fieldAlias);
         return {
@@ -562,6 +573,7 @@ export default class Calculation {
             [this.calculationFieldsService.getFieldKeyByAlias('generalComment')]: this.comment,
             [this.calculationFieldsService.getFieldKeyByAlias('cost')]: this.costPrice,
             [this.calculationFieldsService.getFieldKeyByAlias('total')]: this.totalPrice,
+            [this.calculationFieldsService.getFieldKeyByAlias('recomendationROP')]: this.recomedationROP
         };
         // const leadId = this.cbGetProductData().leadId;
         // const dealId = this.cbGetProductData().dealId;
@@ -571,6 +583,7 @@ export default class Calculation {
         // if (dealId) {
         //     data.parentId2 = dealId;
         // }
+        console.log('getCalculationSmartData = ', data);
         for (let material of this.materials) {
             for (const key in material) {
                 const fieldData = material[key];
