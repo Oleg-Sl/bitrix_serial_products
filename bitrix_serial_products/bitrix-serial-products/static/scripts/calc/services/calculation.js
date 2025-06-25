@@ -86,6 +86,7 @@ export default class Calculation {
                 });
             }
         }
+        console.log('this.materials = ', this.materials);
     }
 
     initCheckListQuestions() {

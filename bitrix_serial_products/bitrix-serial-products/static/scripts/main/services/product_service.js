@@ -15,6 +15,7 @@ import { ID_SPECIFIC_WEIGHT } from "../../configs/smart_process/specific_weight.
 import { ID_ECONOMY } from "../../configs/calc/economy.js";
 import { ID_FOT } from "../../configs/calc/fot.js";
 import { CALC_ID_SOFA } from "../../configs/calc/sp_sofa.js";
+import { ID_COEFFICIENTS_FOT, FIELD_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT } from "../../configs/calc/coefficientsfot.js"
 
 
 export default class ProductService {
@@ -25,6 +26,7 @@ export default class ProductService {
         this.cbSavePagination = null;
 
         this.specificWeights = null;
+        this.coefficientsfot = null;
     }
 
     setPagination(cbSavePagination) {
@@ -178,6 +180,8 @@ export default class ProductService {
     // }
 
     async getProductsFields() {
+        const coefficientFotProductType = PRODUCT_TYPES_COEFFICIENTS_FOT[this.productTypeId];
+        
         const cmd = {
             fieldsMsp: `crm.item.fields?entityTypeId=${ID_MSP}`,
             fieldsSofa: `crm.item.fields?entityTypeId=${ID_SOFA}`,
@@ -190,6 +194,7 @@ export default class ProductService {
             fieldsChair: `crm.item.fields?entityTypeId=${ID_CHAIR}`,
 
             specificWeights: `crm.item.list?entityTypeId=${ID_SPECIFIC_WEIGHT}`,
+            coefficientsfot: `crm.item.list?entityTypeId=${ID_COEFFICIENTS_FOT}`,
 
         };
 
@@ -199,6 +204,7 @@ export default class ProductService {
         });
 
         this.specificWeights = response?.result?.specificWeights?.items;
+        this.coefficientsfot = response?.result?.coefficientsfot?.items;
 
         return {
             [ID_MSP]: response?.result?.fieldsMsp?.fields,

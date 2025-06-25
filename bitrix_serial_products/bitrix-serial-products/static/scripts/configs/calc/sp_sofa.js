@@ -198,13 +198,13 @@ export const CALC_FIELD_SOFA = {
         comments: 'ufCrm51_1714097376',          // Работа подрядчиков (комментарии)
     },
     
-    // package: {
-    //     type: 'package',
-    //     price: 'ufCrm51_1713689599',
-    //     value: 'ufCrm51_1713689617',
-    //     amount: 'ufCrm51_1713689643',
-    //     comments: 'ufCrm51_1713689657',
-    // }
+    package: {
+        type: 'package',
+        price: 'ufCrm51_1713689599',
+        value: 'ufCrm51_1713689617',
+        amount: 'ufCrm51_1713689643',
+        comments: 'ufCrm51_1713689657',
+    }
 
 
 };

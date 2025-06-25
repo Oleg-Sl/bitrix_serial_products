@@ -136,7 +136,7 @@ export default class Calculation {
                 });
             }
         }
-        // console.log("MATERIALS = ", this.materials);
+        console.log("MATERIALS = ", this.materials);
     }
 
     getFabricRunningMeters() {

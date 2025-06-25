@@ -19,6 +19,7 @@ export default class Filter {
         let economies = [];
         let fots = [];
         let calculations = [];
+        let coefficientsfot = [];
         try {
             const params = this.getFilterParams();
             // if (this.inputFilter.value.length >= 3) {
@@ -31,11 +32,12 @@ export default class Filter {
             fots = calculationData.fots;
             calculations = calculationData.calculations;
             economies = calculationData.economies;
+            coefficientsfot = this.productsService.coefficientsfot;
         } catch (error) {
             alert(`Ошибка получения списка продуктов: ${error.message}`);
         }
 
-        this.productsList.displayProducts(products, economies, calculations, fots);
+        this.productsList.displayProducts(products, economies, calculations, fots, coefficientsfot);
         if (BX24) {
             BX24.fitWindow();
             // const frameSize = BX24.getScrollSize();
