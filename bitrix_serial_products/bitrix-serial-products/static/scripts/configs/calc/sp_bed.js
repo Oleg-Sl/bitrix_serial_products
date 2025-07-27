@@ -14,6 +14,7 @@ export const CALC_FIELD_BED = {
     calculationFixed: 'ufCrm71_1719148487',         // Фиксация рассчитанного изделия
 
     recomendationROP: 'ufCrm71_1748941519',         // Рекомендация РОП
+    isTemplatePotochka: "ufCrm71_1753012285",       // 
 
     totalWork: {
         overallRating: 'ufCrm71_1713849393',     

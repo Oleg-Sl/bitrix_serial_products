@@ -1,4 +1,4 @@
-import { ID_SOFA, ID_ARMCHAIR, ID_BED, ID_POUF, ID_MSP, ID_NIGHTSTAND, ID_TABLE, ID_CHAIR, ID_MELOCHEVKA } from '../import.js';
+import { ID_SOFA, ID_ARMCHAIR, ID_BED, ID_POUF, ID_MSP, ID_NIGHTSTAND, ID_TABLE, ID_CHAIR, ID_MELOCHEVKA, FOT_SUMMARY_COST } from '../import.js';
 
 
 export default class Calculation {
@@ -57,12 +57,22 @@ export default class Calculation {
         const fieldDateOfCalculation = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculation');
         const fieldDateOfCalculationToday = this.calculationFieldsService.getFieldKeyByAlias('dateOfCalculationToday');
         const fieldFinalCalculation = this.calculationFieldsService.getFieldKeyByAlias('finalCalculation');
+        const fieldTotalMaterials = this.calculationFieldsService.getFieldKeyByAlias('totalMaterials');
+        const fieldCostPrice = this.calculationFieldsService.getFieldKeyByAlias('cost');
+        const fieldTotalPrice = this.calculationFieldsService.getFieldKeyByAlias('total');
+        // const fieldTotalPrice = this.calculationFieldsService.getFieldKeyByAlias('total');
 
         this.calculationId = this.calculationRawData.id;
         this.dateOfCalculation = this.calculationRawData[fieldDateOfCalculation] || new Date().toISOString();
         this.dateOfCalculationToday = this.calculationRawData[fieldDateOfCalculationToday] || '';
         this.isFinalCalculation = this.calculationRawData[fieldFinalCalculation] || false;
         this.createdBy = this.userService.getUser(this.calculationRawData.createdBy);
+
+        this.summaryMaterials = this.calculationRawData[fieldTotalMaterials] || 0;
+        this.costPrice = this.calculationRawData[fieldCostPrice] || 0;
+        this.totalPrice = this.calculationRawData[fieldTotalPrice] || 0;
+        const fotRawData = this.fotService.getFotByParentId(this.calculationRawData.id) || {};
+        this.summaryFot = fotRawData[this.fotService.getSummaryCostField()] || 0;
 
         this.initMaterials();
         this.initCheckListQuestions();
@@ -71,7 +81,8 @@ export default class Calculation {
         this.initRecomedationROP();
 
         this.updateFabricsComments();
-        this.calculateVariableData();
+        // this.calculateVariableData();
+        this.initVariableData();
 
         this.initEconomy();
     }
@@ -209,6 +220,20 @@ export default class Calculation {
     initRecomedationROP() {
         const fieldRecomendationROP = this.calculationFieldsService.getFieldKeyByAlias('recomendationROP');
         this.recomedationROP = this.calculationRawData[fieldRecomendationROP] || '';
+    }
+
+    initVariableData() {
+        this.calculationMaterialPacked();
+        // this.calculateSummaryMaterials();
+        // this.summaryMaterials = ;
+        this.calculateServicePackedAmount();
+        this.calculateManagementAmount();
+        this.calculateRentAmount();
+        // this.calculateSummaryFots();
+        // this.calculateCostPrice()
+
+        this.calculateSalesRange();
+        this.calculateChecksum();
     }
 
     calculateVariableData() {
@@ -573,7 +598,9 @@ export default class Calculation {
             [this.calculationFieldsService.getFieldKeyByAlias('generalComment')]: this.comment,
             [this.calculationFieldsService.getFieldKeyByAlias('cost')]: this.costPrice,
             [this.calculationFieldsService.getFieldKeyByAlias('total')]: this.totalPrice,
-            [this.calculationFieldsService.getFieldKeyByAlias('recomendationROP')]: this.recomedationROP
+            [this.calculationFieldsService.getFieldKeyByAlias('totalMaterials')]: this.summaryMaterials,
+            [this.calculationFieldsService.getFieldKeyByAlias('recomendationROP')]: this.recomedationROP,
+            [this.calculationFieldsService.getFieldKeyByAlias('isTemplatePotochka')]: 'Y',
         };
         // const leadId = this.cbGetProductData().leadId;
         // const dealId = this.cbGetProductData().dealId;
@@ -601,6 +628,8 @@ export default class Calculation {
             [this.fotService.getFieldParent()]: parentId,
             [`parentId${this.productTypeId}`]: this.productId,
             title: this.getFotTitle(),
+            [this.fotService.getSummaryCostField()]: this.summaryFot,
+            [this.fotService.getIsTemplatePotockaField()]: 'Y'
         };
         const leadId = this.cbGetProductData().leadId;
         const dealId = this.cbGetProductData().dealId;
@@ -617,6 +646,7 @@ export default class Calculation {
             data[this.fotService.getFinalAmountField(fot.code)] = fot.total;
             data[this.fotService.getCommentField(fot.code)] = fot.comment;
         }
+        console.log('getFotSmartData = ', data);
         return data;
     }
 

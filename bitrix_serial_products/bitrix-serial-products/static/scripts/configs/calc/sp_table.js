@@ -14,6 +14,7 @@ export const CALC_FIELD_TABLE = {
     calculationFixed: 'ufCrm81_1719148452',         // Фиксация рассчитанного изделия
 
     recomendationROP: 'ufCrm81_1748941574',         // Рекомендация РОП
+    isTemplatePotochka: "ufCrm81_1731936556",       // 
 
     totalWork: {
         value: 'ufCrm81_1714102605',             // Работа (значение)

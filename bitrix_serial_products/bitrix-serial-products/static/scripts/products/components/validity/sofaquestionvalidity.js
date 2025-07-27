@@ -51,6 +51,8 @@ export default class CheckSofaData {
             name: this.productNameRus,
             freeTitle: this.productManager.getValue("freeTitle"),
             baseValue: 1,
+            baseValue: this.deliveryCalculation.calcLinearMeters(this.productManager.getProductDataMap()),
+
             fabricPrices: this.fabricManager.getPrices(),
             fabricComments: this.fabricManager.getComments(),
             selectedCalculationId: this.productManager.getValue("calculationId"),

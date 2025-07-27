@@ -14,10 +14,11 @@ export const CALC_FIELD_MSP = {
     calculationFixed: 'ufCrm27_1719148542',         // Фиксация рассчитанного изделия
 
     recomendationROP: 'ufCrm27_1748941561',         // Рекомендация РОП
+    isTemplatePotochka: "ufCrm27_1753012350",       // 
 
     totalWork: {
         overallRating: 'ufCrm27_1708832160',     // Работа (общая оценка на работу)
-        value: 'ufCrm59_1713842381',             // Работа (значение)
+        value: 'ufCrm27_1752990988',             // Работа (значение)
         amount: 'ufCrm27_1709392252',            // Работа (сумма)
         comments: 'ufCrm27_1708832266',          // Работа (комментарии)
     },

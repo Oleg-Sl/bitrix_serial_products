@@ -3,6 +3,7 @@ import { mapKeys, mapAliases, getFieldInBx24 } from '../../configs/mapping/key_m
 import { FIELD_ECONOMY } from '../../configs/calc/economy.js';
 import { ID_SOFA, FIELD_SOFA } from '../../configs/products/sofa.js';
 import { CALC_FIELD_SOFA } from '../../configs/calc/sp_sofa.js';
+import { FOT_SUMMARY_COST } from '../../configs/calc/fot.js';
 import { FIELD_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT } from '../../configs/calc/coefficientsfot.js';
 
 
@@ -262,20 +263,20 @@ export default class ProductsList {
             const calculation = this.calculations.find(item => item[`parentId${product.entityTypeId}`] == product.id) || {};
             const fot = this.fots.find(item => item[`parentId${product.entityTypeId}`] == product.id) || {};
 
-            let summaryMaterials = 0;
-            if (product.entityTypeId == ID_SOFA) {
-                for (const [fieldAlias, fieldData] of Object.entries(CALC_FIELD_SOFA)) {
-                    if (fieldData && (fieldData.type === 'material' || fieldData.type === 'fabric' || fieldData.type === 'others' || fieldData.type === 'package')) {
-                        summaryMaterials += calculation?.[fieldData.amount] || 0;
-                    }
-                }
+            // let summaryMaterials = calculation ? calculation?.totalMaterials : 0;
+            // if (product.entityTypeId == ID_SOFA) {
+            //     for (const [fieldAlias, fieldData] of Object.entries(CALC_FIELD_SOFA)) {
+            //         if (fieldData && (fieldData.type === 'material' || fieldData.type === 'fabric' || fieldData.type === 'others' || fieldData.type === 'package')) {
+            //             summaryMaterials += calculation?.[fieldData.amount] || 0;
+            //         }
+            //     }
 
-                const coefficientFotProductType = PRODUCT_TYPES_COEFFICIENTS_FOT[product.entityTypeId];
-                const coefficientFot = this.coefficientsfot.find(item => item[FIELD_COEFFICIENTS_FOT.typeProduct] == coefficientFotProductType)
+            //     const coefficientFotProductType = PRODUCT_TYPES_COEFFICIENTS_FOT[product.entityTypeId];
+            //     const coefficientFot = this.coefficientsfot.find(item => item[FIELD_COEFFICIENTS_FOT.typeProduct] == coefficientFotProductType)
     
-                const field = FIELD_COEFFICIENTS_FOT.packaging?.costPerUnit;
-                summaryMaterials += coefficientFot[field] || 0;
-            }
+            //     const field = FIELD_COEFFICIENTS_FOT.packaging?.costPerUnit;
+            //     summaryMaterials += coefficientFot[field] || 0;
+            // }
 
     
             const productAliasesData = mapKeys(product);
@@ -288,9 +289,10 @@ export default class ProductsList {
                 depth: productAliasesData.commonDimensionsDepth,
                 productCount: countOfModules,
                 productPrices: productPrices,
-                productTotalMaterials: summaryMaterials,
+                productTotalMaterials: calculation?.[CALC_FIELD_SOFA.totalMaterials],
                 productTotal: calculation?.[CALC_FIELD_SOFA.total],
-                productTotalFot: calculation?.[CALC_FIELD_SOFA.cost] - summaryMaterials,
+                productTotalFot: fot?.[FOT_SUMMARY_COST],
+                // productTotalFot: calculation?.[CALC_FIELD_SOFA.cost] - summaryMaterials,
                 calculation: calculation
             });
         }

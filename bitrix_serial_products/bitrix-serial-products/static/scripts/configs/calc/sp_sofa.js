@@ -14,6 +14,7 @@ export const CALC_FIELD_SOFA = {
     calculationFixed: 'ufCrm51_1719148556',         // Фиксация рассчитанного изделия
 
     recomendationROP: 'ufCrm51_1748941470',         // Рекомендация РОП
+    isTemplatePotochka: "ufCrm51_1720855254",       // 
 
     totalWork: {
         value: 'ufCrm51_1713689850',             // Работа (значение)

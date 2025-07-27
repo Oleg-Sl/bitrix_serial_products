@@ -14,6 +14,7 @@ export const CALC_FIELD_NIGHTSTAND = {
     calculationFixed: 'ufCrm79_1719148379',         // Фиксация рассчитанного изделия
 
     recomendationROP: 'ufCrm79_1748941534',         // Рекомендация РОП
+    isTemplatePotochka: "ufCrm79_1720755010",       // 
 
     totalWork: {
         value: 'ufCrm79_1714100361',             // Работа (значение)

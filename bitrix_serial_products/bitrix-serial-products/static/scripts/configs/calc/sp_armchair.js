@@ -13,6 +13,7 @@ export const CALC_FIELD_ARMCHAIR = {
     calculationFixed: 'ufCrm59_1719148435',         // Фиксация рассчитанного изделия
 
     recomendationROP: 'ufCrm59_1748941499',         // Рекомендация РОП
+    isTemplatePotochka: "ufCrm59_1720762192",       // 
 
     totalWork: {
         overallRating: 'ufCrm59_1713842371',     // Работа (общая оценка на работу)

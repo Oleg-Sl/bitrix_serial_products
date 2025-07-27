@@ -52,7 +52,8 @@ export default class CheckArmchairData {
             dealId: null,
             name: this.productNameRus,
             freeTitle: this.productManager.getValue("freeTitle"),
-            baseValue: this.deliveryCalculation.calcSquareMeters(this.productManager.getProductDataMap()),
+            baseValue: this.deliveryCalculation.calcLinearMeters(this.productManager.getProductDataMap()),
+
             fabricPrices: this.fabricManager.getPrices(),
             fabricComments: this.fabricManager.getComments(),
             selectedCalculationId: this.productManager.getValue("calculationId"),

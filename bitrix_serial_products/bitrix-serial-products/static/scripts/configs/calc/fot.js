@@ -3,6 +3,8 @@
 
 export const ID_FOT = 1048;
 
+export const FOT_SUMMARY_COST = "ufCrm93_1750821799";
+export const FOT_IS_TEMPLATE_POTOCHKA = "ufCrm93_1730297063";
 
 export const FIELD_FOT = {
   development: {

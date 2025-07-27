@@ -1,11 +1,10 @@
-import { ID_FOT, FIELD_FOT } from '../../../import.js';
+import { ID_FOT, FIELD_FOT, FOT_SUMMARY_COST, FOT_IS_TEMPLATE_POTOCHKA } from '../../../import.js';
 
 
 export default class FotService {
     constructor(fot, fieldParentId) {
         this.fot = fot;
         this.fieldParentId = fieldParentId;
-        
     }
 
     isValid() {
@@ -14,6 +13,14 @@ export default class FotService {
 
     addFot(fot) {
         this.fot.push(fot);
+    }
+
+    getIsTemplatePotockaField() {
+        return FOT_IS_TEMPLATE_POTOCHKA;
+    }
+
+    getSummaryCostField() {
+        return FOT_SUMMARY_COST;
     }
 
     getFieldParent() {
@@ -62,10 +69,7 @@ export default class FotService {
     getFieldsFot() {
         let arr = [];
         for (const [ fotName, fotData] of Object.entries(FIELD_FOT)) {
-            
-            arr.push({
-
-            });
+            arr.push({});
         }
         console.log(arr);
         return FIELD_FOT;

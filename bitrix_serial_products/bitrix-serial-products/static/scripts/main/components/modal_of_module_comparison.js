@@ -71,6 +71,21 @@ export default class ModuleComparison {
 
         for (const i in products) {
             const product = products[i];
+            // contentHTML += `
+            //     <tr>
+            //         <td class="text-start" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${+i + 1}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.freeTitle}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.width || '-'}*${product.depth || '-'}*${product.height || '-'}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productTotalMaterials ? product.productTotalMaterials.toLocaleString() : '-'}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productTotalFot ? product.productTotalFot.toLocaleString() : '-'}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productTotal ? product.productTotal.toLocaleString() : '-'}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productPrices['Base'].toLocaleString()}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productPrices['Base+'].toLocaleString()}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productPrices['Premium'].toLocaleString()}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productPrices['Premium+'].toLocaleString()}</td>
+            //         <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productPrices['Limited'].toLocaleString()}</td>
+            //     </tr>
+            // `;
             contentHTML += `
                 <tr>
                     <td class="text-start" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${+i + 1}</td>

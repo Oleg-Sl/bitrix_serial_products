@@ -14,6 +14,7 @@ export const CALC_FIELD_MELOCHEVKA = {
     calculationFixed: 'ufCrm65_1719148511',         // Фиксация рассчитанного изделия
 
     recomendationROP: 'ufCrm65_1748941602',         // Рекомендация РОП
+    isTemplatePotochka: "ufCrm65_1753012413",       // 
 
     totalWork: {
         value: 'ufCrm65_1713853050',             // Работа (значение)
