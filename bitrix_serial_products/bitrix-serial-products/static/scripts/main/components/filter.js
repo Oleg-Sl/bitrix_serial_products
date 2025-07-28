@@ -80,26 +80,28 @@ export default class Filter {
         for (const field of filterFields) {
             const fieldAlias = field.alias;
             const fieldTitle = field.title;
+            const width = field.width || 100;
+
             const fieldData = this.productsList.getFieldData(this.productType, fieldAlias);
             if (fieldData.type === 'enumeration') {
-                contentHTML += this.getSelectHTML(fieldAlias, fieldTitle, fieldData.items);
+                contentHTML += this.getSelectHTML(fieldAlias, fieldTitle, fieldData.items, width);
             } else if (fieldData.type === 'boolean') {
-                contentHTML += this.getSelectHTML(fieldAlias, fieldTitle, [{ ID: 1, VALUE: 'Да' }, { ID: 0, VALUE: 'Нет' }]);
+                contentHTML += this.getSelectHTML(fieldAlias, fieldTitle, [{ ID: 1, VALUE: 'Да' }, { ID: 0, VALUE: 'Нет' }], width);
             } else if (fieldData.type === 'string') {
-                contentHTML += this.getInputHTML(fieldAlias, fieldTitle);
+                contentHTML += this.getInputHTML(fieldAlias, fieldTitle, width);
             }
         }
         this.container.innerHTML = contentHTML;
     }
 
-    getSelectHTML(fieldAlias, title, options) {
+    getSelectHTML(fieldAlias, title, options, width = 100) {
         let optionsHTML = '';
         for (const option of options) {
             optionsHTML += `<option value="${option.ID}">${option.VALUE}</option>`;
         }
         return `
-            <div class="col d-flex flex-nowrap input-group me-1">
-                <span class="input-group-text" id="">${title}</span>
+            <div class="d-flex flex-nowrap input-group me-1 w-${width}">
+                <span class="input-group-text px-1" id="">${title}</span>
                 <select id="${fieldAlias}" class="form-select form-select-sm p-0" aria-label="">
                     <option value=""></option>
                     ${optionsHTML}
@@ -108,10 +110,10 @@ export default class Filter {
         `;
     }
 
-    getInputHTML(fieldAlias, title, placeholder = '') {
+    getInputHTML(fieldAlias, title, placeholder = '', width = 100) {
         return `
-            <div class="col d-flex flex-nowrap input-group me-1">
-                <span class="input-group-text" id="">${title}</span>
+            <div class="d-flex flex-nowrap input-group me-1 w-${width}">
+                <span class="input-group-text px-1" id="">${title}</span>
                 <input type="text" id="${fieldAlias}" class="form-control form-control-sm" placeholder="${placeholder}" aria-label="" aria-describedby="">
             </div>
         `;

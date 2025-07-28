@@ -84,6 +84,8 @@ export function getFilterFields(productTypeId) {
             return [
                 { alias: 'filterNameCollection', title: 'Коллекция' },
                 { alias: 'filterTags', title: 'Тег' },
+                { alias: 'isTechOk', title: 'Tech-OK', width: 50 },
+                { alias: 'isComDirOk', title: 'Ком.дир-OK', width: 50 }
             ];
         case ID_BED:
             return [
@@ -92,11 +94,15 @@ export function getFilterFields(productTypeId) {
                 { alias: 'liftingMechanism', title: 'Механизм' },
                 { alias: 'hasStorageBox', title: 'Ящик' },
                 { alias: 'filterTags', title: 'Тег' },
+                { alias: 'isTechOk', title: 'Tech-OK', width: 50 },
+                { alias: 'isComDirOk', title: 'Ком.дир-OK', width: 50 }
             ];
         case ID_CHAIR:
             return [
                 { alias: 'filterNameCollection', title: 'Коллекция' },
                 { alias: 'filterTags', title: 'Тег' },
+                { alias: 'isTechOk', title: 'Tech-OK', width: 50 },
+                { alias: 'isComDirOk', title: 'Ком.дир-OK', width: 50 }
             ];
         case ID_MELOCHEVKA:
             return [];
@@ -104,18 +110,25 @@ export function getFilterFields(productTypeId) {
             return [
                 { alias: 'filterNameCollection', title: 'Коллекция' },
                 { alias: 'filterTags', title: 'Тег' },
+                { alias: 'isTechOk', title: 'Tech-OK', width: 50 },
+                { alias: 'isComDirOk', title: 'Ком.дир-OK', width: 50 }
             ];
         case ID_NIGHTSTAND:
             return [
                 { alias: 'filterSize', title: 'Размер тумбы' },
                 { alias: 'filterNameCollection', title: 'Коллекция' },
                 { alias: 'filterTags', title: 'Тег' },
+                { alias: 'isTechOk', title: 'Tech-OK', width: 50 },
+                { alias: 'isComDirOk', title: 'Ком.дир-OK', width: 50 }
                 
             ];
         case ID_POUF:
             return [
                 { alias: 'filterNameCollection', title: 'Коллекция' },
+                { alias: 'filterSize', title: 'Размер' },
                 { alias: 'filterTags', title: 'Тег' },
+                { alias: 'isTechOk', title: 'Tech-OK', width: 50 },
+                { alias: 'isComDirOk', title: 'Ком.дир-OK', width: 50 }
             ];
         case ID_SOFA:
             return [
@@ -123,12 +136,16 @@ export function getFilterFields(productTypeId) {
                 { alias: 'shape', title: 'Форма' },
                 { alias: 'filterMechanism', title: 'Механизм' },
                 { alias: 'filterTags', title: 'Тег' },
+                { alias: 'isTechOk', title: 'Tech-OK', width: 50 },
+                { alias: 'isComDirOk', title: 'Ком.дир-OK', width: 50 }
             ];
         case ID_TABLE:
             return [
                 { alias: 'filterNameCollection', title: 'Коллекция' },
                 { alias: 'filterSize', title: 'Размер' },
                 { alias: 'filterTags', title: 'Тег' },
+                { alias: 'isTechOk', title: 'Tech-OK', width: 50 },
+                { alias: 'isComDirOk', title: 'Ком.дир-OK', width: 50 }
             ];
         default:
             return {};

@@ -25,6 +25,7 @@ export const FIELD_POUF = {
 
     isTemplatePotochka: "ufCrm67_1716718131",   // Шаблон поточки
     filter: "ufCrm67_1730291092",               // Для фильтра в Поточке
+    filterSize: "ufCrm67_1745928494",           // фильтр "Размер"
 
     sketch: "ufCrm67_1718036145",               // Эскиз
     sentToWorkshop: "ufCrm67_1718036378",       // Отправлено в цех
