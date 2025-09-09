@@ -96,7 +96,15 @@ export const FIELD_FOT = {
     finalAmount: "ufCrm93_1724603155",        // Покраска - итоговая сумма
     allocatedHours: "ufCrm93_1726818030",     // Покраска - выделено часов
     comment: "ufCrm93_1724603238"             // Покраска - комментарий
-  }
+  },
+    sketch: {
+      title: "Эскиз",
+      estimatedAmount: "ufCrm93_1755315840",    // Эскиз - расчетная сумма
+      growthCoefficient: "ufCrm93_1755315900",  // Эскиз - коэффициент роста
+      finalAmount: "ufCrm93_1755315928",        // Эскиз - итоговая сумма
+      allocatedHours: "ufCrm93_1756134437",     // Эскиз - выделено часов
+      comment: "ufCrm93_1755316125"             // Эскиз - комментарий
+    },
 };
 
   

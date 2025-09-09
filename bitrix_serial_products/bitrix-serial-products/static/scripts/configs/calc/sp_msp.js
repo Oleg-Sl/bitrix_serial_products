@@ -22,12 +22,18 @@ export const CALC_FIELD_MSP = {
         amount: 'ufCrm27_1709392252',            // Работа (сумма)
         comments: 'ufCrm27_1708832266',          // Работа (комментарии)
     },
-
+    
     MDF6mm: {
         type: 'material',
         value: 'ufCrm27_1707314359',               
         amount: 'ufCrm27_1707314461',              
         comments: 'ufCrm27_1708661569',            
+    },
+    MDF10mm: {
+        type: 'material',
+        value: 'ufCrm27_1749484729',               
+        amount: 'ufCrm27_1749484746',              
+        comments: 'ufCrm27_1749484769',            
     },
     PPU_EL20mm: {
         type: 'material',
@@ -70,6 +76,13 @@ export const CALC_FIELD_MSP = {
         value: 'ufCrm27_1708658363',               
         amount: 'ufCrm27_1708658373',              
         comments: 'ufCrm27_1708831505',            
+    },
+    // Розетки | включатели
+    SocketsAndSwitches: {
+        type: 'material',
+        value: 'ufCrm27_1749484898',
+        amount: 'ufCrm27_1749484915',
+        comments: 'ufCrm27_1749484932',
     },
     Decor1: {
         type: 'material',

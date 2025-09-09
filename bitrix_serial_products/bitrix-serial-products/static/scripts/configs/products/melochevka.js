@@ -23,6 +23,9 @@ export const FIELD_MELOCHEVKA = {
     parentId1: "parentId1",
     parentId2: "parentId2",
 
+    freeTitle: "ufCrm63_1723010358",           // Свободное название издеия
+
+
     isTemplatePotochka: "ufCrm63_1728261830",   // Шаблон поточки
     filter: "ufCrm63_1730291045",               // Для фильтра в Поточке
 
@@ -36,6 +39,14 @@ export const FIELD_MELOCHEVKA = {
     dateOfTech: "ufCrm63_1731471198",           // Дата проверки tech
     isComDirOk: "ufCrm63_1732253447",           // Ком.дир-OK
     dateOfComDir: "ufCrm63_1732253596",         // Дата согласования ком.дир
+
+
+    productVariationIds: "ufCrm63_1733073456",  // ID_вариации_каталога
+    productMainId: "ufCrm63_1733204849",        // ID_головного товара
+
+    //    itemPositionId: "ufCrm63_1714367361",       // ID товарной позиции
+    // itemPotochkaId: "ufCrm63_1716305042",       // ID_товар_поточка
+    // itemPotochkaVariationId: "ufCrm63_1727882303",  // ID_товар_поточка_вариация
 
     deliveryCity: "ufCrm63_1713514517",         // Город доставки
     quantity: "ufCrm63_1713514573",             // Количество
