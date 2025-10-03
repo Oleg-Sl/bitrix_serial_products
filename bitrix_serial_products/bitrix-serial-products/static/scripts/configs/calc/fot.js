@@ -7,6 +7,14 @@ export const FOT_SUMMARY_COST = "ufCrm93_1750821799";
 export const FOT_IS_TEMPLATE_POTOCHKA = "ufCrm93_1730297063";
 
 export const FIELD_FOT = {
+  sketch: {
+    title: "Эскиз",
+    estimatedAmount: "ufCrm93_1755315840",    // Эскиз - расчетная сумма
+    growthCoefficient: "ufCrm93_1755315900",  // Эскиз - коэффициент роста
+    finalAmount: "ufCrm93_1755315928",        // Эскиз - итоговая сумма
+    allocatedHours: "ufCrm93_1756134437",     // Эскиз - выделено часов
+    comment: "ufCrm93_1755316125"             // Эскиз - комментарий
+  },
   development: {
     title: "Разработка",
     estimatedAmount: "ufCrm93_1723537303",    // Разработка - расчетная сумма
@@ -97,14 +105,6 @@ export const FIELD_FOT = {
     allocatedHours: "ufCrm93_1726818030",     // Покраска - выделено часов
     comment: "ufCrm93_1724603238"             // Покраска - комментарий
   },
-    sketch: {
-      title: "Эскиз",
-      estimatedAmount: "ufCrm93_1755315840",    // Эскиз - расчетная сумма
-      growthCoefficient: "ufCrm93_1755315900",  // Эскиз - коэффициент роста
-      finalAmount: "ufCrm93_1755315928",        // Эскиз - итоговая сумма
-      allocatedHours: "ufCrm93_1756134437",     // Эскиз - выделено часов
-      comment: "ufCrm93_1755316125"             // Эскиз - комментарий
-    },
 };
 
   
