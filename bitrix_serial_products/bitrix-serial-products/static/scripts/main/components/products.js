@@ -104,7 +104,7 @@ export default class ProductsList {
                         <p class="text-nowrap text-truncate card-text" title="${product.freeTitle || "-"}">${product.freeTitle || "-"}</p>
                     </div>
                     <div class="px-0 product-card-body-footer" style="display: flex;">
-                        <div>
+                        <div class="d-flex align-items-center">
                             <small class="mx-1 text-secondary" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" data-bs-auto-close="outside"  aria-expanded="false" class="text-body-secondary">info</small>
                             <div class="dropdown-menu p-0 dropdown-fabric-menu" id="fabric-info-1">
                                 <div class="dropdown-header bg-secondary-subtle text-center dropdown-fabric-menu-header">Связанные СП</div>
@@ -145,9 +145,10 @@ export default class ProductsList {
                             </div>
                         </div>
                         <div style="width: 100%;">
-                            <small class="text-body-secondary">Размеры: ${this.getProductSize_(product) || "-"}</small>
+                            Размеры:
+                            <small class="text-body-secondary">${this.getProductSize_(product) || "-"}</small>
                         </div>
-                        <div>
+                        <div class="d-flex align-items-center">
                             <small class="mx-1 text-secondary" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false" class="text-body-secondary">Вес</small>
                             <div class="dropdown-menu p-0 dropdown-fabric-menu" id="fabric-info-1">
                                 <div class="dropdown-header bg-secondary-subtle text-center dropdown-fabric-menu-header">Вес изделия</div>
@@ -284,6 +285,7 @@ export default class ProductsList {
                 productId: productId,
                 productTitle: productAliasesData.title,
                 freeTitle: productAliasesData.freeTitle,
+                count_of_fabric1: calculation?.[CALC_FIELD_SOFA?.Fabric1_smart?.value] || '-',
                 width: productAliasesData.commonDimensionsWidth,
                 height: productAliasesData.commonDimensionsHeight,
                 depth: productAliasesData.commonDimensionsDepth,
