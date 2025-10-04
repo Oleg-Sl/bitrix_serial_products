@@ -302,6 +302,35 @@ export default class ProductsList {
         return result;
     }
 
+    calcSummaryModulesPrice(products) {
+        let summaryProdcuctData = {
+            count_of_fabric1: 0,
+            productTotalMaterials: 0,
+            productTotalFot: 0,
+            productTotal: 0,
+            productPrices: {
+                base: 0,
+                basePlus: 0,
+                premium: 0,
+                premiumPlus: 0,
+                limited: 0,
+            },
+        }
+        for (const i in products) {
+            const product = products[i];
+            summaryProdcuctData.count_of_fabric1 += +product.count_of_fabric1 || 0;
+            summaryProdcuctData.productTotalMaterials += product.productTotalMaterials || 0;
+            summaryProdcuctData.productTotalFot += product.productTotalFot || 0;
+            summaryProdcuctData.productTotal += product.productTotal || 0;
+            summaryProdcuctData.productPrices.base += product.productPrices['Base'] || 0;
+            summaryProdcuctData.productPrices.basePlus += product.productPrices['Base+'] || 0;
+            summaryProdcuctData.productPrices.premium += product.productPrices['Premium'] || 0;
+            summaryProdcuctData.productPrices.premiumPlus += product.productPrices['Premium+'] || 0;
+            summaryProdcuctData.productPrices.limited += product.productPrices['Limited'] || 0;
+        }
+        return summaryProdcuctData;
+    }
+
     getCountOfModulesHTML(product) {
         if (product.entityTypeId == ID_SOFA) {
             return `

@@ -32,7 +32,7 @@ import AppUploadAccessControl from './app_upload_access_control.js'
 import FotAccessManager from './fot_access_manager.js';
 import FotAccessControl from './fot_access_control.js';
 
-const ALLOWED_USERS = ['11789', '1', '351'];
+const ALLOWED_USERS = ['11789', '1', '351', '21387'];
 
 
 export default class PermissionManager {
