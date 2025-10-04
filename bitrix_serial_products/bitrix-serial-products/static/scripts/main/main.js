@@ -37,5 +37,6 @@ export async function main(apiClient) {
         console.error('Ошибка инициализации приложения', error);
     } finally {
         loader.hide();
+        BX24.fitWindow();
     }
 }
