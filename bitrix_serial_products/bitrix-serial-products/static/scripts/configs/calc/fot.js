@@ -73,8 +73,12 @@ export const FIELD_FOT = {
   //   comment: "ufCrm93_1723537384"             // Разработка - комментарий
   // }
 
+
+
+
   carpentry: {
-    title: "Столярка",
+    // title: "Столярка",
+    title: "Столяр (подготовка)",
     estimatedAmount: "ufCrm93_1724602922",    // Столярка - расчетная сумма
     growthCoefficient: "ufCrm93_1724603020",  // Столярка - коэффициент роста
     finalAmount: "ufCrm93_1724603097",        // Столярка - итоговая сумма
@@ -82,7 +86,8 @@ export const FIELD_FOT = {
     comment: "ufCrm93_1724603181"             // Столярка - комментарий
   },
   carpentryAssembly: {
-    title: "Столярка (сборка)",
+    // title: "Столярка (сборка)",
+    title: "Столяр (фин.сборка)",
     estimatedAmount: "ufCrm93_1724602957",    // Столярка (сборка) - расчетная сумма
     growthCoefficient: "ufCrm93_1724603039",  // Столярка (сборка) - коэффициент роста
     finalAmount: "ufCrm93_1724603120",        // Столярка (сборка) - итоговая сумма
@@ -90,7 +95,8 @@ export const FIELD_FOT = {
     comment: "ufCrm93_1724603199"             // Столярка (сборка) - комментарий
   },
   paintingPreparation: {
-    title: "Покраска (подготовка)",
+    // title: "Покраска (подготовка)",
+    title: "Шлифовка",
     estimatedAmount: "ufCrm93_1724602974",    // Покраска (подготовка) - расчетная сумма
     growthCoefficient: "ufCrm93_1724603053",  // Покраска (подготовка) - коэффициент роста
     finalAmount: "ufCrm93_1724603138",        // Покраска (подготовка) - итоговая сумма
@@ -98,7 +104,8 @@ export const FIELD_FOT = {
     comment: "ufCrm93_1724603218"             // Покраска (подготовка) - комментарий
   },
   painting: {
-    title: "Покраска",
+    // title: "Покраска",
+    title: "Моляр",
     estimatedAmount: "ufCrm93_1724602995",    // Покраска - расчетная сумма
     growthCoefficient: "ufCrm93_1724603075",  // Покраска - коэффициент роста
     finalAmount: "ufCrm93_1724603155",        // Покраска - итоговая сумма
