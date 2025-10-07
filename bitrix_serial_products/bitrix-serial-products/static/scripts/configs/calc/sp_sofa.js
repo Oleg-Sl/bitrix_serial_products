@@ -35,6 +35,12 @@ export const CALC_FIELD_SOFA = {
         amount: 'ufCrm51_1713671963',
         comments: 'ufCrm51_1713671989',
     },
+    plywood6mm: {
+        type: 'material',
+        value: 'ufCrm51_1759809870',    // Фанера 6мм (лист)"
+        amount: 'ufCrm51_1759809890',   // Фанера 6мм (сумма)
+        comments: 'ufCrm51_1759809904', // Фанера 6мм (комментарий)
+    },
     plywood3mm: {
         type: 'material',
         value: 'ufCrm51_1713672017',
@@ -190,6 +196,34 @@ export const CALC_FIELD_SOFA = {
         value: 'ufCrm51_1713689617',
         amount: 'ufCrm51_1713689643',
         comments: 'ufCrm51_1713689657',
+    },
+
+    DecorCeramics: {
+        type: 'material',
+        price: 'ufCrm51_1759650615',
+        value: 'ufCrm51_1759650649',
+        amount: 'ufCrm51_1759650668',
+        comments: 'ufCrm51_1759650686',
+    },
+    DecorNaturalVeneer: {
+        type: 'material',
+        price: 'ufCrm51_1759650733',
+        value: 'ufCrm51_1759650755',
+        amount: 'ufCrm51_1759650778',
+        comments: 'ufCrm51_1759650791',
+    },
+    DecorNaturalStone: {
+        type: 'material',
+        price: 'ufCrm51_1759650805',
+        value: 'ufCrm51_1759650820',
+        amount: 'ufCrm51_1759650852',
+        comments: 'ufCrm51_1759650868',
+    },
+    furnitureRubber: {
+        type: 'material',
+        value: 'ufCrm51_1759809941',    // Мебельная резина (метр)
+        amount: 'ufCrm51_1759809972',   // Мебельная резина (сумма)
+        comments: 'ufCrm51_1759809993', // Мебельная резина (комментарий)
     },
     subcontractorWork: {
         type: 'others',

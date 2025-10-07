@@ -35,5 +35,6 @@ export const FIELD_MATERIALS = {
 
     paint: 'ufCrm25_1714099485',                        // Краска
     ModuleBox: 'ufCrm25_1714811227',                    // Ящик в модуле (ящик хранения в диване)
+    furnitureRubber: 'ufCrm25_1759664970',              // Мебельная резина (матр)
 
 };
