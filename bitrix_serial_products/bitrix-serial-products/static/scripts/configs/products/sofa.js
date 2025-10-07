@@ -95,6 +95,7 @@ export const FIELD_SOFA = {
     supportColor: "ufCrm53_1713497879",                 // 1-Цвет опор
     supportHeight: "ufCrm53_1713497937",                // 1-Высота опор
     upholsteryFabricCollection: "ufCrm53_1713496775",   // 1-Коллекция и цвет обивочной ткани
+    decor: "ufCrm53_1759650077",                        // 1-Декор
     decorationDescription: "ufCrm53_1713498015",        // 1-Доп. описание и описание декора
     depthThree: "ufCrm53_1715618438",                   // 1-Г(3)-правая часть
     depthTwo: "ufCrm53_1715618385",                     // 1-Г(2)-центральная часть
