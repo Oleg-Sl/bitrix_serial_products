@@ -6,28 +6,22 @@
   left: 20px;
   z-index: 1001;
 }
-
 .draggable-window .fixed-rows-top {
   background-color: #ffffff;
-  position: -webkit-sticky;
   position: sticky;
   top: 0px;
 }
-
 .draggable-window .window-content {
   height: 600px;
   overflow-y: scroll;
 }
-
 .draggable-window .fixed-tfooter {
   background-color: #ffffff;
   z-index: 101;
   border-top: 2px solid #cccccc;
-  position: -webkit-sticky;
   position: sticky;
   bottom: 0;
 }
-
 .draggable-window .window-header {
   cursor: move;
   padding: 3px;
@@ -35,58 +29,45 @@
   border-bottom: 1px solid #cccccc;
   text-align: center;
 }
-
 .draggable-window .window-grip-left {
   width: 25px;
   background-color: #f0f0f0;
 }
-
 .draggable-window .window-droptable {
   background-color: #f0f0f0;
   cursor: move;
   text-align: center;
 }
-
 .draggable-window th:first-child, .draggable-window td:first-child {
   border-left: 1px solid #cccccc;
 }
-
 .draggable-window tr:first-child {
   border-top: 1px solid #cccccc;
 }
-
 .draggable-window table {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 200px 90px 90px 90px 100px 100px 100px;
-      grid-template-columns: 200px 90px 90px 90px 100px 100px 100px;
-  -webkit-transition: max-height 0.5s ease-out;
+  grid-template-columns: 200px 90px 90px 90px 100px 100px 100px;
   transition: max-height 0.5s ease-out;
   max-height: 700px;
 }
-
 .draggable-window table input {
   width: 100%;
   text-align: right;
   padding: 0;
 }
-
 .draggable-window table textarea {
   width: 100%;
   border: none;
   padding: 2px;
   resize: vertical;
 }
-
 .draggable-window table .btn-chek-list {
   width: 100%;
   height: 100%;
 }
-
 .draggable-window table thead, .draggable-window table tbody, .draggable-window table tfoot, .draggable-window table tr {
   display: contents;
 }
-
 .draggable-window table th, .draggable-window table td {
   border-right: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
@@ -95,35 +76,22 @@
   text-overflow: ellipsis;
   background-color: #ffffff;
 }
-
 .draggable-window table th div, .draggable-window table td div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   height: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 .draggable-window table.materials-list .column-5-7 {
-  -ms-grid-column: 5;
-  -ms-grid-column-span: 7;
-  grid-column: 5 / span 7;
+  grid-column: 5/span 7;
 }
-
 .draggable-window table.collapsed {
   max-height: 0;
   height: 0;
 }
-
 .draggable-window .window-footer {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-}
-/*# sourceMappingURL=calc.css.map */
+  grid-template-columns: 1fr 1fr;
+}/*# sourceMappingURL=calc.css.map */

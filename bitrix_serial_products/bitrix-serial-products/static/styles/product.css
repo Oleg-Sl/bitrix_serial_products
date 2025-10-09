@@ -3,30 +3,24 @@
   width: 100%;
   border: 2px solid #000;
 }
-
 .photos-parent .child {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border: 1px solid #c7c7c7;
   overflow: hidden;
 }
-
 .photos-parent .child input {
   position: absolute;
   left: 0;
   z-index: 1000;
 }
-
 .photos-parent .child .child-container {
   width: 100%;
   height: 100%;
 }
-
 .photos-parent .child .child-container img {
   width: 100%;
   height: 100%;
 }
-
 .photos-parent .child1 {
   position: absolute;
   top: 5px;
@@ -34,7 +28,6 @@
   width: 15%;
   height: 15%;
 }
-
 .photos-parent .child2 {
   position: absolute;
   top: 5px;
@@ -42,7 +35,6 @@
   width: 15%;
   height: 15%;
 }
-
 .photos-parent .child3 {
   position: absolute;
   top: 5px;
@@ -50,7 +42,6 @@
   width: calc(70% - 30px);
   height: calc(50% - 10px);
 }
-
 .photos-parent .child4 {
   position: absolute;
   bottom: 5px;
@@ -58,7 +49,6 @@
   width: calc(50% - 10px);
   height: calc(50% - 10px);
 }
-
 .photos-parent .child5 {
   position: absolute;
   bottom: 5px;
@@ -76,28 +66,22 @@
   left: 20px;
   z-index: 1001;
 }
-
 .modal-calculation-new .fixed-rows-top {
   background-color: #ffffff;
-  position: -webkit-sticky;
   position: sticky;
   top: 0px;
 }
-
 .modal-calculation-new .window-content {
   height: 600px;
   overflow-y: scroll;
 }
-
 .modal-calculation-new .fixed-tfooter {
   background-color: #ffffff;
   z-index: 101;
   border-top: 2px solid #cccccc;
-  position: -webkit-sticky;
   position: sticky;
   bottom: 0;
 }
-
 .modal-calculation-new .window-header {
   cursor: move;
   padding: 3px;
@@ -105,71 +89,55 @@
   border-bottom: 1px solid #cccccc;
   text-align: center;
 }
-
 .modal-calculation-new .window-grip-left {
   width: 25px;
   background-color: #f0f0f0;
 }
-
 .modal-calculation-new .window-droptable {
   background-color: #f0f0f0;
   cursor: move;
   text-align: center;
 }
-
 .modal-calculation-new th:first-child, .modal-calculation-new td:first-child {
   border-left: 1px solid #cccccc;
 }
-
 .modal-calculation-new tr:first-child {
   border-top: 1px solid #cccccc;
 }
-
 .modal-calculation-new #containerFot {
-  -webkit-transition: max-height 1.5s ease-out;
   transition: max-height 1.5s ease-out;
-  max-height: 800px;
+  max-height: 1200px;
 }
-
 .modal-calculation-new #containerFot.collapsed {
   max-height: 0;
   height: 0;
 }
-
 .modal-calculation-new table {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 90px 90px 90px 90px 90px 1fr 1fr;
-      grid-template-columns: 1fr 90px 90px 90px 90px 90px 1fr 1fr;
-  -webkit-transition: max-height 0.5s ease-out;
+  grid-template-columns: 1fr 90px 90px 90px 90px 90px 1fr 1fr;
   transition: max-height 0.5s ease-out;
-  max-height: 800px;
+  max-height: 1200px;
 }
-
 .modal-calculation-new table input {
   width: 100%;
   text-align: right;
   padding: 0;
 }
-
 .modal-calculation-new table textarea {
   width: 100%;
   border: none;
   padding: 2px;
   resize: vertical;
 }
-
 .modal-calculation-new table .btn-chek-list {
   height: 100%;
   font-weight: bold;
   font-size: 25px;
   line-height: 25px;
 }
-
 .modal-calculation-new table thead, .modal-calculation-new table tbody, .modal-calculation-new table tfoot, .modal-calculation-new table tr {
   display: contents;
 }
-
 .modal-calculation-new table th, .modal-calculation-new table td {
   border-right: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
@@ -178,36 +146,24 @@
   text-overflow: ellipsis;
   background-color: #ffffff;
 }
-
 .modal-calculation-new table th div, .modal-calculation-new table td div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   height: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 .modal-calculation-new table.materials-list .column-5-7 {
-  -ms-grid-column: 5;
-  -ms-grid-column-span: 7;
-  grid-column: 5 / span 7;
+  grid-column: 5/span 7;
 }
-
 .modal-calculation-new table.collapsed {
   max-height: 0;
   height: 0;
 }
-
 .modal-calculation-new .window-footer {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .modal-calculation-old {
@@ -218,28 +174,22 @@
   left: 100px;
   z-index: 1001;
 }
-
 .modal-calculation-old .fixed-rows-top {
   background-color: #ffffff;
-  position: -webkit-sticky;
   position: sticky;
   top: 0px;
 }
-
 .modal-calculation-old .window-content {
   height: 600px;
   overflow-y: auto;
 }
-
 .modal-calculation-old .fixed-tfooter {
   background-color: #ffffff;
   z-index: 101;
   border-top: 2px solid #cccccc;
-  position: -webkit-sticky;
   position: sticky;
   bottom: 0;
 }
-
 .modal-calculation-old .window-header {
   cursor: move;
   padding: 3px;
@@ -247,57 +197,43 @@
   border-bottom: 1px solid #cccccc;
   text-align: center;
 }
-
 .modal-calculation-old .window-grip-left {
   width: 25px;
   background-color: #f0f0f0;
 }
-
 .modal-calculation-old .window-droptable {
   background-color: #f0f0f0;
   cursor: move;
   text-align: center;
 }
-
 .modal-calculation-old th:first-child, .modal-calculation-old td:first-child {
   border-left: 1px solid #cccccc;
 }
-
 .modal-calculation-old tr:first-child {
   border-top: 1px solid #cccccc;
 }
-
 .modal-calculation-old table {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 200px 90px 90px 90px auto;
-      grid-template-columns: 200px 90px 90px 90px auto;
+  grid-template-columns: 200px 90px 90px 90px auto;
 }
-
 .modal-calculation-old table input {
   width: 100%;
   text-align: right;
   border: none;
   padding: 0;
 }
-
 .modal-calculation-old table textarea {
   width: 100%;
   border: none;
   padding: 2px;
   resize: vertical;
 }
-
 .modal-calculation-old table .comment {
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 4;
-  grid-column: 2 / span 4;
+  grid-column: 2/span 4;
 }
-
 .modal-calculation-old table thead, .modal-calculation-old table tbody, .modal-calculation-old table tfoot, .modal-calculation-old table tr {
   display: contents;
 }
-
 .modal-calculation-old table th, .modal-calculation-old table td {
   border-right: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
@@ -305,42 +241,29 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 .modal-calculation-old table th div, .modal-calculation-old table td div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   height: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 .modal-calculation-old .window-footer {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .dropdown-fabric-menu {
   width: 450px;
 }
-
 .dropdown-fabric-menu .dropdown-fabric-menu-content table {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto 1fr;
-      grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr;
 }
-
 .dropdown-fabric-menu .dropdown-fabric-menu-content tbody, .dropdown-fabric-menu .dropdown-fabric-menu-content tr {
   display: contents;
 }
-
 .dropdown-fabric-menu .dropdown-fabric-menu-content td {
   border: 1px solid #e3e3e3;
   padding-left: 4px;
@@ -353,7 +276,6 @@ body {
 }
 
 .product-buttons {
-  position: -webkit-sticky;
   position: sticky;
   top: 0px;
   z-index: 100;
@@ -385,7 +307,6 @@ body {
 .file-upload-label {
   height: 500px;
 }
-
 .file-upload-label .upload-icon {
   margin-top: 175px;
 }
@@ -400,7 +321,6 @@ body {
   text-align: center !important;
   vertical-align: middle !important;
 }
-
 .table-cell-value textarea, .table-cell-value input, .table-cell-value select, .table-body-size textarea, .table-body-size input, .table-body-size select {
   text-align: center !important;
   vertical-align: middle !important;
@@ -411,7 +331,6 @@ body {
   height: 36px;
   padding: 0;
   border-radius: 4px;
-  display: -ms-grid;
   display: grid;
   cursor: pointer;
 }
@@ -422,7 +341,6 @@ body {
   padding: 0;
   margin: 0 2px;
 }
-
 .btn-add-image img {
   border: 2px solid #b9b9b9;
   height: 100%;
@@ -435,7 +353,6 @@ body {
   border: 3px solid #d2d2d2;
   position: relative;
 }
-
 .btn-add-image div {
   position: absolute;
   height: 12px;
@@ -494,20 +411,15 @@ body {
 }
 
 .table-history-data {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto 1fr;
-      grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr;
 }
-
 .table-history-data thead, .table-history-data tbody, .table-history-data tfoot, .table-history-data tr {
   display: contents;
 }
-
 .table-history-data th, .table-history-data td {
   max-width: 500px;
   border-right: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   white-space: nowrap;
-}
-/*# sourceMappingURL=product.css.map */
+}/*# sourceMappingURL=product.css.map */

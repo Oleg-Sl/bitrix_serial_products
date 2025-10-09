@@ -4,41 +4,28 @@
 }
 
 .Header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   border-bottom-color: #c9d1d9;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   margin: 0 15px 0 15px;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  align-items: flex-end;
+  justify-content: space-between;
 }
-
 @media only screen and (min-width: 600px) {
   .Header {
     margin-bottom: 10px;
   }
 }
-
 .Header > H1,
 .Header > H3 {
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
   margin-left: 20px;
   cursor: pointer;
 }
-
 .Header > H1 > a,
 .Header > H3 > a {
   color: #c9d1d9;
@@ -54,29 +41,20 @@
     border-radius: 5px;
   }
 }
-
 .navContainer > ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   list-style-type: none;
   padding: 0;
   margin: 0;
   margin-bottom: 1px;
 }
-
 .navContainer > ul > li {
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
   padding: 0;
 }
-
 .navContainer > ul > li > a {
   padding: 5px 10px 5px 10px;
   text-decoration: none;
@@ -86,25 +64,20 @@
   display: block;
   text-align: center;
 }
-
 .navContainer > ul > li > a > strong {
   display: block;
-  color: #ededed;
+  color: rgb(236.5, 236.5, 236.5);
 }
-
 .navContainer > ul > li > a > img {
   height: 25px;
   width: 25px;
   vertical-align: middle;
 }
-
 .navContainer > ul > li:hover {
-  background-color: #ffffff6e;
+  background-color: rgba(255, 255, 255, 0.431372549);
 }
-
 .navContainer > a > img {
   height: 25px;
   width: 25px;
   vertical-align: middle;
-}
-/*# sourceMappingURL=Header.module.css.map */
+}/*# sourceMappingURL=Header.module.css.map */

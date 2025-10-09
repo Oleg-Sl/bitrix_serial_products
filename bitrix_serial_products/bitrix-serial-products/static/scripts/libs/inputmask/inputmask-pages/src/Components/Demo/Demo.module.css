@@ -1,15 +1,8 @@
 .Demo {
   width: 100%;
 }
-
 .Demo > div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   margin: 15px;
-}
-/*# sourceMappingURL=Demo.module.css.map */
+}/*# sourceMappingURL=Demo.module.css.map */
