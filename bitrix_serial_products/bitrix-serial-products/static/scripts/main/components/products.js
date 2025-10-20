@@ -258,7 +258,7 @@ export default class ProductsList {
             for (const fabricAlias in FIELD_ECONOMY) {
                 const title = FIELD_ECONOMY[fabricAlias].title;
                 const fieldPrice = FIELD_ECONOMY[fabricAlias].price;
-                productPrices[title] = economy[fieldPrice] || 0;
+                productPrices[title] = (economy[fieldPrice] || 0 ) * countOfModules;
             }
 
             const calculation = this.calculations.find(item => item[`parentId${product.entityTypeId}`] == product.id) || {};
@@ -285,15 +285,15 @@ export default class ProductsList {
                 productId: productId,
                 productTitle: productAliasesData.title,
                 freeTitle: productAliasesData.freeTitle,
-                count_of_fabric1: calculation?.[CALC_FIELD_SOFA?.Fabric1_smart?.value] || '-',
+                count_of_fabric1: calculation?.[CALC_FIELD_SOFA?.Fabric1_smart?.value] * countOfModules || '-',
                 width: productAliasesData.commonDimensionsWidth,
                 height: productAliasesData.commonDimensionsHeight,
                 depth: productAliasesData.commonDimensionsDepth,
                 productCount: countOfModules,
                 productPrices: productPrices,
-                productTotalMaterials: calculation?.[CALC_FIELD_SOFA.totalMaterials],
-                productTotal: calculation?.[CALC_FIELD_SOFA.total],
-                productTotalFot: fot?.[FOT_SUMMARY_COST],
+                productTotalMaterials: calculation?.[CALC_FIELD_SOFA.totalMaterials] * countOfModules,
+                productTotal: calculation?.[CALC_FIELD_SOFA.total] * countOfModules,
+                productTotalFot: fot?.[FOT_SUMMARY_COST] * countOfModules,
                 // productTotalFot: calculation?.[CALC_FIELD_SOFA.cost] - summaryMaterials,
                 calculation: calculation
             });
@@ -304,6 +304,7 @@ export default class ProductsList {
 
     calcSummaryModulesPrice(products) {
         let summaryProdcuctData = {
+            productCount: 0,
             count_of_fabric1: 0,
             productTotalMaterials: 0,
             productTotalFot: 0,
@@ -318,6 +319,7 @@ export default class ProductsList {
         }
         for (const i in products) {
             const product = products[i];
+            summaryProdcuctData.productCount += product.productCount || 0;
             summaryProdcuctData.count_of_fabric1 += +product.count_of_fabric1 || 0;
             summaryProdcuctData.productTotalMaterials += product.productTotalMaterials || 0;
             summaryProdcuctData.productTotalFot += product.productTotalFot || 0;

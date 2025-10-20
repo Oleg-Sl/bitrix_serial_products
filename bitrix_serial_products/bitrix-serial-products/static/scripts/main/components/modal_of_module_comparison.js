@@ -46,6 +46,7 @@ export default class ModuleComparison {
                         <th scope="col" class="text-center" rowspan="2" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">Номер</th>
                         <th scope="col" class="text-center" rowspan="2" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">Название</th>
                         <th scope="col" class="text-center" rowspan="2" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">Размер</th>
+                        <th scope="col" class="text-center" rowspan="2" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">Кол-во модулей</th>
                         <th scope="col" class="text-center" rowspan="2" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">Кол-во ткани</th>
                         <th scope="col" class="text-center" rowspan="2" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">Материалы</th>
                         <th scope="col" class="text-center" rowspan="2" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">ФОТ</th>
@@ -98,6 +99,7 @@ export default class ModuleComparison {
                     <td class="text-start" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${+i + 1}</td>
                     <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.freeTitle}</td>
                     <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.width || '-'}*${product.depth || '-'}*${product.height || '-'}</td>
+                    <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productCount}</td>
                     <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.count_of_fabric1}</td>
                     <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productTotalMaterials ? product.productTotalMaterials.toLocaleString() : '-'}</td>
                     <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${product.productTotalFot ? product.productTotalFot.toLocaleString() : '-'}</td>
@@ -118,6 +120,7 @@ export default class ModuleComparison {
         return `
             <tr class="fw-bold">
                 <td class="text-start text-uppercase text-center" colspan="3" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">Итого</td>
+                <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${summaryProdcuctData.productCount}</td>
                 <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${summaryProdcuctData.count_of_fabric1.toLocaleString()}</td>
                 <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${summaryProdcuctData.productTotalMaterials.toLocaleString()}</td>
                 <td class="text-end" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">${summaryProdcuctData.productTotalFot.toLocaleString()}</td>
