@@ -420,9 +420,8 @@ export default class Calculation {
         let material = this.materials.find((item) => item.code === materialCode);
         material[field].value = +newValue;
         material.amount.value = Math.ceil(material.price.value * material.value.value * material.coefficient);
-        this.calculateEconomies();
-
         this.calculateVariableData();
+        this.calculateEconomies();
     }
 
     changeMaterialComment(materialCode, newValue) {
