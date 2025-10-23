@@ -441,6 +441,7 @@ export default class Calculation {
         fot.allocatedHours = +newValue;
         this.calculateFot(fot);
         this.calculateVariableData();
+        this.calculateEconomies();
     }
 
     changeFotCoefficient(fotCode, newValue) {
@@ -448,6 +449,8 @@ export default class Calculation {
         fot.coefficient = +newValue;
         this.calculateFot(fot);
         this.calculateVariableData();
+        this.calculateEconomies();
+
     }
 
     changeEconomyMargin(code, value) {
