@@ -262,7 +262,7 @@ export default class ProductsList {
             for (const fabricAlias in FIELD_ECONOMY) {
                 const title = FIELD_ECONOMY[fabricAlias].title;
                 const fieldPrice = FIELD_ECONOMY[fabricAlias].price;
-                productPrices[title] = (economy[fieldPrice] || 0 ) * countOfModules;
+                productPrices[title] = economy[fieldPrice] || 0 ;
             }
 
             const calculation = this.calculations.find(item => item[`parentId${product.entityTypeId}`] == product.id) || {};
