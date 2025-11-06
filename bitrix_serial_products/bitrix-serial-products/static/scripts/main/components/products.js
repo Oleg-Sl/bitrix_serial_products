@@ -123,6 +123,10 @@ export default class ProductsList {
                                                 <td>ФОТ:</td>
                                                 <td class="text-end path-to-smart-process" data-path="/crm/type/1048/details/${product.parentId1048}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.parentId1048}</td>
                                             </tr>
+                                            <tr>
+                                                <td>Экономика:</td>
+                                                <td class="text-end path-to-smart-process" data-path="/crm/type/1074/details/${product.parentId1074}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.parentId1074 || "-"}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <table class="w-100">

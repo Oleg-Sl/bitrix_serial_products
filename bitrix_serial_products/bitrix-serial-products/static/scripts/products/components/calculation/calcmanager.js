@@ -114,6 +114,18 @@ export default class CalculationManager {
         return calculation.getFotId();
     }
 
+    getSelectedEconomyCalculationId() {
+        const calculationId = this.dataService.getSelectedCalculationId();
+        if (!calculationId) {
+            return;
+        }
+        const calculation = this.dataService.getCalculation(calculationId);
+        if (!calculation) {
+            return;
+        }
+        return calculation.getEconomyId();
+    }
+
     openCalculation(calculationId) {
         const calculation = this.dataService.getCalculation(calculationId);
         this.dataService.resetStateOfQuestions();

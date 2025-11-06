@@ -4,6 +4,7 @@ import MainPhotoManager from '../components/main_photo/mainphotomanager.js';
 import CanvasManager from '../components/canvas/canvasmanager.js';
 import FotAccessManager from '../../main/components/permissions/fot_access_manager.js';
 import { ID_FOT } from '../../configs/calc/fot.js';
+import { ID_ECONOMY } from '../../configs/calc/economy.js';
 import ProductItemService from '../services/productitem_service2.js';
 
 
@@ -337,6 +338,7 @@ export default class BaseApp {
             title: `${this.productNameRus} `,
             [this.productService.getFieldName('calculationId')]: this.calculation.getSelectedCalculationId(),
             [`parentId${ID_FOT}`]: this.calculation.getSelectedFotCalculationId(),
+            [`parentId${ID_ECONOMY}`]: this.calculation.getSelectedFotCalculationId(),
 
             // ...this.calculation.getChangedData(),
             ...this.productService.getChangedData(),
