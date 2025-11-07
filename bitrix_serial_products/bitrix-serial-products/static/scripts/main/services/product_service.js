@@ -1,9 +1,7 @@
 import { getProductConfig, getProductConfigById } from '../../configs/utils.js';
 
-// import Paginator from '../components/paginator.js';
-
 import { ID_MSP } from "../../configs/products/msp.js";
-import { ID_SOFA } from "../../configs/products/sofa.js";
+import { ID_SOFA, BP_RECALCULATE_SOFA_COMBINATION } from "../../configs/products/sofa.js";
 import { ID_BED } from "../../configs/products/bed.js";
 import { ID_ARMCHAIR } from "../../configs/products/armchair.js";
 import { ID_POUF } from "../../configs/products/pouf.js";
@@ -147,38 +145,6 @@ export default class ProductService {
         };
     }
 
-    // async getProducts(productType, page = 1) {
-    //     const { title, smartId, field } = getProductConfig(productType);
-    //     console.log({
-    //         productType,
-    //         title,
-    //         smartId,
-    //         field
-    //     });
-    //     try {
-    //         const cmd = {
-    //             products: `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[id]=DESC&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC&start=${(page - 1) * 50}`,
-    //         };
-
-    //         const response = await this.apiClient.callMethod('batch', {
-    //             halt: 0,
-    //             cmd: cmd
-    //         });
-    //         console.log('response', response);
-
-    //         if (!response || !response.result?.products?.items) {
-    //             throw new Error('Invalid response from batch call');
-    //         }
-
-    //         this.cbSavePagination(page, response?.result_total?.products || 0);
-
-    //         return response?.result?.products?.items || [];
-    //     } catch (error) {
-    //         console.error('Error in getProducts:', error);
-    //         throw error;
-    //     }
-    // }
-
     async getProductsFields() {
         const coefficientFotProductType = PRODUCT_TYPES_COEFFICIENTS_FOT[this.productTypeId];
         
@@ -262,5 +228,18 @@ export default class ProductService {
                 }
             );
         });
+    }
+
+    async runRecaculateCombinationBP(productTypeId, productId) {
+        if (productTypeId != ID_SOFA) {
+            return;
+        }
+
+        const result = await this.apiClient.runSmartProcessBP(
+            BP_RECALCULATE_SOFA_COMBINATION,
+            productTypeId,
+            productId
+        );
+        return result;
     }
 }

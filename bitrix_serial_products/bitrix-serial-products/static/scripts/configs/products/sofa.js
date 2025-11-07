@@ -1,4 +1,9 @@
 export const ID_SOFA = 158;
+export const BP_RECALCULATE_SOFA_COMBINATION = 2179;
+export const SHAPE_SOFA = {
+    module: 3713,
+}
+
 
 export const ITEM_ID_POTOCHKA = 4349;
 

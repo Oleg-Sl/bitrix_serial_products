@@ -1,7 +1,7 @@
 // import { DEAL_FIELDS } from '../config/dealFields';
 import { mapKeys, mapAliases, getFieldInBx24 } from '../../configs/mapping/key_mapping.js';
 import { FIELD_ECONOMY } from '../../configs/calc/economy.js';
-import { ID_SOFA, FIELD_SOFA } from '../../configs/products/sofa.js';
+import { ID_SOFA, SHAPE_SOFA } from '../../configs/products/sofa.js';
 import { CALC_FIELD_SOFA } from '../../configs/calc/sp_sofa.js';
 import { FOT_SUMMARY_COST } from '../../configs/calc/fot.js';
 import { FIELD_COEFFICIENTS_FOT, PRODUCT_TYPES_COEFFICIENTS_FOT } from '../../configs/calc/coefficientsfot.js';
@@ -90,6 +90,7 @@ export default class ProductsList {
                             </div>
                         </div>
                         ${this.getCountOfModulesHTML(product)}
+                        ${this.getButtonUpdateCalculationOfCombinationHTML(product)}
                         <div class="product-card-header-title text-truncate d-flex align-items-center">
                             <div class="text-truncate align-middle w-100 text-center" title="${product.title}">${product.title}</div>
                         </div>
@@ -342,6 +343,17 @@ export default class ProductsList {
             return `
                 <div class="product-card-header-count-of-modules" style="width: 50px;">
                     <input class="form-control form-control-sm" type="number" data-id="${product.id}" min="0" max="99" step="1">
+                </div>
+            `;
+        }
+        return '';
+    }
+
+    getButtonUpdateCalculationOfCombinationHTML(product) {
+        if (product.entityTypeId == ID_SOFA && product.shape != SHAPE_SOFA.module) {
+            return `
+                <div class="d-flex align-items-center">
+                    <button class="btn p-1 product-card-header-update" type="button" aria-expanded="false" title="Обновление расчета комбинаций">🔄</button>
                 </div>
             `;
         }
