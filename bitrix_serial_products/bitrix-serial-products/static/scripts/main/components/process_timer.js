@@ -1,46 +1,49 @@
 
-class ProcessTime {
-    constructor() {
-        this.initModal();
+export default class ProcessTime {
+    timeoutUpdateData = 1000;
 
-        this.timeoutUpdateMessage = 1000;
+    constructor() {
         this.modalProcessTimer = null;
         this.processTimer = null;
-        this.message = null;
+        this.title = null;
         this.timer = null;
+
+        this.initModal();
     }
 
-    process(message, timeSeconds = 5) {
-        this.displayMessage(message);
+    process(title, timeSeconds = 5) {
+        this.displayTitle(title);
         this.setTimer(timeSeconds);
     }
 
     async setTimer(timeSeconds) {
-        // const timerPromise = new Promise(function(resolve, reject) {
-        //       setTimeout(() => resolve("done"), timeSeconds);
-        // });
         this.displayTimer(`Осталось ${timeSeconds} секунд`);
-        const intervalPromise = new Promise(function(resolve, reject) {
-            const intervalMessage = setInterval(function() {
+        this.showModal();
+        const intervalPromise = new Promise((resolve, reject) => {
+            const intervalUpdateData = setInterval(() => {
                 timeSeconds -= 1;
                 this.displayTimer(`Осталось ${timeSeconds} секунд`);
                 if (timeSeconds <= 0) {
-                    clearInterval(intervalMessage);
+                    clearInterval(intervalUpdateData);
                     resolve();
                 }
-            }, this.timeoutUpdateMessage);
+            }, this.timeoutUpdateData);
         });
 
         await intervalPromise;
         this.hideModal();
     }
 
-    displayMessage(message) {
-        this.message.innerHTML = message;
+    displayTitle(title) {
+        this.title.innerHTML = title;
     }
 
-    displayTimer(timerMessage) {
-        this.timer.innerHTML = timerMessage;
+    displayTimer(timerTitle) {
+        this.timer.innerHTML = timerTitle;
+    }
+
+    showModal() {
+        this.modalProcessTimer.show();
     }
 
     hideModal() {
@@ -49,12 +52,13 @@ class ProcessTime {
 
     initModal() {
         const modalHTML = this.getModalHTML();
+
         document.body.insertAdjacentHTML('beforeend', modalHTML);
         this.processTimer = document.querySelector('#modalProcessTimer');
-        this.message = this.processTimer.querySelector('.message');
+        this.title = this.processTimer.querySelector('.title');
         this.timer = this.processTimer.querySelector('.timer');
-        this.modalProcessTimer = new bootstrap.Modal(processTimer, {});
-
+ 
+        this.modalProcessTimer = new bootstrap.Modal(this.processTimer, {});
     }
 
     getModalHTML() {
@@ -63,10 +67,9 @@ class ProcessTime {
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Заголовок модального окна</h1>
+                        <h1 class="title fs-5" id="staticBackdropLabel">Заголовок модального окна</h1>
                     </div>
                     <div class="modal-body">
-                        <div class="message"></div>
                         <div class="timer"></div>
                     </div>
                 </div>

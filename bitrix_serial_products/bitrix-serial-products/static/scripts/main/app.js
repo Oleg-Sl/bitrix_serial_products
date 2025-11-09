@@ -23,8 +23,6 @@ export default class App {
         this.productsFields = await this.productsService.getProductsFields();
         this.specificWeights = await this.productsService.getSpecificWeights();
 
-        // console.log('this.productsFields = ', this.productsFields);
-
         const filterButtonsContainer = document.querySelector(".product-buttons");
         const productsContainer = document.querySelector(".app-products-cards");
         
