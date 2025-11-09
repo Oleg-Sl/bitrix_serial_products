@@ -338,7 +338,7 @@ export default class BaseApp {
             title: `${this.productNameRus} `,
             [this.productService.getFieldName('calculationId')]: this.calculation.getSelectedCalculationId(),
             [`parentId${ID_FOT}`]: this.calculation.getSelectedFotCalculationId(),
-            [`parentId${ID_ECONOMY}`]: this.calculation.getSelectedFotCalculationId(),
+            [`parentId${ID_ECONOMY}`]: this.calculation.getSelectedEconomyCalculationId(),
 
             // ...this.calculation.getChangedData(),
             ...this.productService.getChangedData(),
