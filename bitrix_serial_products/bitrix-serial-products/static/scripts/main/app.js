@@ -5,6 +5,7 @@ import ProductAction from './components/product_action.js';
 import Paginator from './components/paginator.js';
 import PriceModules from './components/price_modules.js';
 import ModuleComparison from './components/modal_of_module_comparison.js';
+import ProcessTime from './components/process_timer.js';
 
 
 export default class App {
@@ -26,11 +27,12 @@ export default class App {
 
         const filterButtonsContainer = document.querySelector(".product-buttons");
         const productsContainer = document.querySelector(".app-products-cards");
-
+        
+        const processTimer = new ProcessTime();
         const packed = new PackedParameters(this.specificWeights);
         const productsList = new ProductsList(productsContainer, this.productsFields, this.currentUser, packed);
         const filter = new Filter(filterButtonsContainer, this.productsService, productsList);
-        const productAction = new ProductAction(this.apiClient, this.productsService);
+        const productAction = new ProductAction(this.apiClient, this.productsService, processTimer);
         const paginator = new Paginator(filter);
         const calcModulesPrices = new PriceModules(productsList);
         const moduleComparison = new ModuleComparison(productsList);

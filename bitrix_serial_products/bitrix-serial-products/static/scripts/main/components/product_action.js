@@ -1,8 +1,9 @@
 
 export default class ProductAction {
-    constructor(apiClient, productsService) {
+    constructor(apiClient, productsService, processTimer) {
         this.apiClient = apiClient;
         this.productsService = productsService;
+        this.processTimer = processTimer;
 
         this.addProductButtonsContainer = document.getElementById('addProductContainer');
         this.productCardsContainer = document.getElementById('productCardsContainer');
@@ -56,5 +57,11 @@ export default class ProductAction {
 
         const result = await this.productsService.runRecaculateCombinationBP(productTypeId, productId);
         console.log('Result of launching a business process: ', result);
+
+        this.processTimer.process(
+            'Идет запуск БП "Обновление расчета комбинаций"',
+            5
+        );
     }
+
 }
