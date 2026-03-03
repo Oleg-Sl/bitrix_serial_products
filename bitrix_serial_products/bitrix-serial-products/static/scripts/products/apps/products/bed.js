@@ -105,6 +105,8 @@ export default class BedApp extends BaseApp {
 
     getProductItemvariationTitle(fabric = null) {
         const collection = this.productService.getValueText('filterNameCollection') || '-';
+        const filterSize = this.productService.getValueText('filterSize') || '-';
+
         const smp = this.productService.getValue('smp');
         const mechanism = this.isMechanism() ? 'С механизмом' : 'Без механизма';
         const storageBox = this.isStorageBox() ? 'С ящиком' : 'Без ящика';
@@ -112,7 +114,7 @@ export default class BedApp extends BaseApp {
         const d = this.productService.getValue('commonDimensionsDepth') || '-';
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
         
-        let title = `${this.productNameRus} ${collection}. Общий габарит:  Ш*Г*В - ${w}*${d}*${h} мм. Под матрас - ${smp}. ${mechanism}. ${storageBox}.`;
+        let title = `${this.productNameRus} ${collection} ${filterSize}. Общий габарит:  Ш*Г*В - ${w}*${d}*${h} мм. Под матрас - ${smp}. ${mechanism}. ${storageBox}.`;
         // let title = `${this.productNameRus} ${collection} (индивидуальное изделие код №2). Общий габарит:  Ш*Г*В - ${w}*${d}*${h} мм. Под матрас - ${smp}. ${mechanism}. ${storageBox}.`;
         if (fabric) {
             title += ` Ткань: ${fabric}.`;

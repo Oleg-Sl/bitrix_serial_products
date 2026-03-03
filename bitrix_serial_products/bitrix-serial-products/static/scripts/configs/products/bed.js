@@ -63,6 +63,8 @@ export const FIELD_BED = {
     filterNameCollection: "ufCrm61_1732096195", // Фильтр - Название коллекии
     filterTitle: "ufCrm61_1732096195",          // Фильтр - Название
     filterTags: "ufCrm61_1730291004",           // Фильтр - ТЕГИ
+    filterSize: "ufCrm61_1772525977",               // Фильтр - размер тумбы (список)
+
 
     btnSave: "ufCrm61_1714990992",              // Кнопка "сохранить"
     btnRemove: "ufCrm61_1714991000",            // Кнопка "удалить"
