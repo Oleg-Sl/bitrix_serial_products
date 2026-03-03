@@ -79,6 +79,30 @@ export default class BedApp extends BaseApp {
         }
     }
 
+    getProperty547() {
+        const filterSize = this.productService.getValue('filterSize') || '-';
+        console.log('filterSize = ', filterSize);
+        if (filterSize == 6661) {
+            // XS
+            return 713;
+        } else if (filterSize == 6663) {
+            // S
+            return 473;
+        } else if (filterSize == 6665) {
+            // M
+            return 475;
+        } else if (filterSize == 6667) {
+            // L
+            return 477;
+        } else if (filterSize == 6669) {
+            // XL
+            return 715;
+        } else if (filterSize == 6671) {
+            // XXL
+            return 717;
+        }
+    }
+
     // - Ящик - данные берем из поля Ящик для хранения
     async callbackProductItem(action, productId = null, detailText = null) {
         let fields = {
@@ -89,6 +113,14 @@ export default class BedApp extends BaseApp {
         if (smp) {
             fields['property465'] = { value: smp };
         }
+        
+        const property547 = this.getProperty547();
+        console.log('property547 = ', property547);
+
+        if (property547) {
+            fields['property547'] = { value: property547 };
+        }
+
         // action = 0 - создание главного товара и вариаций
         // action = 1 - обновление вариаций
         if (action == 0) {
