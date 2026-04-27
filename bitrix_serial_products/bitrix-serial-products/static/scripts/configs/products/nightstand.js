@@ -83,6 +83,7 @@ export const FIELD_NIGHTSTAND = {
     filterSize: "ufCrm73_1735451104",               // Фильтр - размер тумбы (список)
     filterSizeDesc: "ufCrm73_1735450365",           // Фильтр - размер тумбы описание (скобки нужно учитывать)
     filterTopMaterial: "ufCrm73_1736099439",        // Фильтр - описание ТОПа
+    sortingProducts: "ufCrm73_1776837729",          // Сортировка (для Прайса и конфигуратора)
 
     freeTitle: "ufCrm73_1714011680",                    // 1-Свободное название изделия
     commonDimensionsWidth: "ufCrm73_1714011692",        // 1-Общие габариты (Ш.)

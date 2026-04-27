@@ -65,8 +65,9 @@ export default class ProductsList {
         }
     }
     // BX24.openPath('/crm/type/145/details/287/', r => console.log(r))
-
+    // sortingProducts
     getProductCardHTML(product, economy) {
+        const sortingProductsHTML = product?.sortingProducts ? `<div class="position-absolute bg-light text-dark border rounded p-1 m-1 opacity-75">${product.sortingProducts}</div>` : '';
         return `
             <div class="app-products-card-container" data-id="${product.id}" data-smart-type-id="${product.entityTypeId}">
                 <div class="col app-product-card">
@@ -97,7 +98,8 @@ export default class ProductsList {
                         <div class="d-flex align-items-center product-card-header-comdirok" style="font-size: 24px;">${this.getMarkerIsComDirOk(product.isComDirOk)}</div>
                         <div class="d-flex align-items-center product-card-header-measure">${this.getMarkerIsTechOk(product.isTechOk)}</div>
                     </div>
-                    <div class="product-card-body-img">
+                    <div class="product-card-body-img position-relative">
+                        ${sortingProductsHTML}
                         <div class="overlay d-none"></div>
                         <img src="${this.getPhotoUrl_(product.canvasScreenMain?.urlMachine, portalUrl)}" class="card-img-top" alt="...">
                     </div>

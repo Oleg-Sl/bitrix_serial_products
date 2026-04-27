@@ -45,7 +45,6 @@ export default class ProductService {
     }
 
     async getFilterProducts(productType, params, page = 1) {
-        // const { title, smartId, field, calcTypeId } = getProductConfig(productType);
         const { title, smartId, field, calcTypeId } = getProductConfigById(productType);
         
         console.log({
@@ -57,7 +56,11 @@ export default class ProductService {
             page
         });
         try {
-            let commandProducts = `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1&order[id]=DESC&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC&start=${(page - 1) * 50}`;
+            let commandProducts = `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1`;
+            if (field?.sortingProducts) {
+                commandProducts += `&order[${field.sortingProducts}]=ASC`;
+            }
+            commandProducts += `&order[id]=DESC&order[${field.isActive}]=DESC&order[${field.isMeasured}]=DESC&start=${(page - 1) * 50}`;
             for (const [key, value] of Object.entries(params)) {
                 commandProducts += `&filter[${field[key]}]=${value}`;
             }

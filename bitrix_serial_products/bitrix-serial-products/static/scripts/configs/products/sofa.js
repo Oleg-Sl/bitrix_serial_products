@@ -67,6 +67,8 @@ export const FIELD_SOFA = {
     filterMechanism: "ufCrm53_1732095781",      // Фильтр - Наличие механизма
     filterNameCollection: "ufCrm53_1732093381", // Фильтр - Название коллекии
     filterTags: "ufCrm53_1730290956",           // Фильтр - ТЕГИ
+    sortingProducts: "ufCrm53_1775387824",      // Сортировка (для Прайса и конфигуратора)
+
 
     createdBy: "ufCrm53_1715516212",
     updatedBy: "ufCrm53_1715516230",
