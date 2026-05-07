@@ -125,7 +125,6 @@ export default class TableApp extends BaseApp {
         const collection = this.productService.getValueText('filterNameCollection') || '-';
         const tableSize = this.productService.getValueText('filterSize') || '-';
 
-        const storageBox = this.isStorageBox() ? 'С ящиком' : 'Без ящика';
         const w = this.productService.getValue('commonDimensionsWidth') || '-';
         const d = this.productService.getValue('commonDimensionsDepth') || '-';
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
