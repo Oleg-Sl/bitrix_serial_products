@@ -81,6 +81,7 @@ export const FIELD_TABLE = {
     filterNameCollection: "ufCrm75_1733553570",     // Фильтр - Название коллекии
     filterTags: "ufCrm75_1730291077",               // Фильтр - ТЕГИ
     filterSize: "ufCrm75_1740889253",               // Фильтр - размер стола (список)
+    filterVariantTable: "ufCrm75_1778065765",       // Фильтр - Вариант стола
  
 
     // Столешница
@@ -95,6 +96,8 @@ export const FIELD_TABLE = {
     countertopFoldMechanism: "ufCrm75_1714014371",      // 1-Механизм раскладывания (столешница)
     decor: "ufCrm75_1714014433",                        // 1-Декор (описывается в ручную)
     description: "ufCrm75_1714014454",                  // 1-Доп. Описание и комментарии
+    materialTop: "ufCrm75_1778066604",                  // Материал ТОП
+    
 
     // Опоры
     commonDimensionsWidth_2: "ufCrm75_1714014505",      // 2-Общие габариты (Ш.)
