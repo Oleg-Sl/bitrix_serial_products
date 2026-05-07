@@ -16,6 +16,7 @@ export default class TableApp extends BaseApp {
         super(apiClient, productService, fabricService, userService, mechanismService, callbackService, fileUploadService, ID_TABLE, FIELD_TABLE, MAIN_PHOTO_RATIO);
 
         this.productNameRus = 'Стол';
+        this.isFabrics = false;
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
         this.viewMain = new TableView(productService, userService, callbackService, this.callbackProductItem.bind(this));
         this.checkData = new CheckTableData(productService, this.fabricManager, this.productNameRus);
