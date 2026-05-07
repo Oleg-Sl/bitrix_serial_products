@@ -17,7 +17,7 @@ export default class TableApp extends BaseApp {
 
         this.productNameRus = 'Стол';
         this.fabricManager = new FabricManager(fabricService, productService, this.displayFabric.bind(this));
-        this.viewMain = new TableView(productService, userService, callbackService);
+        this.viewMain = new TableView(productService, userService, callbackService, this.callbackProductItem.bind(this));
         this.checkData = new CheckTableData(productService, this.fabricManager, this.productNameRus);
         this.calculation = new CalculationManager(
             apiClient,
