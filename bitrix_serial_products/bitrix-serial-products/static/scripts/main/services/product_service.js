@@ -116,14 +116,13 @@ export default class ProductService {
         return economies;
     }
 
-    async getCalculationData(products) {
+    async getCalculationData(products, calcTypeId = CALC_ID_SOFA) {
         if (!products || products.length === 0) {
             return [];
         }
-
         let cmd = {};
         cmd['fots'] = `crm.item.list?entityTypeId=${ID_FOT}`;
-        cmd['calculations'] = `crm.item.list?entityTypeId=${CALC_ID_SOFA}`;
+        cmd['calculations'] = `crm.item.list?entityTypeId=${calcTypeId}`;
         cmd['economies'] = `crm.item.list?entityTypeId=${ID_ECONOMY}`;
 
         for (const product of products) {

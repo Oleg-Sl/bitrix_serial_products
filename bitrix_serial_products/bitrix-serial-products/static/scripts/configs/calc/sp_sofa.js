@@ -240,6 +240,4 @@ export const CALC_FIELD_SOFA = {
         amount: 'ufCrm51_1713689643',
         comments: 'ufCrm51_1713689657',
     }
-
-
 };

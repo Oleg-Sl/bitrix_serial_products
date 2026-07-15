@@ -56,23 +56,122 @@ export function getProductConfig(productType) {
 export function getProductConfigById(productTypeId) {
     switch (parseInt(productTypeId)) {
         case ID_ARMCHAIR:
-            return { title: 'Кресло', smartId: ID_ARMCHAIR, field: FIELD_ARMCHAIR, calcTypeId: CALC_ID_ARMCHAIR, calcFieldAlias: CALC_FIELD_ARMCHAIR, potochkaId: ITEM_ID_POTOCHKA_ARMCHAIR, fieldIsPotochka: FIELD_ARMCHAIR.isPotochka, fieldIsTemplatePotochka: FIELD_ARMCHAIR.isTemplatePotochka };
+            return {
+                title: 'Кресло',
+                smartId: ID_ARMCHAIR,
+                field: FIELD_ARMCHAIR,
+                calcTypeId: CALC_ID_ARMCHAIR,
+                calcFieldAlias: CALC_FIELD_ARMCHAIR,
+                potochkaId: ITEM_ID_POTOCHKA_ARMCHAIR,
+                fieldIsPotochka: FIELD_ARMCHAIR.isPotochka,
+                fieldIsTemplatePotochka: FIELD_ARMCHAIR.isTemplatePotochka,
+                fieldCalcTotalMaterials: CALC_FIELD_ARMCHAIR.totalMaterials,
+                fieldCalcSummaryCost: CALC_FIELD_ARMCHAIR.total
+                
+            };
         case ID_BED:
-            return { title: 'Кровать', smartId: ID_BED, field: FIELD_BED, calcTypeId: CALC_ID_BED, calcFieldAlias: CALC_FIELD_BED, potochkaId: ITEM_ID_POTOCHKA_BED, fieldIsPotochka: FIELD_BED.isPotochka, fieldIsTemplatePotochka: FIELD_BED.isTemplatePotochka };
+            return {
+                title: 'Кровать',
+                smartId: ID_BED,
+                field: FIELD_BED,
+                calcTypeId: CALC_ID_BED,
+                calcFieldAlias: CALC_FIELD_BED,
+                potochkaId: ITEM_ID_POTOCHKA_BED,
+                fieldIsPotochka: FIELD_BED.isPotochka,
+                fieldIsTemplatePotochka: FIELD_BED.isTemplatePotochka,
+                fieldCalcTotalMaterials: CALC_FIELD_BED.totalMaterials,
+                fieldCalcSummaryCost: CALC_FIELD_BED.total
+            };
         case ID_CHAIR:
-            return { title: 'Стул', smartId: ID_CHAIR, field: FIELD_CHAIR, calcTypeId: CALC_ID_CHAIR, calcFieldAlias: CALC_FIELD_CHAIR, potochkaId: ITEM_ID_POTOCHKA_CHAIR, fieldIsPotochka: FIELD_CHAIR.isPotochka, fieldIsTemplatePotochka: FIELD_CHAIR.isTemplatePotochka };
+            return {
+                title: 'Стул',
+                smartId: ID_CHAIR,
+                field: FIELD_CHAIR,
+                calcTypeId: CALC_ID_CHAIR,
+                calcFieldAlias: CALC_FIELD_CHAIR,
+                potochkaId: ITEM_ID_POTOCHKA_CHAIR,
+                fieldIsPotochka: FIELD_CHAIR.isPotochka,
+                fieldIsTemplatePotochka: FIELD_CHAIR.isTemplatePotochka,
+                fieldCalcTotalMaterials: CALC_FIELD_CHAIR.totalMaterials,
+                fieldCalcSummaryCost: CALC_FIELD_CHAIR.total
+            };
         case ID_MELOCHEVKA:
-            return { title: 'Мелочевка', smartId: ID_MELOCHEVKA, field: FIELD_MELOCHEVKA, calcTypeId: CALC_ID_MELOCHEVKA, calcFieldAlias: CALC_FIELD_MELOCHEVKA, potochkaId: ITEM_ID_POTOCHKA_MELOCHEVKA, fieldIsPotochka: FIELD_MELOCHEVKA.isPotochka, fieldIsTemplatePotochka: FIELD_MELOCHEVKA.isTemplatePotochka };
+            return {
+                title: 'Мелочевка',
+                smartId: ID_MELOCHEVKA,
+                field: FIELD_MELOCHEVKA,
+                calcTypeId: CALC_ID_MELOCHEVKA,
+                calcFieldAlias: CALC_FIELD_MELOCHEVKA,
+                potochkaId: ITEM_ID_POTOCHKA_MELOCHEVKA,
+                fieldIsPotochka: FIELD_MELOCHEVKA.isPotochka,
+                fieldIsTemplatePotochka: FIELD_MELOCHEVKA.isTemplatePotochka,
+                fieldCalcTotalMaterials: CALC_FIELD_CHAIR.totalMaterials,
+                fieldCalcSummaryCost: CALC_FIELD_CHAIR.total
+            };
         case ID_MSP:
-            return { title: 'МСП', smartId: ID_MSP, field: FIELD_MSP, calcTypeId: CALC_ID_MSP, calcFieldAlias: CALC_FIELD_MSP, potochkaId: ITEM_ID_POTOCHKA_MSP, fieldIsPotochka: FIELD_MSP.isPotochka, fieldIsTemplatePotochka: FIELD_MSP.isTemplatePotochka };
+            return {
+                title: 'МСП',
+                smartId: ID_MSP,
+                field: FIELD_MSP,
+                calcTypeId: CALC_ID_MSP,
+                calcFieldAlias: CALC_FIELD_MSP,
+                potochkaId: ITEM_ID_POTOCHKA_MSP,
+                fieldIsPotochka: FIELD_MSP.isPotochka,
+                fieldIsTemplatePotochka: FIELD_MSP.isTemplatePotochka,
+                fieldCalcTotalMaterials: CALC_FIELD_CHAIR.totalMaterials,
+                fieldCalcSummaryCost: CALC_FIELD_CHAIR.total
+            };
         case ID_NIGHTSTAND:
-            return { title: 'Тумбочка', smartId: ID_NIGHTSTAND, field: FIELD_NIGHTSTAND, calcTypeId: CALC_ID_NIGHTSTAND, calcFieldAlias: CALC_FIELD_NIGHTSTAND, potochkaId: ITEM_ID_POTOCHKA_NIGHTSTAND, fieldIsPotochka: FIELD_NIGHTSTAND.isPotochka, fieldIsTemplatePotochka: FIELD_NIGHTSTAND.isTemplatePotochka };
+            return {
+                title: 'Тумбочка',
+                smartId: ID_NIGHTSTAND,
+                field: FIELD_NIGHTSTAND,
+                calcTypeId: CALC_ID_NIGHTSTAND,
+                calcFieldAlias: CALC_FIELD_NIGHTSTAND,
+                potochkaId: ITEM_ID_POTOCHKA_NIGHTSTAND,
+                fieldIsPotochka: FIELD_NIGHTSTAND.isPotochka,
+                fieldIsTemplatePotochka: FIELD_NIGHTSTAND.isTemplatePotochka,
+                fieldCalcTotalMaterials: CALC_FIELD_NIGHTSTAND.totalMaterials,
+                fieldCalcSummaryCost: CALC_FIELD_NIGHTSTAND.total
+            };
         case ID_POUF:
-            return { title: 'Пуф-банкетка', smartId: ID_POUF, field: FIELD_POUF, calcTypeId: CALC_ID_POUF, calcFieldAlias: CALC_FIELD_POUF, potochkaId: ITEM_ID_POTOCHKA_POUF, fieldIsPotochka: FIELD_POUF.isPotochka, fieldIsTemplatePotochka: FIELD_POUF.isTemplatePotochka };
+            return {
+                title: 'Пуф-банкетка', smartId: ID_POUF,
+                field: FIELD_POUF,
+                calcTypeId: CALC_ID_POUF,
+                calcFieldAlias: CALC_FIELD_POUF,
+                potochkaId: ITEM_ID_POTOCHKA_POUF,
+                fieldIsPotochka: FIELD_POUF.isPotochka,
+                fieldIsTemplatePotochka: FIELD_POUF.isTemplatePotochka,
+                fieldCalcTotalMaterials: CALC_FIELD_POUF.totalMaterials,
+                fieldCalcSummaryCost: CALC_FIELD_POUF.total
+            };
         case ID_SOFA:
-            return { title: 'Диван', smartId: ID_SOFA, field: FIELD_SOFA, calcTypeId: CALC_ID_SOFA, calcFieldAlias: CALC_FIELD_SOFA, potochkaId: ITEM_ID_POTOCHKA_SOFA, fieldIsPotochka: FIELD_SOFA.isPotochka, fieldIsTemplatePotochka: FIELD_SOFA.isTemplatePotochka };
+            return {
+                title: 'Диван',
+                smartId: ID_SOFA,
+                field: FIELD_SOFA,
+                calcTypeId: CALC_ID_SOFA,
+                calcFieldAlias: CALC_FIELD_SOFA,
+                potochkaId: ITEM_ID_POTOCHKA_SOFA,
+                fieldIsPotochka: FIELD_SOFA.isPotochka,
+                fieldIsTemplatePotochka: FIELD_SOFA.isTemplatePotochka,
+                fieldCalcTotalMaterials: CALC_FIELD_SOFA.totalMaterials,
+                fieldCalcSummaryCost: CALC_FIELD_SOFA.total
+            };
         case ID_TABLE:
-            return { title: 'Стол', smartId: ID_TABLE, field: FIELD_TABLE, calcTypeId: CALC_ID_TABLE, calcFieldAlias: CALC_FIELD_TABLE, potochkaId: ITEM_ID_POTOCHKA_TABLE, fieldIsPotochka: FIELD_TABLE.isPotochka, fieldIsTemplatePotochka: FIELD_TABLE.isTemplatePotochka };
+            return {
+                title: 'Стол',
+                smartId: ID_TABLE,
+                field: FIELD_TABLE,
+                calcTypeId: CALC_ID_TABLE,
+                calcFieldAlias: CALC_FIELD_TABLE,
+                potochkaId: ITEM_ID_POTOCHKA_TABLE,
+                fieldIsPotochka: FIELD_TABLE.isPotochka,
+                fieldIsTemplatePotochka: FIELD_TABLE.isTemplatePotochka,
+                fieldCalcTotalMaterials: CALC_FIELD_TABLE.totalMaterials,
+                fieldCalcSummaryCost: CALC_FIELD_TABLE.total
+            };
         default:
             return {};
     }

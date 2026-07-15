@@ -43,7 +43,7 @@ export default class ProductsList {
         `;
     }
 
-    displayProducts(products, economies, calculations, fots, coefficientsfot) {
+    displayProducts(products, economies, calculations, fots, coefficientsfot, fieldCalcTotalMaterials, fieldCalcSummaryCost) {
         this.products = products;
         this.economies = economies;
         this.calculations = calculations;
@@ -56,17 +56,28 @@ export default class ProductsList {
             products.forEach(product => {
                 // const economy = economies[product.id];
                 const economy = economies.find(item => item[`parentId${product.entityTypeId}`] == product.id);
+                // console.log('>>> ', product.entityTypeId, product.id);
                 const calculation = calculations.find(item => item[`parentId${product.entityTypeId}`] == product.id);
                 const fot = fots.find(item => item[`parentId${product.entityTypeId}`] == product.id);
 
-                contentHTML += this.getProductCardHTML(mapKeys(product), economy);
+                contentHTML += this.getProductCardHTML(
+                    mapKeys(product),
+                    economy,
+                    calculation,
+                    fot,
+                    calculation?.[fieldCalcTotalMaterials],
+                    calculation?.[fieldCalcSummaryCost],
+                    fot?.ufCrm93_1750821799
+                );
             });
             this.productsContainer.innerHTML = contentHTML;
         }
     }
-    // BX24.openPath('/crm/type/145/details/287/', r => console.log(r))
-    // sortingProducts
-    getProductCardHTML(product, economy) {
+
+    getProductCardHTML(product, economy, calculation, fot, totalMaterials, summaryCost, totalFot) {
+        totalMaterials = totalMaterials ? +totalMaterials : 0;
+        summaryCost = summaryCost ? +summaryCost : 0;
+        totalFot = totalFot ? +totalFot : 0;
         const sortingProductsHTML = product?.sortingProducts ? `<div class="position-absolute bg-light text-dark border rounded p-1 m-1 opacity-75">${product.sortingProducts}</div>` : '';
         return `
             <div class="app-products-card-container" data-id="${product.id}" data-smart-type-id="${product.entityTypeId}">
@@ -110,44 +121,69 @@ export default class ProductsList {
                         <div class="d-flex align-items-center">
                             <small class="mx-1 text-secondary" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" data-bs-auto-close="outside"  aria-expanded="false" class="text-body-secondary">info</small>
                             <div class="dropdown-menu p-0 dropdown-fabric-menu" id="fabric-info-1">
-                                <div class="dropdown-header bg-secondary-subtle text-center dropdown-fabric-menu-header">Связанные СП</div>
-                                <div class="dropdown-fabric-menu-content">
-                                    <table class="table table-bordered table-sm mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <td>Карточка:</td>
-                                                <td class="text-end path-to-smart-process" data-path="/crm/type/${product.entityTypeId}/details/${product.id}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.id}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Расчет:</td>
-                                                <td class="text-end path-to-smart-process" data-path="/crm/type/${product.calcTypeId}/details/${product.calculationId}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.calculationId}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>ФОТ:</td>
-                                                <td class="text-end path-to-smart-process" data-path="/crm/type/1048/details/${product.parentId1048}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.parentId1048}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Экономика:</td>
-                                                <td class="text-end path-to-smart-process" data-path="/crm/type/1074/details/${product.parentId1074}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.parentId1074 || "-"}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="w-100">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" class="text-center" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">ID головного товара</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-start" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">
-                                                    <a class="" data-path="/crm/catalog/24/product/${product?.productMainId || '-'}/" target="_blank" href="https://99frank.bitrix24.ru/crm/catalog/24/product/${product?.productMainId || '-'}/">
-                                                        ${product?.productMainId || '-'}
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="d-flex">
+                                    <div class="border-end border-dark-subtle">
+                                        <div class="dropdown-header bg-secondary-subtle text-center dropdown-fabric-menu-header">Связанные СП</div>
+                                        <div class="dropdown-fabric-menu-content">
+                                            <table class="table table-bordered table-sm mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Карточка:</td>
+                                                        <td class="text-end path-to-smart-process" data-path="/crm/type/${product.entityTypeId}/details/${product.id}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.id}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Расчет:</td>
+                                                        <td class="text-end path-to-smart-process" data-path="/crm/type/${product.calcTypeId}/details/${product.calculationId}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.calculationId}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ФОТ:</td>
+                                                        <td class="text-end path-to-smart-process" data-path="/crm/type/1048/details/${product.parentId1048}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.parentId1048}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Экономика:</td>
+                                                        <td class="text-end path-to-smart-process" data-path="/crm/type/1074/details/${product.parentId1074}/" style="cursor: pointer; text-decoration: underline; color: blue;">${product.parentId1074 || "-"}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="w-100">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" class="text-center" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">ID головного товара</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-start" style="border: 1px solid #e3e3e3; padding: 4px; font-size: 14px;">
+                                                            <a class="" data-path="/crm/catalog/24/product/${product?.productMainId || '-'}/" target="_blank" href="https://99frank.bitrix24.ru/crm/catalog/24/product/${product?.productMainId || '-'}/">
+                                                                ${product?.productMainId || '-'}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-header bg-secondary-subtle text-center dropdown-fabric-menu-header">ЭКОНОМИКА</div>
+                                        <div class="dropdown-fabric-menu-content">
+                                            <table class="table table-bordered table-sm mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Материалы:</td>
+                                                        <td class="text-end">${totalMaterials.toLocaleString('ru-RU')}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ФОТ:</td>
+                                                        <td class="text-end">${totalFot.toLocaleString('ru-RU')}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ИТОГО:</td>
+                                                        <td class="text-end">${summaryCost.toLocaleString('ru-RU')}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

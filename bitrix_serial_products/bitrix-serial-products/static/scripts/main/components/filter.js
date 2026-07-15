@@ -1,4 +1,4 @@
-import { getFilterFields } from "../../configs/utils.js";
+import { getFilterFields, getProductConfigById } from "../../configs/utils.js";
 
 export default class Filter {
     constructor(filterButtonsContainer, productsService, productsList, filterFields = []) {
@@ -20,6 +20,8 @@ export default class Filter {
         let fots = [];
         let calculations = [];
         let coefficientsfot = [];
+        let productInfo = {};
+        
         try {
             const params = this.getFilterParams();
             // if (this.inputFilter.value.length >= 3) {
@@ -28,7 +30,10 @@ export default class Filter {
             this.productsList.displaySpinner();
             products = await this.productsService.getFilterProducts(this.productType, params, page);
             // economies = await this.productsService.getDataEconomies(products);
-            let calculationData = await this.productsService.getCalculationData(products);
+            productInfo = getProductConfigById(this.productType);
+            const calcTypeId = productInfo?.calcTypeId;
+            let calculationData = await this.productsService.getCalculationData(products, calcTypeId);
+
             fots = calculationData.fots;
             calculations = calculationData.calculations;
             economies = calculationData.economies;
@@ -37,7 +42,15 @@ export default class Filter {
             alert(`Ошибка получения списка продуктов: ${error.message}`);
         }
 
-        this.productsList.displayProducts(products, economies, calculations, fots, coefficientsfot);
+        this.productsList.displayProducts(
+            products,
+            economies,
+            calculations,
+            fots,
+            coefficientsfot,
+            productInfo?.fieldCalcTotalMaterials,
+            productInfo?.fieldCalcSummaryCost
+        );
         if (BX24) {
             BX24.fitWindow();
             // const frameSize = BX24.getScrollSize();
