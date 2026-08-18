@@ -54,9 +54,7 @@ export default class ProductsList {
         let contentHTML = "";
         if (products.length !== 0) {
             products.forEach(product => {
-                // const economy = economies[product.id];
                 const economy = economies.find(item => item[`parentId${product.entityTypeId}`] == product.id);
-                // console.log('>>> ', product.entityTypeId, product.id);
                 const calculation = calculations.find(item => item[`parentId${product.entityTypeId}`] == product.id);
                 const fot = fots.find(item => item[`parentId${product.entityTypeId}`] == product.id);
 
@@ -78,6 +76,7 @@ export default class ProductsList {
         totalMaterials = totalMaterials ? +totalMaterials : 0;
         summaryCost = summaryCost ? +summaryCost : 0;
         totalFot = totalFot ? +totalFot : 0;
+        console.log('product = ', product)
         const sortingProductsHTML = product?.sortingProducts ? `<div class="position-absolute bg-light text-dark border rounded p-1 m-1 opacity-75">${product.sortingProducts}</div>` : '';
         return `
             <div class="app-products-card-container" data-id="${product.id}" data-smart-type-id="${product.entityTypeId}">

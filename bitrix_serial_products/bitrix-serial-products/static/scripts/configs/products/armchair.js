@@ -25,6 +25,7 @@ export const FIELD_ARMCHAIR = {
 
     isTemplatePotochka: "ufCrm57_1716716686",   // Шаблон поточки
     filter: "ufCrm57_1730290983",               // Для фильтра в Поточке
+    sortingProducts: "ufCrm57_1787022899",              // Сортировка (для Прайса)
 
     sketch: "ufCrm57_1718035870",               // Эскиз
     sentToWorkshop: "ufCrm57_1718036536",       // Отправлено в цех

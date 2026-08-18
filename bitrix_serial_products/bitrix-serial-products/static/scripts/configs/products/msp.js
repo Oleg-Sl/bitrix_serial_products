@@ -29,6 +29,7 @@ export const FIELD_MSP = {
 
     isTemplatePotochka: "ufCrm23_1728261870",   // Шаблон поточки
     filter: "ufCrm23_1730290916",               // Для фильтра в Поточке
+    // sortingProducts: "",              // Сортировка (для Прайса)
 
     sketch: "ufCrm23_1718035789",               // Эскиз
     sentToWorkshop: "ufCrm23_1718036578",       // Отправлено в цех

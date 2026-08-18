@@ -25,6 +25,7 @@ export const FIELD_NIGHTSTAND = {
 
     isTemplatePotochka: "ufCrm73_1719638118",   // Шаблон поточки
     filter: "ufCrm73_1730291022",               // Для фильтра в Поточке
+    sortingProducts: "ufCrm73_1776837729",              // Сортировка (для Прайса)
 
     sketch: "ufCrm73_1718035964",               // Эскиз
     sentToWorkshop: "ufCrm73_1718036494",       // Отправлено в цех

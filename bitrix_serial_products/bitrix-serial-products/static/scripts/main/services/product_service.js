@@ -110,7 +110,6 @@ export default class ProductService {
         const economies = {};
         for (const [productId, economyData] of Object.entries(response.result)) {
             economies[productId] = economyData?.items?.[0];
-            // economies.push(economyData?.items?.[0]);
         }
 
         return economies;

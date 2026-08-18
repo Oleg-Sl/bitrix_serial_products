@@ -28,6 +28,7 @@ export const FIELD_MELOCHEVKA = {
 
     isTemplatePotochka: "ufCrm63_1728261830",   // Шаблон поточки
     filter: "ufCrm63_1730291045",               // Для фильтра в Поточке
+    // sortingProducts: "",              // Сортировка (для Прайса)
 
     sketch: "ufCrm63_1718036033",               // Эскиз
     sentToWorkshop: "ufCrm63_1718036470",       // Отправлено в цех

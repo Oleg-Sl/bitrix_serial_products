@@ -25,6 +25,7 @@ export const FIELD_TABLE = {
 
     isTemplatePotochka: "ufCrm75_1716718253",   // Шаблон поточки
     filter: "ufCrm75_1730291077",               // Для фильтра в Поточке
+    sortingProducts: "ufCrm75_1778478861",              // Сортировка (для Прайса)
 
     sketch: "ufCrm75_1718036109",               // Эскиз
     sentToWorkshop: "ufCrm75_1718036424",       // Отправлено в цех

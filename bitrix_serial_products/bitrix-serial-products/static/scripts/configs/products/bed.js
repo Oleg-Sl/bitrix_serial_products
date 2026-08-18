@@ -26,6 +26,7 @@ export const FIELD_BED = {
 
     isTemplatePotochka: "ufCrm61_1728261687",   // Шаблон поточки
     filter: "ufCrm61_1730291004",               // Для фильтра в Поточке
+    sortingProducts: "ufCrm61_1787022930",              // Сортировка (для Прайса)
 
     sketch: "ufCrm61_1718035927",               // Эскиз
     sentToWorkshop: "ufCrm61_1718036516",       // Отправлено в цех
