@@ -265,6 +265,7 @@ export default class ModalView {
                                             <th>Total себес</th>
                                             <th>Наценка</th>
                                             <th>ИТОГО РЦ</th>
+                                            <th>Маржа</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-economy-list-body"></tbody>
