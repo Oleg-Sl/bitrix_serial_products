@@ -256,7 +256,7 @@ export default class ModalView {
                                         </tr>
                                     </thead>
                                 </table>
-                                <table id="tableEconomy" class="economy collapsed" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;">
+                                <table id="tableEconomy" class="economy collapsed" style="grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; ">
                                     <thead>
                                         <tr>
                                             <th>Категория</th>
