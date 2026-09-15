@@ -38,7 +38,7 @@ export default class Calculation {
 
         this.murkupWorkshop = +this.coefficientsService.getMurkupWorkshop();
 
-        this.fabricCoefficient = this.coefficientsService.getCoefficientData() || 1;
+        this.fabricCoefficient = this.coefficientsService.getCoefficientData('fabricCoefficient') || 1;
         if (this.fabricCoefficient) {
             this.fabricCoefficient = +this.fabricCoefficient
         }
