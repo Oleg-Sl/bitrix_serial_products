@@ -195,6 +195,9 @@ export default class Calculation {
         const economyRawData = this.economyService.getByParentId(this.calculationRawData.id);
         this.smartEconomyId = economyRawData?.id;
         for (const economyAlias of this.economyService.getFabricAliases()) {
+            console.log('economyAlias = ', economyAlias);
+            console.log('fabricRunningMeters = ', fabricRunningMeters);
+            console.log('fabricCoefficient = ', this.fabricCoefficient);
             const fabricSummary = this.economyService.getFabricPrice(economyAlias) * fabricRunningMeters * this.fabricCoefficient;
 
             let economy = {
