@@ -195,7 +195,8 @@ export default class Calculation {
         const economyRawData = this.economyService.getByParentId(this.calculationRawData.id);
         this.smartEconomyId = economyRawData?.id;
         for (const economyAlias of this.economyService.getFabricAliases()) {
-            const fabricSummary = this.economyService.getFabricPrice(economyAlias) * fabricRunningMeters;
+            const fabricSummary = this.economyService.getFabricPrice(economyAlias) * fabricRunningMeters * this.fabricCoefficient;
+
             let economy = {
                 code: economyAlias,
                 categoryId: this.economyService.getCategoryId(economyAlias),
@@ -507,7 +508,7 @@ export default class Calculation {
     calculateEconomies() {
         const fabricRunningMeters = this.getFabricRunningMeters();
         this.economies.map((economy) => {
-            economy.fabricSummary = this.economyService.getFabricPrice(economy.code) * fabricRunningMeters;
+            economy.fabricSummary = this.economyService.getFabricPrice(economy.code) * fabricRunningMeters * this.fabricCoefficient;
             economy.totalCost = this.totalPrice + economy.fabricSummary;
             // economy.price = Math.ceil((economy.totalCost * economy.margin) / 1000) * 1000;
             economy.margin = Math.ceil(1000 * economy.price / economy.totalCost) / 1000;
