@@ -62,10 +62,11 @@ export default class ModalEconomyView {
         // const colorCellChecksum = this.getColorOfValidatingCalcualation(economy.checksum, economy.basicSalary);
         // const descCellChecksum = this.getDescOfValidatingCalcualation(economy.checksum, economy.basicSalary);
         const marginValue = parseInt(economy.price || 0) - parseInt(economy.totalCost || 0);
+        const fabricPrice = parseInt(economy.fabricPrice) * economy.fabricCoefficient;
         return `
             <tr data-code="${economy.code}">
                 <td><input type="text" class="border-0 economy-fabric-category text-start" value="${economy.fabricCategory || '-'}" data-field="fabricCategory" disabled></td>
-                <td class="text-end px-1">${this.convertNumberWithSpaces(economy.fabricPrice)}</td>
+                <td class="text-end px-1">${this.convertNumberWithSpaces(fabricPrice)}</td>
                 <td class="text-end px-1">${this.convertNumberWithSpaces(economy.fabricSummary)}</td>
                 <td class="text-end px-1">${this.convertNumberWithSpaces(economy.totalCost)}</td>
                 <td><input type="number" class="border-0 economy-margin" min="0" step="0.01" value="${economy.margin || 0}" data-field="margin"></td>

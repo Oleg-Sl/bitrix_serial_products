@@ -37,7 +37,12 @@ export default class Calculation {
         this.isNewCalculation = isNewCalculation;
 
         this.murkupWorkshop = +this.coefficientsService.getMurkupWorkshop();
-        
+
+        this.fabricCoefficient = this.coefficientsService.getCoefficientData() || 1;
+        if (this.fabricCoefficient) {
+            this.fabricCoefficient = +this.fabricCoefficient
+        }
+
         this.summaryMaterials = 0
         this.summaryFot = 0;
         this.costManagement = 0;

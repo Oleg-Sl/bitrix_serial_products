@@ -7,9 +7,13 @@ export default class CoefficientsService {
         // console.log("this.coefficients = ", this.coefficients);
     }
 
-    // getCoefficientById(id) {
-    //     return this.coefficients.find(coefficient => coefficient.id === id);
-    // }
+    getCoefficientData(key) {
+        const fieldInBx24 = FIELD_COEFFICIENTS?.[key];
+        if (fieldInBx24) {
+            const coefficient = this.coefficients?.[fieldInBx24] || 1;
+            return coefficient;
+        }
+    }
 
     getCoefficientByKey(key) {
         const fieldInBx24 = FIELD_COEFFICIENTS?.[key]?.fieldId;
