@@ -146,7 +146,10 @@ export default class BedApp extends BaseApp {
         const d = this.productService.getValue('commonDimensionsDepth') || '-';
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
         
-        let title = `${this.productNameRus} ${collection} ${filterSize}. Общий габарит:  Ш*Г*В - ${w}*${d}*${h} мм. Под матрас - ${smp}. ${mechanism}. ${storageBox}.`;
+        // let title = `${this.productNameRus} ${collection} ${filterSize}. Общий габарит:  Ш*Г*В - ${w}*${d}*${h} мм. Под матрас - ${smp}. ${mechanism}. ${storageBox}.`;
+        let title = `${this.productNameRus} ${collection}`;
+        title += ` ${filterSize}`;
+        title += `. Общий габарит:  Ш*Г*В - ${w}*${d}*${h} мм. Под матрас - ${smp}. ${mechanism}. ${storageBox}.`;
         // let title = `${this.productNameRus} ${collection} (индивидуальное изделие код №2). Общий габарит:  Ш*Г*В - ${w}*${d}*${h} мм. Под матрас - ${smp}. ${mechanism}. ${storageBox}.`;
         if (fabric) {
             title += ` Ткань: ${fabric}.`;
