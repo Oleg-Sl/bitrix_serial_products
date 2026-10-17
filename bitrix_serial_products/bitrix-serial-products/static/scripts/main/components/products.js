@@ -54,7 +54,10 @@ export default class ProductsList {
         let contentHTML = "";
         if (products.length !== 0) {
             products.forEach(product => {
+                console.log('product = ', product);
                 const economy = economies.find(item => item[`parentId${product.entityTypeId}`] == product.id);
+                console.log('product.entityTypeId = ', product.entityTypeId, ', product.id = ', product.id);
+                console.log('economy = ', economy);
                 const calculation = calculations.find(item => item[`parentId${product.entityTypeId}`] == product.id);
                 const fot = fots.find(item => item[`parentId${product.entityTypeId}`] == product.id);
 
