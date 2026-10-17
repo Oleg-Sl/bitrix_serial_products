@@ -57,6 +57,8 @@ export default class ProductService {
         });
         try {
             let commandProducts = `crm.item.list?entityTypeId=${smartId}&filter[${field.isTemplatePotochka}]=1`;
+            console.log('field = ', field);
+            console.log('field?.sortingProducts = ', field?.sortingProducts);
             if (field?.sortingProducts) {
                 commandProducts += `&order[${field.sortingProducts}]=ASC`;
             }

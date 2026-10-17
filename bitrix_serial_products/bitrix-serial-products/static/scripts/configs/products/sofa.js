@@ -30,7 +30,7 @@ export const FIELD_SOFA = {
 
     isTemplatePotochka: "ufCrm53_1716735926",   // Шаблон поточки
     filter: "ufCrm53_1730290956",               // Для фильтра в Поточке
-    sortingProducts: "ufCrm53_1775387824",              // Сортировка (для Прайса)
+    // sortingProducts: "ufCrm53_1775387824",              // Сортировка (для Прайса)
 
     
 
