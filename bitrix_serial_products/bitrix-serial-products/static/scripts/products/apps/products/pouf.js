@@ -61,12 +61,18 @@ export default class PoufApp extends BaseApp {
 
     getProductItemvariationTitle(fabric = null) {
         const collection = this.productService.getValueText('filterNameCollection') || '-';
+        const filterSize = this.productService.getValueText('filterSize');
         const storageBox = this.isStorageBox() ? 'С ящиком' : 'Без ящика';
+
         const w = this.productService.getValue('commonDimensionsWidth') || '-';
         const d = this.productService.getValue('commonDimensionsDepth') || '-';
         const h = this.productService.getValue('commonDimensionsHeight') || '-';
         
-        let title = `${this.productNameRus} ${collection}. Общий габарит: ${w}*${d}*${h} мм. ${storageBox}.`;
+        let title = `${this.productNameRus} ${collection}`;
+        if (filterSize) {
+            title += ` ${filterSize}`;
+        }
+        title += `. Общий габарит: ${w}*${d}*${h} мм. ${storageBox}.`;
         // let title = `${this.productNameRus} ${collection} тест (индивидуальное изделие код №2). Общий габарит: ${w}*${d}*${h} мм. ${storageBox}.`;
         if (fabric) {
             title += ` Ткань: ${fabric}.`;
