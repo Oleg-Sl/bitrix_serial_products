@@ -81,6 +81,7 @@ export default class ProductsList {
         totalFot = totalFot ? +totalFot : 0;
         console.log('product = ', product)
         const sortingProductsHTML = product?.sortingProducts ? `<div class="position-absolute bg-light text-dark border rounded p-1 m-1 opacity-75">${product.sortingProducts}</div>` : '';
+        // ${this.getButtonUpdateCalculationOfCombinationHTML(product)}
         return `
             <div class="app-products-card-container" data-id="${product.id}" data-smart-type-id="${product.entityTypeId}">
                 <div class="col app-product-card">
@@ -104,7 +105,6 @@ export default class ProductsList {
                             </div>
                         </div>
                         ${this.getCountOfModulesHTML(product)}
-                        ${this.getButtonUpdateCalculationOfCombinationHTML(product)}
                         <div class="product-card-header-title text-truncate d-flex align-items-center">
                             <div class="text-truncate align-middle w-100 text-center" title="${product.title}">${product.title}</div>
                         </div>
@@ -390,13 +390,13 @@ export default class ProductsList {
     }
 
     getButtonUpdateCalculationOfCombinationHTML(product) {
-        if (product.entityTypeId == ID_SOFA && product.shape != SHAPE_SOFA.module) {
-            return `
-                <div class="d-flex align-items-center">
-                    <button class="btn p-1 product-card-header-update" type="button" aria-expanded="false" title="Обновление расчета комбинаций">🔄</button>
-                </div>
-            `;
-        }
+        // if (product.entityTypeId == ID_SOFA && product.shape != SHAPE_SOFA.module) {
+        //     return `
+        //         <div class="d-flex align-items-center">
+        //             <button class="btn p-1 product-card-header-update" type="button" aria-expanded="false" title="Обновление расчета комбинаций">🔄</button>
+        //         </div>
+        //     `;
+        // }
         return '';
     }
 }

@@ -39,29 +39,29 @@ export default class ProductAction {
         });
 
         // 
-        this.productCardsContainer.addEventListener('click', this.updateProduct.bind(this));
+        // this.productCardsContainer.addEventListener('click', this.updateProduct.bind(this));
     }
 
-    async updateProduct(event) {
-        const target = event.target;
-        if (!target.classList.contains('product-card-header-update')) {
-            return;
-        }
-        const card = event.target.closest('[data-id]');
-        if (!card) {
-            return;
-        }
-        const productId = card.dataset.id;
-        const productTypeId = card.dataset.smartTypeId;
-        console.log(`Update product: type_id=${productTypeId}, id = ${productId}`);
+    // async updateProduct(event) {
+    //     const target = event.target;
+    //     if (!target.classList.contains('product-card-header-update')) {
+    //         return;
+    //     }
+    //     const card = event.target.closest('[data-id]');
+    //     if (!card) {
+    //         return;
+    //     }
+    //     const productId = card.dataset.id;
+    //     const productTypeId = card.dataset.smartTypeId;
+    //     console.log(`Update product: type_id=${productTypeId}, id = ${productId}`);
 
-        const result = await this.productsService.runRecaculateCombinationBP(productTypeId, productId);
-        console.log('Result of launching a business process: ', result);
+    //     const result = await this.productsService.runRecaculateCombinationBP(productTypeId, productId);
+    //     console.log('Result of launching a business process: ', result);
 
-        this.processTimer.process(
-            'Идет запуск БП "Обновление расчета комбинаций"',
-            5
-        );
-    }
+    //     this.processTimer.process(
+    //         'Идет запуск БП "Обновление расчета комбинаций"',
+    //         5
+    //     );
+    // }
 
 }
