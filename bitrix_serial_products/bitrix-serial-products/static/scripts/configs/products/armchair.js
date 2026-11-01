@@ -97,6 +97,7 @@ export const FIELD_ARMCHAIR = {
     totalThickness_2: "ufCrm57_1716821262",             // 2-Общая толщина
     softnessWish_2: "ufCrm57_1713504895",               // 2-Пожелание по мягкости
     seamType_2: "ufCrm57_1713504908",                   // 2-Тип шва
+    extraFabric_2: "ufCrm57_1793170329",                // 2-Доп. ткань используется
     decorationDescription_2: "ufCrm57_1713505003",      // 2-Доп. описание и описание декора
 
     // Сидение
@@ -106,6 +107,7 @@ export const FIELD_ARMCHAIR = {
     agreedFillerOption_3: "ufCrm57_1713505099",         // 3-Согласованный вариант наполнителя
     useInFillers_3: "ufCrm57_1713505162",               // 3-Использовать в наполнители
     seamType_3: "ufCrm57_1713505253",                   // 3-Тип шва
+    extraFabric_3: "ufCrm57_1793170662",                // 3-Доп. ткань используется
     decorationDescription_3: "ufCrm57_1713505479",      // 3-Доп. описание и описание декора
     
     // Спинка
@@ -113,12 +115,14 @@ export const FIELD_ARMCHAIR = {
     totalThickness_4: "ufCrm57_1716821300",             // 4-Общая толщина
     tiltAngle_4: "ufCrm57_1713505550",                  // 4-Угол наклона
     softnessWish_4: "ufCrm57_1713505564",               // 4-Пожелание по мягкости
+    extraFabric_4: "ufCrm57_1793170808",                // 4-Доп. ткань используется
     decorationDescription_4: "ufCrm57_1713505581",      // 4-Доп. описание и описание декора
 
     agreedFillerOption_5: "ufCrm57_1713505633",         // 5-Согласованный вариант наполнителя
     seamType_5: "ufCrm57_1713505350",                   // 5-Тип шва
     seamPitch_5: "ufCrm57_1713505880",                  // 5-Шаг шва
     cutType_5: "ufCrm57_1713505915",                    // 5-Тип кроя
+    extraFabric_5: "ufCrm57_1793170945",                // 5-Доп. ткань используется
     pillowSize1_5: "ufCrm57_1713506005",                // 5-Размер подушки (чистовой)-1
     pillowNumber1_5: "ufCrm57_1713506050",              // 5-Кол-во подушек - 1
     pillowSize2_5: "ufCrm57_1713506015",                // 5-Размер подушки (чистовой)-2
@@ -129,6 +133,7 @@ export const FIELD_ARMCHAIR = {
 
     agreedFillerOption_6: "ufCrm57_1713506120",         // 6-Согласованный вариант наполнителя
     seamType_6: "ufCrm57_1713506163",                   // 6-Вид шва
+    extraFabric_6: "ufCrm57_1793171047",                // 6-Доп. ткань используется
     pillowSize1_6: "ufCrm57_1713506228",                // 6-Размер подушки (чистовой)-1
     pillowNumber1_6: "ufCrm57_1713506259",              // 6-Кол-во подушек - 1
     pillowSize2_6: "ufCrm57_1713506236",                // 6-Размер подушки (чистовой)-2

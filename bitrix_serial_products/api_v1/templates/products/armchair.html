@@ -19,11 +19,9 @@
         const smartProcessId = {{ smartProcessId }};
         const portalUrl = "{{ portal_url }}";
     </script>
-
     <title>Кресло</title>
 </head>
 <body>
-
     <div id="elemWaitingLoader" class="mt-5 d-flex justify-content-center">
         <p class="fs-2">Загрузка карточки товара (Кресло) ...</p>
         <div class="ms-3 spinner-border" style="width: 3rem; height: 3rem;" role="status">
@@ -115,14 +113,6 @@
                     </div>
                 </button>
             </div>
-            <!-- <div class="col">
-                <button type="button" id="btnDeleteProduct" class="btn btn-secondary w-75 product-btn-remove">
-                    Удалить
-                    <div class="ms-3 spinner-border spinner-border-sm text-light" role="status" style="display: none;">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </button>
-            </div> -->
             <div class="col-1 d-flex align-items-center">
                 <div class="form-check w-100">
                     <input type="checkbox" class="btn-check" id="isComDirOk" autocomplete="off" data-field="isComDirOk" data-track="true">
@@ -141,30 +131,6 @@
                     </label>
                 </div>
             </div>
-            <!-- <div class="col-1 d-flex align-items-center">
-                <div class="form-check w-100">
-                    <input type="checkbox" class="btn-check" id="isMeasured" autocomplete="off" data-field="isMeasured" data-track="true">
-                    <label class="btn btn-outline-success w-100" for="isMeasured">Замер</label><br>
-                </div>
-            </div>
-            <div class="col-1 d-flex align-items-center">
-                <div class="form-check w-100">
-                    <input type="checkbox" class="btn-check" id="isExhibited" autocomplete="off" data-field="isExhibited" data-track="true">
-                    <label class="btn btn-outline-success w-100" for="isExhibited">Выставка</label><br>
-                </div>
-            </div>
-            <div class="col-1 d-flex align-items-center dropdown">
-                <div class="form-check w-100">
-                    <input type="checkbox" class="btn-check" id="sketch" autocomplete="off" data-field="sketch" data-track="true">
-                    <label class="btn btn-outline-success w-100 dropdown-toggle" for="sketch" data-bs-toggle="dropdown">Эскиз</label><br>
-                </div>
-            </div>
-            <div class="col-1 d-flex align-items-center">
-                <div class="form-check w-100">
-                    <input type="checkbox" class="btn-check" id="isActive" autocomplete="off" data-field="isActive" data-track="true">
-                    <label class="btn btn-outline-success w-100" for="isActive">Активен</label><br>
-                </div>
-            </div> -->
         </div>
         <div class="row mb-3">
             <div class="product-left col-7">
@@ -360,72 +326,20 @@
                                 <td colspan="1" style="min-width: 45px;" class="table-header-size text-start table-cell-header btn-show-history" data-field="commonDimensionsWidth">Ш.</td>
                                 <td colspan="1" class="p-0 m-0 table-body-size">
                                     <input type="number" id="commonDimensionsWidth" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="..." data-field="commonDimensionsWidth" data-track="true">
-                                    <!-- <div class="d-flex flex-row" data-field="commonDimensionsWidth">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="commonDimensionsWidth" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                                 <td colspan="1" style="min-width: 45px;" class="table-header-size table-cell-header btn-show-history" data-field="commonDimensionsDepth">Г.</td>
                                 <td colspan="1" class="p-0 m-0 table-body-size">
                                     <input type="number" id="commonDimensionsDepth" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="..." data-field="commonDimensionsDepth" data-track="true">
-                                    <!-- <div class="d-flex flex-row" data-field="commonDimensionsDepth">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="commonDimensionsDepth" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                                 <td colspan="1" style="min-width: 45px;" class="table-header-size table-cell-header btn-show-history" data-field="commonDimensionsHeight">В.</td>
                                 <td colspan="1" class="p-0 m-0 table-body-size">
                                     <input type="number" id="commonDimensionsHeight" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="..." data-field="commonDimensionsHeight" data-track="true">
-                                    <!-- <div class="d-flex flex-row" data-field="commonDimensionsHeight">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="commonDimensionsHeight" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="supports">Опоры (материал):</td>
                                 <td colspan="3" class="p-0 m-0 table-body-size">
                                     <select id="supports" class="form-select form-select-sm border-0 text-center" data-field="supports" data-track="true"></select>
-                                    <!-- <div class="d-flex flex-row" data-field="supports">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="supports" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                                 <td colspan="1" class="table-header-size table-cell-header">Цвет:</td>
                                 <td colspan="2" class="p-0 m-0 table-body-size">
@@ -436,42 +350,13 @@
                                 <td class="table-header-size table-cell-header">Высота Опоры (мм):</td>
                                 <td colspan="6" class="p-0 m-0 table-body-size btn-show-history" data-field="supportHeight">
                                     <input type="number" id="supportHeight" class="mh-100 w-100 py-1 px-2 border-0 text-center" data-field="supportHeight" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="supportHeight">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="supportHeight" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
-                                <td class="table-header-size table-cell-header btn-show-history" data-field="upholsteryFabricCollection">Коллекция ткани:</td>
+                                <td class="table-header-size table-cell-header btn-show-history" data-field="upholsteryFabricCollection">Коллекция осн.ткани:</td>
                                 <td colspan="6" class="p-0 m-0 table-body-size">
                                     <div class="d-flex">
                                         <select id="upholsteryFabricCollection" class="flex-grow-1 form-select form-select-sm border-0 fabric-select text-center" aria-label="" data-field="upholsteryFabricCollection" data-track="true" data-target="fabric-info-1" data-fabric-type-id="upholsteryFabricType" data-fabric-color-id="upholsteryFabricColor"></select>
-                                        <!-- <div class="d-flex flex-row flex-grow-1" data-field="upholsteryFabricCollection">
-                                            <div class="flex-grow-1">
-                                            </div>
-                                            <div style="position: relative;">
-                                                <div class="show-history label-show-history" data-field="upholsteryFabricCollection" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                                <div class="dropdown-menu p-0">
-                                                    <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                    <div class="">
-                                                        <table class="table table-bordered table-sm"></table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <!-- <div class="flex-grow-1">
-                                            <select id="upholsteryFabricCollection" class="flex-grow-1 form-select form-select-sm border-0 fabric-select text-center" aria-label="" data-field="upholsteryFabricCollection" data-track="true" data-target="fabric-info-1" data-fabric-type-id="upholsteryFabricType" data-fabric-color-id="upholsteryFabricColor"></select>
-                                        </div> -->
                                         <div class="btn-group dropstart">
                                             <i class="bi bi-info-square-fill mx-1 fs-5 text-secondary" id="popoverButton" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></i>
                                             <div class="dropdown-menu p-0 dropdown-fabric-menu" id="fabric-info-1">
@@ -542,7 +427,6 @@
                 <!-- Подлокотники -->
                 <div class="product-armrests">
                     <div class="border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
-                        <!-- <label for="" class="fs-5 fw-bold header-size">Подлокотники</label> -->
                         <div class="d-flex flex-row justify-content-between align-items-center">
                             <label for="" class="fs-5 fw-bold flex-grow-1 header-size">Подлокотники</label>
                             <div class="text-end px-2 btn-set-default-values" title="Установить значения по умолчанию">&bull;</div>
@@ -567,22 +451,15 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="table-header-size table-cell-header">Доп. ткань используется:</td>
+                                <td class="p-0 m-0 table-body-size">
+                                    <select id="extraFabric_2" class="form-select form-select-sm border-0 text-center" data-field="extraFabric_2" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="decorationDescription_2">Доп. описание и описание декора:</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <textarea class="form-control border-0 table-body-size text-center" id="decorationDescription_2" rows="3" data-field="decorationDescription_2" data-track="true"></textarea>
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="decorationDescription_2">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="decorationDescription_2" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                         </table>
@@ -591,7 +468,6 @@
                 <!-- Сидение -->
                 <div class="product-seat">
                     <div class="border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
-                        <!-- <label for="" class="fs-5 fw-bold header-size">Сидение</label> -->
                         <div class="d-flex flex-row justify-content-between align-items-center">
                             <label for="" class="fs-5 fw-bold flex-grow-1 header-size">Сидение</label>
                             <div class="text-end px-2 btn-set-default-values" title="Установить значения по умолчанию">&bull;</div>
@@ -601,93 +477,28 @@
                                 <td width="35%" class="table-header-size table-cell-header btn-show-history" data-field="totalThickness_3">Общая толщина, мм:</td>
                                 <td colspan="3" class="p-0 m-0 table-body-size">
                                     <input type="number" id="totalThickness_3" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="totalThickness_3" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="totalThickness_3">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="totalThickness_3" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="plantingDepth_3">Глубина посадки, мм:</td>
                                 <td colspan="3" class="p-0 m-0 table-body-size">
                                     <input type="number" id="plantingDepth_3" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="plantingDepth_3" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="plantingDepth_3">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="plantingDepth_3" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="plantingHeight_3">Высота посадки, мм:</td>
                                 <td colspan="3" class="p-0 m-0 table-body-size">
                                     <input type="number" id="plantingHeight_3" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="plantingHeight_3" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="plantingHeight_3">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="plantingHeight_3" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="agreedFillerOption_3">Вариант наполнителя:</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <select id="agreedFillerOption_3" class="form-select form-select-sm border-0 text-center" data-field="agreedFillerOption_3" data-track="true"></select>
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="plantingHeight_3">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="plantingHeight_3" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="useInFillers_3" style="white-space: nowrap;">Испо-вать:</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <select id="useInFillers_3" class="form-select form-select-sm border-0 text-center" data-field="useInFillers_3" data-track="true"></select>
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="useInFillers_3">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="useInFillers_3" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
@@ -697,22 +508,15 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="table-header-size table-cell-header">Доп. ткань используется:</td>
+                                <td colspan="3" class="p-0 m-0 table-body-size">
+                                    <select id="extraFabric_3" class="form-select form-select-sm border-0 text-center" data-field="extraFabric_3" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="decorationDescription_3">Доп. описание и описание декора:</td>
                                 <td colspan="3" class="p-0 m-0 table-body-size">
                                     <textarea class="form-control border-0 table-body-size text-center" id="decorationDescription_3" rows="3" data-field="decorationDescription_3" data-track="true"></textarea>
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="decorationDescription_3">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="decorationDescription_3" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                         </table>
@@ -721,7 +525,6 @@
                 <!-- Спинка -->
                 <div class="product-back">
                     <div class="border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
-                        <!-- <label for="" class="fs-5 fw-bold header-size">Спинка</label> -->
                         <div class="d-flex flex-row justify-content-between align-items-center">
                             <label for="" class="fs-5 fw-bold flex-grow-1 header-size">Спинка</label>
                             <div class="text-end px-2 btn-set-default-values" title="Установить значения по умолчанию">&bull;</div>
@@ -744,22 +547,15 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="table-header-size table-cell-header">Доп. ткань используется:</td>
+                                <td colspan="3" class="p-0 m-0 table-body-size">
+                                    <select id="extraFabric_4" class="form-select form-select-sm border-0 text-center" data-field="extraFabric_4" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="decorationDescription_4">Доп. описание и описание декора:</td>
                                 <td colspan="3" class="p-0 m-0 table-body-size">
                                     <textarea class="form-control border-0 table-body-size text-center" id="decorationDescription_4" rows="3" data-field="decorationDescription_4" data-track="true"></textarea>
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="decorationDescription_4">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="decorationDescription_4" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                         </table>
@@ -768,7 +564,6 @@
                 <!-- Подушки основные -->
                 <div class="product-basic-pillows">
                     <div class="border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
-                        <!-- <label for="" class="fs-5 fw-bold header-size">Подушки основные</label> -->
                         <div class="d-flex flex-row justify-content-between align-items-center">
                             <label for="" class="fs-5 fw-bold flex-grow-1 header-size">Подушки основные</label>
                             <div class="text-end px-2 btn-set-default-values" title="Установить значения по умолчанию">&bull;</div>
@@ -778,19 +573,6 @@
                                 <td width="35%" class="table-header-size table-cell-header btn-show-history" data-field="agreedFillerOption_5">Вариант наполнителя:</td>
                                 <td colspan="3" class="p-0 m-0 table-body-size">
                                     <select id="agreedFillerOption_5" class="form-select form-select-sm border-0 text-center" data-field="agreedFillerOption_5" data-track="true"></select>
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="agreedFillerOption_5">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="agreedFillerOption_5" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
@@ -798,10 +580,6 @@
                                 <td colspan="4" class="p-0 m-0 table-body-size">
                                     <select id="seamType_5" class="form-select form-select-sm border-0 text-center" data-field="seamType_5" data-track="true"></select>
                                 </td>
-                                <!-- <td style="white-space: nowrap" class="table-header-size table-cell-header">Шаг шва:</td>
-                                <td class="p-0 m-0 table-body-size">
-                                    <select id="seamPitch_5" class="form-select form-select-sm border-0 text-center" data-field="seamPitch_5" data-track="true"></select>
-                                </td> -->
                             </tr>
                             <tr>
                                 <td class="table-header-size table-cell-header">Тип кроя:</td>
@@ -810,111 +588,39 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="table-header-size table-cell-header">Доп. ткань используется:</td>
+                                <td colspan="4" class="p-0 m-0 table-body-size">
+                                    <select id="extraFabric_5" class="form-select form-select-sm border-0 text-center" data-field="extraFabric_5" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="pillowSize1_5">Размер подушки (чистовой):</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <input type="text" id="pillowSize1_5" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="pillowSize1_5" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="pillowSize1_5">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="pillowSize1_5" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                                 <td style="white-space: nowrap" class="table-header-size table-cell-header btn-show-history" data-field="pillowNumber1_5">кол-во:</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <input type="number" id="pillowNumber1_5" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="pillowNumber1_5" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="pillowNumber1_5">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="pillowNumber1_5" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="pillowSize2_5">Размер подушки (чистовой):</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <input type="text" id="pillowSize2_5" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="pillowSize2_5" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="pillowSize2_5">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="pillowSize2_5" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                                 <td style="white-space: nowrap" class="table-header-size table-cell-header btn-show-history" data-field="pillowNumber2_5">кол-во:</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <input type="number" id="pillowNumber2_5" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="pillowNumber2_5" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="pillowNumber2_5">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="pillowNumber2_5" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="pillowSize3_5">Размер подушки (чистовой):</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <input type="text" id="pillowSize3_5" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="pillowSize3_5" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="pillowSize3_5">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="pillowSize3_5" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                                 <td style="white-space: nowrap" class="table-header-size table-cell-header btn-show-history" data-field="pillowNumber3_5">кол-во:</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <input type="number" id="pillowNumber3_5" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="pillowNumber3_5" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="pillowNumber3_5">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="pillowNumber3_5" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
@@ -929,7 +635,6 @@
                 <!-- Подушки декоративные -->
                 <div class="product-decorative-pillows">
                     <div class="border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
-                        <!-- <label for="" class="fs-5 fw-bold header-size">Подушки декоративные</label> -->
                         <div class="d-flex flex-row justify-content-between align-items-center">
                             <label for="" class="fs-5 fw-bold flex-grow-1 header-size">Подушки декоративные</label>
                             <div class="text-end px-2 btn-set-default-values" title="Установить значения по умолчанию">&bull;</div>
@@ -939,19 +644,6 @@
                                 <td width="35%" class="table-header-size table-cell-header btn-show-history" data-field="agreedFillerOption_6">Вариант наполнителя:</td>
                                 <td colspan="3" class="p-0 m-0 table-body-size">
                                     <select id="agreedFillerOption_6" class="form-select form-select-sm border-0 text-center" data-field="agreedFillerOption_6" data-track="true"></select>
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="agreedFillerOption_6">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="agreedFillerOption_6" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
@@ -961,39 +653,19 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="table-header-size table-cell-header">Доп. ткань используется:</td>
+                                <td colspan="3" class="p-0 m-0 table-body-size">
+                                    <select id="extraFabric_6" class="form-select form-select-sm border-0 text-center" data-field="extraFabric_6" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="table-header-size table-cell-header btn-show-history" data-field="pillowSize1_6">Размер подушки (чистовой):</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <input type="text" id="pillowSize1_6" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="pillowSize1_6" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="pillowSize1_6">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="pillowSize1_6" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                                 <td style="white-space: nowrap" class="table-header-size table-cell-header btn-show-history" data-field="pillowNumber1_6">кол-во:</td>
                                 <td class="p-0 m-0 table-body-size">
                                     <input type="number" id="pillowNumber1_6" class="mh-100 w-100 py-1 px-2 border-0 text-center" placeholder="" data-field="pillowNumber1_6" data-track="true">
-                                    <!-- <div class="d-flex flex-row flex-grow-1" data-field="pillowNumber1_6">
-                                        <div class="flex-grow-1">
-                                        </div>
-                                        <div style="position: relative;">
-                                            <div class="show-history label-show-history" data-field="pillowNumber1_6" data-bs-toggle="dropdown" data-bs-custom-class="custom-popover" aria-expanded="false"></div>
-                                            <div class="dropdown-menu p-0">
-                                                <div class="dropdown-header bg-secondary-subtle text-center">История</div>
-                                                <div class="">
-                                                    <table class="table table-bordered table-sm"></table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                             <tr>
