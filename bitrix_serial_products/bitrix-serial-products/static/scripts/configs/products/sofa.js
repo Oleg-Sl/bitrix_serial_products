@@ -116,6 +116,7 @@ export const FIELD_SOFA = {
     totalThickness_2: "ufCrm53_1716820670",             // 2-Общая толщина
     softnessWish_2: "ufCrm53_1713498165",               // 2-Пожелание по мягкости
     seamType_2: "ufCrm53_1713498375",                   // 2-Тип шва
+    extraFabric_2: "ufCrm53_1793166894",                // 2-Доп. ткань используется
     decorationDescription_2: "ufCrm53_1713498464",      // 2-Доп. описание и описание декора
 
     totalThickness_3: "ufCrm53_1713498494",             // 3-Общая толщина
@@ -124,6 +125,7 @@ export const FIELD_SOFA = {
     agreedFillerOption_3: "ufCrm53_1713498576",         // 3-Согласованный вариант наполнителя
     useInFillers_3: "ufCrm53_1713499060",               // 3-Использовать в наполнители
     seamType_3: "ufCrm53_1713499129",                   // 3-Тип шва
+    extraFabric_3: "ufCrm53_1793169168",                // 3-Доп. ткань используется
     decorationDescription_3: "ufCrm53_1713499219",      // 3-Доп. описание и описание декора
     
     // totalThickness_4: "ufCrm53_1713499334",             // 4-Общая толщина
@@ -131,12 +133,14 @@ export const FIELD_SOFA = {
     seamType_4: "ufCrm53_1725523131",                   // 2-Тип шва
     tiltAngle_4: "ufCrm53_1713499350",                  // 4-Угол наклона
     softnessWish_4: "ufCrm53_1713499455",               // 4-Пожелание по мягкости
+    extraFabric_4: "ufCrm53_1793169457",                // 4-Доп. ткань используется
     decorationDescription_4: "ufCrm53_1713499477",      // 4-Доп. описание и описание декора
 
     agreedFillerOption_5: "ufCrm53_1713499552",         // 5-Согласованный вариант наполнителя
     seamType_5: "ufCrm53_1713499746",                   // 5-Тип шва
     seamPitch_5: "ufCrm53_1713499968",                  // 5-Шаг шва
     cutType_5: "ufCrm53_1713500022",                    // 5-Тип кроя
+    extraFabric_5: "ufCrm53_1793169708",                // 5-Доп. ткань используется
     pillowSize1_5: "ufCrm53_1713500111",                // 5-Размер подушки (чистовой)-1
     pillowNumber1_5: "ufCrm53_1713500180",              // 5-Кол-во подушек - 1
     pillowSize2_5: "ufCrm53_1713500216",                // 5-Размер подушки (чистовой)-2
@@ -147,6 +151,7 @@ export const FIELD_SOFA = {
 
     agreedFillerOption_6: "ufCrm53_1713500381",         // 6-Согласованный вариант наполнителя
     seamType_6: "ufCrm53_1713500473",                   // 6-Вид шва
+    extraFabric_6: "ufCrm53_1793169904",                // 6-Доп. ткань используется
     pillowSize1_6: "ufCrm53_1713500702",                // 6-Размер подушки (чистовой)-1
     pillowNumber1_6: "ufCrm53_1713500740",              // 6-Кол-во подушек - 1
     pillowSize2_6: "ufCrm53_1713500716",                // 6-Размер подушки (чистовой)-2
