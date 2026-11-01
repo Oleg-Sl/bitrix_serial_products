@@ -102,6 +102,7 @@ export const FIELD_POUF = {
     seamType: "ufCrm67_1726481213",                     // Тип шва
     thicknessSeatPPU: "ufCrm67_1713518725",             // 1-Толщина ППУ по сидения
     upholsteryFabricCollection: "ufCrm67_1713518754",   // 1-Коллекция и цвет обивочной ткани
+    extraFabric: "ufCrm67_1793175973",                  // 1-Доп. ткань используется
     decor: "ufCrm67_1713518816",                        // 1-Декор (описывается в ручную)
     managerDescription: "ufCrm67_1713518824",           // 1-Дополнительное описание менеджера
     

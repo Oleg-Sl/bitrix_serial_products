@@ -244,20 +244,12 @@
                                 <th width="100px" class="table-header-size">Итоговый</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!--  -->
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                     <div class="d-flex justify-content-start mb-3">
                         <div class="btn-group">
                             <button type="button" id="newProductCalculation" class="btn btn-primary product-btn-save">Новый</button>
                         </div>
-                        <!-- <div class="btn-group ms-3">
-                            <button type="button" id="addProductCalculation" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Добавить
-                            </button>
-                            <ul id="productOtherCalculationsList" class="dropdown-menu px-3 calculation-dropdown-menu"></ul>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -410,6 +402,12 @@
                                 <td style="white-space: nowrap;" class="table-header-size">Цвет:</td>
                                 <td colspan="4" class="p-0 m-0 table-body-size">
                                     <input type="text" id="upholsteryFabricColor" class="mh-100 w-100 py-1 px-2 border-0" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size text-start">Доп. ткань используется:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <select id="extraFabric" class="form-select form-select-sm border-0 text-center" data-field="extraFabric" data-track="true"></select>
                                 </td>
                             </tr>
                             <tr>
