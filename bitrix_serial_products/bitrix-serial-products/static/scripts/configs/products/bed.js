@@ -111,6 +111,7 @@ export const FIELD_BED = {
     thicknessPPU_2: "ufCrm61_1713513456",               // 2-Толщина ППУ
     seamType: "ufCrm61_1726218793",                     // 2-Тип шва
     upholsteryFabricCollection_2: "ufCrm61_1713513510", // 2-Коллекция и цвет обивочной ткани
+    extraFabric_2: "ufCrm61_1793174722",                // 2-Доп. ткань используется
     baseboardCutout_2: "ufCrm61_1713513572",            // 2-Вырез под плинтус
     baseboardHeight_2: "ufCrm61_1713513690",            // 2-Высота плинтуса
     sockets_2: "ufCrm61_1713513745",                    // 2-Розетки/включатели
@@ -125,11 +126,11 @@ export const FIELD_BED = {
     thicknessPPU_3: "ufCrm61_1713514159",               // 3-Толщина ППУ
     case_3: "ufCrm61_1713514180",                       // 3-Чехол
     upholsteryFabricCollection_3: "ufCrm61_1713514220", // 3-Коллекция и цвет обивочной ткани
+    extraFabric_3: "ufCrm61_1793174893",                // 3-Доп. ткань используется
     decorationDescription_3: "ufCrm61_1713514250",      // 3-Доп. описание и описание декора
     
     managerDescription_4: "ufCrm61_1713514311",         // 4-Дополнительное описание менеджера
     managerNotes_5: "ufCrm61_1713514335",               // 5-Замечание руководителя
-
 
     // Фотографии товара    
     canvasMain: "ufCrm61_1714817167",       // Полотно - Главное фото

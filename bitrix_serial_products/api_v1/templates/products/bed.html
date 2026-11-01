@@ -246,20 +246,12 @@
                                 <th width="100px" class="table-header-size">Итоговый</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!--  -->
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                     <div class="d-flex justify-content-start mb-3">
                         <div class="btn-group">
                             <button type="button" id="newProductCalculation" class="btn btn-primary product-btn-save">Новый</button>
                         </div>
-                        <!-- <div class="btn-group ms-3">
-                            <button type="button" id="addProductCalculation" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Добавить
-                            </button>
-                            <ul id="productOtherCalculationsList" class="dropdown-menu px-3 calculation-dropdown-menu"></ul>
-                        </div> -->
                     </div>
                 </div>
                 <div class="product-comment-responsible col border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
@@ -369,7 +361,6 @@
                 <!-- Изголовье -->
                 <div class="product-headboard">
                     <div class="border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
-                        <!-- <label for="" class="fs-5 fw-bold header-size">ИЗГОЛОВЬЕ</label> -->
                         <div class="d-flex flex-row justify-content-between align-items-center">
                             <label for="" class="fs-5 fw-bold flex-grow-1 header-size">ИЗГОЛОВЬЕ</label>
                             <div class="text-end px-2 btn-set-default-values" title="Установить значения по умолчанию">&bull;</div>
@@ -456,6 +447,12 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="table-header-size text-start">Доп. ткань используется:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <select id="extraFabric_2" class="form-select form-select-sm border-0 text-center" data-field="extraFabric_2" data-track="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="table-header-size btn-show-history" data-field="baseboardCutout_2">Вырез под плинтус:</td>
                                 <td colspan="2" class="p-0 m-0 table-body-size">
                                     <select id="baseboardCutout_2" class="flex-grow-1 form-select form-select-sm border-0 fabric-select" data-field="baseboardCutout_2" data-track="true"  data-target="fabric-info-3" data-fabric-type-id="upholsteryFabricType_2" data-fabric-color-id="upholsteryFabricColor_2"></select>
@@ -488,7 +485,6 @@
                 <!-- ЦАРГИ -->
                 <div class="product-tsargi">
                     <div class="border border-secondary-subtle mb-2 bg-light bg-opacity-5 text-dark">
-                        <!-- <label for="" class="fs-5 fw-bold header-size">ЦАРГИ</label> -->
                         <div class="d-flex flex-row justify-content-between align-items-center">
                             <label for="" class="fs-5 fw-bold flex-grow-1 header-size">ЦАРГИ</label>
                             <div class="text-end px-2 btn-set-default-values" title="Установить значения по умолчанию">&bull;</div>
@@ -580,6 +576,12 @@
                                 <td class="table-header-size">Цвет:</td>
                                 <td colspan="1" class="p-0 m-0 table-body-size">
                                     <input type="text" id="upholsteryFabricColor" class="mh-100 w-100 py-1 px-2 border-0" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-header-size text-start">Доп. ткань используется:</td>
+                                <td colspan="6" class="p-0 m-0 table-body-size">
+                                    <select id="extraFabric_3" class="form-select form-select-sm border-0 text-center" data-field="extraFabric_3" data-track="true"></select>
                                 </td>
                             </tr>
                             <tr>
